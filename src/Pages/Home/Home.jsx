@@ -1,20 +1,12 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import useProducts from "../../Components/Hooks/useProducts";
 
 const Home = () => {
+  const [products, loading] = useProducts();
 
-  const [product, setProduct] = useState([]);
-  useEffect(() => {
-    fetch("/product.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setProduct(data);
-      });
-  }, []);
-console.log(product)
   return (
     <div>
-      <p className="font-bold font-poppins">welcome home</p>
+      <p>Number of Products: {products.length}</p>
+      <p className="font-bold font-poppins">Welcome Home</p>
       <button className="btn btn-primary font-opensans text-white">
         Primary
       </button>
