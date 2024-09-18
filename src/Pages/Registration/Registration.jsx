@@ -1,6 +1,6 @@
 import React from "react";
 
-const Register = () => {
+const Registration = () => {
   return (
     <div>
       <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl">
@@ -128,4 +128,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Registration;
