@@ -11,10 +11,9 @@ const OurStory = () => {
         style={{ width: '50%', height: 'auto', marginBottom: '20px' }}
       />
         <div>
-        <h2 className="text-xl  uppercase font-opensans ">Our Heritage</h2>
+        <h2 className="text-xl  uppercase font-opensans font-semibold">Our Heritage</h2>
         <p>
-          We have a rich heritage of delivering unique and memorable gifts to
-          customers all over the world.
+        We have a rich heritage of delivering unique and memorable gifts to customers all over the world. Over the years, we’ve cultivated relationships with artisans and suppliers to bring you high-quality, one-of-a-kind products. Our journey began with a passion for making every occasion special, and we have stayed true to that mission by continually innovating and curating thoughtful collections. 
         </p>
         </div>
       </section>
@@ -26,12 +25,12 @@ const OurStory = () => {
         style={{ width: '50%', height: 'auto', marginBottom: '20px' }}
       />
         <div>
-        <h2 className="text-xl  uppercase font-opensans ">Who We Are</h2>
+        <h2 className="text-xl  uppercase font-opensans font-semibold">Who We Are</h2>
         <p>
-          A passionate team dedicated to curating special moments through
-          thoughtful gifts.
+        A passionate team dedicated to curating special moments through thoughtful gifts. Our diverse group of designers, artisans, and experts come together to create unique, meaningful experiences for our customers. We believe in the power of gifting to strengthen relationships and celebrate life’s most cherished moments.
         </p>
         </div>
+       
       </section>
       <section className="flex flex-col-reverse md:grid grid-cols-2">
       <img
@@ -41,10 +40,9 @@ const OurStory = () => {
         style={{ width: '50%', height: 'auto', marginBottom: '20px' }}
       />
        <div>
-       <h2 className="text-xl  uppercase font-opensans ">Our Mission</h2>
+       <h2 className="text-xl  uppercase font-opensans font-semibold ">Our Mission</h2>
         <p>
-          Our mission is to make every occasion memorable with the perfect gift,
-          creating lasting impressions.
+          Our mission is to make every occasion memorable with the perfect gift, creating lasting impressions. We strive to inspire joy and connection through thoughtful and personalized gifting, ensuring that every gift leaves a meaningful impact.
         </p>
        </div>
       </section>
@@ -103,7 +101,7 @@ const OurStory = () => {
   
 
 
-export default InfoSections;
+
 
         </div>
       </section>
