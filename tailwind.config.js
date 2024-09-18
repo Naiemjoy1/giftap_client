@@ -5,12 +5,7 @@ export default {
     extend: {
       fontFamily: {
         poppins: "'Poppins', sans-serif ",
-        reenie: "'Reenie Beanie', cursive",
-        roboto: "'Roboto', sans-serif",
-        robotoslab: "'Roboto Slab', serif",
-        belle: "'La Belle Aurore', cursive",
-        marcellus: "'Marcellus', serif",
-        jost: "'Jost', sans-serif",
+        opensans: "'Open Sans',sans-serif",
       },
     },
   },
@@ -19,10 +14,10 @@ export default {
     themes: [
       {
         mytheme: {
-          primary: "#47ccc8",
-          secondary: "#2d3663",
-          accent: "#dc4545",
-          neutral: "#343434",
+          primary: "#FF6B6B",
+          secondary: "#4ECDC4",
+          accent: "#FFE66D",
+          neutral: "#F7FFF7",
           "base-100": "#ffffff",
         },
       },
