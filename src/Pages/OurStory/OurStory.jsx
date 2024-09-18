@@ -7,6 +7,7 @@ const OurStory = () => {
       <img
         src="https://img.freepik.com/free-photo/3d-illustration-closed-black-gift-box_107791-18203.jpg?t=st=1726679783~exp=1726683383~hmac=88b25ef60aad0c890b35790671ebee7f3671d82cb300b2f0a32c4c81cac319d9&w=740"
         alt="Gift Image"
+        className="hover:scale-105 transition-transform duration-500 ease-in-out"
         style={{ width: '50%', height: 'auto', marginBottom: '20px' }}
       />
         <div>
@@ -21,6 +22,7 @@ const OurStory = () => {
       <img
         src="https://img.freepik.com/free-photo/3d-illustration-closed-black-gift-box_107791-18203.jpg?t=st=1726679783~exp=1726683383~hmac=88b25ef60aad0c890b35790671ebee7f3671d82cb300b2f0a32c4c81cac319d9&w=740"
         alt="Gift Image"
+          className="hover:scale-105 transition-transform duration-500 ease-in-out"
         style={{ width: '50%', height: 'auto', marginBottom: '20px' }}
       />
         <div>
@@ -35,6 +37,7 @@ const OurStory = () => {
       <img
         src="https://img.freepik.com/free-photo/3d-illustration-closed-black-gift-box_107791-18203.jpg?t=st=1726679783~exp=1726683383~hmac=88b25ef60aad0c890b35790671ebee7f3671d82cb300b2f0a32c4c81cac319d9&w=740"
         alt="Gift Image"
+          className="hover:scale-105 transition-transform duration-500 ease-in-out"
         style={{ width: '50%', height: 'auto', marginBottom: '20px' }}
       />
        <div>
@@ -45,14 +48,10 @@ const OurStory = () => {
         </p>
        </div>
       </section>
-      <section className="grid grid-cols-1 md:grid-cols-2">
-      <img
-        src="https://img.freepik.com/free-photo/3d-illustration-closed-black-gift-box_107791-18203.jpg?t=st=1726679783~exp=1726683383~hmac=88b25ef60aad0c890b35790671ebee7f3671d82cb300b2f0a32c4c81cac319d9&w=740"
-        alt="Gift Image"
-        style={{ width: '50%', height: 'auto', marginBottom: '20px' }}
-      />
+      <section className="mt-8">
+      <h1 className="font-bold text-5xl italic mb-4">Customer Services</h1>
         <div>
-        <h2 className="text-xl  uppercase font-opensans ">Customer Service</h2>
+        <h2 className="">Customer Service</h2>
         <p>
           We pride ourselves on delivering exceptional customer service to
           ensure your gift-giving experience is seamless and joyful.
