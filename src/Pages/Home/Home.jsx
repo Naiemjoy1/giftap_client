@@ -1,15 +1,13 @@
-import useProducts from "../../Components/Hooks/useProducts";
+import Banner from "./Banner/Banner";
+import Features from "./Features/Features";
+import Gifts from "./Gifts/Gifts";
 
 const Home = () => {
-  const [products, loading] = useProducts();
-
   return (
     <div>
-      <p>Number of Products: {products.length}</p>
-      <p className="font-bold font-poppins">Welcome Home</p>
-      <button className="btn btn-primary font-opensans text-white">
-        Primary
-      </button>
+      <Banner></Banner>
+      <Features></Features>
+      <Gifts></Gifts>
     </div>
   );
 };
