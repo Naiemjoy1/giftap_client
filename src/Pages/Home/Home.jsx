@@ -1,10 +1,13 @@
+import Banner from "./Banner/Banner";
+import Features from "./Features/Features";
+import Gifts from "./Gifts/Gifts";
+
 const Home = () => {
   return (
     <div>
-      <p className="font-bold font-poppins">welcome home</p>
-      <button className="btn btn-primary font-opensans text-white">
-        Primary
-      </button>
+      <Banner></Banner>
+      <Features></Features>
+      <Gifts></Gifts>
     </div>
   );
 };
