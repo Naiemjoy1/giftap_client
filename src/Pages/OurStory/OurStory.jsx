@@ -1,6 +1,6 @@
 const OurStory = () => {
   return (
-    <div style={{ padding: '25px' }}>
+    <div  style={{ padding: '50px' }}>
       <h1 className="font-bold text-4xl italic flex justify-center mb-10 font-serif">Our Story</h1>
       
       <section className="flex flex-col-reverse md:grid grid-cols-2">
@@ -8,9 +8,9 @@ const OurStory = () => {
         src="https://img.freepik.com/free-photo/3d-illustration-closed-black-gift-box_107791-18203.jpg?t=st=1726679783~exp=1726683383~hmac=88b25ef60aad0c890b35790671ebee7f3671d82cb300b2f0a32c4c81cac319d9&w=740"
         alt="Gift Image"
         className="hover:scale-105 transition-transform duration-500 ease-in-out"
-        style={{ width: '50%', height: 'auto', marginBottom: '20px' }}
+        style={{ width: '70%', height: 'auto', marginBottom: '20px' }}
       />
-        <div>
+        <div className="mt-24"> 
         <h2 className="text-xl  uppercase font-opensans font-semibold">Our Heritage</h2>
         <p>
         We have a rich heritage of delivering unique and memorable gifts to customers all over the world. Over the years, we’ve cultivated relationships with artisans and suppliers to bring you high-quality, one-of-a-kind products. Our journey began with a passion for making every occasion special, and we have stayed true to that mission by continually innovating and curating thoughtful collections. 
@@ -22,7 +22,7 @@ const OurStory = () => {
         src="https://img.freepik.com/free-photo/silhouettes-executives-interacting_1098-1787.jpg?t=st=1726682441~exp=1726686041~hmac=802785b2b419a7854c661bdb312356ecc68d72f845b3bd2f0ab0ae438ac32bbe&w=900"
         alt="Gift Image"
           className="hover:scale-105 transition-transform duration-500 ease-in-out"
-        style={{ width: '50%', height: 'auto', marginBottom: '20px' }}
+        style={{ width: '50%', height: 'auto', marginBottom: '30px' }}
       />
         <div>
         <h2 className="text-xl  uppercase font-opensans font-semibold">Who We Are</h2>
