@@ -8,7 +8,7 @@ const OurStory = () => {
         src="https://img.freepik.com/free-photo/3d-illustration-closed-black-gift-box_107791-18203.jpg?t=st=1726679783~exp=1726683383~hmac=88b25ef60aad0c890b35790671ebee7f3671d82cb300b2f0a32c4c81cac319d9&w=740"
         alt="Gift Image"
         className="hover:scale-105 transition-transform duration-500 ease-in-out"
-        style={{ width: '70%', height: 'auto', marginBottom: '20px' }}
+        style={{ width: '60%', height: 'auto', marginBottom: '20px' }}
       />
         <div className="mt-24"> 
         <h2 className="text-xl  uppercase font-opensans font-semibold">Our Heritage</h2>
