@@ -9,6 +9,7 @@ const Contact = () => {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isHovered, setIsHovered] = useState(false); // State to track hover effect
 
   // Handle form field changes
   const handleChange = (e) => {
@@ -32,7 +33,7 @@ const Contact = () => {
           fontFamily: 'Helvetica, Arial, sans-serif',
           color: '#333',
           fontSize: '36px',
-          textAlign: 'center',  // Centering heading
+          textAlign: 'center',  
           marginBottom: '20px',
           letterSpacing: '2px'
         }}
@@ -40,9 +41,9 @@ const Contact = () => {
       >
         We Here To Help!
       </h1>
-      <h1 className="flex justify-center font-bold font-mono text-4xl italic">Contact Us</h1>
+    
 
-      <div className='grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2' style={styles.container}>
+      <div style={styles.container}>
         <div style={styles.formSection}>
           <h2 className="text-3xl font-extralight mt-4 mb-4">Get in Touch</h2>
           <p>Contact us to find out more or how we can help you better.</p>
@@ -95,14 +96,27 @@ const Contact = () => {
                   style={styles.textarea}
                 />
               </div>
-              <button type="submit" style={styles.button}>Submit</button>
+              
+              <button
+                type="submit"
+                style={{
+                  ...styles.button,
+                  color: isHovered ? 'red' : '#000', // Change color on hover
+                }}
+                onMouseEnter={() => setIsHovered(true)} // Change to red on hover
+                onMouseLeave={() => setIsHovered(false)} // Revert color on mouse leave
+              >
+                Submit
+              </button>
+              
+              <hr className="border-t-2 border-red-400 border-dashed w-1/4 mb-8 mx-auto" />
             </form>
           )}
         </div>
 
         <div style={styles.infoSection}>
           <img
-            src="https://img.freepik.com/free-photo/information-data-goals-development_53876-124495.jpg"
+            src="https://img.freepik.com/premium-photo/house-with-red-pin-pointing-home-word-home-it_51650-233.jpg?w=996"
             alt="Gift Image"
             className="hover:scale-105 transition-transform duration-500 ease-in-out"
             style={{ width: '100%', height: 'auto', marginBottom: '20px' }}
@@ -191,6 +205,7 @@ const styles = {
     marginTop: '20px',
     fontWeight: 'bold',
     fontSize: '16px',
+    transition: 'color 0.3s', // Smooth transition for color change
   },
   icon: {
     marginRight: '8px',
