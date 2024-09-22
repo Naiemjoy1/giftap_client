@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import useProducts from "../../Components/Hooks/useProducts";
+import { BsFillGrid3X2GapFill } from "react-icons/bs";
+import { FaThList } from "react-icons/fa";
+import { MdViewList } from "react-icons/md";
 
 const Shop = () => {
   const [products, loading] = useProducts();
@@ -129,13 +132,13 @@ const Shop = () => {
                 className={`${viewMode === "grid" ? "font-bold" : ""}`}
                 onClick={() => setViewMode("grid")}
               >
-                Grid view
+                <BsFillGrid3X2GapFill />
               </button>
               <button
                 className={`${viewMode === "list" ? "font-bold" : ""}`}
                 onClick={() => setViewMode("list")}
               >
-                List View
+                <MdViewList />
               </button>
             </section>
 
@@ -159,16 +162,52 @@ const Shop = () => {
             viewMode === "grid" ? "grid-cols-3 gap-4" : "grid-cols-1 gap-4"
           }`}
         >
-          {currentProducts.map((item) => (
-            <div key={item._id} className=" p-4">
-              <img src={item.image} alt="" />
-              <section className="text-center">
-                <p>{item.price}</p>
-                <p>{item.name}</p>
-                <p>Rating</p>
-              </section>
-            </div>
-          ))}
+          {viewMode === "grid"
+            ? currentProducts.map((item) => (
+                <section
+                  className="relative group h-64 w-full flex flex-col justify-between"
+                  key={item._id}
+                >
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="h-44 w-full object-cover"
+                  />
+                  {/* This section will slide up on hover */}
+                  <section className="flex justify-center items-center gap-4 bg-white shadow-xl w-1/2 mx-auto rounded-full p-1 absolute inset-x-0 top-36 transform -translate-y-10 opacity-0 transition-all duration-700 group-hover:translate-y-0 group-hover:opacity-100">
+                    <p>w</p>
+                    <p>w</p>
+                    <p>w</p>
+                  </section>
+                  <section className="text-center">
+                    <p>${item.price}</p>
+                    <p>{item.name}</p>
+                    <p>Rating: {item.rating}</p>
+                  </section>
+                </section>
+              ))
+            : currentProducts.map((item, index) => (
+                <div key={item._id}>
+                  <section className="bg-base-100 flex items-center">
+                    <figure>
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-80 h-56 object-cover" // Ensuring consistent width and height
+                      />
+                    </figure>
+                    <div className="card-body">
+                      <h2 className="card-title">{item.name}</h2>
+                      <p>Price: ${item.price}</p>
+                      <p>Rating: {item.rating}</p>
+                      <p>{item.description}</p>
+                    </div>
+                  </section>
+                  {index !== currentProducts.length - 1 && (
+                    <hr className="border-dashed my-4" />
+                  )}
+                </div>
+              ))}
         </section>
 
         {/* Pagination Controls */}
@@ -178,9 +217,9 @@ const Shop = () => {
               <li key={index}>
                 <button
                   onClick={() => paginate(index + 1)}
-                  className={` py-2 px-4 border ${
+                  className={`py-2 px-4 border ${
                     currentPage === index + 1
-                      ? " bg-primary rounded-full text-white"
+                      ? "bg-primary rounded-full text-white"
                       : "bg-gray-200 rounded-full"
                   }`}
                 >
