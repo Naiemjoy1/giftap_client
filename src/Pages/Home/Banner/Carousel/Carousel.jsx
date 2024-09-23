@@ -1,101 +1,154 @@
-import {
-  Navigation,
-  Pagination,
-  Scrollbar,
-  A11y,
-  Autoplay,
-} from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
+import MovingText from 'react-moving-text'
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
-import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import "swiper/css/autoplay";
-
-import img1 from "./../../../../assets/Images/Banner/img-1.jpg";
-import img2 from "./../../../../assets/Images/Banner/img-2.png";
-import img3 from "./../../../../assets/Images/Banner/img-3.png";
+import img4 from "./../../../../assets/Images/Banner/Mask_group_48.webp";
 
 const Carousel = () => {
   return (
     <div>
       <Swiper
-        spaceBetween={10}
-        slidesPerView={1}
-        navigation={true}
-        loop={true}
-        modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+        spaceBetween={30}
+        pagination={{
+          dynamicBullets: true,
+          clickable: true,
+        }}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
+        modules={[Pagination, Autoplay]}
         className="mySwiper"
       >
         <SwiperSlide>
           <div
-            className="w-full h-[450px] flex justify-center items-center rounded-md"
+            className="w-full min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] flex justify-center items-center"
             style={{
-              backgroundImage: `url(${img1})`,
+              backgroundImage: `url(${img4})`,
               backgroundSize: "cover", // Ensure the background image covers the area
               backgroundPosition: "center", // Center the background image
             }}
           >
-            <div className="bg-primary text-center space-y-4 px-10 py-12 rounded-md">
-              <p className="text-4xl font-poppins font-semibold">
-                Unique Gifts
-              </p>
-              <p className="uppercase tracking-widest font-opensans">
-                For every occasion
-              </p>
-            </div>
+            <MovingText
+              type="unfold"
+              duration="1000ms"
+              delay="0s"
+              direction="normal"
+              timing="ease"
+              iteration="1"
+              fillMode="none"
+            >
+              <div className="flex flex-col justify-center items-center space-y-5 text-center px-4">
+                <p className="uppercase text-[#f04854] text-sm md:text-base font-medium">
+                  print with perfection
+                </p>
+                <h3 className="text-[36px] md:text-[50px] lg:text-[90px] uppercase leading-tight md:leading-tight lg:leading-[102px] font-medium">
+                  Gift More, <br />
+                  Save More
+                </h3>
+                <p className="text-[#666666] text-sm md:text-xl">
+                  Order By 6pm EST Dec. 19 for express shipping!
+                </p>
+                <div>
+                  <button
+                    className="btn text-white py-3 px-6 md:py-[16px] md:px-[40px] rounded-3xl flex items-center justify-center gap-2 border-2 border-transparent hover:border-black hover:bg-red-700 transition-all duration-500 ease-in-out"
+                    style={{ backgroundColor: "rgb(240, 72, 84)" }}
+                  >
+                    Shop The Sale
+                  </button>
+                </div>
+              </div>
+            </MovingText>
           </div>
         </SwiperSlide>
+        
         <SwiperSlide>
-          <div className="w-full h-[450px] bg-primary flex justify-center items-center py-10 px-20 gap-6 rounded-md">
-            <section className="w-1/2 flex items-center justify-center">
-              <img
-                src={img2}
-                alt=""
-                className="object-cover h-full rounded-md"
-              />
-            </section>
-            <section className="w-1/2 flex flex-col justify-center items-center gap-8">
-              <p className="font-opensans">Stationary</p>
-              <section className="flex flex-col justify-center items-center gap-2">
-                <p className="text-4xl font-poppins font-semibold">
-                  Sale 50% Off
+          <div
+            className="w-full min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] flex justify-center items-center"
+            style={{
+              backgroundImage: `url(${img4})`,
+              backgroundSize: "cover", // Ensure the background image covers the area
+              backgroundPosition: "center", // Center the background image
+            }}
+          >
+            <MovingText
+              type="unfold"
+              duration="1000ms"
+              delay="0s"
+              direction="normal"
+              timing="ease"
+              iteration="1"
+              fillMode="none"
+            >
+              <div className="flex flex-col justify-center items-center space-y-5 text-center px-4">
+                <p className="uppercase text-[#f04854] text-sm md:text-base font-medium">
+                  print with perfection
                 </p>
-                <p className="uppercase tracking-widest font-opensans">
-                  office & stationery
+                <h3 className="text-[36px] md:text-[50px] lg:text-[90px] uppercase leading-tight md:leading-tight lg:leading-[102px] font-medium">
+                  Gift More, <br />
+                  Save More
+                </h3>
+                <p className="text-[#666666] text-sm md:text-xl">
+                  Order By 6pm EST Dec. 19 for express shipping!
                 </p>
-              </section>
-              <p className="uppercase font-opensans">from $09.99</p>
-            </section>
+                <div>
+                  <button
+                    className="btn text-white py-3 px-6 md:py-[16px] md:px-[40px] rounded-3xl flex items-center justify-center gap-2 border-2 border-transparent hover:border-black hover:bg-red-700 transition-all duration-500 ease-in-out"
+                    style={{ backgroundColor: "rgb(240, 72, 84)" }}
+                  >
+                    Shop The Sale
+                  </button>
+                </div>
+              </div>
+            </MovingText>
           </div>
         </SwiperSlide>
+        
         <SwiperSlide>
-          <div className="w-full h-[450px] bg-primary flex justify-center items-center py-10 px-20 gap-6 rounded-md">
-            <section className="w-1/2 flex items-center justify-center">
-              <img
-                src={img3}
-                alt=""
-                className="object-cover h-full w-full rounded-md"
-              />
-            </section>
-            <section className="w-1/2 flex flex-col justify-center items-center gap-8">
-              <p className="font-opensans">New Arrival</p>
-              <section className="flex flex-col justify-center items-center gap-2">
-                <p className="text-4xl font-poppins font-semibold">
-                  Send Your Love
+          <div
+            className="w-full min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] flex justify-center items-center"
+            style={{
+              backgroundImage: `url(${img4})`,
+              backgroundSize: "cover", // Ensure the background image covers the area
+              backgroundPosition: "center", // Center the background image
+            }}
+          >
+            <MovingText
+              type="unfold"
+              duration="1000ms"
+              delay="0s"
+              direction="normal"
+              timing="ease"
+              iteration="1"
+              fillMode="none"
+            >
+              <div className="flex flex-col justify-center items-center space-y-5 text-center px-4">
+                <p className="uppercase text-[#f04854] text-sm md:text-base font-medium">
+                  print with perfection
                 </p>
-                <p className="uppercase tracking-widest font-opensans">
-                  From <span>$29.99</span>
+                <h3 className="text-[36px] md:text-[50px] lg:text-[90px] uppercase leading-tight md:leading-tight lg:leading-[102px] font-medium">
+                  Gift More, <br />
+                  Save More
+                </h3>
+                <p className="text-[#666666] text-sm md:text-xl">
+                  Order By 6pm EST Dec. 19 for express shipping!
                 </p>
-              </section>
-              <button className="btn btn-md btn-secondary rounded-full px-10">
-                Send Gift
-              </button>
-            </section>
+                <div>
+                  <button
+                    className="btn text-white py-3 px-6 md:py-[16px] md:px-[40px] rounded-3xl flex items-center justify-center gap-2 border-2 border-transparent hover:border-black hover:bg-red-700 transition-all duration-500 ease-in-out"
+                    style={{ backgroundColor: "rgb(240, 72, 84)" }}
+                  >
+                    Shop The Sale
+                  </button>
+                </div>
+              </div>
+            </MovingText>
           </div>
         </SwiperSlide>
+        
       </Swiper>
     </div>
   );
