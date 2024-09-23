@@ -1,7 +1,7 @@
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../Components/Hooks/useAuth";
 import Swal from "sweetalert2";
-import { useEffect, useState } from "react";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import { IoIosEyeOff, IoMdEye } from "react-icons/io";
 
@@ -46,58 +46,71 @@ const SignIn = ({ toggleForm, setReset }) => {
   };
 
   return (
-    <div className="flex min-h-[calc(100vh-100px)]">
-      <section className="w-1/2 flex flex-col justify-center items-center space-y-4">
-        <p className="text-4xl font-bold">Sign In</p>
-        <section>
-          <SocialLogin></SocialLogin>
-        </section>
-        <p className="text-sm">Or use your email password</p>
-        <section>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-4"
-          >
-            <div className="form-control">
-              <input
-                {...register("email", { required: true })}
-                type="email"
-                placeholder="email"
-                className="input input-bordered w-[400px]"
-              />
-              {errors.email && (
-                <span className="text-red-500">Email is required</span>
-              )}
-            </div>
-            <div className="form-control relative">
-              <input
-                {...register("password", { required: true })}
-                type={showPassword ? "text" : "password"}
-                placeholder="password"
-                className="input input-bordered"
-              />
-              <span
-                className=" absolute top-4 right-4"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? <IoMdEye /> : <IoIosEyeOff />}
-              </span>
-              {errors.password && (
-                <span className="text-red-500">Password is required</span>
-              )}
-              <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
-                  Forgot password?
-                </a>
-              </label>
-            </div>
-            <div className="form-control mt-6">
-              <button className="btn btn-primary text-white">Sign In</button>
-            </div>
-          </form>
-        </section>
+    <div className="flex flex-col md:flex-row min-h-[calc(100vh-100px)]">
+      {/* Section 1: Small devices only */}
+      <section className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 flex-col justify-center items-center space-y-4 p-4 md:p-10 text-white block lg:hidden md:hidden">
+        <p className="text-4xl font-black text-center">Hello, Friend</p>
+        <p className="text-lg text-center">
+          Register with your personal details to use all site features
+        </p>
+        <button
+          className="btn btn-outline border-white text-white"
+          onClick={toggleForm}
+        >
+          Sign Up
+        </button>
       </section>
-      <section className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-r-3xl rounded-l-[170px] w-1/2 flex flex-col justify-center items-center space-y-4 px-32 text-white">
+
+      {/* Section 2: Responsive for all devices */}
+      <section className="flex-1 flex flex-col justify-center items-center space-y-4 p-4 md:p-10">
+        <p className="text-4xl font-bold">Sign In</p>
+        <SocialLogin />
+        <p className="text-sm">Or use your email password</p>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col gap-4 w-full max-w-md"
+        >
+          <div className="form-control">
+            <input
+              {...register("email", { required: true })}
+              type="email"
+              placeholder="Email"
+              className="input input-bordered"
+            />
+            {errors.email && (
+              <span className="text-red-500">Email is required</span>
+            )}
+          </div>
+          <div className="form-control relative">
+            <input
+              {...register("password", { required: true })}
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              className="input input-bordered"
+            />
+            <span
+              className="absolute top-4 right-4 cursor-pointer"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <IoMdEye /> : <IoIosEyeOff />}
+            </span>
+            {errors.password && (
+              <span className="text-red-500">Password is required</span>
+            )}
+            <label className="label">
+              <a href="#" className="label-text-alt link link-hover">
+                Forgot password?
+              </a>
+            </label>
+          </div>
+          <div className="form-control mt-6">
+            <button className="btn btn-primary text-white">Sign In</button>
+          </div>
+        </form>
+      </section>
+
+      {/* Section 3: Medium and large devices only */}
+      <section className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-r-[170px] flex-1 flex-col justify-center items-center space-y-4 p-4 md:p-10 text-white hidden lg:flex md:flex">
         <p className="text-4xl font-black">Hello, Friend</p>
         <p className="text-lg text-center">
           Register with your personal details to use all site features

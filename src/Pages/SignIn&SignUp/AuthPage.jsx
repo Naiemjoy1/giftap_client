@@ -8,7 +8,6 @@ const AuthPage = () => {
   const [resetSignUp, setResetSignUp] = useState(null);
 
   const toggleForm = () => {
-    // Reset both forms during the transition
     if (resetSignIn) resetSignIn();
     if (resetSignUp) resetSignUp();
 
@@ -16,7 +15,11 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="container mx-auto min-h-[calc(100vh-100px)] my-10 rounded-3xl shadow-xl relative overflow-hidden">
+    <div
+      className={`container mx-auto ${
+        window.innerWidth < 640 ? "h-screen" : "min-h-[calc(100vh-100px)]"
+      } my-10 relative overflow-hidden`}
+    >
       <div
         className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
           isSignUp ? "translate-x-0" : "translate-x-full"
@@ -26,7 +29,6 @@ const AuthPage = () => {
           <SignIn toggleForm={toggleForm} setReset={setResetSignIn} />
         </div>
       </div>
-
       <div
         className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
           !isSignUp ? "translate-x-0" : "-translate-x-full"
