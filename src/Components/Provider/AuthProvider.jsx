@@ -7,6 +7,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
+  GithubAuthProvider,
+  TwitterAuthProvider,
 } from "firebase/auth";
 import auth from "../../Firebase/FirebaseConfig";
 
@@ -15,6 +17,10 @@ export const AuthContext = createContext(auth);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
+  const twitterProvider = new TwitterAuthProvider();
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -28,13 +34,28 @@ const AuthProvider = ({ children }) => {
 
   const googleSignIn = () => {
     setLoading(true);
-    const provider = new GoogleAuthProvider();
-    return signInWithPopup(auth, provider);
+    return signInWithPopup(auth, googleProvider).finally(() =>
+      setLoading(false)
+    );
+  };
+
+  const githubLogin = () => {
+    setLoading(true);
+    return signInWithPopup(auth, githubProvider).finally(() =>
+      setLoading(false)
+    );
+  };
+
+  const twitterLogin = () => {
+    setLoading(true);
+    return signInWithPopup(auth, twitterProvider).finally(() =>
+      setLoading(false)
+    );
   };
 
   const logOut = () => {
     setLoading(true);
-    return signOut(auth);
+    return signOut(auth).finally(() => setLoading(false));
   };
 
   useEffect(() => {
@@ -57,6 +78,8 @@ const AuthProvider = ({ children }) => {
     logOut,
     googleSignIn,
     updateUserProfile,
+    githubLogin,
+    twitterLogin,
   };
 
   return (

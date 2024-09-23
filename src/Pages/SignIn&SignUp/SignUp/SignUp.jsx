@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaFacebookF, FaGithub, FaGoogle, FaLinkedin } from "react-icons/fa";
 import useAuth from "../../../Components/Hooks/useAuth";
 import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import SocialLogin from "../SocialLogin/SocialLogin";
+import { IoIosEyeOff, IoMdEye } from "react-icons/io";
 
 const SignUp = ({ toggleForm, setReset }) => {
   const { createUser, updateUserProfile } = useAuth();
   const axiosPublic = useAxiosPublic();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
@@ -28,18 +30,16 @@ const SignUp = ({ toggleForm, setReset }) => {
     try {
       const { name, email, password } = data;
 
-      // Create the user using the correct function name
       const userResult = await createUser(email, password);
       console.log("User created:", userResult);
 
-      // Update user profile with the name
       await updateUserProfile(name);
       console.log("User profile updated");
 
-      // Save the user in the database
       const userInfo = {
         name,
         email,
+        password,
         createdDate: new Date().toISOString(),
         status: "active",
       };
@@ -58,11 +58,20 @@ const SignUp = ({ toggleForm, setReset }) => {
       }
     } catch (error) {
       console.error("Error in onSubmit:", error);
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Something went wrong. Please try again.",
-      });
+
+      if (error.code === "auth/email-already-in-use") {
+        Swal.fire({
+          icon: "error",
+          title: "Email already in use",
+          text: "This email is already associated with an account. Please sign in or use a different email.",
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong. Please try again.",
+        });
+      }
     } finally {
       setLoading(false);
     }
@@ -84,19 +93,8 @@ const SignUp = ({ toggleForm, setReset }) => {
       </section>
       <section className="w-1/2 flex flex-col justify-center items-center space-y-4">
         <p className="text-4xl font-bold">Sign Up</p>
-        <section className="space-x-4">
-          <button className="bg-white border p-3 rounded-lg">
-            <FaGoogle />
-          </button>
-          <button className="bg-white border p-3 rounded-lg">
-            <FaFacebookF />
-          </button>
-          <button className="bg-white border p-3 rounded-lg">
-            <FaGithub />
-          </button>
-          <button className="bg-white border p-3 rounded-lg">
-            <FaLinkedin />
-          </button>
+        <section>
+          <SocialLogin></SocialLogin>
         </section>
         <p className="text-sm">Or use your email password for registration</p>
         <section>
@@ -126,13 +124,19 @@ const SignUp = ({ toggleForm, setReset }) => {
                 <span className="text-red-500">Email is required</span>
               )}
             </div>
-            <div className="form-control">
+            <div className="form-control relative">
               <input
                 {...register("password", { required: true })}
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 className="input input-bordered"
               />
+              <span
+                className=" absolute top-4 right-4"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <IoMdEye /> : <IoIosEyeOff />}
+              </span>
               {errors.password && (
                 <span className="text-red-500">Password is required</span>
               )}
