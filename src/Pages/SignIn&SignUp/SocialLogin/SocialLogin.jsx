@@ -1,7 +1,7 @@
-import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
-import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
-import useAuth from "../../../Components/Hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../../Components/Hooks/useAuth";
+import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
+import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 const SocialLogin = () => {
@@ -12,15 +12,17 @@ const SocialLogin = () => {
   const handleSocialLogin = (socialProvider) => {
     socialProvider()
       .then((result) => {
-        console.log(result.user);
+        const user = result.user;
 
         const userInfo = {
-          name: result.user?.displayName,
-          email: result.user?.email,
+          name: user?.displayName,
+          email: user?.email,
+          provider: user.providerId, // Add provider information
           createdDate: new Date().toISOString(),
           status: "active",
         };
 
+        // Send user info to your back-end
         axiosPublic.post("/users", userInfo).then((res) => {
           if (res.data.insertedId) {
             Swal.fire({

@@ -48,7 +48,7 @@ const SignIn = ({ toggleForm, setReset }) => {
   return (
     <div className="flex flex-col md:flex-row min-h-[calc(100vh-100px)]">
       {/* Section 1: Small devices only */}
-      <section className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 flex-col justify-center items-center space-y-4 p-4 md:p-10 text-white block lg:hidden md:hidden">
+      <section className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 flex flex-col justify-center items-center space-y-4 p-4 md:p-10 text-white lg:hidden md:hidden">
         <p className="text-4xl font-black text-center">Hello, Friend</p>
         <p className="text-lg text-center">
           Register with your personal details to use all site features
