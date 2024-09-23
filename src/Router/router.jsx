@@ -9,6 +9,7 @@ import Contact from "../Pages/Contact/Contact";
 import Faq from "../Pages/Faq/Faq";
 import TrackOrders from "../Pages/TrackOrders/TrackOrders";
 import AuthPage from "../Pages/SignIn&SignUp/AuthPage";
+import UpdateProfile from "../Pages/UpdateProfile/UpdateProfile";
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
       {
         path: "/track",
         element: <TrackOrders></TrackOrders>,
+      },
+      {
+        path: "/updateprofile",
+        element: <UpdateProfile></UpdateProfile>,
       },
     ],
   },

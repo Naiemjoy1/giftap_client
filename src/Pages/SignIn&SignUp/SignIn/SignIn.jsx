@@ -1,13 +1,16 @@
 import { useForm } from "react-hook-form";
-import { FaFacebookF, FaGithub, FaGoogle, FaLinkedin } from "react-icons/fa";
 import useAuth from "../../../Components/Hooks/useAuth";
 import Swal from "sweetalert2";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import SocialLogin from "../SocialLogin/SocialLogin";
+import { IoIosEyeOff, IoMdEye } from "react-icons/io";
 
 const SignIn = ({ toggleForm, setReset }) => {
   const { signIn } = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
+
   const {
-    register, // Register hook to register input fields
+    register,
     handleSubmit,
     reset,
     formState: { errors },
@@ -18,12 +21,13 @@ const SignIn = ({ toggleForm, setReset }) => {
   }, [setReset, reset]);
 
   const onSubmit = async (data) => {
-    console.log(data);
-
     const { email, password } = data;
-    signIn(email, password).then((result) => {
+
+    try {
+      const result = await signIn(email, password);
       const user = result.user;
       console.log(user);
+
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -31,26 +35,22 @@ const SignIn = ({ toggleForm, setReset }) => {
         showConfirmButton: false,
         timer: 1500,
       });
-    });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Invalid email or password!",
+      });
+      console.error(error.message);
+    }
   };
 
   return (
     <div className="flex min-h-[calc(100vh-100px)]">
       <section className="w-1/2 flex flex-col justify-center items-center space-y-4">
         <p className="text-4xl font-bold">Sign In</p>
-        <section className="space-x-4">
-          <button className="bg-white border p-3 rounded-lg">
-            <FaGoogle />
-          </button>
-          <button className="bg-white border p-3 rounded-lg">
-            <FaFacebookF />
-          </button>
-          <button className="bg-white border p-3 rounded-lg">
-            <FaGithub />
-          </button>
-          <button className="bg-white border p-3 rounded-lg">
-            <FaLinkedin />
-          </button>
+        <section>
+          <SocialLogin></SocialLogin>
         </section>
         <p className="text-sm">Or use your email password</p>
         <section>
@@ -60,7 +60,7 @@ const SignIn = ({ toggleForm, setReset }) => {
           >
             <div className="form-control">
               <input
-                {...register("email", { required: true })} // Registering the email input field
+                {...register("email", { required: true })}
                 type="email"
                 placeholder="email"
                 className="input input-bordered w-[400px]"
@@ -69,13 +69,19 @@ const SignIn = ({ toggleForm, setReset }) => {
                 <span className="text-red-500">Email is required</span>
               )}
             </div>
-            <div className="form-control">
+            <div className="form-control relative">
               <input
-                {...register("password", { required: true })} // Registering the password input field
-                type="password"
+                {...register("password", { required: true })}
+                type={showPassword ? "text" : "password"}
                 placeholder="password"
                 className="input input-bordered"
               />
+              <span
+                className=" absolute top-4 right-4"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <IoMdEye /> : <IoIosEyeOff />}
+              </span>
               {errors.password && (
                 <span className="text-red-500">Password is required</span>
               )}
