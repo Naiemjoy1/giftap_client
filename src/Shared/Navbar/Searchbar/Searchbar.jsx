@@ -78,6 +78,13 @@ const Searchbar = () => {
                     </button>
                   </li>
                   <li>
+                    <button className="btn btn-sm btn-ghost">
+                      <Link to="/Dashboard">
+                        Dashboard
+                      </Link>
+                    </button>
+                  </li>
+                  <li>
                     <button
                       onClick={handleLogOut}
                       className="btn btn-sm btn-ghost"
