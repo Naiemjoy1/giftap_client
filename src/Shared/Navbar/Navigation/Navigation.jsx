@@ -5,8 +5,7 @@ import { FaBars } from "react-icons/fa";
 
 const Navigation = () => {
   const [products, loading] = useProducts();
-  console.log(products);
-  const categories = products.map((item) => item.category);
+  const categories = [...new Set(products.map((item) => item.category))];
 
   const navLinks = (
     <>
