@@ -40,6 +40,14 @@ const NavDrawer = ({ toggleDrawer, user, handleLogOut }) => {
             <RxCrossCircled />
           </button>
         </div>
+        <div className="flex justify-between items-center px-4 text-sm">
+          <Link to="/profile">
+            <p className=" hover:text-primary">My account</p>
+          </Link>
+          <Link to="/track">
+            <p className=" hover:text-primary">Order Tracking</p>
+          </Link>
+        </div>
 
         {/* Category and Links */}
         <div className="space-y-4">
