@@ -1,6 +1,6 @@
 const TrackOrders = () => {
   return (
-    <div>
+    <div className="container mx-auto my-10">
       <p>TrackOrders</p>
     </div>
   );

@@ -10,6 +10,7 @@ import Faq from "../Pages/Faq/Faq";
 import TrackOrders from "../Pages/TrackOrders/TrackOrders";
 import AuthPage from "../Pages/SignIn&SignUp/AuthPage";
 import UpdateProfile from "../Pages/UpdateProfile/UpdateProfile";
+import About from "../Pages/About/About";
 
 export const router = createBrowserRouter([
   {
@@ -30,8 +31,8 @@ export const router = createBrowserRouter([
         element: <Shop></Shop>,
       },
       {
-        path: "/story",
-        element: <OurStory></OurStory>,
+        path: "/about",
+        element: <About></About>,
       },
       {
         path: "/blog",
@@ -50,7 +51,7 @@ export const router = createBrowserRouter([
         element: <TrackOrders></TrackOrders>,
       },
       {
-        path: "/updateprofile",
+        path: "/profile",
         element: <UpdateProfile></UpdateProfile>,
       },
     ],
