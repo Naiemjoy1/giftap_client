@@ -1,9 +1,19 @@
 import React from "react";
 
-const ReviewCard = () => {
+const ReviewCard = ({ review }) => {
+  const { user_image, user_name, profession, rating, description } = review;
   return (
-    <div>
-      <h1>This is review card</h1>
+    <div className="bg-white border w-[300px] rounded-2xl p-5">
+      <div className="flex items-center space-x-5">
+        <img className="w-14 h-14 rounded-full" src={user_image} alt="" />
+        <div>
+          <h1 className="text-base font-semibold">{user_name}</h1>
+          <h1>{profession}</h1>
+          <h1>{rating}</h1>
+        </div>
+      </div>
+      <div class="border-b-2 border-slate-300 mt-5 ..."></div>
+      <h1 className="mt-4 text-base font-medium">{description}</h1>
     </div>
   );
 };

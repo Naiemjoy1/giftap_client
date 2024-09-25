@@ -1,16 +1,14 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
 import useReviews from "../../../Components/Hooks/useReviews";
+import ReviewCard from "./ReviewCard";
 
 const Review = () => {
   const [reviews, loading] = useReviews();
 
   return (
     <div>
-      <div className="relative bg-gradient-to-r from-purple-200 to-purple-300">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 40 40%27 width=%2740%27 height=%2740%27%3E%3Cpath fill=%27none%27 stroke=%27%23e1e1e1%27 stroke-width=%271%27 d=%27M0 39.5H40M39.5 0V40%27/%3E%3C/svg%3E')] opacity-50"></div>
-
-        {/* Your customer review cards go here */}
+      <div className="bg-gradient-to-r from-slate-200 to-pink-200 rounded-2xl h-[800px]">
         <div className="relative z-10 p-8">
           <h1 className="text-center text-3xl font-medium">
             CUSTOMERS REVIEWS
@@ -32,7 +30,12 @@ const Review = () => {
             </h1>
           </div>
         </div>
-        <h1>{reviews.length}</h1>
+        {/* Your customer review cards go here */}
+        <div className="grid grid-cols-5 gap-4 mt-7">
+          {reviews.map((review) => (
+            <ReviewCard key={review._id} review={review}></ReviewCard>
+          ))}
+        </div>
       </div>
     </div>
   );
