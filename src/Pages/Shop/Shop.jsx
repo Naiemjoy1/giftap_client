@@ -1,28 +1,23 @@
 import { useState, useEffect } from "react";
 import useProducts from "../../Components/Hooks/useProducts";
 import { BsFillGrid3X2GapFill } from "react-icons/bs";
-import { FaThList } from "react-icons/fa";
 import { MdViewList } from "react-icons/md";
+import { motion } from "framer-motion";
 
 const Shop = () => {
   const [products, loading] = useProducts();
-  console.log(products);
-
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
-  const [viewMode, setViewMode] = useState("grid"); // Tracks view mode
-  const [sortOption, setSortOption] = useState("default"); // Tracks sorting option
-  const [priceRange, setPriceRange] = useState([0, 100]); // Tracks selected price range
+  const [viewMode, setViewMode] = useState("grid");
+  const [sortOption, setSortOption] = useState("default");
+  const [priceRange, setPriceRange] = useState([0, 100]);
   const productsPerPage = 9;
 
-  // Calculate total pages
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
-  // Get unique categories
   const categories = ["All", ...new Set(products.map((item) => item.category))];
 
-  // Update filtered products when category, sort option, or price range changes
   useEffect(() => {
     let updatedProducts = [...products];
 
@@ -39,18 +34,25 @@ const Shop = () => {
         product.price >= priceRange[0] && product.price <= priceRange[1]
     );
 
-    // Sort based on sortOption
-    if (sortOption === "highToLow") {
-      updatedProducts.sort((a, b) => b.price - a.price);
-    } else if (sortOption === "lowToHigh") {
+    // Sort by selected option
+    if (sortOption === "lowToHigh") {
       updatedProducts.sort((a, b) => a.price - b.price);
+    } else if (sortOption === "highToLow") {
+      updatedProducts.sort((a, b) => b.price - a.price);
+    } else if (sortOption === "alphabeticalAZ") {
+      updatedProducts.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortOption === "alphabeticalZA") {
+      updatedProducts.sort((a, b) => b.name.localeCompare(a.name));
+    } else if (sortOption === "dateOldToNew") {
+      updatedProducts.sort((a, b) => new Date(a.date) - new Date(b.date));
+    } else if (sortOption === "dateNewToOld") {
+      updatedProducts.sort((a, b) => new Date(b.date) - new Date(a.date));
     }
 
     setFilteredProducts(updatedProducts);
-    setCurrentPage(1); // Reset to page 1 when category, sorting, or price changes
+    setCurrentPage(1);
   }, [selectedCategory, sortOption, priceRange, products]);
 
-  // Get products for the current page
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = filteredProducts.slice(
@@ -58,10 +60,8 @@ const Shop = () => {
     indexOfLastProduct
   );
 
-  // Pagination handler
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  // Handle price range input
   const handlePriceRangeChange = (e) => {
     const { name, value } = e.target;
     if (name === "minPrice") {
@@ -73,9 +73,11 @@ const Shop = () => {
 
   return (
     <div className="container mx-auto my-10 grid grid-cols-[30%_70%] justify-between gap-10">
-      <section className="space-y-8">
+      {/* Sidebar */}
+      <section className="space-y-8 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 p-5 rounded-lg text-white">
+        {/* Category Section */}
         <section>
-          <p className="text-2xl font-medium">Product categories</p>
+          <p className="text-2xl font-medium">Product Categories</p>
           <hr className="border-dashed mt-4" />
         </section>
         <section>
@@ -97,6 +99,8 @@ const Shop = () => {
             ))}
           </ul>
         </section>
+
+        {/* Price Filter Section */}
         <section>
           <p className="text-2xl font-medium">Filter by Price</p>
           <hr className="border-dashed my-4" />
@@ -119,12 +123,34 @@ const Shop = () => {
             />
           </div>
         </section>
+
+        {/* Sort By Section */}
+        <section>
+          <p className="text-2xl font-medium">Sort By</p>
+          <hr className="border-dashed my-4" />
+          <div className="space-y-4">
+            <select
+              value={sortOption}
+              onChange={(e) => setSortOption(e.target.value)}
+              className="border p-2 w-full bg-white text-black"
+            >
+              <option value="default">Default Sort</option>
+              <option value="alphabeticalAZ">Alphabetically, A-Z</option>
+              <option value="alphabeticalZA">Alphabetically, Z-A</option>
+              <option value="lowToHigh">Price, low to high</option>
+              <option value="highToLow">Price, high to low</option>
+              <option value="dateOldToNew">Date, old to new</option>
+              <option value="dateNewToOld">Date, new to old</option>
+            </select>
+          </div>
+        </section>
       </section>
+
+      {/* Products Section */}
       <section>
         <section className="flex justify-between">
           <p>
-            Showing {currentProducts.length} of {filteredProducts.length}{" "}
-            results
+            Showing {currentProducts.length} of {filteredProducts.length} results
           </p>
           <section className="flex gap-5">
             <section className="flex gap-2">
@@ -141,93 +167,80 @@ const Shop = () => {
                 <MdViewList />
               </button>
             </section>
-
-            {/* Sorting Options */}
-            <select
-              value={sortOption}
-              onChange={(e) => setSortOption(e.target.value)}
-              className="border p-2"
-            >
-              <option value="default">Default Sort</option>
-              <option value="highToLow">Sort by Price: High to Low</option>
-              <option value="lowToHigh">Sort by Price: Low to High</option>
-            </select>
           </section>
         </section>
         <hr className="border-dashed my-4" />
 
-        {/* Apply different grid classes based on viewMode */}
+        {/* Products Grid/List */}
         <section
           className={`grid ${
-            viewMode === "grid" ? "grid-cols-3 gap-4" : "grid-cols-1 gap-4"
+            viewMode === "grid" ? "grid-cols-3 gap-6" : "grid-cols-1 gap-6"
           }`}
         >
-          {viewMode === "grid"
-            ? currentProducts.map((item) => (
-                <section
-                  className="relative group h-64 w-full flex flex-col justify-between"
-                  key={item._id}
-                >
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="h-44 w-full object-cover"
-                  />
-                  {/* This section will slide up on hover */}
-                  <section className="flex justify-center items-center gap-4 bg-white shadow-xl w-1/2 mx-auto rounded-full p-1 absolute inset-x-0 top-36 transform -translate-y-10 opacity-0 transition-all duration-700 group-hover:translate-y-0 group-hover:opacity-100">
-                    <p>w</p>
-                    <p>w</p>
-                    <p>w</p>
-                  </section>
-                  <section className="text-center">
-                    <p>${item.price}</p>
-                    <p>{item.name}</p>
-                    <p>Rating: {item.rating}</p>
-                  </section>
-                </section>
-              ))
-            : currentProducts.map((item, index) => (
-                <div key={item._id}>
-                  <section className="bg-base-100 flex items-center">
-                    <figure>
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="w-80 h-56 object-cover" // Ensuring consistent width and height
-                      />
-                    </figure>
-                    <div className="card-body">
-                      <h2 className="card-title">{item.name}</h2>
-                      <p>Price: ${item.price}</p>
-                      <p>Rating: {item.rating}</p>
-                      <p>{item.description}</p>
-                    </div>
-                  </section>
-                  {index !== currentProducts.length - 1 && (
-                    <hr className="border-dashed my-4" />
-                  )}
+          {currentProducts.map((item) => (
+            <motion.div
+              key={item._id}
+              className="relative group bg-white shadow-lg rounded-lg overflow-hidden"
+              whileHover={{ scale: 1.03 }}
+              transition={{ duration: 0.5 }}
+            >
+              <motion.img
+                src={item.image}
+                alt={item.name}
+                className="w-full h-64 object-cover"
+                whileHover={{ scale: 1.4 }}
+                transition={{ duration: 0.5 }}
+              />
+              <section className="p-4 space-y-2">
+                <h3 className="text-lg font-semibold">{item.name}</h3>
+                <p className="text-sm font-semibold">Seller: {item.seller_name}</p>
+                <p className="text-sm"><span className="font-bold text-pink-500">Store:</span>{item.store_name}</p>
+                <p className="text-sm"><span className="font-bold text-pink-500">Category:</span>{item.category}</p>
+                <div className="flex justify-between items-center">
+                  <span className="text-lg font-bold text-red-500">${item.price}</span>
+                  <span className="text-sm text-red-500">{item.discount}</span>
                 </div>
-              ))}
+                <motion.section
+                  className="flex justify-center items-center gap-4 w-full mx-auto py-2"
+                  initial={{ y: 10, opacity: 0 }}
+                  whileHover={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <button className="text-sm font-semibold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 px-4 py-2 rounded-full">
+                    Add to Cart
+                  </button>
+                  <button className="text-sm font-semibold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 px-4 py-2 rounded-full">
+                    View Details
+                  </button>
+                </motion.section>
+              </section>
+            </motion.div>
+          ))}
         </section>
 
-        {/* Pagination Controls */}
-        <section className="flex justify-center mt-4">
-          <ul className="flex space-x-2">
-            {Array.from({ length: totalPages }, (_, index) => (
-              <li key={index}>
-                <button
-                  onClick={() => paginate(index + 1)}
-                  className={`py-2 px-4 border ${
-                    currentPage === index + 1
-                      ? "bg-primary rounded-full text-white"
-                      : "bg-gray-200 rounded-full"
-                  }`}
-                >
-                  {index + 1}
-                </button>
-              </li>
-            ))}
-          </ul>
+        {/* Pagination */}
+        <section className="flex justify-center items-center gap-4 mt-6">
+          <button
+            disabled={currentPage === 1}
+            onClick={() => paginate(currentPage - 1)}
+            className={`px-4 py-2 rounded ${
+              currentPage === 1 ? "bg-pink-400 text-white" : "bg-red-400 text-white"
+            }`}
+          >
+            Previous
+          </button>
+          <p>
+            Page {currentPage} of {totalPages}
+          </p>
+          <button
+            disabled={currentPage === totalPages}
+            onClick={() => paginate(currentPage + 1)}
+            className={`px-4 py-2 rounded ${
+              currentPage === totalPages ? "bg-pink-400 text-white" : "bg-red-400 text-white"
+            }`}
+          >
+            Next
+          </button>
         </section>
       </section>
     </div>

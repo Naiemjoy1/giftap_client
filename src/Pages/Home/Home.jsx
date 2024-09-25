@@ -9,7 +9,7 @@ import TrustedShop from "./TrustedShop/TrustedShop";
 
 const Home = () => {
   return (
-    <div className=" container mx-auto my-10 space-y-5">
+    <div className=" mb-10 space-y-5">
       <Banner></Banner>
       <BannerFeature></BannerFeature>
       <Category></Category>
