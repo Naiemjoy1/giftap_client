@@ -1,7 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { Link } from 'react-router-dom';
 
+
+import { demoPosts } from './demoPosts';
 const Blog = () => {
+  // Pagination logic
+const [currentPage, setCurrentPage] = useState(1);
+const postsPerPage = 6;
+
+const indexOfLastPost = currentPage * postsPerPage;
+const indexOfFirstPost = indexOfLastPost - postsPerPage;
+const currentPosts = demoPosts.slice(indexOfFirstPost, indexOfLastPost);
+
+const totalPages = Math.ceil(demoPosts.length / postsPerPage);
+
+const handlePrevious = () => {
+  if (currentPage > 1) setCurrentPage(currentPage - 1);
+};
+
+const handleNext = () => {
+  if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+};
   return (
     <div className="container mx-auto my-5 flex flex-col md:flex-row">
        {/* Left Sidebar  */}
@@ -89,13 +109,20 @@ const Blog = () => {
 
         {/* Tags Cloud */}
         <div className="mb-4">
-          <h2 className="font-bold text-lg mb-2">Tags Cloud</h2>
-          <div className="flex flex-wrap">
-            <span className="border-1px-solid border-red-700  text-black p-1 rounded m-1">Tag1</span>
-            <span className=" text-black p-1 rounded m-1">Tag2</span>
-            {/* Repeat for more tags */}
-          </div>
-        </div>
+  <h2 className="relative font-bold text-lg mb-2 border-b-2 border-black pl-4 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-8 after:h-0.5 after:bg-sky-500">
+    Tags Cloud
+  </h2>
+  <div className="flex flex-wrap">
+    <span className="border border-black text-black px-2 py-1 rounded m-1">airports</span>
+    <span className="border border-black text-black px-2 py-1 rounded m-1">amazing</span>
+    <span className="border border-black text-black px-2 py-1 rounded m-1">Bootstrap</span>
+    <span className="border border-black text-black px-2 py-1 rounded m-1">business</span>
+    <span className="border border-black text-black px-2 py-1 rounded m-1">Clean Design</span>
+    <span className="border border-black text-black px-2 py-1 rounded m-1">electronic</span>
+    <span className="border border-black text-black px-2 py-1 rounded m-1">iPad Pro</span>
+  </div>
+</div>
+
 
         {/* Newsletter */}
         <div>
@@ -121,27 +148,61 @@ const Blog = () => {
         </div>
       </aside>
 
-      {/* Right Side - Blog Content */}
       <main className="w-full md:w-3/4 bg-white p-5 shadow-lg rounded-lg">
         <h1 className="text-2xl font-bold mb-5">Blog Posts</h1>
 
-        {/* Blog Cards */}
-        <div className="space-y-4">
-          {/* Example Blog Card */}
-          <div className="border p-4 rounded-lg shadow hover:shadow-lg transition">
-            <img src="image-url" alt="Blog" className="w-full h-40 object-cover rounded" />
-            <h2 className="font-semibold text-xl my-2">Blog Title</h2>
-            <p className="text-gray-500">Published on: Date | Comments: 5</p>
-            <p className="text-gray-700">Some description about the blog goes here...</p>
-            <button className="mt-2 bg-black text-white p-2 rounded">Read More</button>
-          </div>
-          {/* Repeat for more blog cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {currentPosts.map((post) => (
+            <div key={post.id} className="border p-4 rounded-lg shadow hover:shadow-lg transition">
+              <img src={post.image} alt={post.title} className="w-full h-48 object-cover rounded-md mb-2" />
+              <div className="flex justify-between text-red-500 text-sm mb-2">
+                <span>{post.date}</span>
+                <span className="flex items-center">
+                  <i className="fas fa-comment mr-1"></i> {post.comments} Comments
+                </span>
+              </div>
+              <h2 className="font-semibold text-xl my-2 text-center">{post.title}</h2>
+              <p className="text-gray-700 text-center">{post.description}</p>
+              
+              <div className="flex justify-center">
+                {/* Link to the blog details page based on the post ID */}
+                <Link to={`/blog/${post.id}`}>
+                  <button className="mt-2 bg-red-500 text-white text-sm p-2 rounded flex items-center justify-center">
+                    Read More
+                  </button>
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* Blog Pagination */}
-        <div className="flex justify-between mt-5">
-          <button className="bg-black text-white p-2 rounded">Previous</button>
-          <button className="bg-black text-white p-2 rounded">Next</button>
+        <div className="flex justify-between mt-5 items-center">
+          <button
+            onClick={handlePrevious}
+            className={`bg-black text-white p-2 rounded ${currentPage === 1 && 'opacity-50 cursor-not-allowed'}`}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <div className="space-x-2">
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index + 1}
+                onClick={() => setCurrentPage(index + 1)}
+                className={`p-2 rounded ${currentPage === index + 1 ? 'bg-black text-white' : 'bg-gray-300'}`}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
+          <button
+            onClick={handleNext}
+            className={`bg-black text-white p-2 rounded ${currentPage === totalPages && 'opacity-50 cursor-not-allowed'}`}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
         </div>
       </main>
     </div>

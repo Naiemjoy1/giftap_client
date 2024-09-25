@@ -10,6 +10,7 @@ import Blog from "../Pages/Blog/Blog";
 import Contact from "../Pages/Contact/Contact";
 import Faq from "../Pages/Faq/Faq";
 import TrackOrders from "../Pages/TrackOrders/TrackOrders";
+import BlogDetails from "../Pages/Blog/BlogDetails";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
       {
         path: "/blog",
         element: <Blog></Blog>,
+      },
+      {
+        path: "/blog/:id", 
+        element: <BlogDetails></BlogDetails>, 
       },
       {
         path: "/contact",
