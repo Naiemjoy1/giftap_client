@@ -1,0 +1,32 @@
+[
+  {
+    "text": "Early birds or night owls, get a 10% discount on your cart!",
+    "promoCode": "DECEMBER10",
+    "finishDate": "2024-12-31T23:59:59",
+    "status": "inactive"
+  },
+  {
+    "text": "Flash Sale! Get 20% off all electronics!",
+    "promoCode": "FLASH20",
+    "finishDate": "2024-11-15T23:59:59",
+    "status": "active"
+  },
+  {
+    "text": "Buy 1 Get 1 Free! Limited time offer!",
+    "promoCode": "BOGO",
+    "finishDate": "2024-10-10T23:59:59",
+    "status": "inactive"
+  },
+  {
+    "text": "Free shipping on all orders over $50!",
+    "promoCode": "SHIPFREE",
+    "finishDate": "2024-09-30T23:59:59",
+    "status": "inactive"
+  },
+  {
+    "text": "25% off on selected items this week only!",
+    "promoCode": "WEEK25",
+    "finishDate": "2024-12-15T23:59:59",
+    "status": "inactive"
+  }
+]

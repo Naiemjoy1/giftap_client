@@ -5,7 +5,7 @@ import Gifts from "./Gifts/Gifts";
 
 const Home = () => {
   return (
-    <div className=" container mx-auto my-10 space-y-5">
+    <div className=" mb-10 space-y-5">
       <Banner></Banner>
       <Category></Category>
       <Features></Features>
