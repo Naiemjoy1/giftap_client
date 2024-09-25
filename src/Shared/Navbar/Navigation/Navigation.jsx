@@ -5,8 +5,7 @@ import { FaBars } from "react-icons/fa";
 
 const Navigation = () => {
   const [products, loading] = useProducts();
-  console.log(products);
-  const categories = products.map((item) => item.category);
+  const categories = [...new Set(products.map((item) => item.category))];
 
   const navLinks = (
     <>
@@ -64,6 +63,20 @@ const Navigation = () => {
           }
         >
           Contact
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/Dashboard"
+          className={({ isActive }) =>
+            `px-4 py-2 rounded transition-colors ${
+              isActive
+                ? "bg-primary text-white"
+                : "hover:bg-primary hover:text-white"
+            }`
+          }
+        >
+          Dashboard
         </NavLink>
       </li>
     </>

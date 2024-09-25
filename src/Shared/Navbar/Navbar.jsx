@@ -7,10 +7,16 @@ import Navigation from "./Navigation/Navigation";
 const Navbar = () => {
   return (
     <div className="shadow-md">
-      <Offerbar></Offerbar>
-      <Topbar></Topbar>
+      <div className="hidden lg:block">
+        <Offerbar></Offerbar>
+      </div>
+      <div className="hidden lg:block">
+        <Topbar></Topbar>
+      </div>
       <Searchbar></Searchbar>
-      <Navigation></Navigation>
+      <div className="hidden lg:block">
+        <Navigation></Navigation>
+      </div>
     </div>
   );
 };
