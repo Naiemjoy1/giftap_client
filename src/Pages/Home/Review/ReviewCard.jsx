@@ -1,4 +1,5 @@
 import React from "react";
+import { FaStar } from "react-icons/fa";
 
 const ReviewCard = ({ review }) => {
   const { user_image, user_name, profession, rating, description } = review;
@@ -9,7 +10,13 @@ const ReviewCard = ({ review }) => {
         <div>
           <h1 className="text-base font-semibold">{user_name}</h1>
           <h1>{profession}</h1>
-          <h1>{rating}</h1>
+          <h1 className="flex space-x-1 mt-1 text-yellow-300 text-sm">
+            <FaStar />
+            <FaStar />
+            <FaStar />
+            <FaStar />
+            <FaStar />
+          </h1>
         </div>
       </div>
       <div class="border-b-2 border-slate-300 mt-5 ..."></div>

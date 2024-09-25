@@ -2,6 +2,7 @@ import React from "react";
 import { FaStar } from "react-icons/fa";
 import useReviews from "../../../Components/Hooks/useReviews";
 import ReviewCard from "./ReviewCard";
+import Marquee from "react-fast-marquee";
 
 const Review = () => {
   const [reviews, loading] = useReviews();
@@ -30,12 +31,15 @@ const Review = () => {
             </h1>
           </div>
         </div>
-        {/* Your customer review cards go here */}
-        <div className="grid grid-cols-5 gap-4 mt-7">
-          {reviews.map((review) => (
-            <ReviewCard key={review._id} review={review}></ReviewCard>
-          ))}
-        </div>
+        <Marquee pauseOnHover className="[--duration:20s]">
+          {/* Your customer review cards go here */}
+          <div className="grid grid-cols-5 gap-4 mt-7">
+            {reviews.map((review) => (
+              <ReviewCard key={review._id} review={review}></ReviewCard>
+            ))}
+          </div>
+        </Marquee>
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white dark:from-background"></div>
       </div>
     </div>
   );
