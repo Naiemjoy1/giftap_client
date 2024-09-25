@@ -10,6 +10,7 @@ import Faq from "../Pages/Faq/Faq";
 import TrackOrders from "../Pages/TrackOrders/TrackOrders";
 import AuthPage from "../Pages/SignIn&SignUp/AuthPage";
 import UpdateProfile from "../Pages/UpdateProfile/UpdateProfile";
+import ProductDeatails from "../Pages/Shop/ProductDetails/ProductDeatails";
 
 export const router = createBrowserRouter([
   {
@@ -53,6 +54,11 @@ export const router = createBrowserRouter([
         path: "/updateprofile",
         element: <UpdateProfile></UpdateProfile>,
       },
+      {
+        path:'/productDetails/:id',
+        element:<ProductDeatails></ProductDeatails>,
+     
+    },
     ],
   },
 ]);

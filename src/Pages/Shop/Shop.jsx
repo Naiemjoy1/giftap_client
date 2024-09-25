@@ -3,6 +3,7 @@ import useProducts from "../../Components/Hooks/useProducts";
 import { BsFillGrid3X2GapFill } from "react-icons/bs";
 import { MdViewList } from "react-icons/md";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Shop = () => {
   const [products, loading] = useProducts();
@@ -72,7 +73,7 @@ const Shop = () => {
   };
 
   return (
-    <div className="container mx-auto my-10 grid grid-cols-[30%_70%] justify-between gap-10">
+    <div className="container mx-auto my-10 grid grid-cols-1 md:grid-cols-[30%_70%] gap-10">
       {/* Sidebar */}
       <section className="space-y-8 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 p-5 rounded-lg text-white">
         {/* Category Section */}
@@ -85,16 +86,12 @@ const Shop = () => {
             {categories.map((category, index) => (
               <li key={index} className="mb-4">
                 <div
-                  className={`cursor-pointer ${
-                    selectedCategory === category ? "font-bold" : ""
-                  }`}
+                  className={`cursor-pointer ${selectedCategory === category ? "font-bold" : ""}`}
                   onClick={() => setSelectedCategory(category)}
                 >
                   {category}
                 </div>
-                {index !== categories.length - 1 && (
-                  <hr className="border-dashed my-4" />
-                )}
+                {index !== categories.length - 1 && <hr className="border-dashed my-4" />}
               </li>
             ))}
           </ul>
@@ -148,8 +145,8 @@ const Shop = () => {
 
       {/* Products Section */}
       <section>
-        <section className="flex justify-between">
-          <p>
+        <section className="flex justify-between flex-wrap">
+          <p className="flex-1">
             Showing {currentProducts.length} of {filteredProducts.length} results
           </p>
           <section className="flex gap-5">
@@ -173,8 +170,8 @@ const Shop = () => {
 
         {/* Products Grid/List */}
         <section
-          className={`grid ${
-            viewMode === "grid" ? "grid-cols-3 gap-6" : "grid-cols-1 gap-6"
+          className={`grid gap-6 ${
+            viewMode === "grid" ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" : "grid-cols-1"
           }`}
         >
           {currentProducts.map((item) => (
@@ -194,8 +191,8 @@ const Shop = () => {
               <section className="p-4 space-y-2">
                 <h3 className="text-lg font-semibold">{item.name}</h3>
                 <p className="text-sm font-semibold">Seller: {item.seller_name}</p>
-                <p className="text-sm"><span className="font-bold text-pink-500">Store:</span>{item.store_name}</p>
-                <p className="text-sm"><span className="font-bold text-pink-500">Category:</span>{item.category}</p>
+                <p className="text-sm"><span className="font-bold text-pink-500">Store:</span> {item.store_name}</p>
+                <p className="text-sm"><span className="font-bold text-pink-500">Category:</span> {item.category}</p>
                 <div className="flex justify-between items-center">
                   <span className="text-lg font-bold text-red-500">${item.price}</span>
                   <span className="text-sm text-red-500">{item.discount}</span>
@@ -209,9 +206,12 @@ const Shop = () => {
                   <button className="text-sm font-semibold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 px-4 py-2 rounded-full">
                     Add to Cart
                   </button>
-                  <button className="text-sm font-semibold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 px-4 py-2 rounded-full">
+                  <Link
+                    to={`/productDetails/${item._id}`} 
+                    className="text-sm font-semibold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 px-4 py-2 rounded-full"
+                  >
                     View Details
-                  </button>
+                  </Link>
                 </motion.section>
               </section>
             </motion.div>
@@ -248,3 +248,4 @@ const Shop = () => {
 };
 
 export default Shop;
+
