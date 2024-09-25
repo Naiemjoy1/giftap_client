@@ -1,7 +1,10 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
+import useReviews from "../../../Components/Hooks/useReviews";
 
 const Review = () => {
+  const [reviews, loading] = useReviews();
+
   return (
     <div>
       <div className="relative bg-gradient-to-r from-purple-200 to-purple-300">
@@ -29,9 +32,8 @@ const Review = () => {
             </h1>
           </div>
         </div>
+        <h1>{reviews.length}</h1>
       </div>
-
-      {/*  */}
     </div>
   );
 };
