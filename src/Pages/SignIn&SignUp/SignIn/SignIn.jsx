@@ -51,7 +51,7 @@ const SignIn = ({ toggleForm, setReset }) => {
       <section className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 flex flex-col justify-center items-center space-y-4 p-4 md:p-10 text-white lg:hidden md:hidden">
         <p className="text-4xl font-black text-center">Hello, Friend</p>
         <p className="text-lg text-center">
-          Register with your personal details to use all site features
+          Enter your personal details to use all site features
         </p>
         <button
           className="btn btn-outline border-white text-white"
@@ -111,9 +111,9 @@ const SignIn = ({ toggleForm, setReset }) => {
 
       {/* Section 3: Medium and large devices only */}
       <section className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-r-[170px] flex-1 flex-col justify-center items-center space-y-4 p-4 md:p-10 text-white hidden lg:flex md:flex">
-        <p className="text-4xl font-black">Hello, Friend</p>
+        <p className="text-4xl font-black">Welcome Back!</p>
         <p className="text-lg text-center">
-          Register with your personal details to use all site features
+          Enter your personal details to use all site features
         </p>
         <button
           className="btn btn-outline border-white text-white"

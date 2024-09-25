@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@smastrom/react-rating": "^1.5.0",
+    "@tanstack/react-query": "^5.56.2",
     "axios": "^1.7.7",
     "firebase": "^10.13.2",
     "framer-motion": "^11.5.6",
@@ -26,6 +27,7 @@
     "react-modern-drawer": "^1.4.0",
     "react-moving-text": "^0.0.7",
     "react-router-dom": "^6.26.2",
+    "socket.io-client": "^4.8.0",
     "sort-by": "^1.2.0",
     "sweetalert2": "^11.14.1",
     "swiper": "^11.1.14"
