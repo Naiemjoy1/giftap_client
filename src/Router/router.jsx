@@ -1,9 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Main from "../LayOut/Main";
 import Home from "../Pages/Home/Home";
 import ErrorPage from "../Shared/ErrorPage/ErrorPage";
 import Shop from "../Pages/Shop/Shop";
-import OurStory from "../Pages/OurStory/OurStory";
 import Blog from "../Pages/Blog/Blog";
 import Contact from "../Pages/Contact/Contact";
 import Faq from "../Pages/Faq/Faq";

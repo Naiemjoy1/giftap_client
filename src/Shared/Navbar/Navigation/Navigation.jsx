@@ -1,11 +1,23 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import useProducts from "../../../Components/Hooks/useProducts";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaBell } from "react-icons/fa";
+import useChat from "../../../Components/Hooks/useChat";
+import useAuth from "../../../Components/Hooks/useAuth";
+import useUsers from "../../../Components/Hooks/useUsers";
+import UserChat from "../../../Pages/Support/UserChat/UserChat";
+import AdminChat from "../../../Pages/Support/AdminChat/AdminChat";
 
 const Navigation = () => {
+  const { user } = useAuth();
+  const [users] = useUsers();
+  const currentUsers = users.filter((login) => login?.email === user?.email);
+  // console.log("currentUsers", currentUsers);
+
   const [products, loading] = useProducts();
   const categories = [...new Set(products.map((item) => item.category))];
+
+  const [chats, refetch] = useChat();
 
   const navLinks = (
     <>
@@ -83,8 +95,12 @@ const Navigation = () => {
           </select>
         </section>
 
-        <section>
+        <section className="flex justify-center items-center gap-4">
           <ul className="menu menu-horizontal">{navLinks}</ul>
+          <section className="flex justify-center gap-4">
+            <UserChat></UserChat>
+            <AdminChat currentUsers={currentUsers} chats={chats}></AdminChat>
+          </section>
         </section>
       </div>
     </div>
