@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import useProducts from "../../Components/Hooks/useProducts";
 import { BsFillGrid3X2GapFill } from "react-icons/bs";
-import { MdViewList } from "react-icons/md";
+import { MdViewList, MdFavoriteBorder, MdAddShoppingCart } from "react-icons/md";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { FcViewDetails } from "react-icons/fc";
 
 const Shop = () => {
   const [products, loading] = useProducts();
@@ -16,26 +17,22 @@ const Shop = () => {
   const productsPerPage = 9;
 
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
-
   const categories = ["All", ...new Set(products.map((item) => item.category))];
 
   useEffect(() => {
     let updatedProducts = [...products];
 
-    // Filter by category
+    // Filtering logic
     if (selectedCategory !== "All") {
       updatedProducts = updatedProducts.filter(
         (product) => product.category === selectedCategory
       );
     }
-
-    // Filter by price range
     updatedProducts = updatedProducts.filter(
       (product) =>
         product.price >= priceRange[0] && product.price <= priceRange[1]
     );
 
-    // Sort by selected option
     if (sortOption === "lowToHigh") {
       updatedProducts.sort((a, b) => a.price - b.price);
     } else if (sortOption === "highToLow") {
@@ -68,7 +65,7 @@ const Shop = () => {
     if (name === "minPrice") {
       setPriceRange([Number(value), priceRange[1]]);
     } else {
-      setPriceRange([priceRange[0], Number(value)]);
+      setPriceRange([priceRange[0], Number(value)]); 
     }
   };
 
@@ -170,9 +167,7 @@ const Shop = () => {
 
         {/* Products Grid/List */}
         <section
-          className={`grid gap-6 ${
-            viewMode === "grid" ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" : "grid-cols-1"
-          }`}
+          className={`grid gap-6 ${viewMode === "grid" ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" : "grid-cols-1"}`}
         >
           {currentProducts.map((item) => (
             <motion.div
@@ -181,66 +176,69 @@ const Shop = () => {
               whileHover={{ scale: 1.03 }}
               transition={{ duration: 0.5 }}
             >
-              <motion.img
-                src={item.image}
-                alt={item.name}
-                className="w-full h-64 object-cover"
-                whileHover={{ scale: 1.4 }}
-                transition={{ duration: 0.5 }}
-              />
-              <section className="p-4 space-y-2">
-                <h3 className="text-lg font-semibold">{item.name}</h3>
-                <p className="text-sm font-semibold">Seller: {item.seller_name}</p>
-                <p className="text-sm"><span className="font-bold text-pink-500">Store:</span> {item.store_name}</p>
-                <p className="text-sm"><span className="font-bold text-pink-500">Category:</span> {item.category}</p>
-                <div className="flex justify-between items-center">
-                  <span className="text-lg font-bold text-red-500">${item.price}</span>
-                  <span className="text-sm text-red-500">{item.discount}</span>
+              {/* Background image */}
+              <div
+                className="h-64 bg-cover bg-center"
+                style={{ backgroundImage: `url(${item.image})` }}
+              >
+                {/* Buttons on hover, overlaid on the image */}
+                <div className="absolute top-30 left-0 -right-30 -bottom-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="grid grid-cols-1 ">
+                    <Link to={`/productDetails/${item._id}`}>
+                      <motion.button
+                        className="tooltip tooltip-right text-blue-500 p-2 rounded-full"
+                        whileHover={{ scale: 1.1 }}
+                        data-tip="View Details"
+                        style={{ zIndex: 1000 }}
+                      >
+                        <FcViewDetails />
+                      </motion.button>
+                    </Link>
+                    <motion.button
+                      className="tooltip tooltip-right text-pink-600 p-2 rounded-full"
+                      whileHover={{ scale: 1.1 }}
+                      data-tip="Add to Wishlist"
+                    >
+                      <MdFavoriteBorder size={24} />
+                    </motion.button>
+                    <motion.button
+                      className="tooltip tooltip-right text-green-600 p-2 rounded-full"
+                      whileHover={{ scale: 1.1 }}
+                      data-tip="Add to Cart"
+                    >
+                      <MdAddShoppingCart size={24} />
+                    </motion.button>
+                  </div>
                 </div>
-                <motion.section
-                  className="flex justify-center items-center gap-4 w-full mx-auto py-2"
-                  initial={{ y: 10, opacity: 0 }}
-                  whileHover={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <button className="text-sm font-semibold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 px-4 py-2 rounded-full">
-                    Add to Cart
-                  </button>
-                  <Link
-                    to={`/productDetails/${item._id}`} 
-                    className="text-sm font-semibold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 px-4 py-2 rounded-full"
-                  >
-                    View Details
-                  </Link>
-                </motion.section>
-              </section>
+              </div>
+
+              <div className="p-4 space-y-3">
+                <p className="font-bold text-lg text-pink-500">{item.name}</p>
+                <p className="text-gray-600">{item.category}</p>
+                <p className="text-red-500">${item.price}</p>
+              </div>
             </motion.div>
           ))}
         </section>
 
         {/* Pagination */}
-        <section className="flex justify-center items-center gap-4 mt-6">
-          <button
-            disabled={currentPage === 1}
-            onClick={() => paginate(currentPage - 1)}
-            className={`px-4 py-2 rounded ${
-              currentPage === 1 ? "bg-pink-400 text-white" : "bg-red-400 text-white"
-            }`}
-          >
-            Previous
-          </button>
-          <p>
-            Page {currentPage} of {totalPages}
-          </p>
-          <button
-            disabled={currentPage === totalPages}
-            onClick={() => paginate(currentPage + 1)}
-            className={`px-4 py-2 rounded ${
-              currentPage === totalPages ? "bg-pink-400 text-white" : "bg-red-400 text-white"
-            }`}
-          >
-            Next
-          </button>
+        <section className="mt-6">
+          {totalPages > 1 && (
+            <ul className="flex justify-center space-x-2">
+              {Array.from({ length: totalPages }, (_, index) => (
+                <li key={index}>
+                  <button
+                    className={`px-4 py-2 rounded-lg ${
+                      currentPage === index + 1 ? "bg-blue-500 text-white" : "bg-gray-200"
+                    }`}
+                    onClick={() => paginate(index + 1)}
+                  >
+                    {index + 1}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
         </section>
       </section>
     </div>
@@ -248,4 +246,3 @@ const Shop = () => {
 };
 
 export default Shop;
-

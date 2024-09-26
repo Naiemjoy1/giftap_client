@@ -24,6 +24,7 @@
     "react-id-swiper": "^4.0.0",
     "react-moving-text": "^0.0.7",
     "react-router-dom": "^6.26.2",
+    "react-tooltip": "^5.28.0",
     "sort-by": "^1.2.0",
     "sweetalert2": "^11.14.1",
     "swiper": "^11.1.14"
