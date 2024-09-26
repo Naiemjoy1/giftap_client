@@ -26,6 +26,7 @@
     "react-modern-drawer": "^1.4.0",
     "react-moving-text": "^0.0.7",
     "react-router-dom": "^6.26.2",
+    "recharts": "^2.12.7",
     "sort-by": "^1.2.0",
     "sweetalert2": "^11.14.1",
     "swiper": "^11.1.14"

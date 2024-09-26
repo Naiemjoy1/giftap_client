@@ -13,6 +13,7 @@ import UpdateProfile from "../Pages/UpdateProfile/UpdateProfile";
 import About from "../Pages/About/About";
 import UserDashboard from "../Pages/Dashboard/UserDashboard/UserDashboard";
 import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
+import PrivetRoute from "./PrivetRoute/PrivetRoute";
 
 export const router = createBrowserRouter([
   {
@@ -58,7 +59,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/Dashboard",
-        element: <AdminDashboard></AdminDashboard>
+        element: <PrivetRoute><AdminDashboard></AdminDashboard></PrivetRoute>
       }
     ],
   },

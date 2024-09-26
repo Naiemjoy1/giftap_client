@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import useProducts from "../../../Components/Hooks/useProducts";
 import { FaBars } from "react-icons/fa";
+import { AuthContext } from "../../../Components/Provider/AuthProvider";
 
 const Navigation = () => {
   const [products, loading] = useProducts();
+  const { user } = useContext(AuthContext);
   const categories = [...new Set(products.map((item) => item.category))];
 
   const navLinks = (
@@ -13,10 +15,9 @@ const Navigation = () => {
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `px-4 py-2 rounded transition-colors ${
-              isActive
-                ? "bg-primary text-white"
-                : "hover:bg-primary hover:text-white"
+            `px-4 py-2 rounded transition-colors ${isActive
+              ? "bg-primary text-white"
+              : "hover:bg-primary hover:text-white"
             }`
           }
         >
@@ -27,10 +28,9 @@ const Navigation = () => {
         <NavLink
           to="/shop"
           className={({ isActive }) =>
-            `px-4 py-2 rounded transition-colors ${
-              isActive
-                ? "bg-primary text-white"
-                : "hover:bg-primary hover:text-white"
+            `px-4 py-2 rounded transition-colors ${isActive
+              ? "bg-primary text-white"
+              : "hover:bg-primary hover:text-white"
             }`
           }
         >
@@ -41,10 +41,9 @@ const Navigation = () => {
         <NavLink
           to="/blog"
           className={({ isActive }) =>
-            `px-4 py-2 rounded transition-colors ${
-              isActive
-                ? "bg-primary text-white"
-                : "hover:bg-primary hover:text-white"
+            `px-4 py-2 rounded transition-colors ${isActive
+              ? "bg-primary text-white"
+              : "hover:bg-primary hover:text-white"
             }`
           }
         >
@@ -55,30 +54,35 @@ const Navigation = () => {
         <NavLink
           to="/contact"
           className={({ isActive }) =>
-            `px-4 py-2 rounded transition-colors ${
-              isActive
-                ? "bg-primary text-white"
-                : "hover:bg-primary hover:text-white"
+            `px-4 py-2 rounded transition-colors ${isActive
+              ? "bg-primary text-white"
+              : "hover:bg-primary hover:text-white"
             }`
           }
         >
           Contact
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/Dashboard"
-          className={({ isActive }) =>
-            `px-4 py-2 rounded transition-colors ${
-              isActive
-                ? "bg-primary text-white"
-                : "hover:bg-primary hover:text-white"
-            }`
-          }
-        >
-          Dashboard
-        </NavLink>
-      </li>
+      {
+        user ? <>
+          <li>
+            <NavLink
+              to="/Dashboard"
+              className={({ isActive }) =>
+                `px-4 py-2 rounded transition-colors ${isActive
+                  ? "bg-primary text-white"
+                  : "hover:bg-primary hover:text-white"
+                }`
+              }
+            >
+              Dashboard
+            </NavLink>
+          </li>
+        </>
+          :
+          <>
+          </>
+      }
     </>
   );
 
