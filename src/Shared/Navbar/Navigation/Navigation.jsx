@@ -77,6 +77,20 @@ const Navigation = () => {
           Contact
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/Dashboard"
+          className={({ isActive }) =>
+            `px-4 py-2 rounded transition-colors ${
+              isActive
+                ? "bg-primary text-white"
+                : "hover:bg-primary hover:text-white"
+            }`
+          }
+        >
+          Dashboard
+        </NavLink>
+      </li>
     </>
   );
 
