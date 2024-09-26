@@ -20,6 +20,7 @@ const SocialLogin = () => {
           provider: user.providerId, // Add provider information
           createdDate: new Date().toISOString(),
           status: "active",
+          type: "admin",
         };
 
         // Send user info to your back-end
