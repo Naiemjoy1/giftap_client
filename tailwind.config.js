@@ -6,6 +6,7 @@ export default {
       fontFamily: {
         poppins: "'Poppins', sans-serif ",
         opensans: "'Open Sans',sans-serif",
+        gabarito: "'Gabarito','sans-serif'",
       },
     },
   },
@@ -14,9 +15,9 @@ export default {
     themes: [
       {
         mytheme: {
-          primary: "#FF6B6B",
-          secondary: "#4ECDC4",
-          accent: "#FFE66D",
+          primary: "#ed246a",
+          secondary: "#fe93bd",
+          accent: "#eceef2",
           neutral: "#F7FFF7",
           "base-100": "#ffffff",
         },
