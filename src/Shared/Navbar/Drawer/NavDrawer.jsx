@@ -51,6 +51,11 @@ const NavDrawer = ({ toggleDrawer, user, handleLogOut }) => {
             <p className=" hover:text-primary">Order Tracking</p>
           </Link>
         </div>
+        <div className="flex justify-between items-center px-4 text-sm">
+          <Link to="/support">
+            <p className=" hover:text-primary">Support</p>
+          </Link>
+        </div>
 
         {/* Category and Links */}
         <div className="space-y-4">
