@@ -10,7 +10,7 @@ import TrackOrders from "../Pages/TrackOrders/TrackOrders";
 import AuthPage from "../Pages/SignIn&SignUp/AuthPage";
 import UpdateProfile from "../Pages/UpdateProfile/UpdateProfile";
 import About from "../Pages/About/About";
-import UserDashboard from "../Pages/Dashboard/UserDashboard/UserDashboard";
+import LiveChat from "../Pages/LiveChat/LiveChat";
 import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
 
 export const router = createBrowserRouter([
@@ -56,9 +56,13 @@ export const router = createBrowserRouter([
         element: <UpdateProfile></UpdateProfile>,
       },
       {
+        path: "/support",
+        element: <LiveChat></LiveChat>,
+      },
+      {
         path: "/Dashboard",
-        element: <AdminDashboard></AdminDashboard>
-      }
+        element: <AdminDashboard></AdminDashboard>,
+      },
     ],
   },
 ]);
