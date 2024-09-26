@@ -1,6 +1,6 @@
 const Blog = () => {
   return (
-    <div>
+    <div className="container mx-auto my-10">
       <p>Blog</p>
     </div>
   );

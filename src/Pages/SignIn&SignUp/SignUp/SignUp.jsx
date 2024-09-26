@@ -42,6 +42,7 @@ const SignUp = ({ toggleForm, setReset }) => {
         password,
         createdDate: new Date().toISOString(),
         status: "active",
+        type: "user",
       };
 
       const res = await axiosPublic.post("/users", userInfo);
@@ -81,9 +82,9 @@ const SignUp = ({ toggleForm, setReset }) => {
     <div className="flex flex-col md:flex-row min-h-[calc(100vh-100px)]">
       {/* mobile  */}
       <section className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 flex-1 flex flex-col justify-center items-center space-y-4 p-4 md:p-10 text-white lg:hidden md:hidden">
-        <p className="text-4xl font-black text-center">Welcome Back!</p>
+        <p className="text-4xl font-black text-center">Hello, Frien</p>
         <p className="text-lg text-center">
-          Enter your personal details to use all site features
+          Register with your personal details to use all site features
         </p>
         <button
           className="btn btn-outline border-white text-white"
@@ -94,9 +95,9 @@ const SignUp = ({ toggleForm, setReset }) => {
       </section>
       {/* large medium  */}
       <section className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-l-3xl rounded-r-[170px] flex-1 flex-col justify-center items-center space-y-4 p-4 md:p-10 text-white hidden lg:flex md:flex">
-        <p className="text-4xl font-black">Welcome Back!</p>
+        <p className="text-4xl font-black">Hello, Friend</p>
         <p className="text-lg text-center">
-          Enter your personal details to use all site features
+          Register with your personal details to use all site features
         </p>
         <button
           className="btn btn-outline border-white text-white"
