@@ -19,11 +19,17 @@ const User = () => {
 
   // Initialize socket connection
   useEffect(() => {
-    const newSocket = io("http://localhost:3000"); // Adjust the URL as needed
+    const newSocket = io("http://localhost:3000", {
+      transports: ["websocket", "polling"], // Use websocket and polling
+      reconnection: true, // Enable reconnection
+    });
     setSocket(newSocket);
 
-    return () => newSocket.close(); // Cleanup on unmount
-  }, [setSocket]);
+    // Cleanup on unmount
+    return () => {
+      newSocket.disconnect(); // Use disconnect instead of close for better handling
+    };
+  }, []);
 
   // Listen for incoming messages
   useEffect(() => {
