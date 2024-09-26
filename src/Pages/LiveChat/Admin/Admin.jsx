@@ -5,13 +5,13 @@ import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 
 const Admin = () => {
   const { user } = useAuth();
-  const [chats, refetch] = useChat(); // refetch to refresh the chat list
+  const [chats, refetch] = useChat();
   const axiosPublic = useAxiosPublic();
 
-  const [selectedChat, setSelectedChat] = useState(null); // For storing the selected chat
-  const [newText, setNewText] = useState(""); // For storing new message text
+  const [selectedChat, setSelectedChat] = useState(null);
+  const [newText, setNewText] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  // Fetch selected chat details (used when clicking "Open")
   const fetchChatDetails = async (chatId) => {
     try {
       const response = await axiosPublic.get(`/chats/${chatId}`);
@@ -21,25 +21,21 @@ const Admin = () => {
     }
   };
 
-  // Polling mechanism to refetch chat details every few seconds
   useEffect(() => {
     if (selectedChat) {
-      // Poll every 5 seconds for new messages in the selected chat
       const interval = setInterval(async () => {
         try {
           const response = await axiosPublic.get(`/chats/${selectedChat._id}`);
-          setSelectedChat(response.data); // Update selected chat with latest messages
+          setSelectedChat(response.data);
         } catch (error) {
           console.error("Error refetching chat details:", error.message);
         }
-      }, 1000); // Polling interval (in milliseconds)
+      }, 1000);
 
-      // Cleanup the interval when the component is unmounted or selectedChat changes
       return () => clearInterval(interval);
     }
-  }, [selectedChat, axiosPublic]); // Dependency array includes selectedChat
+  }, [selectedChat, axiosPublic]);
 
-  // Handle sending a new message
   const handleNewChat = async (event) => {
     event.preventDefault();
     if (!selectedChat) return;
@@ -51,43 +47,40 @@ const Admin = () => {
       time: new Date().toISOString(),
     };
 
+    setLoading(true);
+
     try {
       const chatId = selectedChat._id;
 
-      // Send new message to server
       const response = await axiosPublic.patch(`/chats/${chatId}`, {
         $push: { messages: newMessage },
       });
 
-      // Update the selected chat state locally with the new message
       setSelectedChat((prevChat) => ({
         ...prevChat,
         messages: [...prevChat.messages, newMessage],
       }));
 
-      setNewText(""); // Clear the input field after sending
-      console.log("Message sent successfully:", response.data);
+      setNewText("");
+      //   console.log("Message sent successfully:", response.data);
     } catch (error) {
-      console.error("Error sending message:", error.message);
+      //   console.error("Error sending message:", error.message);
+    } finally {
+      setLoading(false);
     }
-  };
-
-  const toggleChatbox = () => {
-    setIsChatboxOpen((prev) => !prev);
   };
 
   const handleDeleteChat = async () => {
     if (selectedChat) {
-      const chatId = selectedChat._id; // Get the selected chat ID
+      const chatId = selectedChat._id;
 
       try {
         const response = await axiosPublic.delete(`/chats/${chatId}`);
-        console.log("Chat deleted successfully:", response.data);
-        refetch(); // Refresh the chat list after deletion
-        setSelectedChat(null); // Clear the selected chat
-        setIsChatboxOpen(false); // Optionally close the chatbox after deletion
+        // console.log("Chat deleted successfully:", response.data);
+        refetch();
+        setSelectedChat(null);
       } catch (error) {
-        console.error("Error deleting chat:", error.message);
+        // console.error("Error deleting chat:", error.message);
       }
     }
   };
@@ -125,7 +118,11 @@ const Admin = () => {
                 className="btn btn-xs btn-error mt-5"
                 onClick={handleDeleteChat}
               >
-                End Chat
+                {loading ? (
+                  <span className="loading loading-spinner text-primary"></span>
+                ) : (
+                  "End Chat"
+                )}
               </button>
             </div>
           </div>
@@ -136,15 +133,22 @@ const Admin = () => {
               className="input input-bordered w-full max-w-xs"
               value={newText}
               onChange={(e) => setNewText(e.target.value)}
+              disabled={loading}
             />
-            <button className="btn btn-primary ml-2" onClick={handleNewChat}>
-              Send
+            <button
+              className="btn btn-primary ml-2"
+              onClick={handleNewChat}
+              disabled={loading}
+            >
+              {loading ? (
+                <span className="loading loading-spinner text-primary"></span>
+              ) : (
+                "Send"
+              )}
             </button>
           </section>
         </div>
       )}
-
-      {/* Input for new messages */}
     </div>
   );
 };

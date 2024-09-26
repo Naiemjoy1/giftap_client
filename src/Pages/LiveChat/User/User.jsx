@@ -13,6 +13,7 @@ const User = () => {
   const [newText, setNewText] = useState("");
   const [currentChat, setCurrentChat] = useState([]);
   const [socket, setSocket] = useState(null);
+  const [loading, setLoading] = useState(false); // Add loading state
 
   const currentUsers = chats.filter((u) => u?.email === user?.email);
 
@@ -78,12 +79,16 @@ const User = () => {
   const handleNewChat = async (event) => {
     event.preventDefault();
 
+    if (newText.trim() === "") return; // Prevent sending empty messages
+
     const newMessage = {
       text: newText,
       name: user?.displayName,
       email: user?.email,
       time: new Date().toISOString(),
     };
+
+    setLoading(true); // Set loading state to true
 
     try {
       if (currentUsers.length > 0) {
@@ -99,6 +104,8 @@ const User = () => {
       }
     } catch (error) {
       console.error("Error sending message:", error.message);
+    } finally {
+      setLoading(false); // Set loading state to false after completion
     }
   };
 
@@ -159,9 +166,19 @@ const User = () => {
           className="input input-bordered input-sm"
           value={newText}
           onChange={(e) => setNewText(e.target.value)}
+          disabled={loading} // Disable input while loading
         />
-        <button className="btn btn-primary btn-sm" onClick={handleNewChat}>
-          Send
+        <button
+          className="btn btn-primary btn-sm"
+          onClick={handleNewChat}
+          disabled={loading}
+        >
+          {loading ? (
+            <span className="loading loading-spinner text-primary"></span>
+          ) : (
+            "Send"
+          )}{" "}
+          {/* Show loading state in button */}
         </button>
       </section>
     </div>

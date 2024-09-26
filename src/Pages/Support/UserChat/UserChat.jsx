@@ -13,15 +13,13 @@ const UserChat = () => {
 
   const [newText, setNewText] = useState("");
   const [currentChat, setCurrentChat] = useState([]);
-  // console.log("currentChat", currentChat);
-
   const [socket, setSocket] = useState(null);
   const [isChatboxOpen, setIsChatboxOpen] = useState(false);
+  const [loading, setLoading] = useState(false); // Loading state
 
   const chatboxRef = useRef(null); // Create a ref for the chatbox
 
   const currentUsers = chats.filter((u) => u?.email === user?.email);
-  // console.log("currentUsers", currentUsers);
 
   // Initialize socket connection
   useEffect(() => {
@@ -85,6 +83,7 @@ const UserChat = () => {
   // Handle sending new chat messages
   const handleNewChat = async (event) => {
     event.preventDefault();
+    setLoading(true); // Set loading to true when sending the message
 
     const newMessage = {
       text: newText,
@@ -107,6 +106,8 @@ const UserChat = () => {
       }
     } catch (error) {
       console.error("Error sending message:", error.message);
+    } finally {
+      setLoading(false); // Set loading to false after the message is sent
     }
   };
 
@@ -171,16 +172,26 @@ const UserChat = () => {
               </div>
             ))}
           </div>
-          <section className="flex">
+          <section className="flex mt-2">
             <input
               type="text"
               placeholder="Type here"
               className="input input-bordered w-full max-w-xs"
               value={newText}
               onChange={(e) => setNewText(e.target.value)}
+              disabled={loading} // Disable input while loading
             />
-            <button className="btn btn-primary" onClick={handleNewChat}>
-              Send
+            <button
+              className="btn btn-primary ml-2"
+              onClick={handleNewChat}
+              disabled={loading} // Disable button while loading
+            >
+              {loading ? (
+                <span className="loading loading-spinner text-primary"></span>
+              ) : (
+                "Send"
+              )}{" "}
+              {/* Show loading text */}
             </button>
           </section>
         </div>
