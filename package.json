@@ -29,6 +29,7 @@
     "react-modern-drawer": "^1.4.0",
     "react-moving-text": "^0.0.7",
     "react-multi-carousel": "^2.8.5",
+    "react-query": "^3.39.3",
     "react-router-dom": "^6.26.2",
     "react-tooltip": "^5.28.0",
     "socket.io-client": "^4.8.0",

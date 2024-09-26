@@ -5,6 +5,12 @@ import { MdViewList, MdFavoriteBorder, MdAddShoppingCart } from "react-icons/md"
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FcViewDetails } from "react-icons/fc";
+import axios from "axios";
+import useUsers from "../../Components/Hooks/useUsers";
+import useAuth from "../../Components/Hooks/useAuth";
+import useAxiosPublic from "../../Components/Hooks/useAxiosPublic";
+import RecentView from "./RecentView/RecentView";
+
 
 const Shop = () => {
   const [products, loading] = useProducts();
@@ -15,10 +21,26 @@ const Shop = () => {
   const [sortOption, setSortOption] = useState("default");
   const [priceRange, setPriceRange] = useState([0, 100]);
   const productsPerPage = 9;
-
+   const {user} = useAuth();
+   const axiosPublic =useAxiosPublic()
+  //  console.log(user)
+  //  console.log(user?.email)
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
   const categories = ["All", ...new Set(products.map((item) => item.category))];
-
+  const handleRecentView = (id, image, price, category, name) => {
+    const date = new Date().toLocaleDateString();
+    const userEmail = user?.email;
+    
+    const info = { id, image, price, category, name, date, userEmail };
+          console.log(info)
+    axiosPublic.post("/recentviews", info)
+      .then(response => {
+        console.log("Recent view logged:", response.data);
+      })
+      .catch(error => {
+        console.error("Error logging recent view:", error);
+      });
+  };
   useEffect(() => {
     let updatedProducts = [...products];
 
@@ -185,14 +207,16 @@ const Shop = () => {
                 <div className="absolute top-30 left-0 -right-30 -bottom-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="grid grid-cols-1 ">
                     <Link to={`/productDetails/${item._id}`}>
-                      <motion.button
+                  
+                    <motion.button
                         className="tooltip tooltip-right text-blue-500 p-2 rounded-full"
                         whileHover={{ scale: 1.1 }}
                         data-tip="View Details"
                         style={{ zIndex: 1000 }}
-                      >
-                        <FcViewDetails />
+                      >  <button onClick={()=>handleRecentView(item._id,item.image,item.price,item.category,item.name)}>
+                        <FcViewDetails /></button>
                       </motion.button>
+                    
                     </Link>
                     <motion.button
                       className="tooltip tooltip-right text-pink-600 p-2 rounded-full"
@@ -241,6 +265,7 @@ const Shop = () => {
           )}
         </section>
       </section>
+      
     </div>
   );
 };
