@@ -36,7 +36,7 @@ const DeliveryDetails = () => {
             <div className="text-center mt-6">
                 <p className="text-sm text-gray-600">
                     For further assistance, contact our support team at 
-                    <a href="mailto:support@example.com" className="text-blue-500 underline"> support@example.com</a>.
+                    <a href="mailto:support@example.com" className="text-blue-500 underline"> GiftTab@gmail.com</a>.
                 </p>
             </div>
         </div>
