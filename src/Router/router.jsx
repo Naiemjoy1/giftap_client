@@ -10,6 +10,7 @@ import TrackOrders from "../Pages/TrackOrders/TrackOrders";
 import AuthPage from "../Pages/SignIn&SignUp/AuthPage";
 import UpdateProfile from "../Pages/UpdateProfile/UpdateProfile";
 import About from "../Pages/About/About";
+import ProductDeatails from "../Pages/Shop/ProductDetails/ProductDeatails"
 import LiveChat from "../Pages/LiveChat/LiveChat";
 import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
 
@@ -61,8 +62,17 @@ export const router = createBrowserRouter([
       },
       {
         path: "/Dashboard",
-        element: <AdminDashboard></AdminDashboard>,
+        element: <AdminDashboard></AdminDashboard>
       },
+      {
+        path:'/productDetails/:id',
+        element:<ProductDeatails></ProductDeatails>,
+     
+    },
+    {
+      path: "/Dashboard",
+      element: <AdminDashboard></AdminDashboard>,
+    },
     ],
   },
 ]);
