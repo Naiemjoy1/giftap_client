@@ -158,7 +158,7 @@ const handleNext = () => {
               <div className="flex justify-between text-red-500 text-sm mb-2">
                 <span>{post.date}</span>
                 <span className="flex items-center">
-                  <i className="fas fa-comment mr-1"></i> {post.comments} Comments
+                  <i className="fas fa-comment mr-1"></i> {post.comments.length} Comments
                 </span>
               </div>
               <h2 className="font-semibold text-xl my-2 text-center">{post.title}</h2>
