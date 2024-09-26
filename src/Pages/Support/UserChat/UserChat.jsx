@@ -23,17 +23,23 @@ const UserChat = () => {
 
   // Initialize socket connection
   useEffect(() => {
-    const newSocket = io("http://localhost:3000"); // Adjust the URL as needed
+    const newSocket = io("http://localhost:3000", {
+      transports: ["websocket", "polling"], // Use websocket and polling
+      reconnection: true, // Enable reconnection
+    });
     setSocket(newSocket);
 
     // Cleanup on unmount
-    return () => newSocket.close();
-  }, [setSocket]);
+    return () => {
+      newSocket.disconnect(); // Use disconnect instead of close for better handling
+    };
+  }, []);
 
   // Listen for incoming messages
   useEffect(() => {
     if (socket) {
-      socket.on("newMessage", (message) => {
+      socket.on("receiveMessage", (message) => {
+        // Listen for the correct event name
         setCurrentChat((prevChat) => [...prevChat, message]);
       });
 
@@ -41,6 +47,12 @@ const UserChat = () => {
         const response = await axiosPublic.get(`/chats/${chatId}`);
         setCurrentChat(response.data.messages || []);
       });
+
+      // Cleanup event listeners on unmount
+      return () => {
+        socket.off("receiveMessage");
+        socket.off("updateChat");
+      };
     }
   }, [socket, axiosPublic]);
 
@@ -113,7 +125,9 @@ const UserChat = () => {
 
   const toggleChatbox = () => {
     setIsChatboxOpen((prev) => !prev);
-    handleChat();
+    if (!isChatboxOpen) {
+      handleChat(); // Only start chat if the chatbox is currently being opened
+    }
   };
 
   const handleDeleteChat = async () => {
@@ -190,8 +204,7 @@ const UserChat = () => {
                 <span className="loading loading-spinner text-primary"></span>
               ) : (
                 "Send"
-              )}{" "}
-              {/* Show loading text */}
+              )}
             </button>
           </section>
         </div>
