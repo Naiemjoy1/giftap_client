@@ -11,14 +11,20 @@ const AdminChat = ({ currentUsers }) => {
 
   const [selectedChat, setSelectedChat] = useState(null); // For storing the selected chat
   const [newText, setNewText] = useState(""); // For storing new message text
+  const [loading, setLoading] = useState(false); // Loading state
+  const [isChatboxOpen, setIsChatboxOpen] = useState(false);
+  const chatboxRef = useRef(null);
 
   // Fetch selected chat details (used when clicking "Open")
   const fetchChatDetails = async (chatId) => {
+    setLoading(true); // Start loading when fetching chat details
     try {
       const response = await axiosPublic.get(`/chats/${chatId}`);
       setSelectedChat(response.data); // Update selected chat state
     } catch (error) {
       console.error("Error fetching chat details:", error.message);
+    } finally {
+      setLoading(false); // Stop loading after fetching
     }
   };
 
@@ -45,6 +51,8 @@ const AdminChat = ({ currentUsers }) => {
     event.preventDefault();
     if (!selectedChat) return;
 
+    setLoading(true); // Set loading state when sending a message
+
     const newMessage = {
       text: newText,
       name: user?.displayName,
@@ -70,12 +78,10 @@ const AdminChat = ({ currentUsers }) => {
       console.log("Message sent successfully:", response.data);
     } catch (error) {
       console.error("Error sending message:", error.message);
+    } finally {
+      setLoading(false); // Stop loading after the message is sent
     }
   };
-
-  const [isChatboxOpen, setIsChatboxOpen] = useState(false);
-
-  const chatboxRef = useRef(null);
 
   const toggleChatbox = () => {
     setIsChatboxOpen((prev) => !prev);
@@ -133,8 +139,13 @@ const AdminChat = ({ currentUsers }) => {
                   <button
                     className="btn btn-primary btn-sm"
                     onClick={() => fetchChatDetails(chat._id)}
+                    disabled={loading} // Disable button when loading
                   >
-                    Open
+                    {loading ? (
+                      <span className="loading loading-spinner text-primary"></span>
+                    ) : (
+                      "Open"
+                    )}
                   </button>
                 </div>
               ))}
@@ -156,8 +167,13 @@ const AdminChat = ({ currentUsers }) => {
                   <button
                     className="btn btn-xs btn-error mt-5"
                     onClick={handleDeleteChat}
+                    disabled={loading} // Disable button while loading
                   >
-                    End Chat
+                    {loading ? (
+                      <span className="loading loading-spinner text-primary"></span>
+                    ) : (
+                      "End Chat"
+                    )}
                   </button>
                 </div>
               </div>
@@ -172,9 +188,18 @@ const AdminChat = ({ currentUsers }) => {
               className="input input-bordered w-full max-w-xs"
               value={newText}
               onChange={(e) => setNewText(e.target.value)}
+              disabled={loading} // Disable input while loading
             />
-            <button className="btn btn-primary ml-2" onClick={handleNewChat}>
-              Send
+            <button
+              className="btn btn-primary ml-2"
+              onClick={handleNewChat}
+              disabled={loading} // Disable button while loading
+            >
+              {loading ? (
+                <span className="loading loading-spinner text-primary"></span>
+              ) : (
+                "Send"
+              )}
             </button>
           </section>
         </div>
