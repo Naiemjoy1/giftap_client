@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
-import { IoMdGift } from "react-icons/io";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import HomeSectionHeading from "../../../ReUseComponents/HomeSectionHeading/HomeSectionHeading";
 
 const Category = () => {
   const [product, setProduct] = useState([]);
@@ -19,44 +21,83 @@ const Category = () => {
   }, [axiosPublic]);
 
   return (
-    <div className="bg-[linear-gradient(109deg,_rgba(222,196,227,1)_0%,_rgba(222,196,227,1)_15%,_rgba(210,207,230,1)_31%,_rgba(236,202,228,1)_55%,_rgba(244,232,236,1)_69%,_rgba(222,205,231,1)_100%,_rgba(0,212,255,1)_100%)] min-h-screen flex justify-center items-center">
-      <div className="py-6 px-4 w-full max-w-6xl">
-        <p className="text-center mb-3 font-medium text-[#666666] items-center uppercase flex justify-center">
-          <span className="mr-2 text-[25px] text-red-500">
-            <IoMdGift />
-          </span>{" "}
-          Shop with giftap
-        </p>
-        <h2 className="text-4xl uppercase pb-5 font-bold text-center">
-          Shop by category
-        </h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 mt-10 gap-y-10 gap-x-5">
-          {product.slice(0, 8).map((item, idx) => (
-            <div
-              key={idx}
-              className="flex flex-col items-center cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110"
-            >
-              <div className="w-28 h-28 md:w-36 md:h-36 bg-gray-200 rounded-full overflow-hidden">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <p className="mt-2 font-medium text-sm md:text-base">
-                {item.name}
-              </p>
+    <div>
+      {/* this is section heading this style get homeSectionHeading components */}
+      <HomeSectionHeading 
+        subTitle={'shop with giftap'}
+        title={'Shop by category'}
+      ></HomeSectionHeading>
+    
+      <Carousel
+        additionalTransfrom={0}
+        arrows
+        autoPlaySpeed={3000}
+        centerMode={false}
+        className=""
+        containerClass="container"
+        dotListClass=""
+        draggable
+        focusOnSelect={false}
+        infinite={false}
+        itemClass=""
+        keyBoardControl
+        minimumTouchDrag={80}
+        pauseOnHover
+        renderArrowsWhenDisabled={false}
+        renderButtonGroupOutside={false}
+        renderDotsOutside={false}
+        responsive={{
+          desktop: {
+            breakpoint: {
+              max: 3000,
+              min: 1024,
+            },
+            items: 4,
+            partialVisibilityGutter: 40,
+          },
+          mobile: {
+            breakpoint: {
+              max: 464,
+              min: 0,
+            },
+            items: 1,
+            partialVisibilityGutter: 30,
+          },
+          tablet: {
+            breakpoint: {
+              max: 1024,
+              min: 464,
+            },
+            items: 2,
+            partialVisibilityGutter: 30,
+          },
+        }}
+        rewind={false}
+        rewindWithAnimation={false}
+        rtl={false}
+        shouldResetAutoplay
+        showDots={false}
+        sliderClass=""
+        slidesToSlide={1}
+        swipeable
+      >
+        {product.slice(0, 10).map((item) => (
+          <div
+            key={item._id}
+            className="flex flex-col justify-center items-center p-4"
+          >
+            <div className="w-48 h-48 rounded-full overflow-hidden shadow-lg">
+              <img
+                src={item.image}
+                alt={item.name}
+                className="object-cover w-full h-full"
+              />
             </div>
-          ))}
-        </div>
-        <div className="flex justify-center mt-16">
-          <button className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 via-red-500 to-yellow-500 group-hover:from-pink-500 group-hover:via-red-500 group-hover:to-yellow-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:text-white dark:focus:ring-pink-800 shadow transition-all duration-300 ease-in-out hover:scale-110 hover:shadow-lg">
-            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-              See All
-            </span>
-          </button>
-        </div>
-      </div>
+            <p className="text-lg font-medium mt-4">{item.name}</p>
+          </div>
+        ))}
+      
+      </Carousel>
     </div>
   );
 };
