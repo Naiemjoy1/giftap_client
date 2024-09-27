@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import useProducts from '../../../Components/Hooks/useProducts';
 import DeliveryDetails from './DeliveryDetails';
 import Review from './Review';
+import RecentView from '../RecentView/RecentView';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -99,6 +100,9 @@ const ProductDetails = () => {
                 <Review reviews={selectedProduct.reviews} />
               </div>
             )}
+            <div>
+              <RecentView></RecentView>
+            </div>
           </div>
         </>
       ) : (

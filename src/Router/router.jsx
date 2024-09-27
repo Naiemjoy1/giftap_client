@@ -7,11 +7,13 @@ import Blog from "../Pages/Blog/Blog";
 import Contact from "../Pages/Contact/Contact";
 import Faq from "../Pages/Faq/Faq";
 import TrackOrders from "../Pages/TrackOrders/TrackOrders";
+import BlogDetails from "../Pages/Blog/BlogDetails";
 import AuthPage from "../Pages/SignIn&SignUp/AuthPage";
 import About from "../Pages/About/About";
 import ProductDeatails from "../Pages/Shop/ProductDetails/ProductDeatails";
 import LiveChat from "../Pages/LiveChat/LiveChat";
 import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
+import PrivetRoute from "./PrivetRoute/PrivetRoute";
 import ProfileDetails from "../Pages/Dashboard/User/ProfileDetails";
 
 export const router = createBrowserRouter([
@@ -39,6 +41,10 @@ export const router = createBrowserRouter([
       {
         path: "/blog",
         element: <Blog></Blog>,
+      },
+      {
+        path: "/blog/:id",
+        element: <BlogDetails></BlogDetails>,
       },
       {
         path: "/contact",
