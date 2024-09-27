@@ -9,12 +9,12 @@ import Faq from "../Pages/Faq/Faq";
 import TrackOrders from "../Pages/TrackOrders/TrackOrders";
 import BlogDetails from "../Pages/Blog/BlogDetails";
 import AuthPage from "../Pages/SignIn&SignUp/AuthPage";
-import UpdateProfile from "../Pages/UpdateProfile/UpdateProfile";
 import About from "../Pages/About/About";
-import ProductDeatails from "../Pages/Shop/ProductDetails/ProductDeatails"
+import ProductDeatails from "../Pages/Shop/ProductDetails/ProductDeatails";
 import LiveChat from "../Pages/LiveChat/LiveChat";
 import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
 import PrivetRoute from "./PrivetRoute/PrivetRoute";
+import ProfileDetails from "../Pages/Dashboard/User/ProfileDetails";
 
 export const router = createBrowserRouter([
   {
@@ -43,8 +43,8 @@ export const router = createBrowserRouter([
         element: <Blog></Blog>,
       },
       {
-        path: "/blog/:id", 
-        element: <BlogDetails></BlogDetails>, 
+        path: "/blog/:id",
+        element: <BlogDetails></BlogDetails>,
       },
       {
         path: "/contact",
@@ -60,7 +60,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <UpdateProfile></UpdateProfile>,
+        element: <ProfileDetails></ProfileDetails>,
       },
       {
         path: "/support",
@@ -68,17 +68,16 @@ export const router = createBrowserRouter([
       },
       {
         path: "/Dashboard",
-        element: <AdminDashboard></AdminDashboard>
+        element: <AdminDashboard></AdminDashboard>,
       },
       {
-        path:'/productDetails/:id',
-        element:<ProductDeatails></ProductDeatails>,
-     
-    },
-    {
-      path: "/Dashboard",
-      element: <AdminDashboard></AdminDashboard>,
-    },
+        path: "/productDetails/:id",
+        element: <ProductDeatails></ProductDeatails>,
+      },
+      {
+        path: "/Dashboard",
+        element: <AdminDashboard></AdminDashboard>,
+      },
     ],
   },
 ]);
