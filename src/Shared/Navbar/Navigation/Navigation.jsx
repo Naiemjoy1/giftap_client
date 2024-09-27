@@ -1,7 +1,13 @@
 import React from "react";
+// import { Link, NavLink } from "react-router-dom";
+// import { useContext } from "react";
+// import { NavLink } from "react-router-dom";
+// import useProducts from "../../../Components/Hooks/useProducts";
+// import { FaBars } from "react-icons/fa";
+// import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import useProducts from "../../../Components/Hooks/useProducts";
-import { FaBars, FaBell } from "react-icons/fa";
+import { FaBars} from "react-icons/fa";
 import useChat from "../../../Components/Hooks/useChat";
 import useAuth from "../../../Components/Hooks/useAuth";
 import useUsers from "../../../Components/Hooks/useUsers";
@@ -15,6 +21,7 @@ const Navigation = () => {
   // console.log("currentUsers", currentUsers);
 
   const [products, loading] = useProducts();
+
   const categories = [...new Set(products.map((item) => item.category))];
 
   const [chats, refetch] = useChat();
@@ -25,10 +32,9 @@ const Navigation = () => {
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `px-4 py-2 rounded transition-colors ${
-              isActive
-                ? "bg-primary text-white"
-                : "hover:bg-primary hover:text-white"
+            `px-4 py-2 rounded transition-colors ${isActive
+              ? "bg-primary text-white"
+              : "hover:bg-primary hover:text-white"
             }`
           }
         >
@@ -39,10 +45,9 @@ const Navigation = () => {
         <NavLink
           to="/shop"
           className={({ isActive }) =>
-            `px-4 py-2 rounded transition-colors ${
-              isActive
-                ? "bg-primary text-white"
-                : "hover:bg-primary hover:text-white"
+            `px-4 py-2 rounded transition-colors ${isActive
+              ? "bg-primary text-white"
+              : "hover:bg-primary hover:text-white"
             }`
           }
         >
@@ -53,10 +58,9 @@ const Navigation = () => {
         <NavLink
           to="/blog"
           className={({ isActive }) =>
-            `px-4 py-2 rounded transition-colors ${
-              isActive
-                ? "bg-primary text-white"
-                : "hover:bg-primary hover:text-white"
+            `px-4 py-2 rounded transition-colors ${isActive
+              ? "bg-primary text-white"
+              : "hover:bg-primary hover:text-white"
             }`
           }
         >
@@ -67,30 +71,35 @@ const Navigation = () => {
         <NavLink
           to="/contact"
           className={({ isActive }) =>
-            `px-4 py-2 rounded transition-colors ${
-              isActive
-                ? "bg-primary text-white"
-                : "hover:bg-primary hover:text-white"
+            `px-4 py-2 rounded transition-colors ${isActive
+              ? "bg-primary text-white"
+              : "hover:bg-primary hover:text-white"
             }`
           }
         >
           Contact
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/Dashboard"
-          className={({ isActive }) =>
-            `px-4 py-2 rounded transition-colors ${
-              isActive
-                ? "bg-primary text-white"
-                : "hover:bg-primary hover:text-white"
-            }`
-          }
-        >
-          Dashboard
-        </NavLink>
-      </li>
+      {
+        user ? <>
+          <li>
+            <NavLink
+              to="/Dashboard"
+              className={({ isActive }) =>
+                `px-4 py-2 rounded transition-colors ${isActive
+                  ? "bg-primary text-white"
+                  : "hover:bg-primary hover:text-white"
+                }`
+              }
+            >
+              Dashboard
+            </NavLink>
+          </li>
+        </>
+          :
+          <>
+          </>
+      }
     </>
   );
 

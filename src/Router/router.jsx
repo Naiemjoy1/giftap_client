@@ -14,6 +14,7 @@ import About from "../Pages/About/About";
 import ProductDeatails from "../Pages/Shop/ProductDetails/ProductDeatails"
 import LiveChat from "../Pages/LiveChat/LiveChat";
 import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
+import PrivetRoute from "./PrivetRoute/PrivetRoute";
 
 export const router = createBrowserRouter([
   {

@@ -63,7 +63,7 @@ const Footer = () => {
       </div>
 
       {/* Last Footer Section */}
-      <div className="flex justify-between mx-auto container bg-base-300 py-4 mt-10">
+      <div className="flex justify-between mx-auto container  py-4 mt-10">
         <div className="">
           <h1> All Rights Reserved © {new Date().getFullYear()} GifTap Ltd.</h1>
         </div>
@@ -71,10 +71,9 @@ const Footer = () => {
         {/* Payment Image */}
         <div className='flex '>
 
-          <img className='h-8 w-16 mr-2' src={'https://i.ibb.co.com/QbMPCqm/visa-logo-2506831-1024x683.png'} alt="" />
-          <img className='h-8 w-16 ml-2' src={'https://i.ibb.co.com/FmV7C2P/master-Card.jpg'} alt="" />
-          <img className='h-8 w-16 ml-2' src={'https://i.ibb.co.com/YhZvJXx/Bkash.jpg'} alt="" />
-          <img className='h-8 w-16 ml-2' src={'https://i.ibb.co.com/G0WdccQ/Nagad.png'} alt="" />
+          <img className='h-8 w-14 mr-2' src={'https://i.ibb.co.com/FmV7C2P/master-Card.jpg'} alt="" />
+          <img className='h-8 w-14 mr-2' src={'https://i.ibb.co.com/YhZvJXx/Bkash.jpg'} alt="" />
+          <img className='h-8 w-14 mr-2' src={'https://i.ibb.co.com/G0WdccQ/Nagad.png'} alt="" />
 
         </div>
       </div>

@@ -23,6 +23,9 @@ const NavDrawer = ({ toggleDrawer, user, handleLogOut }) => {
       <li>
         <NavLink to="/contact">Contact</NavLink>
       </li>
+      <li>
+        <NavLink to="/Dashboard">Dashboard</NavLink>
+      </li>
     </>
   );
 
