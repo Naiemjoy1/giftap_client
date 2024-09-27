@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FaUser, FaEnvelope } from "react-icons/fa"; // Icons for name and email
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +9,7 @@ const Contact = () => {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isHovered, setIsHovered] = useState(false); // State to track hover effect
 
   // Handle form field changes
   const handleChange = (e) => {
@@ -25,106 +27,97 @@ const Contact = () => {
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.formSection}>
-        <h1
-          style={{
-            fontFamily: "Helvetica, Arial, sans-serif",
-            color: "#333",
-            fontSize: "36px",
-            textAlign: "center",
-            marginBottom: "20px",
-            letterSpacing: "2px",
-          }}
-          className="italic"
-        >
+    <div className="max-w-7xl mx-auto p-8 flex flex-wrap justify-between">
+      {/* Form Section */}
+      <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
+        <h1 className="text-4xl font-semibold text-center mb-4 italic">
           We Are Here To Help!
         </h1>
-        <h1 className="flex justify-center font-bold font-mono text-4xl italic">
-          Contact Us
-        </h1>
+        <h2 className="text-3xl font-light text-center mb-8">Get in Touch</h2>
+        <p className="text-center mb-6">
+          Contact us to find out more or how we can help you better.
+        </p>
 
-        <div>
-          <h2 className="text-3xl font-extralight mt-4 mb-4">Get in Touch</h2>
-          <p>Contact us to find out more or how we can help you better.</p>
-          {submitted ? (
-            <div>
-              <h2>Thank you for your message!</h2>
-              <p>We will get back to you at {formData.email} soon.</p>
+        {submitted ? (
+          <div className="text-center">
+            <h2 className="text-2xl font-semibold">Thank you for your message!</h2>
+            <p className="mt-2">
+              We will get back to you at <strong>{formData.email}</strong> soon.
+            </p>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-6">
+            <div className="flex items-center space-x-2">
+              <FaUser className="text-gray-400" />
+              <input
+                type="text"
+                name="name"
+                placeholder="Enter your name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-2 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500"
+              />
             </div>
-          ) : (
-            <form
-              onSubmit={handleSubmit}
-              style={{ maxWidth: "500px", margin: "0 auto" }}
+
+            <div className="flex items-center space-x-2">
+              <FaEnvelope className="text-gray-400" />
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-2 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500"
+              />
+            </div>
+
+            <div>
+              <textarea
+                name="message"
+                placeholder="Say something..."
+                value={formData.message}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                rows="4"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className={`w-full px-4 py-2 text-white font-semibold bg-blue-500 hover:bg-blue-600 rounded-md transition-colors duration-300 ${isHovered ? "bg-red-500" : ""
+                }`}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
             >
-              <div style={styles.formGroup}>
-                <label htmlFor="name" style={styles.label}>
-                  Name:
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  style={styles.input}
-                />
-              </div>
-              <div style={styles.formGroup}>
-                <label htmlFor="email" style={styles.label}>
-                  Email:
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  style={styles.input}
-                />
-              </div>
-              <div style={styles.formGroup}>
-                <label htmlFor="message" style={styles.label}>
-                  Message:
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  style={styles.textarea}
-                />
-              </div>
-              <button type="submit" style={styles.button}>
-                Send Message
-              </button>
-            </form>
-          )}
-        </div>
+              Submit
+            </button>
+
+            <hr className="border-t-2 border-red-400 border-dashed w-1/4 mx-auto my-4" />
+          </form>
+        )}
       </div>
 
-      <div style={styles.infoSection}>
+      {/* Info Section */}
+      <div className="w-full lg:w-1/2 bg-gray-100 p-6 rounded-lg shadow-md">
         <img
-          src="https://img.freepik.com/free-photo/information-data-goals-development_53876-124495.jpg?t=st=1726739429~exp=1726743029~hmac=9fedc85606cfd18781cc466631ae7c13cfed15da6887f8bf642814e62cddffa6&w=826"
-          alt="Gift Image"
-          className="hover:scale-105 transition-transform duration-500 ease-in-out"
-          style={{ width: "100%", height: "auto", marginBottom: "20px" }}
+          src="https://img.freepik.com/free-photo/information-data-goals-development_53876-124495.jpg"
+          alt="Company"
+          className="w-full h-auto mb-4 hover:scale-105 transition-transform duration-500 ease-in-out"
         />
-        <h2>Our Company Information</h2>
-        <p>
-          <strong>Address:</strong> 1234 Business St, Suite 100, YourCity,
-          Country
+        <h2 className="text-2xl font-semibold mb-4">Our Company Information</h2>
+        <p className="mb-2">
+          <strong>Address:</strong> 1234 Business St, Suite 100, YourCity, Country
         </p>
-        <p>
+        <p className="mb-2">
           <strong>Phone:</strong> +123 456 7890
         </p>
-        <p>
+        <p className="mb-2">
           <strong>Email:</strong> info@company.com
         </p>
-        <p>
+        <p className="mb-2">
           <strong>Opening Hours:</strong> 9:00 AM - 6:00 PM (Mon - Fri)
         </p>
         <p>
@@ -135,64 +128,5 @@ const Contact = () => {
   );
 };
 
-// Styles for the component
-const styles = {
-  container: {
-    display: "flex",
-    justifyContent: "space-between",
-    padding: "20px",
-    maxWidth: "1200px",
-    margin: "0 auto",
-  },
-  formSection: {
-    flex: "1",
-    marginRight: "40px",
-  },
-  infoSection: {
-    flex: "1",
-    backgroundColor: "#f9f9f9",
-    padding: "20px",
-    borderRadius: "8px",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-  },
-  formGroup: {
-    marginBottom: "20px",
-  },
-  label: {
-    display: "block",
-    marginBottom: "8px",
-    fontWeight: "bold",
-  },
-  input: {
-    width: "100%",
-    padding: "10px",
-    fontSize: "16px",
-    border: "none",
-    borderBottom: "2px solid #ccc",
-    outline: "none",
-    transition: "border-color 0.3s",
-  },
-  textarea: {
-    width: "100%",
-    padding: "10px",
-    fontSize: "16px",
-    border: "none",
-    borderBottom: "2px solid #ccc",
-    outline: "none",
-    minHeight: "100px",
-    transition: "border-color 0.3s",
-  },
-  button: {
-    padding: "10px 20px",
-    backgroundColor: "#007bff",
-    color: "#fff",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-    display: "block",
-    width: "100%",
-    marginTop: "20px",
-  },
-};
-
 export default Contact;
+// check github
