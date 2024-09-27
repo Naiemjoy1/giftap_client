@@ -30,6 +30,7 @@
     "react-moving-text": "^0.0.7",
     "react-multi-carousel": "^2.8.5",
     "react-router-dom": "^6.26.2",
+    "react-tabs": "^6.0.2",
     "react-tooltip": "^5.28.0",
     "socket.io-client": "^4.8.0",
     "sort-by": "^1.2.0",
