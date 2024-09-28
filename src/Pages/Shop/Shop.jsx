@@ -41,6 +41,20 @@ const Shop = () => {
         console.error("Error logging recent view:", error);
       });
   };
+  const handleWishlist = (id, image, price,name) => {
+    const date = new Date().toLocaleDateString();
+    const userEmail = user?.email;
+    
+    const info = { id, image, price, name, date, userEmail };
+          console.log(info)
+    axiosPublic.post("/wishlist", info)
+      .then(response => {
+        console.log("Recent view logged:", response.data);
+      })
+      .catch(error => {
+        console.error("Error logging recent view:", error);
+      });
+  };
   useEffect(() => {
     let updatedProducts = [...products];
 
@@ -223,7 +237,9 @@ const Shop = () => {
                       whileHover={{ scale: 1.1 }}
                       data-tip="Add to Wishlist"
                     >
+                      <button onClick={()=>handleWishlist(item._id,item.image,item.price,item.name)}>
                       <MdFavoriteBorder size={24} />
+                      </button>
                     </motion.button>
                     <motion.button
                       className="tooltip tooltip-right text-green-600 p-2 rounded-full"
