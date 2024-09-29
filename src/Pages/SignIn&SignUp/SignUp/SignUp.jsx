@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../Components/Hooks/useAuth";
 import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import { IoIosEyeOff, IoMdEye } from "react-icons/io";
@@ -34,7 +33,7 @@ const SignUp = ({ toggleForm, setReset }) => {
       console.log("User created:", userResult);
 
       await updateUserProfile(name);
-      console.log("User profile updated");
+      // console.log("User profile updated");
 
       const userInfo = {
         name,
@@ -48,30 +47,16 @@ const SignUp = ({ toggleForm, setReset }) => {
       const res = await axiosPublic.post("/users", userInfo);
       if (res.data.insertedId) {
         reset();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "User Created Successfully",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+        toast.success("User Created Successfully");
         navigate("/");
       }
     } catch (error) {
-      console.error("Error in onSubmit:", error);
+      toast.error("Error in onSubmit");
 
       if (error.code === "auth/email-already-in-use") {
-        Swal.fire({
-          icon: "error",
-          title: "Email already in use",
-          text: "This email is already associated with an account. Please sign in or use a different email.",
-        });
+        toast.warning("Email already in use");
       } else {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Something went wrong. Please try again.",
-        });
+        toast.error("Oops...");
       }
     } finally {
       setLoading(false);
