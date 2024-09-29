@@ -6,7 +6,7 @@ import useDivision from "../../../../Components/Hooks/useDivision";
 import useDistricts from "../../../../Components/Hooks/useDistricts";
 import useAxiosPublic from "../../../../Components/Hooks/useAxiosPublic";
 
-const ApplySeller = () => {
+const ApplySeller = ({ setIsModalOpen }) => {
   const { user } = useAuth();
   console.log(user);
 
@@ -61,6 +61,7 @@ const ApplySeller = () => {
       const res = await axiosPublic.post("/applys", applyData);
       console.log("Response:", res.data);
       reset();
+      setIsModalOpen(false);
     } catch (error) {
       console.error("Error submitting the form", error);
     }
