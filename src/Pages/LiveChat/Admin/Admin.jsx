@@ -5,32 +5,32 @@ import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 
 const Admin = () => {
   const { user } = useAuth();
-  const [chats, refetch] = useChat(); // Assumes useChat provides chats and a refetch method
+  const [chats, refetch, isLoadingChats] = useChat();
   const axiosPublic = useAxiosPublic();
 
   const [selectedChat, setSelectedChat] = useState(null);
   const [newText, setNewText] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Fetch selected chat details
   const fetchChatDetails = async (chatId) => {
+    setLoading(true);
     try {
       const response = await axiosPublic.get(`/chats/${chatId}`);
-      setSelectedChat(response.data); // Update selected chat state
+      setSelectedChat(response.data);
     } catch (error) {
       console.error("Error fetching chat details:", error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  // Continuously refetch the list of chats (only when no chat is selected)
   useEffect(() => {
     if (!selectedChat) {
-      const interval = setInterval(refetch, 1000); // Refetch chats every 1 second
+      const interval = setInterval(refetch, 5000);
       return () => clearInterval(interval);
     }
   }, [selectedChat, refetch]);
 
-  // Continuously refetch selected chat details
   useEffect(() => {
     if (selectedChat) {
       const interval = setInterval(async () => {
@@ -40,7 +40,7 @@ const Admin = () => {
         } catch (error) {
           console.error("Error refetching chat details:", error.message);
         }
-      }, 1000); // Refetch selected chat every 1 second
+      }, 5000);
 
       return () => clearInterval(interval);
     }
@@ -48,7 +48,7 @@ const Admin = () => {
 
   const handleNewChat = async (event) => {
     event.preventDefault();
-    if (!selectedChat) return;
+    if (!selectedChat || newText.trim() === "") return;
 
     const newMessage = {
       text: newText,
@@ -61,7 +61,6 @@ const Admin = () => {
 
     try {
       const chatId = selectedChat._id;
-
       await axiosPublic.patch(`/chats/${chatId}`, {
         $push: { messages: newMessage },
       });
@@ -83,12 +82,15 @@ const Admin = () => {
     if (selectedChat) {
       const chatId = selectedChat._id;
 
+      setLoading(true);
       try {
         await axiosPublic.delete(`/chats/${chatId}`);
-        refetch(); // Refetch the list of chats after deletion
+        refetch();
         setSelectedChat(null);
       } catch (error) {
         console.error("Error deleting chat:", error.message);
+      } finally {
+        setLoading(false);
       }
     }
   };
@@ -97,18 +99,22 @@ const Admin = () => {
     <div className="m-10">
       {!selectedChat && (
         <section className="border rounded-lg p-4 space-y-4">
-          <p>Open Ticket</p>
-          {chats.map((chat) => (
-            <div className="flex justify-between gap-4" key={chat._id}>
-              <h2 className="card-title">{chat.name}</h2>
-              <button
-                className="btn btn-primary btn-sm"
-                onClick={() => fetchChatDetails(chat._id)}
-              >
-                Open
-              </button>
-            </div>
-          ))}
+          <p>Open Tickets</p>
+          {isLoadingChats ? (
+            <div>Loading chats...</div>
+          ) : (
+            chats.map((chat) => (
+              <div className="flex justify-between gap-4" key={chat._id}>
+                <h2 className="card-title">{chat.name}</h2>
+                <button
+                  className="btn btn-primary btn-sm"
+                  onClick={() => fetchChatDetails(chat._id)}
+                >
+                  Open
+                </button>
+              </div>
+            ))
+          )}
         </section>
       )}
       {selectedChat && (
@@ -125,6 +131,7 @@ const Admin = () => {
               <button
                 className="btn btn-xs btn-error mt-5"
                 onClick={handleDeleteChat}
+                disabled={loading}
               >
                 {loading ? (
                   <span className="loading loading-spinner text-primary"></span>
@@ -146,7 +153,7 @@ const Admin = () => {
             <button
               className="btn btn-primary ml-2"
               onClick={handleNewChat}
-              disabled={loading}
+              disabled={loading || newText.trim() === ""}
             >
               {loading ? (
                 <span className="loading loading-spinner text-primary"></span>

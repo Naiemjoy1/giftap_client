@@ -15,31 +15,27 @@ const UserChat = () => {
   const [currentChat, setCurrentChat] = useState([]);
   const [socket, setSocket] = useState(null);
   const [isChatboxOpen, setIsChatboxOpen] = useState(false);
-  const [loading, setLoading] = useState(false); // Loading state
+  const [loading, setLoading] = useState(false);
 
-  const chatboxRef = useRef(null); // Create a ref for the chatbox
+  const chatboxRef = useRef(null);
 
   const currentUsers = chats.filter((u) => u?.email === user?.email);
 
-  // Initialize socket connection
   useEffect(() => {
     const newSocket = io("http://localhost:3000", {
-      transports: ["websocket", "polling"], // Use websocket and polling
-      reconnection: true, // Enable reconnection
+      transports: ["websocket", "polling"],
+      reconnection: true,
     });
     setSocket(newSocket);
 
-    // Cleanup on unmount
     return () => {
-      newSocket.disconnect(); // Use disconnect instead of close for better handling
+      newSocket.disconnect();
     };
   }, []);
 
-  // Listen for incoming messages
   useEffect(() => {
     if (socket) {
       socket.on("receiveMessage", (message) => {
-        // Listen for the correct event name
         setCurrentChat((prevChat) => [...prevChat, message]);
       });
 
@@ -48,7 +44,6 @@ const UserChat = () => {
         setCurrentChat(response.data.messages || []);
       });
 
-      // Cleanup event listeners on unmount
       return () => {
         socket.off("receiveMessage");
         socket.off("updateChat");
@@ -56,11 +51,10 @@ const UserChat = () => {
     }
   }, [socket, axiosPublic]);
 
-  // Fetch current chat details when the component mounts or currentUsers change
   useEffect(() => {
     const fetchCurrentChat = async () => {
       if (currentUsers.length > 0) {
-        const chatId = currentUsers[0]._id; // Assuming the first chat is the current one
+        const chatId = currentUsers[0]._id;
         const response = await axiosPublic.get(`/chats/${chatId}`);
         setCurrentChat(response.data.messages || []);
       }
@@ -68,7 +62,6 @@ const UserChat = () => {
     fetchCurrentChat();
   }, [currentUsers, axiosPublic]);
 
-  // Create chat in the database
   const handleChat = async () => {
     const chatData = {
       name: user?.displayName,
@@ -85,17 +78,15 @@ const UserChat = () => {
 
     try {
       const response = await axiosPublic.post("/chats", chatData);
-      refetch(); // Refresh the chat list
+      refetch();
       console.log("Chat started successfully:", response.data);
     } catch (error) {
       console.error("Error starting chat:", error.message);
     }
   };
 
-  // Handle sending new chat messages
   const handleNewChat = async (event) => {
     event.preventDefault();
-    setLoading(true); // Set loading to true when sending the message
 
     const newMessage = {
       text: newText,
@@ -104,6 +95,8 @@ const UserChat = () => {
       time: new Date().toISOString(),
     };
 
+    setLoading(true);
+
     try {
       if (currentUsers.length > 0) {
         const chatId = currentUsers[0]._id;
@@ -111,34 +104,33 @@ const UserChat = () => {
           $push: { messages: newMessage },
         });
 
-        // Emit the new message to the server
         socket.emit("sendMessage", { ...newMessage, chatId });
 
-        setNewText(""); // Clear the input field
+        setNewText("");
       }
     } catch (error) {
       console.error("Error sending message:", error.message);
     } finally {
-      setLoading(false); // Set loading to false after the message is sent
+      setLoading(false);
     }
   };
 
   const toggleChatbox = () => {
     setIsChatboxOpen((prev) => !prev);
     if (!isChatboxOpen) {
-      handleChat(); // Only start chat if the chatbox is currently being opened
+      handleChat();
     }
   };
 
   const handleDeleteChat = async () => {
     if (currentUsers.length > 0) {
-      const chatId = currentUsers[0]._id; // Get the chat ID to delete
+      const chatId = currentUsers[0]._id;
 
       try {
         const response = await axiosPublic.delete(`/chats/${chatId}`);
         console.log("Chat deleted successfully:", response.data);
-        refetch(); // Refresh the chat list
-        setCurrentChat([]); // Clear current chat messages
+        refetch();
+        setCurrentChat([]);
         setIsChatboxOpen(false);
       } catch (error) {
         console.error("Error deleting chat:", error.message);
@@ -148,29 +140,19 @@ const UserChat = () => {
 
   const [users] = useUsers();
   const usersDetails = users.filter((u) => u?.email === user?.email);
-  const isAdmin = usersDetails.length > 0 && usersDetails[0]?.type === "admin";
   const isUser = usersDetails.length > 0 && usersDetails[0]?.type === "user";
 
   return (
     <div>
-      {currentChat.length === 0 && isUser && (
+      {isUser && (
         <button className="text-primary text-2xl" onClick={toggleChatbox}>
           <PiChatsDuotone />
         </button>
       )}
-      {currentChat.length > 0 && isUser && (
-        <button className="text-primary text-2xl">
-          <PiChatsDuotone />
-        </button>
-      )}
-      {!isUser && (
-        <button className="text-primary text-2xl">
-          <PiChatsDuotone />
-        </button>
-      )}
+
       {isChatboxOpen && (
         <div
-          ref={chatboxRef} // Attach the ref to the chatbox div
+          ref={chatboxRef}
           className="absolute right-4 bottom-16 w-96 bg-white shadow-lg rounded-lg p-4 z-10"
         >
           <section className="flex justify-between">
@@ -193,12 +175,12 @@ const UserChat = () => {
               className="input input-bordered w-full max-w-xs"
               value={newText}
               onChange={(e) => setNewText(e.target.value)}
-              disabled={loading} // Disable input while loading
+              disabled={loading}
             />
             <button
               className="btn btn-primary ml-2"
               onClick={handleNewChat}
-              disabled={loading} // Disable button while loading
+              disabled={loading}
             >
               {loading ? (
                 <span className="loading loading-spinner text-primary"></span>
