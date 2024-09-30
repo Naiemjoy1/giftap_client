@@ -188,7 +188,7 @@ const AccountDetails = () => {
           </div>
         </div>
         <div className="form-control mt-6">
-          <button className="btn btn-primary text-white">Save</button>
+          <button className="btn btn-primary text-white">Save Changes</button>
         </div>
       </form>
 
