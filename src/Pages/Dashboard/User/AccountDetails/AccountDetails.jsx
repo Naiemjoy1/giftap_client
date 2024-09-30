@@ -11,7 +11,7 @@ const AccountDetails = () => {
   const [image, setImage] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const [isDisplayNameTaken, setIsDisplayNameTaken] = useState(false);
-  const [users] = useUsers();
+  const [users, refetch] = useUsers();
   const { user, updateUserProfile } = useAuth();
   const axiosPublic = useAxiosPublic();
 
@@ -101,6 +101,7 @@ const AccountDetails = () => {
         if (updateResponse.status === 200) {
           await updateUserProfile(name, displayUrl);
           toast.success("User profile updated");
+          refetch();
         } else {
           toast.error("Failed to update user info");
         }
