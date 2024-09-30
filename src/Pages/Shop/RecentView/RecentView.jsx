@@ -14,7 +14,7 @@ const RecentView = () => {
    
     const recentViewProducts = recentViewProduct
         .filter(item => item?.userEmail === user?.email)
-        .sort((a, b) => new Date(b.date) - new Date(a.date)) // Sort by most recent date
+        .sort((a, b) => new Date(b.date) - new Date(a.date)) 
         .slice(0, 6); 
 
     console.log(recentViewProducts);
