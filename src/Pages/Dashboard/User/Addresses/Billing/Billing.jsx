@@ -8,7 +8,7 @@ import useUsers from "../../../../../Components/Hooks/useUsers";
 import useAxiosPublic from "../../../../../Components/Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 
-const Billing = () => {
+const Billing = ({ onClose }) => {
   const [division] = useDivision();
   const [districts] = useDistricts();
   const [ISDcode] = useISDcode();
@@ -23,6 +23,7 @@ const Billing = () => {
 
   const usersDetails = users.find((u) => u?.email === user?.email);
   const billingInfo = usersDetails?.address?.billing[0];
+  const shippingInfo = usersDetails?.address?.shipping[0];
 
   const fromDivision = division.find((divi) => divi?.id === selectedDivision);
 
@@ -85,6 +86,7 @@ const Billing = () => {
             email,
           },
         ],
+        shipping: [shippingInfo],
       },
     };
 
@@ -95,8 +97,9 @@ const Billing = () => {
       );
 
       if (updateResponse.status === 200) {
-        toast.success("Billing info added successfully!");
         refetch();
+        onClose();
+        toast.success("Billing info added successfully!");
       } else {
         toast.error("Failed to add user billing info");
       }
@@ -303,8 +306,11 @@ const Billing = () => {
       </div>
 
       <div className="flex justify-end">
-        <button type="submit" className="btn btn-primary mt-4">
-          Submit
+        <button
+          type="submit"
+          className="btn btn-primary mt-4 text-white btn-sm"
+        >
+          Add Billing
         </button>
       </div>
     </form>
