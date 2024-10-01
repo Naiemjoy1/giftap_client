@@ -1,183 +1,127 @@
 import React, { useState } from 'react';
-import '@fortawesome/fontawesome-free/css/all.min.css';
 import { Link } from 'react-router-dom';
+// import { demoPosts } from './demoPosts';
+import useBlogs from '../../Components/Hooks/useBlogs';
+import { FaArrowRight, FaCommentDots } from 'react-icons/fa';
+import ReactPaginate from 'react-paginate';
 
 
-import { demoPosts } from './demoPosts';
 const Blog = () => {
   // Pagination logic
-const [currentPage, setCurrentPage] = useState(1);
-const postsPerPage = 6;
 
-const indexOfLastPost = currentPage * postsPerPage;
-const indexOfFirstPost = indexOfLastPost - postsPerPage;
-const currentPosts = demoPosts.slice(indexOfFirstPost, indexOfLastPost);
+  const [blogs] = useBlogs();
 
-const totalPages = Math.ceil(demoPosts.length / postsPerPage);
+  // console.log(blogs)
 
-const handlePrevious = () => {
-  if (currentPage > 1) setCurrentPage(currentPage - 1);
-};
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const postsPerPage = 6;
 
-const handleNext = () => {
-  if (currentPage < totalPages) setCurrentPage(currentPage + 1);
-};
+  // const indexOfLastPost = currentPage * postsPerPage;
+  // const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  // const currentPosts = blogs.slice(indexOfFirstPost, indexOfLastPost);
+
+  // const totalPages = Math.ceil(blogs.length / postsPerPage);
+
+  // const handlePrevious = () => {
+  //   if (currentPage > 1) setCurrentPage(currentPage - 1);
+  // };
+
+  // const handleNext = () => {
+  //   if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  // };
+
+
+
+  const [itemOffset, setItemOffset] = useState(0);
+
+  const itemsPerPage = 4;
+
+  const endOffset = itemOffset + itemsPerPage;
+  console.log(`Loading blogs from ${itemOffset} to ${endOffset}`);
+  const currentItems = blogs.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(blogs.length / itemsPerPage);
+
+  // Invoke when user click to request another page.
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % blogs.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
+
+
+
+  // console.log(currentPosts)
+
+
   return (
     <div className="container mx-auto my-5 flex flex-col md:flex-row">
-       {/* Left Sidebar  */}
-      <aside className="w-full md:w-1/4 bg-white p-5 shadow-lg rounded-lg mb-5 md:mr-5">
-        {/* Search Input */}
-        <div className="mb-4 relative">
-          <input
-            type="text"
-            placeholder="Search in blog title..."
-            className="w-full p-2 border border-gray-300 rounded pl-10"
-          />
-          <span className="absolute right-2 top-2 text-gray-500">
-            <i className="fas fa-search"></i>
-          </span>
-        </div>
 
-        {/* Social Links */}
-        <div>
-          <h3 className="relative font-bold text-lg mb-2 border-b-2 border-black pl-4 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-8 after:h-0.5 after:bg-sky-500">Social</h3>
-        <div className="flex space-x-3 mb-4">
-          <a href="#" className="text-blue-600">
-            <i className="fab fa-facebook-f"></i>
-          </a>
-          <a href="#" className="text-blue-400">
-            <i className="fab fa-twitter"></i>
-          </a>
-          <a href="#" className="text-pink-500">
-            <i className="fab fa-instagram"></i>
-          </a>
-          <a href="#" className="text-red-600">
-            <i className="fab fa-youtube"></i>
-          </a>
-          <a href="#" className="text-blue-600">
-            <i className="fab fa-tiktok"></i>
-          </a>
-        </div>
-        </div>
+      <div className="   ">
+        <h1 className="text-2xl font-bold mb-5 text-gray-400">Blogs</h1>
 
-        {/* Categories */}
-        <div className="mb-4">
-          <h2 className="relative font-bold text-lg mb-2 border-b-2 border-black pl-4 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-8 after:h-0.5 after:bg-sky-500">Categories</h2>
-          <ul className="list-disc pl-5">
-            <li>Food (06)</li>
-            <li>Technology (04)</li>
-            <li>Furniture (09)</li>
-            <li>Makeup (07)</li>
-          </ul>
-        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-4 ">
+          {
+            blogs.map((blog) => (
 
-        {/* Recent Posts */}
-        <div className="mb-4">
-          <h2 className="relative font-bold text-lg mb-2 border-b-2 border-black pl-4 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-8 after:h-0.5 after:bg-sky-500">Recent Posts</h2>
-          
-          <ul>
-            <li className="flex mb-2">
-              <img src="https://img.freepik.com/free-photo/travel-concept-close-up-portrait-young-beautiful-attractive-redhair-girl-wtih-trendy-hat-sunglass-smiling-blue-pastel-background-copy-space_1258-851.jpg?t=st=1727190363~exp=1727193963~hmac=b0c347093a246ffdfc9539ce8902b7d4b383d213c89b3eb0dc4ffa585d452180&w=996"  className="w-16 h-16 rounded-full mr-2" />
-              <div>
-                <p className="font-semibold">Post Title</p>
-                <p className="text-gray-500">oct 24 2021</p>
-              </div>
-            </li>
-            <li className="flex mb-2">
-              <img src="https://img.freepik.com/free-photo/technology-meets-nature-with-smart-phone-generative-ai_188544-19446.jpg?t=st=1727190407~exp=1727194007~hmac=4f737efc747856435e40d74a5c8bdf10556af66b832949cea0282a485f946863&w=996"  className="w-16 h-16 rounded-full mr-2" />
-              <div>
-                <p className="font-semibold">Post Title</p>
-                <p className="text-gray-500">oct 24 2021</p>
-              </div>
-            </li>
-            <li className="flex mb-2">
-              <img src="https://img.freepik.com/free-photo/technology-meets-nature-with-smart-phone-generative-ai_188544-19446.jpg?t=st=1727190407~exp=1727194007~hmac=4f737efc747856435e40d74a5c8bdf10556af66b832949cea0282a485f946863&w=996"  className="w-16 h-16 rounded-full mr-2" />
-              <div>
-                <p className="font-semibold">Post Title</p>
-                <p className="text-gray-500">oct 24 2021</p>
-              </div>
-            </li>
-            <li className="flex mb-2">
-              <img src="https://img.freepik.com/free-photo/finger-touching-smartwatch-s-screen_1134-388.jpg?t=st=1727190283~exp=1727193883~hmac=1541cd57bcfc096b4476733f3d50e4cc479cb78a11f9ab9b4d11a0f4ddc4ade3&w=996"  className="w-16 h-16 rounded-full mr-2" />
-              <div>
-                <p className="font-semibold">Post Title</p>
-                <p className="text-gray-500">oct 24 2021</p>
-              </div>
-            </li>
-          </ul>
-        </div>
+              <div key={blog.id} className="">
 
-        {/* Tags Cloud */}
-        <div className="mb-4">
-  <h2 className="relative font-bold text-lg mb-2 border-b-2 border-black pl-4 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-8 after:h-0.5 after:bg-sky-500">
-    Tags Cloud
-  </h2>
-  <div className="flex flex-wrap">
-    <span className="border border-black text-black px-2 py-1 rounded m-1">airports</span>
-    <span className="border border-black text-black px-2 py-1 rounded m-1">amazing</span>
-    <span className="border border-black text-black px-2 py-1 rounded m-1">Bootstrap</span>
-    <span className="border border-black text-black px-2 py-1 rounded m-1">business</span>
-    <span className="border border-black text-black px-2 py-1 rounded m-1">Clean Design</span>
-    <span className="border border-black text-black px-2 py-1 rounded m-1">electronic</span>
-    <span className="border border-black text-black px-2 py-1 rounded m-1">iPad Pro</span>
-  </div>
-</div>
+                <div className='relative overflow-hidden group '>
+                  <Link to={`/BlogDetails/${blog._id}`}>
+                    {/* Image */}
+                    <img src={blog.blogImage} alt={blog.title} className="w-full h-80 object-cover mb-2 transition-transform duration-700 ease-in-out group-hover:scale-105" />
 
+                    {/* image Icon */}
+                    <div className="absolute inset-0 flex items-end mb-6 mr-6 justify-end opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100">
+                      <div className="bg-white p-4  rounded-full shadow-lg hover:text-primary">
+                        <FaArrowRight className=' text-2xl' />
+                      </div>
+                    </div>
+                  </Link>
+                </div>
 
-        {/* Newsletter */}
-        <div>
-        <h2 className="relative font-bold text-lg mb-2 border-b-2 border-black pl-4 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-8 after:h-0.5 after:bg-sky-500">
-  Newsletter
-</h2>
-
-
-
-
-
-          <p className='mb-2'>Subscribe to our newsletter and get our newest updates right on your inbox.</p>
-          <input
-            type="email"
-            placeholder="Your email..."
-            className="w-full p-2 border border-gray-300 rounded mb-2"
-          />
-          <div className="flex items-center mb-2">
-            <input type="checkbox" className="mr-2" />
-            <label className="text-sm">I agree to the terms and conditions</label>
-          </div>
-          <button className="w-full bg-black text-white p-2 rounded">Subscribe</button>
-        </div>
-      </aside>
-
-      <main className="w-full md:w-3/4 bg-white p-5 shadow-lg rounded-lg">
-        <h1 className="text-2xl font-bold mb-5">Blog Posts</h1>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {currentPosts.map((post) => (
-            <div key={post.id} className="border p-4 rounded-lg shadow hover:shadow-lg transition">
-              <img src={post.image} alt={post.title} className="w-full h-48 object-cover rounded-md mb-2" />
-              <div className="flex justify-between text-red-500 text-sm mb-2">
-                <span>{post.date}</span>
-                <span className="flex items-center">
-                  <i className="fas fa-comment mr-1"></i> {post.comments.length} Comments
-                </span>
-              </div>
-              <h2 className="font-semibold text-xl my-2 text-center">{post.title}</h2>
-              <p className="text-gray-700 text-center">{post.description}</p>
-              
-              <div className="flex justify-center">
-                {/* Link to the blog details page based on the post ID */}
-                <Link to={`/blog/${post.id}`}>
-                  <button className="mt-2 bg-red-500 text-white text-sm p-2 rounded flex items-center justify-center">
-                    Read More
-                  </button>
+                <Link to={`/BlogDetails/${blog._id}`}>
+                  <h2 className="font-bold text-3xl mt-4 hover:text-primary">{blog.title}</h2>
                 </Link>
+
+                <div className="flex justify-between  text-sm mb-2">
+                  <span className='mt-2 text-xl font-semibold text-gray-500'>{blog.publishDate}</span>
+                  <span className="flex items-center text-gray-500">
+                    <FaCommentDots className=' text-[17px] mt-2 mr-2' />
+                    <p className='mt-2 text-[17px] font-semibold '>{blog.comments.length} Comments</p>
+                  </span>
+                </div>
+
+
+                {/* 
+                <p className="text-gray-400 font-medium text-xl text-start ">
+                  {blog.description.split(' ').slice(0, 22).join(' ') + (blog.description.split(' ').length > 15 ? '...' : '')}
+                </p> */}
+
+                <p className='text-gray-400 font-medium text-xl text-start '>
+                  {blog.description.split(" ").slice(0, 22).join(" ") + "..."}
+                </p>
+
+
               </div>
-            </div>
-          ))}
+
+            ))
+          }
         </div>
+
+
+
+
+
+
+
+
+
+
 
         {/* Blog Pagination */}
-        <div className="flex justify-between mt-5 items-center">
+        {/* <div className="flex justify-center mt-5 items-center">
           <button
             onClick={handlePrevious}
             className={`bg-black text-white p-2 rounded ${currentPage === 1 && 'opacity-50 cursor-not-allowed'}`}
@@ -203,8 +147,40 @@ const handleNext = () => {
           >
             Next
           </button>
+        </div> */}
+
+
+
+
+        {/* ----------- Pagination Start ---------- */}
+        <div className="text-center mb-6 mt-4 pagination">
+
+          <div className="grid grid-cols-1 justify-center items-center p-4 space-x-4 md:grid-cols-2 lg:grid-cols-3">
+            {currentItems &&
+              currentItems.map((item) => (
+                <div key={item} >
+                  {/* <AllCard allCaption={item}></AllCard> */}
+                  <h3>{console.log(item)}</h3>
+                </div>
+              ))}
+          </div>
+
+          <ReactPaginate
+            className={currentItems === pageCount ? `bg-blue-200  text-black hover:text-black ml-2` : ` 
+                text-black hover:text-black ml-2`}
+            breakLabel="..."
+            nextLabel="next >"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={3}
+            pageCount={pageCount}
+            previousLabel="< previous"
+            renderOnZeroPageCount={null}
+          />
+
+
         </div>
-      </main>
+        {/* ----------- Pagination End ---------- */}
+      </div>
     </div>
   );
 };
