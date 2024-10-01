@@ -52,9 +52,13 @@ const NavDrawer = ({ toggleDrawer, user, handleLogOut }) => {
           </Link>
         </div>
         <div className="flex justify-between items-center px-4 text-sm">
-          <Link to="/support">
-            <p className=" hover:text-primary">Support</p>
-          </Link>
+          {user ? (
+            <Link to="/support">
+              <p className=" hover:text-primary">Support</p>
+            </Link>
+          ) : (
+            ""
+          )}
         </div>
 
         {/* Category and Links */}

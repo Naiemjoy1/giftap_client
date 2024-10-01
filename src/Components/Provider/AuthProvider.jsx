@@ -66,8 +66,11 @@ const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  const updateUserProfile = (name) => {
-    return updateProfile(auth.currentUser, { displayName: name });
+  const updateUserProfile = (name, image) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: image,
+    });
   };
 
   const authInfo = {

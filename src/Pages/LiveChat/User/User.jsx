@@ -13,25 +13,26 @@ const User = () => {
   const [newText, setNewText] = useState("");
   const [currentChat, setCurrentChat] = useState([]);
   const [socket, setSocket] = useState(null);
-  const [loading, setLoading] = useState(false); // Add loading state
+  const [loading, setLoading] = useState(false);
 
   const currentUsers = chats.filter((u) => u?.email === user?.email);
 
-  // Initialize socket connection
   useEffect(() => {
     const newSocket = io("http://localhost:3000", {
-      transports: ["websocket", "polling"], // Use websocket and polling
-      reconnection: true, // Enable reconnection
+      transports: ["websocket", "polling"],
+      reconnection: true,
+      reconnectionAttempts: 5,
+      reconnectionDelay: 1000,
     });
     setSocket(newSocket);
 
-    // Cleanup on unmount
-    return () => {
-      newSocket.disconnect(); // Use disconnect instead of close for better handling
-    };
+    newSocket.on("connect_error", (err) => {
+      console.error("Socket connection error:", err);
+    });
+
+    return () => newSocket.disconnect();
   }, []);
 
-  // Listen for incoming messages
   useEffect(() => {
     if (socket) {
       socket.on("newMessage", (message) => {
@@ -45,11 +46,10 @@ const User = () => {
     }
   }, [socket, axiosPublic]);
 
-  // Fetch current chat details when the component mounts or currentUsers change
   useEffect(() => {
     const fetchCurrentChat = async () => {
       if (currentUsers.length > 0) {
-        const chatId = currentUsers[0]._id; // Assuming the first chat is the current one
+        const chatId = currentUsers[0]._id;
         const response = await axiosPublic.get(`/chats/${chatId}`);
         setCurrentChat(response.data.messages || []);
       }
@@ -57,7 +57,6 @@ const User = () => {
     fetchCurrentChat();
   }, [currentUsers, axiosPublic]);
 
-  // Create chat in the database
   const handleChat = async () => {
     const chatData = {
       name: user?.displayName,
@@ -74,18 +73,17 @@ const User = () => {
 
     try {
       const response = await axiosPublic.post("/chats", chatData);
-      refetch(); // Refresh the chat list
+      refetch();
       console.log("Chat started successfully:", response.data);
     } catch (error) {
       console.error("Error starting chat:", error.message);
     }
   };
 
-  // Handle sending new chat messages
   const handleNewChat = async (event) => {
     event.preventDefault();
 
-    if (newText.trim() === "") return; // Prevent sending empty messages
+    if (newText.trim() === "") return;
 
     const newMessage = {
       text: newText,
@@ -94,7 +92,7 @@ const User = () => {
       time: new Date().toISOString(),
     };
 
-    setLoading(true); // Set loading state to true
+    setLoading(true);
 
     try {
       if (currentUsers.length > 0) {
@@ -103,28 +101,26 @@ const User = () => {
           $push: { messages: newMessage },
         });
 
-        // Emit the new message to the server
         socket.emit("sendMessage", { ...newMessage, chatId });
 
-        setNewText(""); // Clear the input field
+        setNewText("");
       }
     } catch (error) {
       console.error("Error sending message:", error.message);
     } finally {
-      setLoading(false); // Set loading state to false after completion
+      setLoading(false);
     }
   };
 
-  // Handle deleting the current chat
   const handleDeleteChat = async () => {
     if (currentUsers.length > 0) {
-      const chatId = currentUsers[0]._id; // Get the chat ID to delete
+      const chatId = currentUsers[0]._id;
 
       try {
         const response = await axiosPublic.delete(`/chats/${chatId}`);
         console.log("Chat deleted successfully:", response.data);
-        refetch(); // Refresh the chat list
-        setCurrentChat([]); // Clear current chat messages
+        refetch();
+        setCurrentChat([]);
       } catch (error) {
         console.error("Error deleting chat:", error.message);
       }
@@ -134,7 +130,6 @@ const User = () => {
   const [users] = useUsers();
 
   const usersDetails = users.filter((u) => u?.email === user?.email);
-  //   console.log(usersDetails);
 
   const isAdmin = currentUsers.length > 0 && currentUsers[0]?.type === "admin";
   const isUser = currentUsers.length > 0 && currentUsers[0]?.type === "user";
@@ -156,7 +151,7 @@ const User = () => {
 
       <section
         className="border p-4 rounded-lg my-4 overflow-y-auto h-[300px]"
-        style={{ maxHeight: "300px" }} // Fixed height
+        style={{ maxHeight: "300px" }}
       >
         {currentChat.map((message, index) => (
           <div key={index}>
@@ -172,7 +167,7 @@ const User = () => {
           className="input input-bordered input-sm"
           value={newText}
           onChange={(e) => setNewText(e.target.value)}
-          disabled={loading} // Disable input while loading
+          disabled={loading}
         />
         <button
           className="btn btn-primary btn-sm"
@@ -184,7 +179,6 @@ const User = () => {
           ) : (
             "Send"
           )}{" "}
-          {/* Show loading state in button */}
         </button>
       </section>
     </div>

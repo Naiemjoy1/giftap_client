@@ -117,7 +117,7 @@ const BlogDetails = () => {
             <div>
               <h1 className="text-gray-500 font-bold text-2xl">Recent Posts</h1>
               <hr className="text-gray-500 mt-2" />
-              <div className="space-y-4">
+              <div className="space-y-4 mt-6">
                 {recentBlogs.slice(0, 4).map(blog => (
                   <div key={blog._id} className="flex items-start">
                     <Link to={`/BlogDetails/${blog._id}`}>
