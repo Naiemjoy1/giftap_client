@@ -31,7 +31,7 @@ const Shop = () => {
     const dateB = new Date(`${b.date} ${b.time}`);
     return dateB - dateA; 
   })[0];
-  console.log(mostRecentProduct)
+  console.log(mostRecentProduct?.name)
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
   const categories = ["All", ...new Set(products.map((item) => item.category))];
 
@@ -178,8 +178,36 @@ const Shop = () => {
             </div>
           </div>
         </section>
+        <hr className="border-dashed mt-4" />
+        <h1 className="flex justify-center items-center font-bold text-white text-3xl">Most Recent View product</h1>
+            {/* Most Recent View Product Section */}
+        {mostRecentProduct && (
+         <div className="card bg-base-100 w-96 shadow-xl">
+         <figure className="px-10 pt-10">
+           <img
+             src={mostRecentProduct?.image}
+             alt="Shoes"
+             className="rounded-xl" />
+         </figure>
+         <div className="card-body items-center text-center">
+           <h2 className="card-title font-bold text-2xl">{mostRecentProduct?.name}</h2>
+           <p>{mostRecentProduct?.price}</p>
+           <div className="card-actions">
+           <Link to={`/productDetails/${mostRecentProduct?.id}`}>
+               
+                     
+                      <button
+    className="bg-primary text-white p-2 rounded-full border border-gray-300"
+   
+  >
+   View Details
+  </button></Link>
+           </div>
+         </div>
+       </div>
+        )}
       </section>
-
+     
       {/* Products Section */}
       <section>
         <section className="flex justify-around flex-wrap">
@@ -243,11 +271,12 @@ const Shop = () => {
 
               {/* Product Info */}
               <div className="p-4">
-                <h3 className="font-bold text-lg mb-2">{item.name}</h3>
-                <p className="text-sm text-gray-500 mb-4">{item.description}</p>
-                <div className="flex items-center justify-between">
-                  <p className="font-bold">${item.price}</p>
-                  <p className="text-sm text-gray-500">{item.category}</p>
+                <h3 className="font-bold text-lg mb-2 flex items-center justify-center">{item.name}</h3>
+              
+                <div className="flex-col space-y-2 items-center ">
+                
+                <p className="text-gray-400 text-center">{item.category}</p>
+                <p className="text-primary text-center">${item.price}</p>
                 </div>
               </div>
               {/* Wishlist and Cart Icons */}

@@ -73,7 +73,7 @@ const ProductDetails = () => {
           </div>
 
           {/* Daisy UI Tabs at the top */}
-          <div role="tablist" className="tabs tabs-lifted border-b-2 mb-6">
+          <div role="tablist" className="tabs tabs-lifted items-center gap-4 w-1/2 border-b-2 mb-6">
             <button
               role="tab"
               className={`tab ${activeTab === 'details' ? 'tab-active' : ''}font-bold`}
