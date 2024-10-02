@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import useProducts from "../../Components/Hooks/useProducts";
 import { BsFillGrid3X2GapFill } from "react-icons/bs";
-import { MdViewList, MdFavoriteBorder, MdAddShoppingCart } from "react-icons/md";
+import {
+  MdViewList,
+  MdFavoriteBorder,
+  MdAddShoppingCart,
+} from "react-icons/md";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FcViewDetails } from "react-icons/fc";
@@ -10,7 +14,6 @@ import useUsers from "../../Components/Hooks/useUsers";
 import useAuth from "../../Components/Hooks/useAuth";
 import useAxiosPublic from "../../Components/Hooks/useAxiosPublic";
 import RecentView from "./RecentView/RecentView";
-
 
 const Shop = () => {
   const [products, loading] = useProducts();
@@ -21,8 +24,8 @@ const Shop = () => {
   const [sortOption, setSortOption] = useState("default");
   const [priceRange, setPriceRange] = useState([0, 100]);
   const productsPerPage = 9;
-   const {user} = useAuth();
-   const axiosPublic =useAxiosPublic()
+  const { user } = useAuth();
+  const axiosPublic = useAxiosPublic();
   //  console.log(user)
   //  console.log(user?.email)
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
@@ -30,14 +33,15 @@ const Shop = () => {
   const handleRecentView = (id, image, price, category, name) => {
     const date = new Date().toLocaleDateString();
     const userEmail = user?.email;
-    
+
     const info = { id, image, price, category, name, date, userEmail };
-          console.log(info)
-    axiosPublic.post("/recentviews", info)
-      .then(response => {
+    console.log(info);
+    axiosPublic
+      .post("/recentviews", info)
+      .then((response) => {
         console.log("Recent view logged:", response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error logging recent view:", error);
       });
   };
@@ -87,14 +91,14 @@ const Shop = () => {
     if (name === "minPrice") {
       setPriceRange([Number(value), priceRange[1]]);
     } else {
-      setPriceRange([priceRange[0], Number(value)]); 
+      setPriceRange([priceRange[0], Number(value)]);
     }
   };
 
   return (
     <div className="container mx-auto my-10 grid grid-cols-1 md:grid-cols-[30%_70%] gap-10">
       {/* Sidebar */}
-      <section className="space-y-8 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 p-5 rounded-lg text-white">
+      <section className="space-y-8 bg-gradient-to-r from-slate-200 to-pink-200 p-5 rounded-lg text-black">
         {/* Category Section */}
         <section>
           <p className="text-2xl font-medium">Product Categories</p>
@@ -105,12 +109,18 @@ const Shop = () => {
             {categories.map((category, index) => (
               <li key={index} className="mb-4">
                 <div
-                  className={`cursor-pointer ${selectedCategory === category ? "font-bold" : ""}`}
+                  className={`cursor-pointer hover:bg-primary hover:text-white hover:btn hover:btn-primary ${
+                    selectedCategory === category
+                      ? "font-bold btn btn-primary text-white"
+                      : ""
+                  }`}
                   onClick={() => setSelectedCategory(category)}
                 >
                   {category}
                 </div>
-                {index !== categories.length - 1 && <hr className="border-dashed my-4" />}
+                {index !== categories.length - 1 && (
+                  <hr className="border-dashed my-4" />
+                )}
               </li>
             ))}
           </ul>
@@ -166,7 +176,8 @@ const Shop = () => {
       <section>
         <section className="flex justify-between flex-wrap">
           <p className="flex-1">
-            Showing {currentProducts.length} of {filteredProducts.length} results
+            Showing {currentProducts.length} of {filteredProducts.length}{" "}
+            results
           </p>
           <section className="flex gap-5">
             <section className="flex gap-2">
@@ -189,7 +200,11 @@ const Shop = () => {
 
         {/* Products Grid/List */}
         <section
-          className={`grid gap-6 ${viewMode === "grid" ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" : "grid-cols-1"}`}
+          className={`grid gap-6 ${
+            viewMode === "grid"
+              ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+              : "grid-cols-1"
+          }`}
         >
           {currentProducts.map((item) => (
             <motion.div
@@ -207,16 +222,27 @@ const Shop = () => {
                 <div className="absolute top-30 left-0 -right-30 -bottom-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="grid grid-cols-1 ">
                     <Link to={`/productDetails/${item._id}`}>
-                  
-                    <motion.button
+                      <motion.button
                         className="tooltip tooltip-right text-blue-500 p-2 rounded-full"
                         whileHover={{ scale: 1.1 }}
                         data-tip="View Details"
                         style={{ zIndex: 1000 }}
-                      >  <button onClick={()=>handleRecentView(item._id,item.image,item.price,item.category,item.name)}>
-                        <FcViewDetails /></button>
+                      >
+                        {" "}
+                        <button
+                          onClick={() =>
+                            handleRecentView(
+                              item._id,
+                              item.image,
+                              item.price,
+                              item.category,
+                              item.name
+                            )
+                          }
+                        >
+                          <FcViewDetails />
+                        </button>
                       </motion.button>
-                    
                     </Link>
                     <motion.button
                       className="tooltip tooltip-right text-pink-600 p-2 rounded-full"
@@ -253,7 +279,9 @@ const Shop = () => {
                 <li key={index}>
                   <button
                     className={`px-4 py-2 rounded-lg ${
-                      currentPage === index + 1 ? "bg-blue-500 text-white" : "bg-gray-200"
+                      currentPage === index + 1
+                        ? "bg-blue-500 text-white"
+                        : "bg-gray-200"
                     }`}
                     onClick={() => paginate(index + 1)}
                   >
@@ -265,7 +293,6 @@ const Shop = () => {
           )}
         </section>
       </section>
-      
     </div>
   );
 };

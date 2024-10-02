@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import usePromo from "../../../Components/Hooks/usePromo";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const Offerbar = () => {
   const [promo] = usePromo();
 
-  // Find the active promo
   const activePromo = promo.find((p) => p.status === "active");
 
   const [timeLeft, setTimeLeft] = useState({
@@ -15,13 +14,12 @@ const Offerbar = () => {
     seconds: 0,
   });
 
-  // Countdown based on the promo's finish date
   useEffect(() => {
     if (activePromo) {
       const finishDate = new Date(activePromo.finishDate).getTime();
 
       const updateCountdown = () => {
-        const now = new Date().getTime(); // Recalculate now on each interval
+        const now = new Date().getTime();
         const difference = finishDate - now;
 
         if (difference > 0) {
@@ -45,7 +43,6 @@ const Offerbar = () => {
     }
   }, [activePromo]);
 
-  // Copy promo code to clipboard
   const handleCopyCode = () => {
     if (activePromo) {
       navigator.clipboard.writeText(activePromo.promoCode);
@@ -53,7 +50,6 @@ const Offerbar = () => {
     }
   };
 
-  // Check if active promo has expired
   const hasPromoExpired =
     activePromo &&
     new Date(activePromo.finishDate).getTime() < new Date().getTime();
@@ -86,7 +82,6 @@ const Offerbar = () => {
       ) : (
         <p>No active promotions available.</p>
       )}
-      <Toaster />
     </div>
   );
 };
