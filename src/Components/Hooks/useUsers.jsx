@@ -3,18 +3,18 @@ import useAuth from "./useAuth";
 import useAxiosPublic from "./useAxiosPublic";
 
 const useUsers = () => {
-  const axiosPublic = useAxiosPublic(); // Correctly use useAxiosPublic
+  const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
 
   const { refetch, data: users = [] } = useQuery({
-    queryKey: ["users", user?.email], // Query key should be user-specific if needed
+    queryKey: ["users", user?.email],
     queryFn: async () => {
-      const res = await axiosPublic.get("/users"); // Fixed the URL string
+      const res = await axiosPublic.get("/users");
       return res.data;
     },
   });
 
-  return [users, refetch]; // Return users, not cart
+  return [users, refetch];
 };
 
 export default useUsers;

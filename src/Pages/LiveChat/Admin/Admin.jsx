@@ -5,13 +5,14 @@ import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 
 const Admin = () => {
   const { user } = useAuth();
-  const [chats, refetch] = useChat();
+  const [chats, refetch] = useChat(); // Assumes useChat provides chats and a refetch method
   const axiosPublic = useAxiosPublic();
 
   const [selectedChat, setSelectedChat] = useState(null);
   const [newText, setNewText] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // Fetch selected chat details
   const fetchChatDetails = async (chatId) => {
     try {
       const response = await axiosPublic.get(`/chats/${chatId}`);
@@ -21,6 +22,15 @@ const Admin = () => {
     }
   };
 
+  // Continuously refetch the list of chats (only when no chat is selected)
+  useEffect(() => {
+    if (!selectedChat) {
+      const interval = setInterval(refetch, 1000); // Refetch chats every 1 second
+      return () => clearInterval(interval);
+    }
+  }, [selectedChat, refetch]);
+
+  // Continuously refetch selected chat details
   useEffect(() => {
     if (selectedChat) {
       const interval = setInterval(async () => {
@@ -30,7 +40,7 @@ const Admin = () => {
         } catch (error) {
           console.error("Error refetching chat details:", error.message);
         }
-      }, 1000);
+      }, 1000); // Refetch selected chat every 1 second
 
       return () => clearInterval(interval);
     }
@@ -52,7 +62,7 @@ const Admin = () => {
     try {
       const chatId = selectedChat._id;
 
-      const response = await axiosPublic.patch(`/chats/${chatId}`, {
+      await axiosPublic.patch(`/chats/${chatId}`, {
         $push: { messages: newMessage },
       });
 
@@ -62,9 +72,8 @@ const Admin = () => {
       }));
 
       setNewText("");
-      //   console.log("Message sent successfully:", response.data);
     } catch (error) {
-      //   console.error("Error sending message:", error.message);
+      console.error("Error sending message:", error.message);
     } finally {
       setLoading(false);
     }
@@ -75,12 +84,11 @@ const Admin = () => {
       const chatId = selectedChat._id;
 
       try {
-        const response = await axiosPublic.delete(`/chats/${chatId}`);
-        // console.log("Chat deleted successfully:", response.data);
-        refetch();
+        await axiosPublic.delete(`/chats/${chatId}`);
+        refetch(); // Refetch the list of chats after deletion
         setSelectedChat(null);
       } catch (error) {
-        // console.error("Error deleting chat:", error.message);
+        console.error("Error deleting chat:", error.message);
       }
     }
   };
