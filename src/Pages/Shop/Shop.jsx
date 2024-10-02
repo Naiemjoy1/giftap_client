@@ -25,14 +25,22 @@ const Shop = () => {
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
   const [recentViewProduct] = useRecentView();
+  const mostRecentProduct = recentViewProduct
+  .sort((a, b) => {
+    const dateA = new Date(`${a.date} ${a.time}`);
+    const dateB = new Date(`${b.date} ${b.time}`);
+    return dateB - dateA; 
+  })[0];
+  console.log(mostRecentProduct)
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
   const categories = ["All", ...new Set(products.map((item) => item.category))];
 
   const handleRecentView = (id, image, price, category, name) => {
     const date = new Date().toLocaleDateString();
+    const time = new Date().toLocaleTimeString();
     const userEmail = user?.email;
 
-    const info = { id, image, price, category, name, date, userEmail };
+    const info = { id, image, price, category, name, date,time, userEmail };
     axiosPublic.post("/recentviews", info)
       .then(response => {
         console.log("Recent view logged:", response.data);
@@ -243,12 +251,12 @@ const Shop = () => {
                 </div>
               </div>
               {/* Wishlist and Cart Icons */}
-              <div className="absolute top-0 right-0 mt-2 mr-2 flex gap-2">
+              <div class="absolute top-0 right-0 mt-2 mr-2 flex gap-2 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
 
               <motion.button
-                      className="tooltip tooltip-bottom text-pink-600 p-2 rounded-full"
+                      className="tooltip tooltip-bottom text-pink-600 p-2 rounded full"
                       whileHover={{ scale: 1.1 }}
-                      data-tip="View Details"
+                      data-tip="Add To Wishlist"
                     > <button
                     className="bg-white text-black p-2 rounded-full border border-gray-300"
                     onClick={() => handleWishlist(item._id, item.image, item.price, item.name)}
@@ -256,18 +264,18 @@ const Shop = () => {
                     <MdFavorite />
                   </button></motion.button>
 
-  
+                  <Link to={`/productDetails/${item._id}`}>
                   <motion.button
                       className="tooltip tooltip-bottom text-pink-600 p-2 rounded-full"
                       whileHover={{ scale: 1.1 }}
-                      data-tip="Add to Wishlist"
+                      data-tip="View Details"
                     >
                       <button
     className="bg-white text-black p-2 rounded-full border border-gray-300"
     onClick={() => handleRecentView(item._id, item.image, item.price, item.category, item.name)}
   >
     <FcViewDetails />
-  </button></motion.button>
+  </button></motion.button></Link>
 
   <motion.button
                       className="tooltip tooltip-bottom text-pink-600 p-2 rounded-full"
