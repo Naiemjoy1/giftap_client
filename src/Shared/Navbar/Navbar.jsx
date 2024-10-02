@@ -1,4 +1,3 @@
-import React from "react";
 import Topbar from "./Topbar/Topbar";
 import Offerbar from "./Offerbar/Offerbar";
 import Searchbar from "./Searchbar/Searchbar";
