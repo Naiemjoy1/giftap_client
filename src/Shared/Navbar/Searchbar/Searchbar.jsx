@@ -7,9 +7,7 @@ import { BiUser } from "react-icons/bi";
 import Drawer from "react-modern-drawer";
 import "react-modern-drawer/dist/index.css";
 import NavDrawer from "../Drawer/NavDrawer";
-import { div, h1 } from "framer-motion/client";
-import SearchList from "./SearchList";
-import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
+import Search from "./Search";
 
 const Searchbar = () => {
   const { user, logOut } = useAuth();
@@ -21,41 +19,6 @@ const Searchbar = () => {
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState);
   };
-
-  const [input, setInput] = useState("");
-  const [searchResult, setSearchResult] = useState([]);
-  const axiosPublic = useAxiosPublic()
-
-  // Search List Implement
-  const faceData = (v) => {
-    axiosPublic.get("/products")
-      .then(res => {
-        const result = res.data.filter(product => {
-          return product && (
-            (product.name && product.name.toLowerCase().includes(v.toLowerCase())) ||
-            (product.category && product.category.toLowerCase().includes(v.toLowerCase())) ||
-            (product.description && product.description.toLowerCase().includes(v.toLowerCase()))
-
-            // product.name && product.name.toLowerCase().includes(v.toLowerCase()
-
-          );
-        });
-        // console.log(result)
-        setSearchResult(result);
-      })
-      .catch(error => {
-        console.error("No data:", error);
-      });
-  }
-
-  // console.log(searchResult)
-
-  const handleChange = (v) => {
-    // console.log(v)
-    setInput(v)
-    faceData(v)
-  }
-
 
   return (
     <div className="container mx-auto py-4 font-opensans">
@@ -101,31 +64,7 @@ const Searchbar = () => {
           </Link>
         </div>
         <div className="flex-grow">
-          <section className="flex relative">
-            <label className="input input-bordered rounded-full flex items-center gap-2 w-full">
-              <input
-                type="text"
-                className="grow w-full"
-                placeholder="What are you looking for?"
-                value={input}
-                onChange={(e) => handleChange(e.target.value)}
-              />
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                className="h-4 w-4 opacity-70 text-primary"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                  clipRule="evenodd"
-                />
-              </svg>
-                          
-            </label>
-          </section>
-          <SearchList searchResult={searchResult}></SearchList>
+          <Search></Search>
         </div>
 
         <div className="flex justify-center gap-10 items-center text-sm ">
@@ -208,8 +147,6 @@ const Searchbar = () => {
           </section>
         </div>
       </div>
-
-
 
       <Drawer
         open={isOpen}

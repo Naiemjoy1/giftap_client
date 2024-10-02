@@ -15,7 +15,7 @@ const ProfileDetails = () => {
   const isUser = usersDetails.length > 0 && usersDetails[0]?.type === "user";
   const [tabsData] = useTabs();
 
-  const [isModalOpen, setIsModalOpen] = useState(false); // manage modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div className="container mx-auto my-10 space-y-4">
@@ -28,7 +28,7 @@ const ProfileDetails = () => {
         </p>
         <button
           className="btn btn-primary btn-sm text-white"
-          onClick={() => setIsModalOpen(true)} // Open modal using state
+          onClick={() => setIsModalOpen(true)}
         >
           Apply
         </button>
@@ -40,25 +40,28 @@ const ProfileDetails = () => {
               <form method="dialog">
                 <button
                   className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                  onClick={() => setIsModalOpen(false)} // Close modal using state
+                  onClick={() => setIsModalOpen(false)}
                 >
                   ✕
                 </button>
               </form>
-              <ApplySeller />
+              <ApplySeller setIsModalOpen={setIsModalOpen} />
             </div>
           </dialog>
         )}
       </section>
 
       <Tabs>
-        <TabList>
+        <TabList className="uppercase">
           {tabsData.map((tab, index) => (
             <Tab key={index}>{tab.name}</Tab>
           ))}
         </TabList>
+        <div className="divider divider-primary"></div>
         {tabsData.map((tab, index) => (
-          <TabPanel key={index}>{tab.page}</TabPanel>
+          <TabPanel className="mt-5" key={index}>
+            {tab.page}
+          </TabPanel>
         ))}
       </Tabs>
     </div>

@@ -23,11 +23,11 @@ const Category = () => {
   return (
     <div>
       {/* this is section heading this style get homeSectionHeading components */}
-      <HomeSectionHeading 
-        subTitle={'shop with giftap'}
-        title={'Shop by category'}
+      <HomeSectionHeading
+        subTitle={"shop with giftap"}
+        title={"Shop by category"}
       ></HomeSectionHeading>
-    
+
       <Carousel
         additionalTransfrom={0}
         arrows
@@ -96,7 +96,6 @@ const Category = () => {
             <p className="text-lg font-medium mt-4">{item.name}</p>
           </div>
         ))}
-      
       </Carousel>
     </div>
   );
