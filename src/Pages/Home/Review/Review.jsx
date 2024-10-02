@@ -9,7 +9,7 @@ const Review = () => {
 
   return (
     <div>
-      <div className="bg-gradient-to-r from-slate-200 to-pink-200 rounded-2xl h-[800px]">
+      <div className="bg-gradient-to-r from-slate-200 to-pink-200 py-4">
         <div className="relative z-10 p-8">
           <h1 className="text-center text-3xl font-medium">
             CUSTOMERS REVIEWS
@@ -39,7 +39,6 @@ const Review = () => {
             ))}
           </div>
         </Marquee>
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white dark:from-background"></div>
       </div>
     </div>
   );
