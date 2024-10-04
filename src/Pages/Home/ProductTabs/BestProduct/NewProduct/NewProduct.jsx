@@ -26,7 +26,7 @@ const NewProduct = () => {
           <ReUseCard
             key={item._id}
             productId={item._id}
-            productImage={item.image}
+            productImage={item.image.itemImg}
             productPrice={item.price}
             productTitle={item.name}
             productReview={'1'}
