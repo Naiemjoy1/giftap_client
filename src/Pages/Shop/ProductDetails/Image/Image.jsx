@@ -9,7 +9,7 @@ const Image = ({ product }) => {
     setCurrentImage(index);
   };
   return (
-    <div className="w-[35%]">
+    <div className="lg:w-[35%]">
       <div className="relative overflow-hidden h-96 w-full">
         <div
           className={`absolute inset-0 flex transition-transform duration-700 ease-in-out ${

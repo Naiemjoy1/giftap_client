@@ -22,6 +22,7 @@ const Searchbar = () => {
   };
 
   const [carts] = useCart();
+  const userCarts = carts.filter((cart) => cart?.email === user?.email);
 
   return (
     <div className="container mx-auto py-4 font-opensans">
@@ -46,14 +47,14 @@ const Searchbar = () => {
             </section>
 
             <section>
-              <button className="relative">
+              <Link to="/cart" className="relative">
                 <p className="text-2xl">
                   <HiOutlineShoppingBag />
                 </p>
                 <div className="bg-primary absolute -top-2 -right-2 transform translate-x-1 -translate-y-1 rounded-full w-6 h-6 flex items-center justify-center text-white text-xs">
-                  30
+                  {userCarts.length}
                 </div>
-              </button>
+              </Link>
             </section>
           </section>
         </div>
@@ -143,7 +144,7 @@ const Searchbar = () => {
                   <HiOutlineShoppingBag />
                 </p>
                 <div className="bg-primary absolute -top-2 -right-2 transform translate-x-1 -translate-y-1 rounded-full w-6 h-6 flex items-center justify-center text-white text-xs">
-                  {carts.length}
+                  {userCarts.length}
                 </div>
               </Link>
             </section>

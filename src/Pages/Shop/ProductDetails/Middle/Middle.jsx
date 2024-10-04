@@ -16,13 +16,12 @@ import useCart from "../../../../Components/Hooks/useCart";
 import toast from "react-hot-toast";
 
 const Middle = ({ product }) => {
-  const navigate = useNavigate();
   const { user } = useAuth();
   const [users] = useUsers();
   const [carts, refetch] = useCart();
+  const axiosPublic = useAxiosPublic();
 
   const usersDetails = users.find((u) => u?.email === user?.email);
-  const axiosPublic = useAxiosPublic();
 
   const {
     _id,
@@ -87,10 +86,10 @@ const Middle = ({ product }) => {
       const res = await axiosPublic.post("/carts", purchase);
 
       if (res.status === 200) {
-        refetch();
         setMessage("");
         modalRef.current.close();
-        toast.success("Purchase added to cart");
+        toast.success("Product added to cart");
+        refetch();
       } else {
         toast.error("Failed to add to cart");
       }
@@ -100,7 +99,7 @@ const Middle = ({ product }) => {
   };
 
   return (
-    <div className="space-y-4 w-[35%]">
+    <div className="space-y-4 lg:w-[35%]">
       <div className="flex justify-start gap-4">
         {priceGroup?.map((pkg) => (
           <button
@@ -186,7 +185,7 @@ const Middle = ({ product }) => {
         {category === "digital gift" ? (
           selectedTier?.quantity > 0 ? (
             <button
-              onClick={() => modalRef.current.showModal()} // Show modal using ref
+              onClick={() => modalRef.current.showModal()}
               className="bg-primary px-6 py-2 rounded-full text-white"
             >
               Add to cart
