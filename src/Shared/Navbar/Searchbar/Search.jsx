@@ -62,7 +62,7 @@ const Search = () => {
                   >
                     <section className="w-1/3">
                       <img
-                        src={result.image}
+                        src={result.image.itemImg}
                         alt={result.name}
                         className="w-full h-24 object-cover rounded-md"
                       />

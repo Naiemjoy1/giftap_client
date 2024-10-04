@@ -139,7 +139,7 @@ const Shop = () => {
 
   return (
     <div className="container mx-auto my-10 flex gap-4">
-      <div className="space-y-10 w-1/4 bg-primary p-4 rounded-lg text-white">
+      <div className="space-y-10 w-1/4 bg-primary p-4 rounded-lg text-white hidden lg:block">
         <div>
           <p className="text-lg font-medium uppercase">Product Categories</p>
           <div className="divide bg-white h-[1px] my-2"></div>
@@ -248,7 +248,7 @@ const Shop = () => {
         </div>
       </div>
 
-      <div className="w-3/4 p-4">
+      <div className="lg:w-3/4 p-4">
         <div className="flex justify-between items-center">
           <p>
             Showing {currentProducts.length} of {filteredProducts.length}{" "}
@@ -284,7 +284,7 @@ const Shop = () => {
         <div className="divide bg-black h-[1px] my-2"></div>
 
         {viewMode === "grid" ? (
-          <div className="grid grid-cols-3 gap-4 justify-between items-center mt-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 justify-between items-center mt-4">
             {currentProducts.map((item) => (
               <ItemCard key={item._id} item={item} />
             ))}

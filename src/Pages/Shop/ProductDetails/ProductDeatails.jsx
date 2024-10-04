@@ -12,15 +12,24 @@ import Description from "./Description/Description";
 import ProductReview from "./Reviews/ProductReview";
 import Information from "./Information/Information";
 import RelatedProducts from "./RelatedProducts/RelatedProducts";
+import RecentView from "../RecentView/RecentView";
 
 const ProductDeatails = () => {
   const { id } = useParams();
-  const [products] = useProducts();
+  const [products, loading] = useProducts();
 
   const product = products.find((p) => p._id === id);
   const { name } = product ?? {};
 
   const [activeTab, setActiveTab] = useState("description");
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <span className="loading loading-spinner loading-lg text-primary"></span>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-neutral py-10">
@@ -37,11 +46,11 @@ const ProductDeatails = () => {
               <span className=" text-gray-400">SKU:</span> KTRL59
             </p>
           </div>
-          <div className="flex justify-between gap-8 mt-4">
+          <div className="lg:flex justify-between gap-8 mt-4">
             <Image product={product}></Image>
 
             <Middle product={product}></Middle>
-            <section className="w-[30%] p-6 bg-gray-100 space-y-6 h-1/2">
+            <section className="lg:w-[30%] p-6 bg-gray-100 space-y-6 h-1/2">
               <p className="flex gap-4 text-sm">
                 <span className=" text-xl">
                   <LiaShippingFastSolid />
@@ -101,16 +110,16 @@ const ProductDeatails = () => {
         </div>
         <div className=" space-y-2">
           <p className=" uppercase text-lg font-medium">related products</p>
-          <div className="p-4 bg-white rounded-lg grid grid-cols-4">
-            <RelatedProducts></RelatedProducts>
+          <div className="p-4 bg-white rounded-lg ">
+            <RelatedProducts id={id}></RelatedProducts>
           </div>
         </div>
         <div className=" space-y-2">
           <p className=" uppercase text-lg font-medium">
             recently viewed products
           </p>
-          <div className="p-4 bg-white rounded-lg grid grid-cols-4">
-            <RelatedProducts></RelatedProducts>
+          <div className="p-4 bg-white rounded-lg">
+            <RecentView></RecentView>
           </div>
         </div>
       </div>

@@ -6,6 +6,10 @@ import useCart from "../../../Components/Hooks/useCart";
 import toast from "react-hot-toast";
 
 const ItemCard = ({ item }) => {
+  const { user } = useAuth();
+  const [users] = useUsers();
+  const [carts, refetch] = useCart();
+  const axiosPublic = useAxiosPublic();
   const {
     _id,
     name,
@@ -17,18 +21,33 @@ const ItemCard = ({ item }) => {
     discount,
   } = item;
 
+  const usersDetails = users.find((u) => u?.email === user?.email);
+
   const truncatedName = name.length > 20 ? `${name.slice(0, 20)}...` : name;
   const truncatedDescription =
     description.length > 50 ? `${description.slice(0, 50)}...` : description;
 
-  const { user } = useAuth();
-  const [users] = useUsers();
-  const [carts, refetch] = useCart();
-  const usersDetails = users.find((u) => u?.email === user?.email);
-  const axiosPublic = useAxiosPublic();
-
   const calculateDiscountedPrice = (amount) => {
     return discount ? amount * (1 - discount / 100) : amount;
+  };
+
+  const handleRecent = async () => {
+    const recent = {
+      userID: usersDetails?._id,
+      email: user?.email,
+      productId: _id,
+    };
+
+    try {
+      const res = await axiosPublic.post("/recentviews", recent);
+      if (res.status === 200) {
+        // console.log("Product added to recent view");
+      } else {
+        // console.log("Failed to add product to recent view");
+      }
+    } catch (error) {
+      // console.error("Error adding product to recent view", error);
+    }
   };
 
   const handleAddToCart = async () => {
@@ -46,7 +65,7 @@ const ItemCard = ({ item }) => {
       const res = await axiosPublic.post("/carts", purchase);
       if (res.status === 200) {
         refetch();
-        toast.success("Purchase added to cart");
+        toast.success("Product added to cart");
       } else {
         toast.error("Failed to add to cart");
       }
@@ -109,7 +128,10 @@ const ItemCard = ({ item }) => {
           <div className="mt-4 flex gap-4">
             {category === "digital gift" ? (
               <Link to={`/shop/${_id}`} className="flex-grow">
-                <button className="w-full rounded bg-gray-100 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105">
+                <button
+                  onClick={handleRecent}
+                  className="w-full rounded bg-gray-100 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105"
+                >
                   See More
                 </button>
               </Link>
@@ -117,6 +139,7 @@ const ItemCard = ({ item }) => {
               <>
                 <Link to={`/shop/${_id}`} className="flex-grow">
                   <button
+                    onClick={handleRecent}
                     type="button"
                     className="w-full rounded bg-gray-100 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105"
                   >
