@@ -1,15 +1,63 @@
 import { Link } from "react-router-dom";
+import useAuth from "../../../Components/Hooks/useAuth";
+import useUsers from "../../../Components/Hooks/useUsers";
+import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
+import useCart from "../../../Components/Hooks/useCart";
+import toast from "react-hot-toast";
 
 const ItemCard = ({ item }) => {
-  const { _id, name, image, price, description, category, priceGroup } = item;
+  const {
+    _id,
+    name,
+    image,
+    price,
+    description,
+    category,
+    priceGroup,
+    discount,
+  } = item;
 
   const truncatedName = name.length > 20 ? `${name.slice(0, 20)}...` : name;
   const truncatedDescription =
     description.length > 50 ? `${description.slice(0, 50)}...` : description;
 
+  const { user } = useAuth();
+  const [users] = useUsers();
+  const [carts, refetch] = useCart();
+  const usersDetails = users.find((u) => u?.email === user?.email);
+  const axiosPublic = useAxiosPublic();
+
+  const calculateDiscountedPrice = (amount) => {
+    return discount ? amount * (1 - discount / 100) : amount;
+  };
+
+  const handleAddToCart = async () => {
+    const discountedPrice = calculateDiscountedPrice(price).toFixed(2);
+    const purchase = {
+      userID: usersDetails?._id,
+      email: user?.email,
+      productId: _id,
+      price: discountedPrice,
+      quantity: 1,
+      name: name,
+      image: image.itemImg,
+    };
+    try {
+      const res = await axiosPublic.post("/carts", purchase);
+      if (res.status === 200) {
+        refetch();
+        toast.success("Purchase added to cart");
+      } else {
+        toast.error("Failed to add to cart");
+      }
+    } catch (error) {
+      toast.error("Error adding to cart");
+    }
+  };
+
   return (
     <div>
-      <a href={`/shop/${_id}`} className="group relative block overflow-hidden">
+      <div className="group relative block overflow-hidden">
         <button className="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
           <span className="sr-only">Wishlist</span>
 
@@ -31,7 +79,7 @@ const ItemCard = ({ item }) => {
 
         <img
           src={image.cardImg}
-          alt=""
+          alt={name}
           className="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
         />
 
@@ -43,8 +91,10 @@ const ItemCard = ({ item }) => {
             </p>
           ) : (
             <p className="text-gray-700">
-              ${price}
-              <span className="text-gray-400 line-through ml-2">$80</span>
+              ${calculateDiscountedPrice(price).toFixed(2)}{" "}
+              <span className="text-gray-400 line-through ml-2">
+                ${price.toFixed(2)}
+              </span>
             </p>
           )}
 
@@ -56,30 +106,36 @@ const ItemCard = ({ item }) => {
             {truncatedDescription}
           </p>
 
-          <form className="mt-4 flex gap-4">
+          <div className="mt-4 flex gap-4">
             {category === "digital gift" ? (
-              <Link to={`/shop/${_id}`}>
-                <button className="block w-full rounded bg-gray-100 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105">
+              <Link to={`/shop/${_id}`} className="flex-grow">
+                <button className="w-full rounded bg-gray-100 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105">
                   See More
                 </button>
               </Link>
             ) : (
               <>
-                <button className="block w-full rounded bg-gray-100 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105">
-                  Add to Cart
-                </button>
+                <Link to={`/shop/${_id}`} className="flex-grow">
+                  <button
+                    type="button"
+                    className="w-full rounded bg-gray-100 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105"
+                  >
+                    See More
+                  </button>
+                </Link>
 
                 <button
                   type="button"
-                  className="block w-full rounded bg-gray-900 px-4 py-3 text-sm font-medium text-white transition hover:scale-105"
+                  onClick={handleAddToCart}
+                  className="flex-grow rounded bg-gray-900 px-4 py-3 text-sm font-medium text-white transition hover:scale-105"
                 >
-                  Buy Now
+                  Add to Cart
                 </button>
               </>
             )}
-          </form>
+          </div>
         </div>
-      </a>
+      </div>
     </div>
   );
 };

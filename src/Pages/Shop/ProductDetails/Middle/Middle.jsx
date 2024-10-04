@@ -7,16 +7,19 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 import { LuArrowDownUp } from "react-icons/lu";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react"; // Import useRef
 import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../../../Components/Hooks/useAxiosPublic";
 import useAuth from "../../../../Components/Hooks/useAuth";
 import useUsers from "../../../../Components/Hooks/useUsers";
+import useCart from "../../../../Components/Hooks/useCart";
+import toast from "react-hot-toast";
 
 const Middle = ({ product }) => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const [users, refetch] = useUsers();
+  const [users] = useUsers();
+  const [carts, refetch] = useCart();
 
   const usersDetails = users.find((u) => u?.email === user?.email);
   const axiosPublic = useAxiosPublic();
@@ -30,11 +33,14 @@ const Middle = ({ product }) => {
     category,
     priceGroup,
     discount,
+    image,
   } = product ?? {};
 
   const [selectedTier, setSelectedTier] = useState(null);
-
   const [quantitySelected, setQuantitySelected] = useState(1);
+  const [message, setMessage] = useState("");
+
+  const modalRef = useRef(null);
 
   useEffect(() => {
     if (priceGroup?.length > 0) {
@@ -67,28 +73,29 @@ const Middle = ({ product }) => {
           : calculateDiscountedPrice(price).toFixed(2);
 
       const purchase = {
-        userID: usersDetails._id,
+        userID: usersDetails?._id,
         email: user.email,
         productId: _id,
         price: discountedPrice,
         quantity: quantitySelected,
         tier: selectedTier?.tier,
+        name: name,
+        image: image.itemImg,
+        message: message,
       };
 
-      console.log(purchase);
+      const res = await axiosPublic.post("/carts", purchase);
 
-      //   // Post request to the /carts endpoint
-      //   const res = await axiosPublic.post("/carts", purchase);
-
-      //   if (res.status === 200) {
-      //     console.log("Purchase added to cart:", res.data);
-      //     // navigate("/purchase", { state: { purchase } }); // Navigate to purchase page after adding to cart
-      //   } else {
-      //     console.log("Failed to add to cart");
-      //   }
+      if (res.status === 200) {
+        refetch();
+        setMessage("");
+        modalRef.current.close();
+        toast.success("Purchase added to cart");
+      } else {
+        toast.error("Failed to add to cart");
+      }
     } catch (error) {
-      console.error("Error adding to cart:", error);
-      setError("Failed to add the item to the cart.");
+      toast.error("Error adding to cart");
     }
   };
 
@@ -136,7 +143,6 @@ const Middle = ({ product }) => {
         </p>
       )}
 
-      {/* Stock availability */}
       <section className="flex">
         {category === "digital gift" ? (
           selectedTier?.quantity > 0 ? (
@@ -180,7 +186,7 @@ const Middle = ({ product }) => {
         {category === "digital gift" ? (
           selectedTier?.quantity > 0 ? (
             <button
-              onClick={handleAddToCart}
+              onClick={() => modalRef.current.showModal()} // Show modal using ref
               className="bg-primary px-6 py-2 rounded-full text-white"
             >
               Add to cart
@@ -209,6 +215,34 @@ const Middle = ({ product }) => {
           </button>
         )}
       </section>
+      <dialog ref={modalRef} className="modal">
+        {" "}
+        {/* Attach ref to dialog */}
+        <div className="modal-box relative p-6 bg-white rounded-lg shadow-lg">
+          <form method="dialog" className="absolute right-4 top-4">
+            <button className="btn btn-sm btn-circle btn-ghost hover:bg-gray-200">
+              ✕
+            </button>
+          </form>
+          <h3 className="font-bold text-xl text-center mb-4">
+            Add Your Message
+          </h3>
+          <textarea
+            className="textarea textarea-bordered w-full h-24 p-3 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="Enter your message here..."
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          ></textarea>
+          <div className="flex justify-end mt-4">
+            <button
+              onClick={handleAddToCart}
+              className="btn btn-primary text-white px-6 py-2 rounded-lg hover:bg-primary-focus transition-all duration-300"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </dialog>
 
       <section className="flex justify-start gap-4 items-center">
         <p className="flex uppercase items-center gap-2 text-xs border py-2 px-4 rounded-full">
