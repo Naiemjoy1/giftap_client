@@ -13,8 +13,8 @@ import About from "../Pages/About/About";
 import ProductDeatails from "../Pages/Shop/ProductDetails/ProductDeatails";
 import LiveChat from "../Pages/LiveChat/LiveChat";
 import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
-import PrivetRoute from "./PrivetRoute/PrivetRoute";
 import ProfileDetails from "../Pages/Dashboard/User/ProfileDetails";
+import Cart from "../Pages/Shop/Cart/Cart";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +33,14 @@ export const router = createBrowserRouter([
       {
         path: "/shop",
         element: <Shop></Shop>,
+      },
+      {
+        path: "/shop/:id",
+        element: <ProductDeatails></ProductDeatails>,
+      },
+      {
+        path: "/cart",
+        element: <Cart></Cart>,
       },
       {
         path: "/about",
@@ -71,10 +79,6 @@ export const router = createBrowserRouter([
       {
         path: "/Dashboard",
         element: <AdminDashboard></AdminDashboard>,
-      },
-      {
-        path: "/productDetails/:id",
-        element: <ProductDeatails></ProductDeatails>,
       },
       {
         path: "/Dashboard",

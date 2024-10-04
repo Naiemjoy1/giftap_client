@@ -1,115 +1,121 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import useProducts from '../../../Components/Hooks/useProducts';
-import DeliveryDetails from './DeliveryDetails';
-import Review from './Review';
-import RecentView from '../RecentView/RecentView';
+import { useParams } from "react-router-dom";
+import useProducts from "../../../Components/Hooks/useProducts";
+import { Rating } from "@smastrom/react-rating";
+import "@smastrom/react-rating/style.css";
+import { RiMoneyDollarCircleLine } from "react-icons/ri";
+import { LiaShippingFastSolid } from "react-icons/lia";
+import { TbVaccineBottleOff } from "react-icons/tb";
+import Image from "./Image/Image";
+import Middle from "./Middle/Middle";
+import { useState } from "react";
+import Description from "./Description/Description";
+import ProductReview from "./Reviews/ProductReview";
+import Information from "./Information/Information";
+import RelatedProducts from "./RelatedProducts/RelatedProducts";
 
-const ProductDetails = () => {
+const ProductDeatails = () => {
   const { id } = useParams();
   const [products] = useProducts();
-  const [activeTab, setActiveTab] = useState('details'); // State to track active tab
 
-  const selectedProduct = products.find((p) => p._id === id);
+  const product = products.find((p) => p._id === id);
+  const { name } = product ?? {};
+
+  const [activeTab, setActiveTab] = useState("description");
 
   return (
-    <div className="max-w-6xl mx-auto p-8 bg-white shadow-lg rounded-lg">
-      {selectedProduct ? (
-        <>
-          {/* Product Image and Basic Info */}
-          <div className="flex flex-col md:flex-row gap-8 mb-8">
-            {/* Product Image */}
-            <div className="w-full md:w-1/2">
-              <img
-                src={selectedProduct.image}
-                alt={selectedProduct.name}
-                className="w-full h-auto object-cover rounded-lg shadow-lg hover:scale-105 transition-transform"
-              />
-            </div>
-
-            {/* Product Details */}
-            <div className="flex-1 space-y-4">
-              <h2 className="text-4xl font-bold text-gray-800">{selectedProduct.name}</h2>
-              <p className="text-gray-600 text-lg">{selectedProduct.description}</p>
-              <p className="text-xl font-semibold">Price: ${selectedProduct.price}</p>
-              <p className="text-green-500 font-semibold">Discount: {selectedProduct.discount}%</p>
-              <p className="text-gray-500">Category: {selectedProduct.category}</p>
-              <p className="text-gray-500">Subcategory: {selectedProduct.subCategory}</p>
-              <p className="text-gray-500">Available Quantity: {selectedProduct.quantity}</p>
-              <p className="text-gray-500">Seller: {selectedProduct.seller_name}</p>
-              <p className="text-gray-500">Store: {selectedProduct.store_name}</p>
-              <p className="text-gray-500">Special Mention: {selectedProduct.mention}</p>
-
-              {/* Add to Cart and Wishlist buttons */}
-              <div className="flex space-x-4 mt-4">
-                <button className="bg-pink-500 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-pink-600 transition-colors">
-                  Add to Cart
-                </button>
-                <button className="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg shadow-lg hover:bg-gray-300 transition-colors">
-                  Add to Wishlist
-                </button>
-              </div>
-            </div>
+    <div className="bg-neutral py-10">
+      <div className="container mx-auto space-y-10">
+        <div className="p-6 bg-white rounded-lg">
+          <p className=" text-xl font-semibold">{name}</p>
+          <div className="flex gap-4 text-xs mt-4">
+            <section className="flex gap-2 items-center">
+              <Rating style={{ maxWidth: 80 }} value={3} readOnly />
+              <p className="uppercase">1 review</p>
+            </section>
+            <p>|</p>
+            <p>
+              <span className=" text-gray-400">SKU:</span> KTRL59
+            </p>
           </div>
+          <div className="flex justify-between gap-8 mt-4">
+            <Image product={product}></Image>
 
-          {/* Daisy UI Tabs at the top */}
-          <div role="tablist" className="tabs border-b-2 mb-6">
-            <button
-              role="tab"
-              className={`tab tab-lifted ${activeTab === 'details' ? 'tab-active' : ''}`}
-              onClick={() => setActiveTab('details')}
-            >
-              Product Details
-            </button>
-            <button
-              role="tab"
-              className={`tab tab-lifted ${activeTab === 'delivery' ? 'tab-active' : ''}`}
-              onClick={() => setActiveTab('delivery')}
-            >
-              Delivery Details
-            </button>
-            <button
-              role="tab"
-              className={`tab tab-lifted ${activeTab === 'reviews' ? 'tab-active' : ''}`}
-              onClick={() => setActiveTab('reviews')}
-            >
-              Reviews
-            </button>
+            <Middle product={product}></Middle>
+            <section className="w-[30%] p-6 bg-gray-100 space-y-6 h-1/2">
+              <p className="flex gap-4 text-sm">
+                <span className=" text-xl">
+                  <LiaShippingFastSolid />
+                </span>
+                Free Shipping apply to all orders over $100
+              </p>
+              <p className="flex gap-4 text-sm">
+                <span className=" text-xl">
+                  <TbVaccineBottleOff />
+                </span>
+                Guranteed 100% Organic from natural farmas
+              </p>
+              <p className="flex gap-4 text-sm">
+                <span className=" text-xl">
+                  <RiMoneyDollarCircleLine />
+                </span>
+                1 Day Returns if you change your mind
+              </p>
+            </section>
           </div>
-
-          {/* Tab Content */}
-          <div className="mt-8">
-            {activeTab === 'details' && (
-              <div>
-                <h3 className="text-2xl font-semibold text-gray-800 mb-4">Product Description</h3>
-                <p className="text-gray-600">
-                  Explore our stylish collection of {selectedProduct.name}, perfect for home décor and eco-friendly gifting.
-                  This product is made with high-quality materials and available exclusively from {selectedProduct.store_name}.
-                </p>
-              </div>
+        </div>
+        <div className="p-6 bg-white rounded-lg">
+          <section className="flex gap-6 uppercase">
+            <p
+              onClick={() => setActiveTab("description")}
+              className={`cursor-pointer ${
+                activeTab === "description" ? "font-bold" : ""
+              }`}
+            >
+              Description
+            </p>
+            <p
+              onClick={() => setActiveTab("information")}
+              className={`cursor-pointer ${
+                activeTab === "information" ? "font-bold" : ""
+              }`}
+            >
+              additional Information
+            </p>
+            <p
+              onClick={() => setActiveTab("review")}
+              className={`cursor-pointer ${
+                activeTab === "review" ? "font-bold" : ""
+              }`}
+            >
+              Review (0)
+            </p>
+          </section>
+          <div className="divider divider-primary"></div>
+          <section>
+            {activeTab === "description" && <Description></Description>}
+            {activeTab === "information" && <Information></Information>}
+            {activeTab === "review" && (
+              <ProductReview product={product}></ProductReview>
             )}
-
-            {activeTab === 'delivery' && (
-              <div>
-                <DeliveryDetails />
-              </div>
-            )}
-
-            {activeTab === 'reviews' && (
-              <div>
-                <Review reviews={selectedProduct.reviews} />
-              </div>
-            )}
-            <div>
-              <RecentView></RecentView>
-            </div>
+          </section>
+        </div>
+        <div className=" space-y-2">
+          <p className=" uppercase text-lg font-medium">related products</p>
+          <div className="p-4 bg-white rounded-lg grid grid-cols-4">
+            <RelatedProducts></RelatedProducts>
           </div>
-        </>
-      ) : (
-        <p>Product not found.</p>
-      )}
+        </div>
+        <div className=" space-y-2">
+          <p className=" uppercase text-lg font-medium">
+            recently viewed products
+          </p>
+          <div className="p-4 bg-white rounded-lg grid grid-cols-4">
+            <RelatedProducts></RelatedProducts>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default ProductDetails;
+export default ProductDeatails;
