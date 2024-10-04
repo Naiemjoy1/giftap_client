@@ -1,12 +1,5 @@
 import React from "react";
-
-// Icons can be imported from a library like react-icons or any other library you prefer
-import {
-  FaShippingFast,
-  FaDollarSign,
-  FaTools,
-  FaRocket,
-} from "react-icons/fa";
+import { FaShippingFast, FaDollarSign, FaTools, FaRocket } from "react-icons/fa";
 import { PiRocketLaunch } from "react-icons/pi";
 import HomeSectionHeading from "../../../ReUseComponents/HomeSectionHeading/HomeSectionHeading";
 
@@ -28,7 +21,7 @@ const FeatureSection = () => {
       Icon: FaTools,
       title: "Reliable Service",
       description:
-        "The super simple design tool allows you to create a design with our built in maker tool",
+        "The super simple design tool allows you to create a design with our built-in maker tool",
     },
     {
       Icon: FaRocket,
@@ -56,19 +49,22 @@ const FeatureSection = () => {
       ></HomeSectionHeading>
 
       <div className="bg-white px-6 py-8 md:px-10 md:py-12 lg:px-20 lg:py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              className="text-center p-3  rounded-lg hover:bg-gray-100 transition-all duration-300"
-            >
-              <feature.Icon className="mx-auto text-4xl text-[#F04854] mb-4 transition-transform duration-300 transform hover:scale-110" />
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                {feature.title}
-              </h3>
-              <p className="text-gray-600">{feature.description}</p>
-            </div>
-          ))}
+        {/* Center the container on large screens */}
+        <div className="max-w-screen-xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            {features.map((feature, index) => (
+              <div
+                key={index}
+                className="text-center p-3 rounded-lg hover:bg-gray-100 transition-all duration-300"
+              >
+                <feature.Icon className="mx-auto text-4xl text-[#F04854] mb-4 transition-transform duration-300 transform hover:scale-110" />
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600">{feature.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>
