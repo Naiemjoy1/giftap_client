@@ -56,7 +56,6 @@ const Shipping = ({ onClose }) => {
   }, [shippingInfo, reset]);
 
   const onSubmit = async (data) => {
-    console.log(data);
     const {
       firstName,
       lastName,
@@ -90,7 +89,6 @@ const Shipping = ({ onClose }) => {
         ],
       },
     };
-    console.log(shipping);
 
     try {
       const updateResponse = await axiosPublic.patch(

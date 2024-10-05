@@ -11,22 +11,20 @@ import { PiShoppingBagOpenFill } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import usePromo from "../../../Components/Hooks/usePromo";
+import ConfirmPay from "./ConfirmPay/ConfirmPay";
 
 const Cart = () => {
   const { user } = useAuth();
   const [users] = useUsers();
   const [carts, refetch] = useCart();
   const [products, loading] = useProducts();
-  const [promo] = usePromo();
   const axiosPublic = useAxiosPublic();
-  const [couponCode, setCouponCode] = useState(""); // State for coupon input
-  const [discount, setDiscount] = useState(0); // State to hold discount value
-  const [promoError, setPromoError] = useState(""); // Error message for invalid promo code
-
   const [quantities, setQuantities] = useState({});
   const [message, setMessage] = useState("");
   const usersDetails = users.find((u) => u?.email === user?.email);
   const [currentCartId, setCurrentCartId] = useState(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [payment, setPayment] = useState(null);
 
   useEffect(() => {
     const initialQuantities = carts.reduce((acc, cart) => {
@@ -127,31 +125,21 @@ const Cart = () => {
   };
 
   const handleCheckout = () => {
-    const payment = {
+    const paymentData = {
       email: user.email,
       total: total.toFixed(2),
       cartIds: userCarts.map((cart) => cart._id),
-      productId: userCarts.map((cart) => cart.productId),
+      productId: [userCarts.map((cart) => cart.productId)],
       user: usersDetails,
       amount: total.toFixed(2),
       currency: "USD",
       name: user.displayName,
       date: new Date(),
+      delivery: userCarts.map((cart) => cart.delivery),
     };
 
-    console.log(payment);
-    axiosPublic
-      .post("/payments", payment)
-      .then((response) => {
-        console.log(response);
-        const redirectUrl = response.data.paymentUrl;
-        if (redirectUrl) {
-          window.location.replace(redirectUrl);
-        }
-      })
-      .catch((error) => {
-        console.error("Checkout error:", error);
-      });
+    setPayment(paymentData);
+    setIsModalVisible(true);
   };
 
   if (loading) {
@@ -403,6 +391,20 @@ const Cart = () => {
                 Proceed to checkout
               </button>
             </div>
+            {isModalVisible && (
+              <dialog id="confirm" open className="modal">
+                <div className="modal-box relative p-6 bg-white rounded-lg shadow-lg">
+                  <h3 className="font-bold text-xl text-center mb-4">
+                    Confirm Checkout
+                  </h3>
+                  <p>Are you sure you want to proceed with the payment?</p>
+                  <ConfirmPay
+                    payment={payment}
+                    setIsModalVisible={setIsModalVisible}
+                  ></ConfirmPay>
+                </div>
+              </dialog>
+            )}
           </div>
         </>
       )}
