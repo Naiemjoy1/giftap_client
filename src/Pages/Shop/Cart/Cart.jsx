@@ -9,15 +9,24 @@ import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import { PiShoppingBagOpenFill } from "react-icons/pi";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import usePromo from "../../../Components/Hooks/usePromo";
 
 const Cart = () => {
   const { user } = useAuth();
   const [users] = useUsers();
   const [carts, refetch] = useCart();
-  const [products] = useProducts();
+  const [products, loading] = useProducts();
+  const [promo] = usePromo();
   const axiosPublic = useAxiosPublic();
+  const [couponCode, setCouponCode] = useState(""); // State for coupon input
+  const [discount, setDiscount] = useState(0); // State to hold discount value
+  const [promoError, setPromoError] = useState(""); // Error message for invalid promo code
 
   const [quantities, setQuantities] = useState({});
+  const [message, setMessage] = useState("");
+  const usersDetails = users.find((u) => u?.email === user?.email);
+  const [currentCartId, setCurrentCartId] = useState(null);
 
   useEffect(() => {
     const initialQuantities = carts.reduce((acc, cart) => {
@@ -38,6 +47,18 @@ const Cart = () => {
 
   const shippingCost = shippingOption === "flatRate" ? 5.0 : 0.0;
   const total = subtotal + shippingCost;
+
+  const progressValue = (subtotal / 50) * 100;
+
+  useEffect(() => {
+    if (progressValue >= 100) {
+      setShippingOption("freeShipping");
+    } else {
+      if (subtotal < 50) {
+        setShippingOption("flatRate");
+      }
+    }
+  }, [progressValue, subtotal]);
 
   const handleIncrease = (cartId) => {
     setQuantities((prevQuantities) => ({
@@ -71,22 +92,75 @@ const Cart = () => {
         axiosPublic.delete(`/carts/${cartId}`).then((res) => {
           if (res.data.deletedCount > 0) {
             refetch();
-            Swal.fire({
-              title: "Deleted!",
-              text: "Your item has been deleted.",
-              icon: "success",
-            });
+            toast.success("Your item has been deleted.");
           } else {
-            Swal.fire({
-              title: "Error!",
-              text: "There was an issue deleting your item.",
-              icon: "error",
-            });
+            toast.error("There was an issue deleting your item.");
           }
         });
       }
     });
   };
+
+  const handleOpenMessageModal = (cartId, currentMessage) => {
+    setCurrentCartId(cartId);
+    setMessage(currentMessage || "");
+    document.getElementById("message").showModal();
+  };
+
+  const handleAddMessage = () => {
+    const update = {
+      id: currentCartId,
+      message: message,
+    };
+
+    axiosPublic.patch(`/carts/${currentCartId}`, update).then((res) => {
+      if (res.data.modifiedCount > 0) {
+        refetch();
+        setMessage("");
+        setCurrentCartId(null);
+        document.getElementById("message").close();
+        toast.success("Message added");
+      } else {
+        toast.error("Failed to add Message");
+      }
+    });
+  };
+
+  const handleCheckout = () => {
+    const payment = {
+      email: user.email,
+      total: total.toFixed(2),
+      cartIds: userCarts.map((cart) => cart._id),
+      productId: userCarts.map((cart) => cart.productId),
+      user: usersDetails,
+      amount: total.toFixed(2),
+      currency: "USD",
+      name: user.displayName,
+      date: new Date(),
+    };
+
+    console.log(payment);
+    axiosPublic
+      .post("/payments", payment)
+      .then((response) => {
+        console.log(response);
+        const redirectUrl = response.data.paymentUrl;
+        if (redirectUrl) {
+          window.location.replace(redirectUrl);
+        }
+      })
+      .catch((error) => {
+        console.error("Checkout error:", error);
+      });
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <span className="loading loading-spinner loading-lg text-primary"></span>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto my-10">
@@ -113,12 +187,12 @@ const Cart = () => {
         <>
           <div className="lg:flex justify-between gap-4">
             <div className="lg:w-[65%] space-y-4">
-              <div className="border p-4 rounded-lg">
+              <div className="border p-4 rounded-lg w-full">
                 <p>Add $50.00 to cart and get free shipping</p>
                 <progress
-                  className="progress progress-primary w-56"
-                  value="100"
-                  max="100"
+                  className="progress progress-primary w-full"
+                  value={progressValue}
+                  max="100" // Setting max to 100 since we're showing percentage
                 ></progress>
               </div>
               <div>
@@ -138,7 +212,7 @@ const Cart = () => {
                         <tr key={cart._id}>
                           <th>
                             <button onClick={() => handleRemove(cart._id)}>
-                              <RxCross2></RxCross2>
+                              <RxCross2 />
                             </button>
                           </th>
                           <td>
@@ -149,13 +223,88 @@ const Cart = () => {
                                 </div>
                               </div>
                               <div>
-                                <div className="font-semibold">
-                                  <p>
+                                <div>
+                                  <p className="font-semibold">
                                     {cart.name.length > 20
                                       ? cart.name.slice(0, 20) + "..."
                                       : cart.name}
                                   </p>
+                                  <section className="flex items-center gap-1">
+                                    <p className="text-xs">
+                                      {cart.message === "" ? (
+                                        <button
+                                          className="text-primary text-xs"
+                                          onClick={() =>
+                                            handleOpenMessageModal(
+                                              cart._id,
+                                              cart.message
+                                            )
+                                          }
+                                        >
+                                          Add Message
+                                        </button>
+                                      ) : (
+                                        <>
+                                          {cart.message ? (
+                                            <>
+                                              {cart.message?.length > 20
+                                                ? cart.message?.slice(0, 12)
+                                                : cart.message}
+                                              <button
+                                                className="text-primary text-xs"
+                                                onClick={() =>
+                                                  handleOpenMessageModal(
+                                                    cart._id,
+                                                    cart.message
+                                                  )
+                                                }
+                                              >
+                                                ...edit
+                                              </button>
+                                            </>
+                                          ) : (
+                                            ""
+                                          )}
+                                        </>
+                                      )}
+                                    </p>
+                                  </section>
                                 </div>
+
+                                <dialog id="message" className="modal">
+                                  <div className="modal-box relative p-6 bg-white rounded-lg shadow-lg">
+                                    <form
+                                      method="dialog"
+                                      className="absolute right-4 top-4"
+                                    >
+                                      <button className="btn btn-sm btn-circle btn-ghost hover:bg-gray-200">
+                                        ✕
+                                      </button>
+                                    </form>
+                                    <h3 className="font-bold text-xl text-center mb-4">
+                                      Add Your Message
+                                    </h3>
+                                    <textarea
+                                      className="textarea textarea-bordered w-full h-24 p-3 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                                      placeholder="Enter your message here..."
+                                      value={message}
+                                      onChange={(e) =>
+                                        setMessage(e.target.value)
+                                      }
+                                    ></textarea>
+                                    <div className="flex justify-end mt-4">
+                                      <button
+                                        type="button"
+                                        onClick={() =>
+                                          handleAddMessage(cart._id)
+                                        }
+                                        className="btn btn-primary text-white px-6 py-2 rounded-lg hover:bg-primary-focus transition-all duration-300"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </dialog>
                               </div>
                             </div>
                           </td>
@@ -178,62 +327,61 @@ const Cart = () => {
                               </button>
                             </section>
                           </td>
-                          <th>
-                            <button className="btn btn-ghost btn-xs">
-                              $
-                              {(
-                                cart.price *
-                                (quantities[cart._id] || cart.quantity)
-                              ).toFixed(2)}
-                            </button>
-                          </th>
+                          <td>
+                            $
+                            {(
+                              (quantities[cart._id] || cart.quantity) *
+                              cart.price
+                            ).toFixed(2)}
+                          </td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
                 </div>
               </div>
-              <div className="flex justify-between">
-                <section className="flex gap-2 w-6/12">
-                  <input
-                    type="text"
-                    placeholder="Type here"
-                    className="input input-bordered w-full max-w-xs"
-                  />
-                  <button className="btn btn-primary text-white">
-                    Apply coupon
-                  </button>
-                </section>
+              <div className=" flex gap-2 items-center">
+                <input
+                  type="text"
+                  placeholder="Add coupon here"
+                  className="input input-bordered w-full max-w-xs"
+                />
                 <button className="btn btn-primary text-white">
-                  Remove All
+                  Apply coupon
                 </button>
               </div>
             </div>
             <div className="border lg:w-[35%] rounded-lg p-4">
               <p className="uppercase text-lg font-medium">cart totals</p>
-              <div className="divider divider-primary"></div>
+              <div className="border-b my-2"></div>
               <section className="flex justify-between items-center">
                 <p>Subtotal</p>
                 <p>${subtotal.toFixed(2)}</p> {/* Subtotal calculated */}
               </section>
-              <div className="divider divider-primary"></div>
+              <div className="border-b my-2"></div>
               <section className="flex justify-between items-center">
                 <p>Shipping</p>
                 <div>
-                  <p className="flex justify-between items-center gap-4">
-                    Flat rate: $5.00
+                  <p className="flex justify-between mt-2 items-center">
+                    <span>Flat</span>
+                    <span>
+                      {shippingOption === "freeShipping"
+                        ? "Free"
+                        : `$${shippingCost.toFixed(2)}`}
+                    </span>
                     <input
-                      type="checkbox"
+                      type="radio"
                       className="size-4 rounded border-gray-300"
                       id="flatRate"
                       checked={shippingOption === "flatRate"}
                       onChange={() => handleShippingChange("flatRate")}
                     />
                   </p>
+                  <div className="border-b my-2"></div>
                   <p className="flex justify-between items-center gap-4">
                     Local pickup
                     <input
-                      type="checkbox"
+                      type="radio"
                       className="size-4 rounded border-gray-300"
                       id="localPickup"
                       checked={shippingOption === "localPickup"}
@@ -242,13 +390,16 @@ const Cart = () => {
                   </p>
                 </div>
               </section>
-              <div className="divider divider-primary"></div>
+              <div className="border-b my-2"></div>
               <section className="flex justify-between items-center">
                 <p>Total</p>
                 <p>${total.toFixed(2)}</p> {/* Total calculated */}
               </section>
-              <div className="divider divider-primary"></div>
-              <button className="btn btn-primary text-center text-white">
+              <div className="border-b my-2"></div>
+              <button
+                onClick={handleCheckout}
+                className="btn btn-primary text-center text-white"
+              >
                 Proceed to checkout
               </button>
             </div>
