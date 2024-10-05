@@ -3,13 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "./useAuth";
 
 const useChat = () => {
-  const axiosPublic = useAxiosPublic(); // Correctly use useAxiosPublic
+  const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
 
   const { refetch, data: chats = [] } = useQuery({
-    queryKey: ["chats", user?.email], // Query key should be user-specific if needed
+    queryKey: ["chats", user?.email],
     queryFn: async () => {
-      const res = await axiosPublic.get("/chats"); // Fixed the URL string
+      const res = await axiosPublic.get("/chats");
       return res.data;
     },
   });
