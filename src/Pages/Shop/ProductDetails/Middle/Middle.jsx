@@ -15,6 +15,8 @@ import useUsers from "../../../../Components/Hooks/useUsers";
 import useCart from "../../../../Components/Hooks/useCart";
 import toast from "react-hot-toast";
 import useWishs from "../../../../Components/Hooks/useWishs";
+import Flatpickr from "react-flatpickr";
+import "flatpickr/dist/themes/material_green.css";
 
 const Middle = ({ product }) => {
   const { user } = useAuth();
@@ -22,6 +24,8 @@ const Middle = ({ product }) => {
   const [carts, refetch] = useCart();
   const [wishlists, refetchWish] = useWishs();
   const axiosPublic = useAxiosPublic();
+  const [date, setDate] = useState(new Date());
+  const [selectedDelivery, setSelectedDelivery] = useState("localPickup");
 
   const usersDetails = users.find((u) => u?.email === user?.email);
 
@@ -75,6 +79,8 @@ const Middle = ({ product }) => {
         category === "digital gift"
           ? calculateDiscountedPrice(selectedTier?.price.amount).toFixed(2)
           : calculateDiscountedPrice(price).toFixed(2);
+      const deliveryData =
+        selectedDelivery === "localPickup" ? date : "instant";
 
       const purchase = {
         userID: usersDetails?._id,
@@ -86,6 +92,7 @@ const Middle = ({ product }) => {
         name: name,
         image: image.itemImg,
         message: message,
+        delivery: deliveryData,
       };
 
       const res = await axiosPublic.post("/carts", purchase);
@@ -274,6 +281,40 @@ const Middle = ({ product }) => {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           ></textarea>
+          <div className="mt-4 flex justify-between items-center">
+            <div className="flex justify-between items-center gap-2">
+              <input
+                type="radio"
+                className="size-4 rounded border-gray-300"
+                id="localPickup"
+                name="deliveryOption"
+                checked={selectedDelivery === "localPickup"}
+                onChange={() => setSelectedDelivery("localPickup")}
+              />
+              <Flatpickr
+                data-enable-time
+                value={date}
+                onChange={([date]) => setDate(date)}
+                options={{
+                  minDate: "today", // Allow only future dates
+                  static: true,
+                }}
+                className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+            </div>
+            <div className="flex justify-end items-center gap-2">
+              <input
+                type="radio"
+                className="size-4 rounded border-gray-300"
+                id="instantDelivery"
+                name="deliveryOption"
+                checked={selectedDelivery === "instantDelivery"}
+                onChange={() => setSelectedDelivery("instantDelivery")}
+              />
+              <p>Instant Delivery</p>
+            </div>
+          </div>
+
           <div className="flex justify-end mt-4">
             <button
               onClick={handleAddToCart}
