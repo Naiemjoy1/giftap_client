@@ -2,23 +2,25 @@ import "@smastrom/react-rating/style.css";
 import { FiPlus, FiMinus } from "react-icons/fi";
 import {
   FaFacebookF,
+  FaHeart,
   FaLinkedin,
   FaRegHeart,
   FaWhatsapp,
 } from "react-icons/fa";
 import { LuArrowDownUp } from "react-icons/lu";
-import { useState, useEffect, useRef } from "react"; // Import useRef
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
 import useAxiosPublic from "../../../../Components/Hooks/useAxiosPublic";
 import useAuth from "../../../../Components/Hooks/useAuth";
 import useUsers from "../../../../Components/Hooks/useUsers";
 import useCart from "../../../../Components/Hooks/useCart";
 import toast from "react-hot-toast";
+import useWishs from "../../../../Components/Hooks/useWishs";
 
 const Middle = ({ product }) => {
   const { user } = useAuth();
   const [users] = useUsers();
   const [carts, refetch] = useCart();
+  const [wishlists, refetchWish] = useWishs();
   const axiosPublic = useAxiosPublic();
 
   const usersDetails = users.find((u) => u?.email === user?.email);
@@ -38,6 +40,9 @@ const Middle = ({ product }) => {
   const [selectedTier, setSelectedTier] = useState(null);
   const [quantitySelected, setQuantitySelected] = useState(1);
   const [message, setMessage] = useState("");
+
+  const usersWishs = wishlists.filter((wish) => wish.email === user?.email);
+  const wishProduct = usersWishs.find((item) => item.productId === _id);
 
   const modalRef = useRef(null);
 
@@ -95,6 +100,45 @@ const Middle = ({ product }) => {
       }
     } catch (error) {
       toast.error("Error adding to cart");
+    }
+  };
+
+  const handleAddTowish = async () => {
+    if (wishProduct) {
+      toast.error("Product is already in your wishlist");
+      return;
+    }
+
+    const Wishlist = {
+      userID: usersDetails?._id,
+      email: user?.email,
+      productId: _id,
+    };
+
+    try {
+      const res = await axiosPublic.post("/wishlists", Wishlist);
+      if (res.status === 200) {
+        refetchWish();
+        toast.success("Product added to wishlist");
+      } else {
+        toast.error("Failed to add to wishlist");
+      }
+    } catch (error) {
+      toast.error("Error adding to wishlist");
+    }
+  };
+
+  const handleRemove = async (wishlistId) => {
+    try {
+      const res = await axiosPublic.delete(`/wishlists/${wishlistId}`);
+      if (res.data.acknowledged && res.data.deletedCount > 0) {
+        refetchWish();
+        toast.success("Product removed from wishlist");
+      } else {
+        toast.error("Failed to remove product from wishlist");
+      }
+    } catch (error) {
+      toast.error("Error removing product from wishlist");
     }
   };
 
@@ -215,8 +259,6 @@ const Middle = ({ product }) => {
         )}
       </section>
       <dialog ref={modalRef} className="modal">
-        {" "}
-        {/* Attach ref to dialog */}
         <div className="modal-box relative p-6 bg-white rounded-lg shadow-lg">
           <form method="dialog" className="absolute right-4 top-4">
             <button className="btn btn-sm btn-circle btn-ghost hover:bg-gray-200">
@@ -244,12 +286,28 @@ const Middle = ({ product }) => {
       </dialog>
 
       <section className="flex justify-start gap-4 items-center">
-        <p className="flex uppercase items-center gap-2 text-xs border py-2 px-4 rounded-full">
-          <span>
-            <FaRegHeart />
-          </span>
-          add to wishlist
-        </p>
+        {wishProduct ? (
+          <button
+            onClick={() => handleRemove(wishProduct._id)}
+            className="flex uppercase items-center gap-2 text-xs border py-2 px-4 rounded-full"
+          >
+            <span>
+              <FaHeart className="text-primary" />
+            </span>
+            added wishlist
+          </button>
+        ) : (
+          <button
+            onClick={handleAddTowish}
+            className="flex uppercase items-center gap-2 text-xs border py-2 px-4 rounded-full"
+          >
+            <span>
+              <FaRegHeart className="text-primary" />
+            </span>
+            add to wishlist
+          </button>
+        )}
+
         <p className="flex uppercase items-center gap-2 text-xs border py-2 px-4 rounded-full">
           <span>
             <LuArrowDownUp />

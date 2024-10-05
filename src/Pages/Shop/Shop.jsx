@@ -5,6 +5,7 @@ import { MdViewList } from "react-icons/md";
 import ItemCard from "./ItemCard/ItemCard";
 import { GrPrevious, GrNext } from "react-icons/gr";
 import ListItemCard from "./ListItemCard/ListItemCard";
+import HotSale from "./HotSale/HotSale";
 
 const Shop = () => {
   const [products, loading] = useProducts();
@@ -246,6 +247,7 @@ const Shop = () => {
           <div className="divide bg-white h-[1px] my-2"></div>
           <p className="text-lg font-medium uppercase mt-8">Hot Sale Product</p>
         </div>
+        <HotSale></HotSale>
       </div>
 
       <div className="lg:w-3/4 p-4">

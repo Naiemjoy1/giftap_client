@@ -119,7 +119,7 @@ const ProductDeatails = () => {
             recently viewed products
           </p>
           <div className="p-4 bg-white rounded-lg">
-            <RecentView></RecentView>
+            <RecentView id={id}></RecentView>
           </div>
         </div>
       </div>

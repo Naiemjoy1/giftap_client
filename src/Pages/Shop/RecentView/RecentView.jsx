@@ -1,7 +1,6 @@
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { BsArrowsFullscreen } from "react-icons/bs";
-import { FaRegHeart } from "react-icons/fa";
 import useRecentView from "../../../Components/Hooks/useRecntView";
 import { Link } from "react-router-dom";
 import useAuth from "../../../Components/Hooks/useAuth";
@@ -9,15 +8,30 @@ import useUsers from "../../../Components/Hooks/useUsers";
 import useCart from "../../../Components/Hooks/useCart";
 import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
+import useProducts from "../../../Components/Hooks/useProducts";
 
-const RecentView = () => {
+const RecentView = ({ id }) => {
   const { user } = useAuth();
   const [users] = useUsers();
   const [carts, refetch] = useCart();
   const axiosPublic = useAxiosPublic();
+  const [products, loading] = useProducts();
   const [recentviews] = useRecentView();
 
   const usersDetails = users.find((u) => u?.email === user?.email);
+
+  const userRecents = recentviews.filter(
+    (recent) => recent.email === user?.email
+  );
+
+  const recentProducts = products.filter((product) =>
+    userRecents.some((recent) => recent.productId === product._id)
+  );
+
+  // Exclude the product with the specified id
+  const filteredRecentProducts = recentProducts.filter(
+    (recent) => recent._id !== id
+  );
 
   const calculateDiscountedPrice = (price, discount) => {
     return discount ? price * (1 - discount / 100) : price;
@@ -31,7 +45,7 @@ const RecentView = () => {
     const purchase = {
       userID: usersDetails?._id,
       email: user?.email,
-      productId: recent.productId,
+      productId: recent._id,
       price: discountedPrice,
       quantity: 1,
       name: recent.name,
@@ -51,10 +65,18 @@ const RecentView = () => {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <span className="loading loading-spinner loading-lg text-primary"></span>
+      </div>
+    );
+  }
+
   return (
     <div className="grid gap-4 grid-cols-1 lg:grid-cols-4">
-      {recentviews.slice(0, 4).map((recent) => (
-        <div className="relative group" key={recent.productId}>
+      {filteredRecentProducts.slice(0, 4).map((recent) => (
+        <div className="relative group" key={recent._id}>
           <figure>
             <img src={recent.image.itemImg1} alt={recent.name} />
           </figure>
@@ -66,9 +88,9 @@ const RecentView = () => {
             </p>
 
             {recent.category === "digital gift" ? (
-              <p className="text-green-600 uppercase text-xs">in stock</p>
+              <p className="text-green-600 uppercase text-xs">In Stock</p>
             ) : recent.quantity > 0 ? (
-              <p className="text-green-600 uppercase text-xs">in stock</p>
+              <p className="text-green-600 uppercase text-xs">In Stock</p>
             ) : (
               <p className="uppercase text-sm text-red-700">Out of Stock</p>
             )}
@@ -110,7 +132,7 @@ const RecentView = () => {
 
             {recent.category === "digital gift" ? (
               <Link
-                to={`/shop/${recent.productId}`}
+                to={`/shop/${recent._id}`}
                 className="btn btn-outline btn-primary w-full rounded-full"
               >
                 See More
@@ -136,9 +158,6 @@ const RecentView = () => {
           <div className="grid grid-cols-1 gap-2 absolute top-4 right-4 transform translate-x-full opacity-0 invisible transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-hover:visible">
             <button className="bg-white shadow-xl p-2 rounded-full text-lg">
               <BsArrowsFullscreen />
-            </button>
-            <button className="bg-white shadow-xl p-2 rounded-full text-lg">
-              <FaRegHeart />
             </button>
           </div>
         </div>
