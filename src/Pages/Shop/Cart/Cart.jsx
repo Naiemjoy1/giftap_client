@@ -12,6 +12,8 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import usePromo from "../../../Components/Hooks/usePromo";
 import ConfirmPay from "./ConfirmPay/ConfirmPay";
+import Flatpickr from "react-flatpickr";
+import "flatpickr/dist/themes/material_green.css";
 
 const Cart = () => {
   const { user } = useAuth();
@@ -25,6 +27,8 @@ const Cart = () => {
   const [currentCartId, setCurrentCartId] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [payment, setPayment] = useState(null);
+  const [date, setDate] = useState(new Date());
+  const [selectedDelivery, setSelectedDelivery] = useState("localPickup");
 
   useEffect(() => {
     const initialQuantities = carts.reduce((acc, cart) => {
@@ -106,9 +110,12 @@ const Cart = () => {
   };
 
   const handleAddMessage = () => {
+    const deliveryData = selectedDelivery === "localPickup" ? date : "instant";
+
     const update = {
       id: currentCartId,
       message: message,
+      delivery: deliveryData,
     };
 
     axiosPublic.patch(`/carts/${currentCartId}`, update).then((res) => {
@@ -117,9 +124,9 @@ const Cart = () => {
         setMessage("");
         setCurrentCartId(null);
         document.getElementById("message").close();
-        toast.success("Message added");
+        toast.success("Message and delivery updated successfully!");
       } else {
-        toast.error("Failed to add Message");
+        toast.error("Failed to update message and delivery.");
       }
     });
   };
@@ -129,12 +136,13 @@ const Cart = () => {
       email: user.email,
       total: total.toFixed(2),
       cartIds: userCarts.map((cart) => cart._id),
-      productId: [userCarts.map((cart) => cart.productId)],
+      productId: userCarts.map((cart) => cart.productId),
       user: usersDetails,
       amount: total.toFixed(2),
       currency: "USD",
       name: user.displayName,
       date: new Date(),
+      message: userCarts.map((cart) => cart.message),
       delivery: userCarts.map((cart) => cart.delivery),
     };
 
@@ -280,6 +288,50 @@ const Cart = () => {
                                         setMessage(e.target.value)
                                       }
                                     ></textarea>
+                                    <div className="mt-4 flex justify-between items-center">
+                                      <div className="flex justify-between items-center gap-2">
+                                        <input
+                                          type="radio"
+                                          className="size-4 rounded border-gray-300"
+                                          id="localPickup"
+                                          name="deliveryOption"
+                                          checked={
+                                            selectedDelivery === "localPickup"
+                                          }
+                                          onChange={() =>
+                                            setSelectedDelivery("localPickup")
+                                          }
+                                        />
+                                        <Flatpickr
+                                          data-enable-time
+                                          value={date}
+                                          onChange={([date]) => setDate(date)}
+                                          options={{
+                                            minDate: "today", // Allow only future dates
+                                            static: true,
+                                          }}
+                                          className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-primary"
+                                        />
+                                      </div>
+                                      <div className="flex justify-end items-center gap-2">
+                                        <input
+                                          type="radio"
+                                          className="size-4 rounded border-gray-300"
+                                          id="instantDelivery"
+                                          name="deliveryOption"
+                                          checked={
+                                            selectedDelivery ===
+                                            "instantDelivery"
+                                          }
+                                          onChange={() =>
+                                            setSelectedDelivery(
+                                              "instantDelivery"
+                                            )
+                                          }
+                                        />
+                                        <p>Instant Delivery</p>
+                                      </div>
+                                    </div>
                                     <div className="flex justify-end mt-4">
                                       <button
                                         type="button"
@@ -405,6 +457,12 @@ const Cart = () => {
                 </div>
               </dialog>
             )}
+          </div>
+          <div className="mt-4">
+            <img
+              src="https://securepay.sslcommerz.com/public/image/SSLCommerz-Pay-With-logo-All-Size-01.png"
+              alt=""
+            />
           </div>
         </>
       )}
