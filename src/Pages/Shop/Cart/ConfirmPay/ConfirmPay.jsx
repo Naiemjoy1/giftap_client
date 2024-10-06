@@ -166,9 +166,14 @@ const ConfirmPay = ({ setIsModalVisible, payment }) => {
         </div>
       </div>
       <div className="modal-action">
-        <button onClick={handleConfirm} className="btn btn-primary text-white">
+        <button
+          onClick={handleConfirm}
+          className="btn btn-primary text-white"
+          disabled={!billingInfo || !shippingInfo}
+        >
           Confirm
         </button>
+
         <button
           onClick={() => setIsModalVisible(false)}
           className="btn bg-gray-100 border-none"
