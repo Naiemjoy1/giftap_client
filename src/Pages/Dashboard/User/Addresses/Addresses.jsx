@@ -10,6 +10,7 @@ const Addresses = () => {
   const [users, refetch] = useUsers();
 
   const usersDetails = users.find((u) => u?.email === user?.email);
+  console.log(usersDetails);
 
   const billingInfo = usersDetails?.address?.billing[0];
   const shippingInfo = usersDetails?.address?.shipping[0];

@@ -10,10 +10,12 @@ const ProductReview = ({ product }) => {
   return (
     <div className=" space-y-6">
       <p className=" uppercase text-base font-medium">0 review for {name}</p>
-      <section className="flex gap-4 justify-start items-center">
-        <div className="avatar">
-          <div className="w-20 rounded-full">
-            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+      <section className="lg:flex md:flex grid grid-cols-1 gap-4 lg:justify-start md:justify-start justify-center items-center">
+        <div className="flex justify-center items-center">
+          <div className="avatar">
+            <div className="w-20 rounded-full">
+              <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+            </div>
           </div>
         </div>
         <div className=" space-y-2">

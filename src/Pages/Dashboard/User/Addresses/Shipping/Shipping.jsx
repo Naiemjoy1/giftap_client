@@ -298,7 +298,7 @@ const Shipping = ({ onClose }) => {
           {...register("email", { required: true })}
           placeholder="Email"
           className="input input-bordered w-full"
-          value={user?.email}
+          // value={user?.email}
         />
         {errors.email && (
           <span className="text-red-500">Email is required</span>

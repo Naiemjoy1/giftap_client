@@ -42,6 +42,12 @@ const RecentView = ({ id }) => {
       recent.price,
       recent.discount
     ).toFixed(2);
+    let deliveryData;
+    if (category === "digital gift") {
+      deliveryData = selectedDelivery === "localPickup" ? date : "instant";
+    } else {
+      deliveryData = "home";
+    }
     const purchase = {
       userID: usersDetails?._id,
       email: user?.email,
@@ -50,6 +56,7 @@ const RecentView = ({ id }) => {
       quantity: 1,
       name: recent.name,
       image: recent.image.itemImg1,
+      delivery: deliveryData,
     };
 
     try {
@@ -74,7 +81,7 @@ const RecentView = ({ id }) => {
   }
 
   return (
-    <div className="grid gap-4 grid-cols-1 lg:grid-cols-4">
+    <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
       {filteredRecentProducts.slice(0, 4).map((recent) => (
         <div className="relative group" key={recent._id}>
           <figure>

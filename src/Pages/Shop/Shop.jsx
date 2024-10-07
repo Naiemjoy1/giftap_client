@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import useProducts from "../../Components/Hooks/useProducts";
 import { BsFillGrid3X2GapFill } from "react-icons/bs";
 import { MdViewList } from "react-icons/md";
@@ -6,6 +6,9 @@ import ItemCard from "./ItemCard/ItemCard";
 import { GrPrevious, GrNext } from "react-icons/gr";
 import ListItemCard from "./ListItemCard/ListItemCard";
 import HotSale from "./HotSale/HotSale";
+import { CiFilter } from "react-icons/ci";
+import Drawer from "react-modern-drawer";
+import "react-modern-drawer/dist/index.css";
 
 const Shop = () => {
   const [products, loading] = useProducts();
@@ -32,6 +35,11 @@ const Shop = () => {
 
   const totalPages = Math.ceil(products.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
+
+  const [isOpen, setIsOpen] = React.useState(false);
+  const toggleDrawer = () => {
+    setIsOpen((prevState) => !prevState);
+  };
 
   const capitalizeWords = (str) => {
     return str
@@ -252,10 +260,134 @@ const Shop = () => {
 
       <div className="lg:w-3/4 p-4">
         <div className="flex justify-between items-center">
-          <p>
+          <p className="hidden lg:block">
             Showing {currentProducts.length} of {filteredProducts.length}{" "}
             results
           </p>
+          <CiFilter
+            onClick={toggleDrawer}
+            className=" text-xl text-primary lg:hidden"
+          />
+          <Drawer
+            open={isOpen}
+            onClose={toggleDrawer}
+            direction="right"
+            className="bla bla bla"
+          >
+            <div className="p-4 bg-primary h-screen space-y-10 text-white">
+              <div>
+                <p className="lg:text-lg md:text-lg text-base font-medium uppercase">
+                  Product Categories
+                </p>
+                <div className="divide bg-white h-[1px] my-2"></div>
+                <div className=" h-80 overflow-y-auto mt-8">
+                  <div className="space-y-4">
+                    {categories.map((category, index) => (
+                      <div key={index}>
+                        <p className="flex justify-start gap-2 items-center">
+                          <input
+                            type="checkbox"
+                            checked={selectedCategories.has(category)}
+                            onChange={() => handleCategoryChange(category)}
+                            className="size-4 rounded border-gray-300"
+                            id={`Option${index}`}
+                          />
+                          {capitalizeWords(category)}
+                          {category !== "All" && (
+                            <button
+                              className="ml-2 text-white"
+                              onClick={() =>
+                                setExpandedCategory(
+                                  expandedCategory === category
+                                    ? null
+                                    : category
+                                )
+                              }
+                            >
+                              {expandedCategory === category ? "-" : "+"}
+                            </button>
+                          )}
+                        </p>
+                        {expandedCategory === category && (
+                          <div className="ml-4 mt-2 text-sm text-gray-300">
+                            {getSubCategories(category).map(
+                              (subCategory, subIndex) => (
+                                <p key={subIndex}>
+                                  <input
+                                    type="checkbox"
+                                    checked={selectedCategories.has(
+                                      subCategory
+                                    )}
+                                    onChange={() =>
+                                      handleCategoryChange(subCategory)
+                                    }
+                                    className="mr-2"
+                                  />
+                                  {capitalizeWords(subCategory)}{" "}
+                                </p>
+                              )
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div className="divide bg-white h-[1px] my-2"></div>
+                <p className="lg:text-lg md:text-lg text-base font-medium uppercase mt-8">
+                  Filter By Price Range
+                </p>
+                <section className="flex justify-between gap-4 items-center mt-4">
+                  <input
+                    type="number"
+                    placeholder="Min"
+                    className="input input-bordered w-full max-w-xs text-black"
+                    value={minPrice}
+                    onChange={(e) => setMinPrice(e.target.value)}
+                  />
+                  <input
+                    type="number"
+                    placeholder="Max"
+                    className="input input-bordered w-full max-w-xs text-black"
+                    value={maxPrice}
+                    onChange={(e) => setMaxPrice(e.target.value)}
+                  />
+                </section>
+              </div>
+
+              <div>
+                <div className="divide bg-white h-[1px] my-2"></div>
+                <p className="lg:text-lg md:text-lg text-base font-medium uppercase mt-8">
+                  Product Status
+                </p>
+                <section className="mt-4 space-y-4">
+                  <p className="flex justify-start gap-4 items-center">
+                    <input
+                      type="checkbox"
+                      className="size-4 rounded border-gray-300"
+                      id="inStock"
+                      checked={inStockOnly}
+                      onChange={() => setInStockOnly(!inStockOnly)}
+                    />{" "}
+                    In Stock
+                  </p>
+                  <p className="flex justify-start gap-4 items-center">
+                    <input
+                      type="checkbox"
+                      id="onSale"
+                      checked={onSaleOnly}
+                      onChange={() => setOnSaleOnly(!onSaleOnly)}
+                      className="size-4 rounded border-gray-300"
+                    />{" "}
+                    On Sale
+                  </p>
+                </section>
+              </div>
+            </div>
+          </Drawer>
+
           <div className="flex justify-center gap-4">
             <section className="flex justify-end gap-2 items-center text-xl">
               <button
@@ -286,7 +418,7 @@ const Shop = () => {
         <div className="divide bg-black h-[1px] my-2"></div>
 
         {viewMode === "grid" ? (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 justify-between items-center mt-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-between items-center mt-4">
             {currentProducts.map((item) => (
               <ItemCard key={item._id} item={item} />
             ))}
