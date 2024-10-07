@@ -30,7 +30,7 @@ const Contact = () => {
     <div className="max-w-7xl mx-auto p-8 flex flex-wrap justify-between">
       {/* Form Section */}
       <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
-        <h1 className="text-4xl font-semibold text-center mb-4 italic">
+        <h1 className="text-4xl font-semibold text-center mb-4 ">
           We Are Here To Help!
         </h1>
         <h2 className="text-3xl font-light text-center mb-8">Get in Touch</h2>
@@ -87,7 +87,7 @@ const Contact = () => {
 
             <button
               type="submit"
-              className={`w-full px-4 py-2 text-white font-semibold bg-blue-500 hover:bg-blue-600 rounded-md transition-colors duration-300 ${isHovered ? "bg-red-500" : ""
+              className={`w-full px-4 py-2 text-white font-semibold bg-primary rounded-md transition-colors duration-300 ${isHovered ? "bg-red-500" : ""
                 }`}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
@@ -102,11 +102,17 @@ const Contact = () => {
 
       {/* Info Section */}
       <div className="w-full lg:w-1/2 bg-gray-100 p-6 rounded-lg shadow-md">
-        <img
-          src="https://img.freepik.com/free-photo/information-data-goals-development_53876-124495.jpg"
-          alt="Company"
-          className="w-full h-auto mb-4 hover:scale-105 transition-transform duration-500 ease-in-out"
-        />
+     <div className="w-full ">
+     <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3649.301105939981!2d90.40035027362796!3d23.84343928520141!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c691ba478fbd%3A0xd1b3f71371eb15ec!2sHazrat%20Shahjalal%20International%20Airport!5e0!3m2!1sen!2sbd!4v1728324696742!5m2!1sen!2sbd" 
+          width="540" 
+          height="400" 
+          style={{ border: 0 }} 
+          allowFullScreen 
+          loading="lazy" 
+          referrerPolicy="no-referrer-when-downgrade">
+        </iframe>
+     </div>
         <h2 className="text-2xl font-semibold mb-4">Our Company Information</h2>
         <p className="mb-2">
           <strong>Address:</strong> 1234 Business St, Suite 100, YourCity, Country
