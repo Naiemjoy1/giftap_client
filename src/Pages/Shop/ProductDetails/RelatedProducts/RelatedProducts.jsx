@@ -36,6 +36,12 @@ const RelatedProducts = ({ id }) => {
       item.price,
       item.discount
     ).toFixed(2);
+    let deliveryData;
+    if (category === "digital gift") {
+      deliveryData = selectedDelivery === "localPickup" ? date : "instant";
+    } else {
+      deliveryData = "home";
+    }
     const purchase = {
       userID: usersDetails?._id,
       email: user?.email,
@@ -44,6 +50,7 @@ const RelatedProducts = ({ id }) => {
       quantity: 1,
       name: item.name,
       image: item.image.itemImg1,
+      delivery: deliveryData,
     };
 
     try {
@@ -109,7 +116,7 @@ const RelatedProducts = ({ id }) => {
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {related.slice(0, 4).map((item) => {
         const wishProduct = usersWishs.find(
           (wish) => wish.productId === item._id

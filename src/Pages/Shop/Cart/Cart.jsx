@@ -23,12 +23,12 @@ const Cart = () => {
   const axiosPublic = useAxiosPublic();
   const [quantities, setQuantities] = useState({});
   const [message, setMessage] = useState("");
-  const usersDetails = users.find((u) => u?.email === user?.email);
   const [currentCartId, setCurrentCartId] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [payment, setPayment] = useState(null);
   const [date, setDate] = useState(new Date());
   const [selectedDelivery, setSelectedDelivery] = useState("localPickup");
+  const [shippingOption, setShippingOption] = useState("flatRate");
 
   useEffect(() => {
     const initialQuantities = carts.reduce((acc, cart) => {
@@ -38,7 +38,7 @@ const Cart = () => {
     setQuantities(initialQuantities);
   }, [carts]);
 
-  const [shippingOption, setShippingOption] = useState("flatRate");
+  const usersDetails = users.find((u) => u?.email === user?.email);
 
   const userCarts = carts.filter((cart) => cart?.email === user?.email);
 
@@ -132,6 +132,8 @@ const Cart = () => {
   };
 
   const handleCheckout = () => {
+    const shippingEmail = usersDetails?.address?.shipping[0].email;
+
     const paymentData = {
       email: user.email,
       total: total.toFixed(2),
@@ -144,6 +146,7 @@ const Cart = () => {
       date: new Date(),
       message: userCarts.map((cart) => cart.message),
       delivery: userCarts.map((cart) => cart.delivery),
+      shippingEmail: shippingEmail,
     };
 
     setPayment(paymentData);
@@ -159,7 +162,7 @@ const Cart = () => {
   }
 
   return (
-    <div className="container mx-auto my-10">
+    <div className="container mx-auto my-10 px-4 lg:px-0">
       {userCarts.length === 0 ? (
         <div className="h-screen flex justify-center items-center">
           <div className="flex flex-col items-center gap-4">
@@ -181,7 +184,7 @@ const Cart = () => {
         </div>
       ) : (
         <>
-          <div className="lg:flex justify-between gap-4">
+          <div className="lg:flex justify-between space-y-4 gap-4">
             <div className="lg:w-[65%] space-y-4">
               <div className="border p-4 rounded-lg w-full">
                 <p>Add $50.00 to cart and get free shipping</p>
@@ -226,44 +229,48 @@ const Cart = () => {
                                       : cart.name}
                                   </p>
                                   <section className="flex items-center gap-1">
-                                    <p className="text-xs">
-                                      {cart.message === "" ? (
-                                        <button
-                                          className="text-primary text-xs"
-                                          onClick={() =>
-                                            handleOpenMessageModal(
-                                              cart._id,
-                                              cart.message
-                                            )
-                                          }
-                                        >
-                                          Add Message
-                                        </button>
-                                      ) : (
-                                        <>
-                                          {cart.message ? (
-                                            <>
-                                              {cart.message?.length > 20
-                                                ? cart.message?.slice(0, 12)
-                                                : cart.message}
-                                              <button
-                                                className="text-primary text-xs"
-                                                onClick={() =>
-                                                  handleOpenMessageModal(
-                                                    cart._id,
-                                                    cart.message
-                                                  )
-                                                }
-                                              >
-                                                ...edit
-                                              </button>
-                                            </>
-                                          ) : (
-                                            ""
-                                          )}
-                                        </>
-                                      )}
-                                    </p>
+                                    {cart.category === "digital gift" ? (
+                                      <p className="text-xs">
+                                        {cart.message === "" ? (
+                                          <button
+                                            className="text-primary text-xs"
+                                            onClick={() =>
+                                              handleOpenMessageModal(
+                                                cart._id,
+                                                cart.message
+                                              )
+                                            }
+                                          >
+                                            Add Message
+                                          </button>
+                                        ) : (
+                                          <>
+                                            {cart.message ? (
+                                              <>
+                                                {cart.message?.length > 20
+                                                  ? cart.message?.slice(0, 12)
+                                                  : cart.message}
+                                                <button
+                                                  className="text-primary text-xs"
+                                                  onClick={() =>
+                                                    handleOpenMessageModal(
+                                                      cart._id,
+                                                      cart.message
+                                                    )
+                                                  }
+                                                >
+                                                  ...edit
+                                                </button>
+                                              </>
+                                            ) : (
+                                              ""
+                                            )}
+                                          </>
+                                        )}
+                                      </p>
+                                    ) : (
+                                      ""
+                                    )}
                                   </section>
                                 </div>
 

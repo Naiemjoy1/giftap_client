@@ -33,7 +33,7 @@ const ProductDeatails = () => {
 
   return (
     <div className="bg-neutral py-10">
-      <div className="container mx-auto space-y-10">
+      <div className="container mx-auto space-y-10 px-4 lg:px-0">
         <div className="p-6 bg-white rounded-lg">
           <p className=" text-xl font-semibold">{name}</p>
           <div className="flex gap-4 text-xs mt-4">
@@ -46,7 +46,7 @@ const ProductDeatails = () => {
               <span className=" text-gray-400">SKU:</span> KTRL59
             </p>
           </div>
-          <div className="lg:flex justify-between gap-8 mt-4">
+          <div className="lg:flex justify-between gap-8 mt-4 space-y-4">
             <Image product={product}></Image>
 
             <Middle product={product}></Middle>

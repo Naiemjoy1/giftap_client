@@ -57,6 +57,12 @@ const ItemCard = ({ item }) => {
 
   const handleAddToCart = async () => {
     const discountedPrice = calculateDiscountedPrice(price).toFixed(2);
+    let deliveryData;
+    if (category === "digital gift") {
+      deliveryData = selectedDelivery === "localPickup" ? date : "instant";
+    } else {
+      deliveryData = "home";
+    }
     const purchase = {
       userID: usersDetails?._id,
       email: user?.email,
@@ -65,6 +71,7 @@ const ItemCard = ({ item }) => {
       quantity: 1,
       name: name,
       image: image.itemImg,
+      delivery: deliveryData,
     };
     try {
       const res = await axiosPublic.post("/carts", purchase);
