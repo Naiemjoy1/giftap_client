@@ -147,6 +147,9 @@ const Cart = () => {
       message: userCarts.map((cart) => cart.message),
       delivery: userCarts.map((cart) => cart.delivery),
       shippingEmail: shippingEmail,
+      quantities: userCarts.map(
+        (cart) => quantities[cart._id] || cart.quantity
+      ),
     };
 
     setPayment(paymentData);

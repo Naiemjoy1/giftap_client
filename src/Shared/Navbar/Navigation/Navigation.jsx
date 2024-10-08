@@ -81,7 +81,7 @@ const Navigation = () => {
         <>
           <li>
             <NavLink
-              to="/Dashboard"
+              to="/dashboard"
               className={({ isActive }) =>
                 `px-4 py-2 rounded transition-colors ${
                   isActive

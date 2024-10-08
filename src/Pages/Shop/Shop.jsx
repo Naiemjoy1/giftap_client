@@ -264,10 +264,13 @@ const Shop = () => {
             Showing {currentProducts.length} of {filteredProducts.length}{" "}
             results
           </p>
-          <CiFilter
+          <button
             onClick={toggleDrawer}
-            className=" text-xl text-primary lg:hidden"
-          />
+            className="lg:hidden flex items-center gap-2"
+          >
+            <CiFilter className="text-xl text-primary" />
+            <span className=" font-semibold">Filter</span>
+          </button>
           <Drawer
             open={isOpen}
             onClose={toggleDrawer}
