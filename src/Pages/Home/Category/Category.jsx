@@ -20,8 +20,6 @@ const Category = () => {
     fetchProducts();
   }, [axiosPublic]);
 
-  console.log(product);
-
   return (
     <div>
       {/* this is section heading this style get homeSectionHeading components */}

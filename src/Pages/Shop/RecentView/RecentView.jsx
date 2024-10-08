@@ -28,7 +28,6 @@ const RecentView = ({ id }) => {
     userRecents.some((recent) => recent.productId === product._id)
   );
 
-  // Exclude the product with the specified id
   const filteredRecentProducts = recentProducts.filter(
     (recent) => recent._id !== id
   );
@@ -42,12 +41,14 @@ const RecentView = ({ id }) => {
       recent.price,
       recent.discount
     ).toFixed(2);
+
     let deliveryData;
-    if (category === "digital gift") {
+    if (recent.category === "digital gift") {
       deliveryData = selectedDelivery === "localPickup" ? date : "instant";
     } else {
       deliveryData = "home";
     }
+
     const purchase = {
       userID: usersDetails?._id,
       email: user?.email,
@@ -57,6 +58,7 @@ const RecentView = ({ id }) => {
       name: recent.name,
       image: recent.image.itemImg1,
       delivery: deliveryData,
+      category: recent.category,
     };
 
     try {

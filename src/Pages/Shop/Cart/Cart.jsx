@@ -41,6 +41,7 @@ const Cart = () => {
   const usersDetails = users.find((u) => u?.email === user?.email);
 
   const userCarts = carts.filter((cart) => cart?.email === user?.email);
+  console.log("userCarts", userCarts);
 
   const subtotal = userCarts.reduce((acc, cart) => {
     const quantity = quantities[cart._id] || cart.quantity;
@@ -145,11 +146,13 @@ const Cart = () => {
       name: user.displayName,
       date: new Date(),
       message: userCarts.map((cart) => cart.message),
+      category: userCarts.map((cart) => cart.category),
       delivery: userCarts.map((cart) => cart.delivery),
       shippingEmail: shippingEmail,
       quantities: userCarts.map(
         (cart) => quantities[cart._id] || cart.quantity
       ),
+      tier: userCarts.map((cart) => cart.tier),
     };
 
     setPayment(paymentData);
