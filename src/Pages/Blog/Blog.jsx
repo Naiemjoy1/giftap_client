@@ -1,37 +1,17 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-// import { demoPosts } from './demoPosts';
 import useBlogs from '../../Components/Hooks/useBlogs';
 import { FaArrowRight, FaCommentDots } from 'react-icons/fa';
 import ReactPaginate from 'react-paginate';
 
 
 const Blog = () => {
-  // Pagination logic
 
   const [blogs] = useBlogs();
 
   // console.log(blogs)
 
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const postsPerPage = 6;
-
-  // const indexOfLastPost = currentPage * postsPerPage;
-  // const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  // const currentPosts = blogs.slice(indexOfFirstPost, indexOfLastPost);
-
-  // const totalPages = Math.ceil(blogs.length / postsPerPage);
-
-  // const handlePrevious = () => {
-  //   if (currentPage > 1) setCurrentPage(currentPage - 1);
-  // };
-
-  // const handleNext = () => {
-  //   if (currentPage < totalPages) setCurrentPage(currentPage + 1);
-  // };
-
-
-
+ 
   const [itemOffset, setItemOffset] = useState(0);
 
   const itemsPerPage = 4;
@@ -109,46 +89,6 @@ const Blog = () => {
             ))
           }
         </div>
-
-
-
-
-
-
-
-
-
-
-
-        {/* Blog Pagination */}
-        {/* <div className="flex justify-center mt-5 items-center">
-          <button
-            onClick={handlePrevious}
-            className={`bg-black text-white p-2 rounded ${currentPage === 1 && 'opacity-50 cursor-not-allowed'}`}
-            disabled={currentPage === 1}
-          >
-            Previous
-          </button>
-          <div className="space-x-2">
-            {Array.from({ length: totalPages }, (_, index) => (
-              <button
-                key={index + 1}
-                onClick={() => setCurrentPage(index + 1)}
-                className={`p-2 rounded ${currentPage === index + 1 ? 'bg-black text-white' : 'bg-gray-300'}`}
-              >
-                {index + 1}
-              </button>
-            ))}
-          </div>
-          <button
-            onClick={handleNext}
-            className={`bg-black text-white p-2 rounded ${currentPage === totalPages && 'opacity-50 cursor-not-allowed'}`}
-            disabled={currentPage === totalPages}
-          >
-            Next
-          </button>
-        </div> */}
-
 
 
 
