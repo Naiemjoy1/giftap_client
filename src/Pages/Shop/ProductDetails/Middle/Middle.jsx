@@ -88,17 +88,17 @@ const Middle = ({ product }) => {
       }
 
       const purchase = {
-        category: category,
         userID: usersDetails?._id,
         email: user.email,
         productId: _id,
         price: discountedPrice,
         quantity: quantitySelected,
-        tier: selectedTier?.tier,
         name: name,
         image: image.itemImg,
         message: message,
         delivery: deliveryData,
+        category: category,
+        tier: selectedTier?.tier,
       };
 
       const res = await axiosPublic.post("/carts", purchase);

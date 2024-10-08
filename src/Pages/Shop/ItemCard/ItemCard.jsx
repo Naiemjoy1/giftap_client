@@ -72,6 +72,7 @@ const ItemCard = ({ item }) => {
       name: name,
       image: image.itemImg,
       delivery: deliveryData,
+      category: category,
     };
     try {
       const res = await axiosPublic.post("/carts", purchase);

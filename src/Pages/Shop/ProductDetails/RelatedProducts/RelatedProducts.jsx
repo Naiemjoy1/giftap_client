@@ -36,12 +36,14 @@ const RelatedProducts = ({ id }) => {
       item.price,
       item.discount
     ).toFixed(2);
+
     let deliveryData;
-    if (category === "digital gift") {
+    if (item.category === "digital gift") {
       deliveryData = selectedDelivery === "localPickup" ? date : "instant";
     } else {
       deliveryData = "home";
     }
+
     const purchase = {
       userID: usersDetails?._id,
       email: user?.email,
@@ -51,6 +53,7 @@ const RelatedProducts = ({ id }) => {
       name: item.name,
       image: item.image.itemImg1,
       delivery: deliveryData,
+      category: item.category,
     };
 
     try {
