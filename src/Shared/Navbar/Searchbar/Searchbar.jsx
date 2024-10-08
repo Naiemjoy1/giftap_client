@@ -8,6 +8,8 @@ import Drawer from "react-modern-drawer";
 import "react-modern-drawer/dist/index.css";
 import NavDrawer from "../Drawer/NavDrawer";
 import Search from "./Search";
+import useCart from "../../../Components/Hooks/useCart";
+import useWishs from "../../../Components/Hooks/useWishs";
 
 const Searchbar = () => {
   const { user, logOut } = useAuth();
@@ -19,6 +21,12 @@ const Searchbar = () => {
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState);
   };
+
+  const [carts] = useCart();
+  const [wishlists, refetchWish] = useWishs();
+
+  const userCarts = carts.filter((cart) => cart?.email === user?.email);
+  const usersWishs = wishlists.filter((wish) => wish.email === user?.email);
 
   return (
     <div className="container mx-auto py-4 font-opensans">
@@ -43,14 +51,14 @@ const Searchbar = () => {
             </section>
 
             <section>
-              <button className="relative">
+              <Link to="/cart" className="relative">
                 <p className="text-2xl">
                   <HiOutlineShoppingBag />
                 </p>
                 <div className="bg-primary absolute -top-2 -right-2 transform translate-x-1 -translate-y-1 rounded-full w-6 h-6 flex items-center justify-center text-white text-xs">
-                  30
+                  {userCarts.length}
                 </div>
-              </button>
+              </Link>
             </section>
           </section>
         </div>
@@ -125,24 +133,24 @@ const Searchbar = () => {
               )}
             </section>
             <section>
-              <button className="relative">
+              <div className="relative">
                 <p className="text-2xl">
                   <FaRegHeart />
                 </p>
                 <div className="bg-primary absolute -top-2 -right-3 transform translate-x-1 -translate-y-1 rounded-full w-6 h-6 flex items-center justify-center text-white text-xs">
-                  20
+                  {usersWishs.length}
                 </div>
-              </button>
+              </div>
             </section>
             <section>
-              <button className="relative">
+              <Link to="/cart" className="relative">
                 <p className="text-2xl">
                   <HiOutlineShoppingBag />
                 </p>
                 <div className="bg-primary absolute -top-2 -right-2 transform translate-x-1 -translate-y-1 rounded-full w-6 h-6 flex items-center justify-center text-white text-xs">
-                  30
+                  {userCarts.length}
                 </div>
-              </button>
+              </Link>
             </section>
           </section>
         </div>

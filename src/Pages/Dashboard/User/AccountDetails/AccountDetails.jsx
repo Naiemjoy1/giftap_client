@@ -74,6 +74,7 @@ const AccountDetails = () => {
         });
 
         const result = await response.json();
+        // console.log("Image upload result:", result); // Log image upload result
 
         if (result.success) {
           displayUrl = result.data.display_url;
@@ -93,10 +94,14 @@ const AccountDetails = () => {
           type: userDetail.type,
         };
 
+        // console.log("Updating user info:", updateInfo); // Log the update info
+
         const updateResponse = await axiosPublic.patch(
           `/users/${userDetail._id}`,
           updateInfo
         );
+
+        // console.log("Update response:", updateResponse); // Log the update response
 
         if (updateResponse.status === 200) {
           await updateUserProfile(name, displayUrl);
@@ -109,6 +114,7 @@ const AccountDetails = () => {
         toast.warning("User not found");
       }
     } catch (error) {
+      console.error("Error updating profile:", error);
       toast.error("Error updating profile");
     }
   };

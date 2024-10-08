@@ -8,8 +8,8 @@ import coffee from '../../../../assets/Images/coffee-shop.png';
 const BannerFeature = () => {
   return (
     <div className="bg-white py-5">
-      <div className="mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-4 md:border-b">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-4 md:border-b justify-items-center">
           <Feature icon={shop} text="No minimum order" />
           <Feature icon={phone} text="One on one services" />
           <Feature icon={rocket} text="100% Free to use" />
