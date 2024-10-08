@@ -12,9 +12,9 @@ import AuthPage from "../Pages/SignIn&SignUp/AuthPage";
 import About from "../Pages/About/About";
 import ProductDeatails from "../Pages/Shop/ProductDetails/ProductDeatails";
 import LiveChat from "../Pages/LiveChat/LiveChat";
-import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
 import ProfileDetails from "../Pages/Dashboard/User/ProfileDetails";
 import Cart from "../Pages/Shop/Cart/Cart";
+import Admin from "../Pages/Dashboard/Admin/Admin";
 
 export const router = createBrowserRouter([
   {
@@ -78,7 +78,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <AdminDashboard></AdminDashboard>,
+        element: <Admin></Admin>,
       },
     ],
   },
