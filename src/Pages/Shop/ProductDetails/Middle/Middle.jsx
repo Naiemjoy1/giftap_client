@@ -80,13 +80,10 @@ const Middle = ({ product }) => {
           ? calculateDiscountedPrice(selectedTier?.price.amount).toFixed(2)
           : calculateDiscountedPrice(price).toFixed(2);
 
-      // Determine delivery based on the category
       let deliveryData;
       if (category === "digital gift") {
-        // For digital gift, allow user to select between date and instant
         deliveryData = selectedDelivery === "localPickup" ? date : "instant";
       } else {
-        // For other categories, set delivery to home
         deliveryData = "home";
       }
 

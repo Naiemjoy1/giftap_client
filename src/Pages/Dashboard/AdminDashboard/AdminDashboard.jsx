@@ -1,198 +1,112 @@
-import { FaWallet } from "react-icons/fa";
-import { IoDocumentText } from "react-icons/io5";
-import { TbWorld } from "react-icons/tb";
-import { IoMdCart } from "react-icons/io";
-import AdminChart from "./AdminChart/AdminChart";
-
-
+import { useState } from "react";
+import { BiSolidDownArrow } from "react-icons/bi";
+import { FaRegEnvelope, FaStore } from "react-icons/fa";
+import { IoMdNotifications } from "react-icons/io";
+import { Link } from "react-router-dom";
+import Flatpickr from "react-flatpickr";
+import "flatpickr/dist/themes/material_green.css";
 
 const AdminDashboard = () => {
+  const [tab, setTab] = useState(0);
 
+  const handleTabs = (index) => {
+    setTab(index);
+  };
 
-    return (
-        <div className="mx-auto container bg-[#FBEDEF]">
-
-            <div className="">
-                <div>
-                    <h1 className="text-4xl font-bold text-center">General Statistics</h1>
-                </div>
-
-                <div className="lg:flex  justify-between">
-
-                    {/* Card */}
-                    <div className="mt-14 ml-8">
-                        <div className="md:flex  lg:flex justify-center gap-4  mt-10  ">
-                            {/* today's money */}
-                            <div className="bg-[#EEF9FF]  p-6 w-80 lg:w-96 h-32 rounded-2xl flex justify-between">
-                                <div>
-                                    <h1 className="text-2xl font-bold text-black">Today's Money</h1>
-                                    <div className="flex ">
-                                        <p className="text-3xl font-bold text-black mt-2">$53,000</p>
-                                        <p className="text-xl mt-3 ml-2 text-green-400 font-semibold">+55%</p>
-                                    </div>
-                                </div>
-                                <div className="bg-[#FBEDEF] p-5 m-2 rounded-full">
-                                    <FaWallet className="text-2xl" />
-                                </div>
-                            </div>
-
-                            {/* new clients */}
-                            <div className="bg-[#EEF9FF]  p-6 w-80 lg:w-96 h-32 rounded-2xl flex justify-between  mt-4 md:mt-0 lg:mt-0">
-                                <div>
-                                    <h1 className="text-2xl font-bold text-black">New Clients</h1>
-                                    <div className="flex ">
-                                        <p className="text-3xl font-bold text-black mt-2">+3,462 </p>
-                                        <p className="text-xl mt-3 ml-2 text-rose-600 font-semibold">-2%</p>
-                                    </div>
-                                </div>
-                                <div className="bg-[#FBEDEF] p-5 m-2 rounded-full">
-                                    <IoDocumentText className="text-2xl" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="lg:flex md:flex justify-center gap-4  mt-4 lg:mt-4">
-                            {/* today's users */}
-                            <div className="bg-[#EEF9FF]  p-6 w-80 lg:w-96  h-32 rounded-2xl flex justify-between">
-                                <div>
-                                    <h1 className="text-2xl font-bold text-black">Today's Users</h1>
-                                    <div className="flex ">
-                                        <p className="text-3xl font-bold text-black mt-2">2,300</p>
-                                        <p className="text-xl mt-3 ml-2 text-green-400 font-semibold">+3%</p>
-                                    </div>
-                                </div>
-                                <div className="bg-[#FBEDEF] p-3 m-3 rounded-full">
-                                    <TbWorld className="text-3xl" />
-                                </div>
-                            </div>
-
-                            {/* Today's Sales */}
-                            <div className="bg-[#EEF9FF]  p-6 w-80 lg:w-96 h-32 rounded-2xl flex justify-between mt-4 md:mt-0 ">
-                                <div>
-                                    <h1 className="text-2xl font-bold text-black">Today's Sales</h1>
-                                    <div className="flex ">
-                                        <p className="text-3xl font-bold text-black mt-2">$103,430  </p>
-                                        <p className="text-xl mt-3 ml-2 text-green-500 font-semibold">+5%</p>
-                                    </div>
-                                </div>
-                                <div className="bg-[#FBEDEF] p-4 m-3 rounded-full">
-                                    <IoMdCart className="text-3xl" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/*  */}
-                    <div className="md:flex lg:flex justify-center gap-4  mt-10 ">
-                        <div className="bg-[#EEF9FF]  p-6 w-80 lg:w-[710px] h-96 rounded-2xl ml-7 lg:ml-0 md:ml-0">
-
-                            <h1 className="text-3xl font-bold text-black text-center">Sales by Country</h1>
-
-                            <div className="overflow-x-auto">
-                                <table className="table">
-                                    {/* head */}
-                                    <thead>
-                                        <tr className="text-black font-bold text-xl">
-                                            <th>Country:</th>
-                                            <th>Sales:</th>
-                                            <th>Value:</th>
-                                            <th>Bounce:</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {/* row 1 */}
-                                        <tr>
-
-                                            <td>
-                                                <div className="flex items-center gap-3">
-                                                    <div className="avatar">
-                                                        <div className="mask mask-squircle h-12 w-12">
-                                                            <img
-                                                                src="https://i.postimg.cc/L4PsS9n0/United-States-svg.png"
-                                                                alt="United States" />
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                        <div className="text-xl lg:text-xl font-bold text-black">United States</div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span className="text-xl lg:text-xl font-bold text-black">2500</span>
-                                            </td>
-                                            <td className="text-xl lg:text-xl font-bold text-black">$230,900</td>
-                                            <th className="text-xl lg:text-xl font-bold text-black">29.9%</th>
-                                        </tr>
-                                        {/* row 2 */}
-                                        <tr>
-
-                                            <td>
-                                                <div className="flex items-center gap-3">
-                                                    <div className="avatar">
-                                                        <div className="mask mask-squircle h-12 w-12">
-                                                            <img
-                                                                src="https://i.postimg.cc/Z5sm32Wd/German-Flag.png"
-                                                                alt="Avatar Tailwind CSS Component" />
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                        <div className="text-xl lg:text-xl font-bold text-black">Germany</div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span className="text-xl lg:text-xl font-bold text-black">3.900</span>
-                                            </td>
-                                            <td className="text-xl lg:text-xl font-bold text-black">$440,000</td>
-                                            <th className="text-xl lg:text-xl font-bold text-black">40.22%</th>
-                                        </tr>
-                                        {/* row 3 */}
-                                        <tr>
-
-                                            <td>
-                                                <div className="flex items-center gap-3">
-                                                    <div className="avatar">
-                                                        <div className="mask mask-squircle h-12 w-12">
-                                                            <img
-                                                                src="https://i.postimg.cc/9QrK3MfD/Brazil.png"
-                                                                alt="Avatar Tailwind CSS Component" />
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                        <div className="text-xl lg:text-xl font-bold text-black">Brasil</div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span className="text-xl lg:text-xl font-bold text-black">562</span>
-                                            </td>
-                                            <td className="text-xl lg:text-xl font-bold text-black">$143,960</td>
-                                            <th className="text-xl lg:text-xl font-bold text-black">32.14%</th>
-                                        </tr>
-
-                                    </tbody>
-
-                                </table>
-                                <button className="btn btn-primary text-white border border-blue-400 ml-72">See All</button>
-                            </div>
-
-
-                        </div>
-
-                    </div>
-
-
-
-                </div>
-
-
-                <AdminChart></AdminChart>
-
-            </div>
-
-
+  return (
+    <div className="flex justify-between ">
+      <div className=" w-[20%] pl-10 pr-4 py-4 bg-black space-y-4 h-screen">
+        <p className=" text-white text-xl font-bold uppercase">Giftap</p>
+        <div className="border-t border-gray-400"></div>
+        <div className=" space-y-4">
+          <Link
+            to="/"
+            className="flex gap-2 items-center text-gray-400 px-2 rounded-md py-2"
+          >
+            <FaStore /> Home
+          </Link>
+          <p
+            className={
+              tab === 0
+                ? "text-white bg-[#222222] px-2 rounded-md py-2"
+                : " text-gray-400 px-2 rounded-md py-2"
+            }
+            onClick={() => handleTabs(0)}
+          >
+            Tab 1
+          </p>
+          <p
+            className={
+              tab === 1
+                ? "text-white bg-[#222222] px-2 rounded-md py-2"
+                : "text-gray-400 px-2 rounded-md py-2"
+            }
+            onClick={() => handleTabs(1)}
+          >
+            Tab 2
+          </p>
         </div>
-    );
+      </div>
+      <div className=" w-[80%]">
+        {/* Top bar with search and user-related info */}
+        <div className=" shadow-sm w-full flex justify-between gap-14 p-4 items-center">
+          {/* Left: Search and calendar */}
+          <div className="flex items-center gap-4">
+            <label className="input input-bordered flex items-center gap-2">
+              <input type="text" className="grow" placeholder="Search" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+                className="h-4 w-4 opacity-70"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </label>
+            <Flatpickr
+              data-enable-time
+              options={{
+                minDate: "today",
+                static: true,
+              }}
+              className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-primary"
+            />
+          </div>
+
+          {/* Right: User info */}
+          <div className="flex items-center gap-4">
+            <p className=" text-xl">
+              <FaRegEnvelope />
+            </p>
+            <p className=" text-xl">
+              <IoMdNotifications />
+            </p>
+            <p>Name</p>
+            <p>
+              <div className="avatar">
+                <div className="w-8 rounded-full">
+                  <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                </div>
+              </div>
+            </p>
+            <p>
+              <BiSolidDownArrow />
+            </p>
+          </div>
+        </div>
+
+        {/* Conditionally rendered content based on the active tab */}
+        <div className="p-4">
+          {tab === 0 && <p>Page 1</p>}
+          {tab === 1 && <p>Page 2</p>}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default AdminDashboard;

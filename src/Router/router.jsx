@@ -77,11 +77,7 @@ export const router = createBrowserRouter([
         element: <LiveChat></LiveChat>,
       },
       {
-        path: "/Dashboard",
-        element: <AdminDashboard></AdminDashboard>,
-      },
-      {
-        path: "/Dashboard",
+        path: "/dashboard",
         element: <AdminDashboard></AdminDashboard>,
       },
     ],
