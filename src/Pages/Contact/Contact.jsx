@@ -106,7 +106,7 @@ const Contact = () => {
      <iframe 
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3649.301105939981!2d90.40035027362796!3d23.84343928520141!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c691ba478fbd%3A0xd1b3f71371eb15ec!2sHazrat%20Shahjalal%20International%20Airport!5e0!3m2!1sen!2sbd!4v1728324696742!5m2!1sen!2sbd" 
           width="540" 
-          height="400" 
+          height="270" 
           style={{ border: 0 }} 
           allowFullScreen 
           loading="lazy" 

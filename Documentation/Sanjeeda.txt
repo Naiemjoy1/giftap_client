@@ -1,0 +1,25 @@
+ ********** WEEK 3   *******
+ #Endgame Project Documentation
+
+
+## 1. **Shop Details Page**
+   - Developed a detailed shop page showcasing product and shop-specific information.
+   - Implemented a **tab functionality** to navigate between sections like product details, reviews, and delivery details.
+   - Added shipping and delivery information for enhanced user experience.
+
+## 2. **Footer Design**
+   - Created a responsive footer with essential links, such as terms of service, contact info, and social media.
+
+
+## 3. **Wishlist Button Functionality**
+   - Implemented wishlist buttons, allowing users to save products.
+   - Developed a POST API and stored wishlist data in MongoDB for user-specific persistence.
+
+## 4. **Recent View Product Feature**
+   - Added a feature to track and display recently viewed products.
+   - Implemented **POST and GET APIs** to save and retrieve recently viewed product data for each user.
+
+
+## 5. **Error Page Development**
+   - Developed a custom error page using React and integrated a Lottie animation for improved user interaction during errors.
+
