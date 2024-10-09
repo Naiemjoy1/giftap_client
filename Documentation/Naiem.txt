@@ -29,3 +29,26 @@ Upcoming Feature: The system will be extended to allow users to chat with seller
 
 Summary:
 The work completed so far covers crucial aspects of the user experience, including secure authentication, easy navigation, personalized user dashboards, and real-time communication. Future work will focus on extending the chat feature to include seller communication and other enhancements to improve the platform further.
+
+   ***********WEEK 4****************
+   Title: Enhancements to Shop Page Functionality and Payment Process
+
+Overview: This week, I implemented several key features in the shop and product details pages, along with payment processing integration. Below is a step-by-step summary of the updates:
+
+1. Shop Page Enhancements
+Wishlist Addition: Added the functionality to allow users to add products to their wishlist for later reference.
+Add to Cart: Implemented the “Add to Cart” feature, enabling users to add items directly from the shop page.
+2. Product Details Page
+Related Products Display: Configured a section to show related products based on the currently viewed product, enhancing user experience by suggesting similar items.
+Recently Viewed Products: Added a section that displays recently viewed products, allowing users to easily revisit products they've previously explored.
+3. Cart Functionality
+Subtotal Calculation: Implemented dynamic subtotal calculation for items in the cart, updating in real-time as users add or remove products.
+Shipping Charge Calculation: Developed logic to calculate shipping charges based on the total cart value and destination, if applicable.
+4. Payment Process Integration
+SSLCommerz Integration: Integrated SSLCommerz to handle the payment process. This ensures secure transactions, supporting various payment methods.
+Payment Confirmation Email: Configured automated emails to confirm successful payments, sent to the user’s email upon transaction completion.
+5. Digital Gift Delivery
+Delivery Email for Digital Gifts: If a user purchases a digital gift, an automated email is sent to the provided shipping address, ensuring timely delivery.
+
+Summary
+In Week 4, I enhanced the shop and product details pages by adding wishlist and "Add to Cart" functionalities, as well as displaying related and recently viewed products. I implemented dynamic calculations for cart subtotal and shipping charges, ensuring accurate and seamless updates. Additionally, I integrated SSLCommerz for secure payment processing and set up automated emails to confirm payments. For digital gift purchases, I configured a delivery email to be sent directly to the shipping address, enhancing the overall user experience.
