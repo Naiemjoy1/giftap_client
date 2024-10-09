@@ -6,7 +6,11 @@ const useApplys = () => {
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
 
-  const { refetch, data: applys = [] } = useQuery({
+  const {
+    refetch,
+    data: applys = [],
+    isLoading,
+  } = useQuery({
     queryKey: ["applys", user?.email],
     queryFn: async () => {
       const res = await axiosPublic.get("/applys");
@@ -14,7 +18,7 @@ const useApplys = () => {
     },
   });
 
-  return [applys, refetch];
+  return [applys, refetch, isLoading];
 };
 
 export default useApplys;
