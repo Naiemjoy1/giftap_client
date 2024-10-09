@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import useProducts from "../../Components/Hooks/useProducts";
 import { BsFillGrid3X2GapFill } from "react-icons/bs";
-import { MdViewList, MdFavoriteBorder, MdAddShoppingCart, MdFavorite } from "react-icons/md";
+import { MdViewList, MdFavoriteBorder, MdAddShoppingCart } from "react-icons/md";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";  
 import { FcViewDetails } from "react-icons/fc";
@@ -12,7 +12,6 @@ import useAxiosPublic from "../../Components/Hooks/useAxiosPublic";
 import RecentView from "./RecentView/RecentView";
 import useRecentView from "../../Components/Hooks/useRecntView";
 
-
 const Shop = () => {
   const [products, loading] = useProducts();
   const [filteredProducts, setFilteredProducts] = useState(products);
@@ -22,16 +21,10 @@ const Shop = () => {
   const [sortOption, setSortOption] = useState("default");
   const [priceRange, setPriceRange] = useState([0, 100]);
   const productsPerPage = 9;
-  const { user } = useAuth();
-  const axiosPublic = useAxiosPublic();
-  const [recentViewProduct] = useRecentView();
-  const mostRecentProduct = recentViewProduct
-  .sort((a, b) => {
-    const dateA = new Date(`${a.date} ${a.time}`);
-    const dateB = new Date(`${b.date} ${b.time}`);
-    return dateB - dateA; 
-  })[0];
-  console.log(mostRecentProduct?.name)
+   const {user} = useAuth();
+   const axiosPublic =useAxiosPublic()
+  //  console.log(user)
+  //  console.log(user?.email)
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
   const categories = ["All", ...new Set(products.map((item) => item.category))];
 
@@ -39,13 +32,14 @@ const Shop = () => {
     const date = new Date().toLocaleDateString();
     const time = new Date().toLocaleTimeString();
     const userEmail = user?.email;
-
-    const info = { id, image, price, category, name, date,time, userEmail };
+    
+    const info = { id, image, price, category, name, date, userEmail };
+          console.log(info)
     axiosPublic.post("/recentviews", info)
       .then(response => {
         console.log("Recent view logged:", response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error logging recent view:", error);
       });
   };
@@ -122,14 +116,14 @@ const Shop = () => {
     if (name === "minPrice") {
       setPriceRange([Number(value), priceRange[1]]);
     } else {
-      setPriceRange([priceRange[0], Number(value)]);
+      setPriceRange([priceRange[0], Number(value)]); 
     }
   };
 
   return (
     <div className="container mx-auto my-10 grid grid-cols-1 md:grid-cols-[30%_70%] gap-8">
       {/* Sidebar */}
-      <section className="space-y-8 bg-primary p-5 rounded-lg text-white">
+      <section className="space-y-8 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 p-5 rounded-lg text-white">
         {/* Category Section */}
         <section>
           <p className="text-2xl font-medium">Product Categories</p>
@@ -140,12 +134,18 @@ const Shop = () => {
             {categories.map((category, index) => (
               <li key={index} className="mb-4">
                 <div
-                  className={`cursor-pointer ${selectedCategory === category ? "font-bold" : ""}`}
+                  className={`cursor-pointer hover:bg-primary hover:text-white hover:btn hover:btn-primary ${
+                    selectedCategory === category
+                      ? "font-bold btn btn-primary text-white"
+                      : ""
+                  }`}
                   onClick={() => setSelectedCategory(category)}
                 >
                   {category}
                 </div>
-                {index !== categories.length - 1 && <hr className="border-dashed my-4" />}
+                {index !== categories.length - 1 && (
+                  <hr className="border-dashed my-4" />
+                )}
               </li>
             ))}
           </ul>
@@ -212,7 +212,8 @@ const Shop = () => {
       <section>
         <section className="flex justify-around flex-wrap">
           <p className="flex-1">
-            Showing {currentProducts.length} of {filteredProducts.length} results
+            Showing {currentProducts.length} of {filteredProducts.length}{" "}
+            results
           </p>
           <section className="flex gap-2 ">
             <section className="flex gap-2">
@@ -254,7 +255,11 @@ const Shop = () => {
 
         {/* Products Grid/List */}
         <section
-          className={`grid gap-6 ${viewMode === "grid" ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" : "grid-cols-1"}`}
+          className={`grid gap-6 ${
+            viewMode === "grid"
+              ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+              : "grid-cols-1"
+          }`}
         >
           {currentProducts.map((item) => (
             <motion.div
@@ -267,16 +272,37 @@ const Shop = () => {
               <div
                 className="h-64 bg-cover bg-center"
                 style={{ backgroundImage: `url(${item.image})` }}
-              />
-
-              {/* Product Info */}
-              <div className="p-4">
-                <h3 className="font-bold text-lg mb-2 flex items-center justify-center">{item.name}</h3>
-              
-                <div className="flex-col space-y-2 items-center ">
-                
-                <p className="text-gray-400 text-center">{item.category}</p>
-                <p className="text-primary text-center">${item.price}</p>
+              >
+                {/* Buttons on hover, overlaid on the image */}
+                <div className="absolute top-30 left-0 -right-30 -bottom-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="grid grid-cols-1 ">
+                    <Link to={`/productDetails/${item._id}`}>
+                  
+                    <motion.button
+                        className="tooltip tooltip-right text-blue-500 p-2 rounded-full"
+                        whileHover={{ scale: 1.1 }}
+                        data-tip="View Details"
+                        style={{ zIndex: 1000 }}
+                      >  <button onClick={()=>handleRecentView(item._id,item.image,item.price,item.category,item.name)}>
+                        <FcViewDetails /></button>
+                      </motion.button>
+                    
+                    </Link>
+                    <motion.button
+                      className="tooltip tooltip-right text-pink-600 p-2 rounded-full"
+                      whileHover={{ scale: 1.1 }}
+                      data-tip="Add to Wishlist"
+                    >
+                      <MdFavoriteBorder size={24} />
+                    </motion.button>
+                    <motion.button
+                      className="tooltip tooltip-right text-green-600 p-2 rounded-full"
+                      whileHover={{ scale: 1.1 }}
+                      data-tip="Add to Cart"
+                    >
+                      <MdAddShoppingCart size={24} />
+                    </motion.button>
+                  </div>
                 </div>
               </div>
               {/* Wishlist and Cart Icons */}
@@ -323,18 +349,26 @@ const Shop = () => {
         </section>
 
         {/* Pagination */}
-        <section className="flex justify-center items-center space-x-4 mt-8">
-          {Array.from({ length: totalPages }).map((_, index) => (
-            <button
-              key={index}
-              className={`px-3 py-1 rounded-lg ${currentPage === index + 1 ? "bg-primary text-white" : "bg-gray-400 text-black"}`}
-              onClick={() => paginate(index + 1)}
-            >
-              {index + 1}
-            </button>
-          ))}
+        <section className="mt-6">
+          {totalPages > 1 && (
+            <ul className="flex justify-center space-x-2">
+              {Array.from({ length: totalPages }, (_, index) => (
+                <li key={index}>
+                  <button
+                    className={`px-4 py-2 rounded-lg ${
+                      currentPage === index + 1 ? "bg-blue-500 text-white" : "bg-gray-200"
+                    }`}
+                    onClick={() => paginate(index + 1)}
+                  >
+                    {index + 1}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
         </section>
       </section>
+      
     </div>
   );
 };

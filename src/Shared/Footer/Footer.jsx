@@ -6,22 +6,23 @@ const Footer = () => {
   return (
     <footer className="bg-base-200 text-base-content py-10">
       <div className="container mx-auto px-4">
-        <div className="flex flex-wrap justify-between">
+        <div className="flex flex-wrap justify-between space-y-6 md:space-y-0">
           {/* Store Information Section */}
-          <div className="w-full md:w-1/4 mb-6 md:mb-0">
+          <div className="w-full sm:w-1/2 md:w-1/4 mb-6 md:mb-0">
             <h6 className="text-lg font-semibold mb-4">GifTap</h6>
             <p className="text-sm mb-2">We promise we’ll get back to you promptly– your gifting needs are always on our minds!</p>
             <p className="text-sm">Monday – Friday 8am – 6pm</p>
 
-            <div className='flex mt-4'>
+            <div className="flex mt-4 space-x-3">
               <a href="Facebook"><FaFacebook className='text-2xl cursor-pointer' /></a>
-              <a href="Github"><FaGithub className='text-2xl ml-3 cursor-pointer' /></a>
-              <a href="Linkedin"><FaLinkedin className='text-2xl ml-3 cursor-pointer' /></a>
-              <a href="Instagram"><FaSquareInstagram className='text-2xl ml-3 cursor-pointer' /></a>
+              <a href="Github"><FaGithub className='text-2xl cursor-pointer' /></a>
+              <a href="Linkedin"><FaLinkedin className='text-2xl cursor-pointer' /></a>
+              <a href="Instagram"><FaSquareInstagram className='text-2xl cursor-pointer' /></a>
             </div>
           </div>
+
           {/* Services Section */}
-          <div className="w-full md:w-1/4 mb-6 md:mb-0">
+          <div className="w-full sm:w-1/2 md:w-1/4 mb-6 md:mb-0">
             <h6 className="text-lg font-semibold mb-4">Services</h6>
             <ul>
               <li><a href="#" className="hover:text-gray-400">Branding</a></li>
@@ -31,9 +32,8 @@ const Footer = () => {
             </ul>
           </div>
 
-
           {/* Legal Section */}
-          <div className="w-full md:w-1/4 mb-6 md:mb-0">
+          <div className="w-full sm:w-1/2 md:w-1/4 mb-6 md:mb-0">
             <h6 className="text-lg font-semibold mb-4">Legal</h6>
             <ul>
               <li><a href="#" className="hover:text-gray-400">Terms of Use</a></li>
@@ -43,16 +43,16 @@ const Footer = () => {
           </div>
 
           {/* Newsletter Section */}
-          <div className="w-full md:w-1/4">
+          <div className="w-full sm:w-1/2 md:w-1/4">
             <h6 className="text-lg font-semibold mb-4">Newsletter</h6>
             <form>
               <div className="flex">
                 <input
                   type="email"
                   placeholder="username@site.com"
-                  className="input input-bordered flex-grow rounded-l-md border-gray-300 bg-white text-base-content"
+                  className="input input-bordered lg:w-full md:w-20 w-full flex-grow rounded-l-md border-gray-300 bg-white text-base-content"
                 />
-                <button className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-r-md border border-blue-600 transition">
+                <button className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-r-md border border-blue-600 transition lg:w-full md:w-20 w-auto">
                   Subscribe
                 </button>
               </div>
@@ -63,19 +63,16 @@ const Footer = () => {
       </div>
 
       {/* Last Footer Section */}
-      <div className="flex justify-between mx-auto container bg-base-300 py-4 mt-10">
-        <div className="">
+      <div className="container mx-auto py-4 mt-10 flex flex-wrap justify-between items-center">
+        <div>
           <h1> All Rights Reserved © {new Date().getFullYear()} GifTap Ltd.</h1>
         </div>
 
-        {/* Payment Image */}
-        <div className='flex '>
-
-          <img className='h-8 w-16 mr-2' src={'https://i.ibb.co.com/QbMPCqm/visa-logo-2506831-1024x683.png'} alt="" />
-          <img className='h-8 w-16 ml-2' src={'https://i.ibb.co.com/FmV7C2P/master-Card.jpg'} alt="" />
-          <img className='h-8 w-16 ml-2' src={'https://i.ibb.co.com/YhZvJXx/Bkash.jpg'} alt="" />
-          <img className='h-8 w-16 ml-2' src={'https://i.ibb.co.com/G0WdccQ/Nagad.png'} alt="" />
-
+        <div className="flex space-x-3 mt-4 sm:mt-0 mr-10">
+          <img src={'https://i.ibb.co.com/QbMPCqm/visa-logo-2506831-1024x683.png'} alt="Visa" className="h-10 w-10" />
+          <img src={'https://i.ibb.co.com/FmV7C2P/master-Card.jpg'} alt="MasterCard" className="h-10 w-10" />
+          <img src={'https://i.ibb.co.com/YhZvJXx/Bkash.jpg'} alt="Bkash" className="h-10 w-10" />
+          <img src={'https://i.ibb.co.com/G0WdccQ/Nagad.png'} alt="Nagad" className="h-10 w-10" />
         </div>
       </div>
     </footer>

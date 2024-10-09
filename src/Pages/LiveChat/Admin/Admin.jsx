@@ -5,7 +5,7 @@ import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 
 const Admin = () => {
   const { user } = useAuth();
-  const [chats, refetch] = useChat();
+  const [chats, refetch, isLoadingChats] = useChat();
   const axiosPublic = useAxiosPublic();
 
   const [selectedChat, setSelectedChat] = useState(null);
@@ -13,13 +13,23 @@ const Admin = () => {
   const [loading, setLoading] = useState(false);
 
   const fetchChatDetails = async (chatId) => {
+    setLoading(true);
     try {
       const response = await axiosPublic.get(`/chats/${chatId}`);
-      setSelectedChat(response.data); // Update selected chat state
+      setSelectedChat(response.data);
     } catch (error) {
       console.error("Error fetching chat details:", error.message);
+    } finally {
+      setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (!selectedChat) {
+      const interval = setInterval(refetch, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [selectedChat, refetch]);
 
   useEffect(() => {
     if (selectedChat) {
@@ -30,7 +40,7 @@ const Admin = () => {
         } catch (error) {
           console.error("Error refetching chat details:", error.message);
         }
-      }, 1000);
+      }, 5000);
 
       return () => clearInterval(interval);
     }
@@ -38,7 +48,7 @@ const Admin = () => {
 
   const handleNewChat = async (event) => {
     event.preventDefault();
-    if (!selectedChat) return;
+    if (!selectedChat || newText.trim() === "") return;
 
     const newMessage = {
       text: newText,
@@ -51,8 +61,7 @@ const Admin = () => {
 
     try {
       const chatId = selectedChat._id;
-
-      const response = await axiosPublic.patch(`/chats/${chatId}`, {
+      await axiosPublic.patch(`/chats/${chatId}`, {
         $push: { messages: newMessage },
       });
 
@@ -62,9 +71,8 @@ const Admin = () => {
       }));
 
       setNewText("");
-      //   console.log("Message sent successfully:", response.data);
     } catch (error) {
-      //   console.error("Error sending message:", error.message);
+      console.error("Error sending message:", error.message);
     } finally {
       setLoading(false);
     }
@@ -74,13 +82,15 @@ const Admin = () => {
     if (selectedChat) {
       const chatId = selectedChat._id;
 
+      setLoading(true);
       try {
-        const response = await axiosPublic.delete(`/chats/${chatId}`);
-        // console.log("Chat deleted successfully:", response.data);
+        await axiosPublic.delete(`/chats/${chatId}`);
         refetch();
         setSelectedChat(null);
       } catch (error) {
-        // console.error("Error deleting chat:", error.message);
+        console.error("Error deleting chat:", error.message);
+      } finally {
+        setLoading(false);
       }
     }
   };
@@ -89,18 +99,22 @@ const Admin = () => {
     <div className="m-10">
       {!selectedChat && (
         <section className="border rounded-lg p-4 space-y-4">
-          <p>Open Ticket</p>
-          {chats.map((chat) => (
-            <div className="flex justify-between gap-4" key={chat._id}>
-              <h2 className="card-title">{chat.name}</h2>
-              <button
-                className="btn btn-primary btn-sm"
-                onClick={() => fetchChatDetails(chat._id)}
-              >
-                Open
-              </button>
-            </div>
-          ))}
+          <p>Open Tickets</p>
+          {isLoadingChats ? (
+            <div>Loading chats...</div>
+          ) : (
+            chats.map((chat) => (
+              <div className="flex justify-between gap-4" key={chat._id}>
+                <h2 className="card-title">{chat.name}</h2>
+                <button
+                  className="btn btn-primary btn-sm"
+                  onClick={() => fetchChatDetails(chat._id)}
+                >
+                  Open
+                </button>
+              </div>
+            ))
+          )}
         </section>
       )}
       {selectedChat && (
@@ -117,6 +131,7 @@ const Admin = () => {
               <button
                 className="btn btn-xs btn-error mt-5"
                 onClick={handleDeleteChat}
+                disabled={loading}
               >
                 {loading ? (
                   <span className="loading loading-spinner text-primary"></span>
@@ -138,7 +153,7 @@ const Admin = () => {
             <button
               className="btn btn-primary ml-2"
               onClick={handleNewChat}
-              disabled={loading}
+              disabled={loading || newText.trim() === ""}
             >
               {loading ? (
                 <span className="loading loading-spinner text-primary"></span>
