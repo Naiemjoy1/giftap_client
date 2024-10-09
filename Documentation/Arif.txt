@@ -29,3 +29,19 @@ Conclusion
 As the front-end developer of Giftap, my primary objective was to create a homepage that is both functional and visually appealing, enhancing the user’s experience with dynamic features and seamless navigation. The product tab system, FAQ section, review integration, and attention to responsive design all come together to provide a user-friendly environment that makes gift shopping a pleasant experience.
 For the next mission, I will go to the backend developer of this website. 
 Giftap’s mission is to make gifting easy and joyful, and as the front-end developer, my work is centered around delivering a website that reflects this goal. Thank you for using Giftap, and I hope you enjoy the website as much as we enjoyed building it!
+
+*******************WEEK 4**************************
+Title: Design Updates for About Page and Order Tracking System
+
+Overview: This week, I collaborated with Arif Adnan to update the design for the "About" page and develop the layout for an order tracking system. Below is a detailed breakdown of the work completed:
+
+1. About Page Design Update
+Content Layout: Reorganized the content layout to improve readability and visual appeal, highlighting key sections like the company’s story, mission, and values.
+Visual Enhancements: Added images, icons, and other visuals to better represent the brand and engage users, creating a more immersive experience.
+Responsive Design: Ensured the page adapts seamlessly across various devices, providing a consistent experience on both desktop and mobile platforms.
+2. Order Tracking System Design
+Tracking Interface: Designed a user-friendly interface where customers can track their orders, displaying current status and estimated delivery date.
+Progress Indicators: Added a progress bar and status indicators to show each stage of the order process, from order placement to delivery.
+Order Details Access: Created a section where users can view specific details about their order, including items, shipping method, and contact information for support.
+Summary
+This week, I worked with Arif Adnan to update the "About" page design and implement a user-friendly order tracking system. The "About" page enhancements improve brand storytelling, while the order tracking system offers customers a transparent view of their order status. These updates enhance user engagement and provide a more comprehensive customer experience.
