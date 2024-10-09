@@ -1,0 +1,31 @@
+      *********WEEK 3**********
+Giftap Project Documentation (Current Work Progress by Naiem Hasan)
+Overview:
+This document details the work completed by Naiem Hasan on the Giftap platform, an e-commerce system focused on gifting. The features implemented enhance user interaction, communication, and administrative management.
+
+Features Developed:
+1. User Authentication
+Naiem implemented a robust user authentication system allowing for:
+Login Methods:
+Users can log in using their email and password.
+Social login options with Google and GitHub have also been integrated for a seamless experience.
+Sign-Up:
+New users can sign up by providing their email, name, and password.
+2. Navbar Section
+To improve user experience and accessibility, the following features were added to the navbar:
+Hot Offer Section: A dynamic section displaying ongoing offers, along with a countdown timer showing the time left until the offer ends.
+Search Functionality: A search bar integrated into the navbar allows users to search for products across the platform quickly and efficiently.
+3. User Dashboard
+The user dashboard was created to provide users with control over their account settings and information:
+Profile Update: Users can update their personal details, such as their name, email, and password.
+Address Management: Users can add or update their shipping and billing addresses for a streamlined checkout process.
+Seller Request: Users have the option to request seller status. These requests are displayed on the admin side:
+Admins can approve or delete the requests.
+Once approved, the user's role is updated to seller, granting them access to seller functionalities.
+4. Live Chat System (Using WebSocket)
+Naiem developed a live chat system using WebSocket technology to facilitate real-time communication:
+User-Admin Chat: Currently, users can engage in real-time chat with admins for support or queries.
+Upcoming Feature: The system will be extended to allow users to chat with sellers, enhancing buyer-seller communication.
+
+Summary:
+The work completed so far covers crucial aspects of the user experience, including secure authentication, easy navigation, personalized user dashboards, and real-time communication. Future work will focus on extending the chat feature to include seller communication and other enhancements to improve the platform further.
