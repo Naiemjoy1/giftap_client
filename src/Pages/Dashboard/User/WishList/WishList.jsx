@@ -1,10 +1,11 @@
 import React from "react";
-import { AiFillDelete } from "react-icons/ai"; // Import the delete icon
+import { AiFillDelete } from "react-icons/ai";
 import useWishs from "../../../../Components/Hooks/useWishs";
 import useAuth from "../../../../Components/Hooks/useAuth";
 import useProducts from "../../../../Components/Hooks/useProducts";
 import toast from "react-hot-toast";
 import useAxiosPublic from "../../../../Components/Hooks/useAxiosPublic";
+import { Link } from "react-router-dom";
 
 const WishList = () => {
   const [wishlists, refetchWish, isLoading] = useWishs();
@@ -12,9 +13,9 @@ const WishList = () => {
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
 
-  const myWishlist = wishlists.filter(item => item?.email === user?.email);
-  const productIds = myWishlist.map(item => item?.productId);
-  console.log(productIds);
+  const myWishlist = wishlists?.filter(item => item?.email === user?.email);
+  const productIds = myWishlist?.map(item => item?.productId);
+  // console.log(productIds);
 
   const wishlistProducts = products?.filter(product => productIds?.includes(product._id));
 
@@ -37,7 +38,7 @@ const WishList = () => {
       {/* Wishlist Section */}
       <div className="mb-8 lg:w-[60%] ">
        
-        {wishlistProducts.length === 0 ? (
+        {wishlistProducts?.length === 0 ? (
           <div className="text-center my-4">
             <h3 className="text-lg font-semibold">Your wishlist is empty.</h3>
             <p>Add products to your wishlist to see them here!</p>
@@ -51,6 +52,7 @@ const WishList = () => {
                 <th>Product Name</th>
                 <th>Category</th>
                 <th>Store</th>
+                <th>Details</th>
                 <th>Remove</th> 
               </tr>
             </thead>
@@ -72,6 +74,12 @@ const WishList = () => {
                   <td>{product?.name}</td>
                   <td>{product?.category}</td>
                   <td>{product?.store_name}</td>
+                  <td> 
+                      <Link to={`/shop/${product?._id}`}>
+                        <button className="btn bg-secondary text-white btn-xs">
+                          View Details
+                        </button>
+                      </Link></td>
                   <th>
                     <button className="btn btn-ghost btn-xs" onClick={() => handleRemove(product._id)}>
                       <AiFillDelete className="text-primary text-xl" /> 
