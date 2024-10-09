@@ -1,0 +1,25 @@
+**********************WEEK 3******************
+Project Documentation for Giftap
+
+Project Name: GifTap ( Live )
+Team: Web Wizards ( 901.5 )
+Team Member: Rashedul Haque Rasel
+
+Introduction:
+The website GifTap has been developed with a focus on providing users with an intuitive and seamless experience. This document outlines the key features implemented so far, along with details about the current status of various components. I played a vital role in developing several crucial parts of the website, including creating the documentation file, implementing search bar suggestions, working on the admin dashboard, and updating the blog section. 
+
+Documentation File: 
+The documentation file serves as a guide for developers and users, explaining how the different parts of the website work. I created detailed and simple documentation that ensures everyone can easily understand how to navigate and use the platform.
+
+Search Bar Suggestion Feature:
+I implemented the search bar suggestion feature to enhance the user experience. Now, when users type something into the search bar, they receive suggestions related to what they are looking for. This makes it easier for them to find what they need quickly.
+
+
+Admin Dashboard (Demo Version):
+The admin dashboard was developed as a demo version, allowing admins to manage the website's content and user data. This dashboard includes key features like viewing site analytics, managing blog posts, and controlling user permissions. Although it’s a demo, it gives a clear idea of how the final admin panel will function.
+
+Blog Page and Blog Details Page Updates:
+I worked on updating the blog section to make it more interactive and visually appealing. The blog page now has an updated layout, making it easier for users to browse through posts. The blog details page has also been revamped for a better reading experience, with improved formatting and content display.
+
+Conclusion:
+Overall, the GifTap website is continuously evolving. The features mentioned above play a crucial role in improving the platform's usability and functionality. I will continue to contribute to its development, ensuring that every part of the website works smoothly for users and admins alike.
