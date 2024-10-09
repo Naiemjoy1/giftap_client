@@ -9,7 +9,7 @@ const Blog = () => {
 
   const [blogs] = useBlogs();
 
-  // console.log(blogs)
+  console.log(blogs)
 
  
   const [itemOffset, setItemOffset] = useState(0);
@@ -62,14 +62,14 @@ const Blog = () => {
                 </div>
 
                 <Link to={`/BlogDetails/${blog._id}`}>
-                  <h2 className="font-bold text-3xl mt-4 hover:text-primary">{blog.title}</h2>
+                  <h2 className="font-bold text-3xl mt-4 hover:text-primary">{blog.blogTitle}</h2>
                 </Link>
 
                 <div className="flex justify-between  text-sm mb-2">
-                  <span className='mt-2 text-xl font-semibold text-gray-500'>{blog.publishDate}</span>
+                  <span className='mt-2 text-xl font-semibold text-gray-500'>{blog.blogPublishDate}</span>
                   <span className="flex items-center text-gray-500">
                     <FaCommentDots className=' text-[17px] mt-2 mr-2' />
-                    <p className='mt-2 text-[17px] font-semibold '>{blog.comments.length} Comments</p>
+                    <p className='mt-2 text-[17px] font-semibold '>{blog.blogComments.length} Comments</p>
                   </span>
                 </div>
 
@@ -80,7 +80,7 @@ const Blog = () => {
                 </p> */}
 
                 <p className='text-gray-400 font-medium text-xl text-start '>
-                  {blog.description.split(" ").slice(0, 22).join(" ") + "..."}
+                  {blog.blogDescription.split(" ").slice(0, 22).join(" ") + "..."}
                 </p>
 
 
