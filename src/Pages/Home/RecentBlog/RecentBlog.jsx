@@ -10,7 +10,7 @@ const RecentBlog = () => {
       ></HomeSectionHeading>
 
       <section className="bg-white dark:bg-gray-100 dark:text-gray-800">
-        <div className="container max-w-6xl p-6 mx-auto space-y-10 sm:space-y-16">
+        <div className="container max-w-screen-xl p-6 mx-auto space-y-10 sm:space-y-16">
           {/* Featured Blog */}
           <a
             rel="noopener noreferrer"
@@ -92,7 +92,7 @@ const RecentBlog = () => {
             <a
               rel="noopener noreferrer"
               href="#"
-              className="max-w-sm mx-auto group hover:no-underline focus:no-underline bg-white dark:bg-gray-50 shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105 duration-300"
+              className="max-w-screen-xl mx-auto group hover:no-underline focus:no-underline bg-white dark:bg-gray-50 shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105 duration-300"
             >
               <img
                 role="presentation"
@@ -115,6 +115,7 @@ const RecentBlog = () => {
           </div>
 
           {/* View All Blogs Button */}
+          
           <div className="flex justify-center">
             <button
               className="btn text-white py-3 px-6 md:py-[16px] md:px-[40px] rounded-3xl flex items-center justify-center gap-2 border-2 border-transparent hover:border-black hover:bg-red-700 transition-all duration-500 ease-in-out"

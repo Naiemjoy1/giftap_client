@@ -1,20 +1,20 @@
-import { useEffect, useState } from "react";
+import useAxiosPublic from "./useAxiosPublic";
+import useAuth from "./useAuth";
+import { useQuery } from "@tanstack/react-query";
 
-const useRecentView = () => {
-  const [recentViewProduct, setRecentViewProduct] = useState([]);
-  const [loading, setLoading] = useState(true);
+const useRecntView = () => {
+  const axiosPublic = useAxiosPublic();
+  const { user } = useAuth();
 
-  useEffect(() => {
-    fetch("http://localhost:3000/recentviews")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setRecentViewProduct(data);
-        setLoading(false);
-      });
-  }, []);
+  const { refetch, data: recentviews = [] } = useQuery({
+    queryKey: ["recentviews", user?.email],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/recentviews");
+      return res.data;
+    },
+  });
 
-  return [recentViewProduct, loading];
+  return [recentviews, refetch];
 };
 
-export default useRecentView;
+export default useRecntView;

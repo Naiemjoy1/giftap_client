@@ -56,7 +56,6 @@ const Shipping = ({ onClose }) => {
   }, [shippingInfo, reset]);
 
   const onSubmit = async (data) => {
-    console.log(data);
     const {
       firstName,
       lastName,
@@ -90,7 +89,6 @@ const Shipping = ({ onClose }) => {
         ],
       },
     };
-    console.log(shipping);
 
     try {
       const updateResponse = await axiosPublic.patch(
@@ -300,7 +298,7 @@ const Shipping = ({ onClose }) => {
           {...register("email", { required: true })}
           placeholder="Email"
           className="input input-bordered w-full"
-          value={user?.email}
+          // value={user?.email}
         />
         {errors.email && (
           <span className="text-red-500">Email is required</span>

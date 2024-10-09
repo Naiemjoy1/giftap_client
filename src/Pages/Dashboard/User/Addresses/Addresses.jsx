@@ -10,6 +10,8 @@ const Addresses = () => {
   const [users, refetch] = useUsers();
 
   const usersDetails = users.find((u) => u?.email === user?.email);
+  console.log(usersDetails);
+
   const billingInfo = usersDetails?.address?.billing[0];
   const shippingInfo = usersDetails?.address?.shipping[0];
 
@@ -21,10 +23,9 @@ const Addresses = () => {
       <div className="flex justify-between gap-10">
         <section className="w-1/2">
           <p className="font-bold">Billing Address</p>
-          <div className="divider"></div>
 
           {billingInfo ? (
-            <div className="border p-4 rounded-xl border-primary relative">
+            <div className="border p-4 rounded-xl border-primary relative mt-2">
               <p>
                 <span className="font-semibold">Name: </span>
                 {`${billingInfo.firstName} ${billingInfo.lastName}`}
@@ -85,9 +86,8 @@ const Addresses = () => {
         </section>
         <section className="w-1/2">
           <p className="font-bold">Shipping Address</p>
-          <div className="divider"></div>
           {shippingInfo ? (
-            <div className="border p-4 rounded-xl border-primary relative">
+            <div className="border p-4 rounded-xl border-primary relative mt-2">
               <p>
                 <span className="font-semibold">Name: </span>
                 {`${shippingInfo.firstName} ${shippingInfo.lastName}`}

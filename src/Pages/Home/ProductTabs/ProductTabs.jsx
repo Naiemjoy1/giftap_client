@@ -14,7 +14,7 @@ const ProductTabs = () => {
   const [activeTab, setActiveTab] = React.useState("newProduct");
 
   return (
-    <div className="pt-[150px]">
+    <div className="pt-[150px] max-w-6xl mx-auto">
       <Tabs value={activeTab} onChange={(value) => setActiveTab(value)}>
         <TabsHeader
           className="rounded-none text-gray-500 border-blue-gray-50 bg-transparent p-0"
