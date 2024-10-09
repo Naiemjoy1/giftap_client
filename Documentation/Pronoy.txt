@@ -35,3 +35,21 @@ Conclusion:
 The shop page is a central feature of the platform, and my work has contributed to the overall success of Giftap as a user-friendly and well-designed gift-giving solution.
 
 This document highlights my role and the impact of my contributions to the Giftap website, particularly focusing on the development of the shop page.
+
+*************WEEK 4****************
+Seller Dashboard Documentation
+1. Dashboard Overview
+Summary:
+The dashboard overview provides sellers with a comprehensive summary of their account and activities. This section includes quick insights into total sales, active listings, recent orders, and performance metrics, enabling sellers to monitor their business at a glance.
+
+2. Payment Management
+Summary:
+The payment management section allows sellers to manage and view pending payments, set up payout methods, and track the status of their earnings. This ensures that sellers have control over their financial transactions and can easily manage incoming payments.
+
+3. Payment History
+Summary:
+The payment history section provides a detailed record of all past transactions, including dates, amounts, and payment statuses. Sellers can review their earning history, download reports, and analyze their revenue trends over time.
+
+4. User Management
+Summary:
+In the user management section, sellers can view and manage their customer base. This feature allows sellers to delete user accounts or upgrade users to premium membership status, enabling customized user management and tailored customer experiences.
