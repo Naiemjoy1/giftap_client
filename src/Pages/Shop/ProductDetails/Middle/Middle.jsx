@@ -94,7 +94,7 @@ const Middle = ({ product }) => {
         price: discountedPrice,
         quantity: quantitySelected,
         name: name,
-        image: image.itemImg,
+        image: image.cardImg1,
         message: message,
         delivery: deliveryData,
         category: category,
