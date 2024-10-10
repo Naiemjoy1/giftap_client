@@ -194,7 +194,7 @@ const BlogDetails = () => {
               </div>
             </div>
 
-            {/* Blog  blogTags */}
+            {/* Blog  blogTags... */}
             <div>
               <h1 className="text-gray-500 font-bold text-2xl">Tags</h1>
               <hr className="text-gray-500 mt-2" />

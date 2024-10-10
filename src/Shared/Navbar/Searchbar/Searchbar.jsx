@@ -13,11 +13,13 @@ import useWishs from "../../../Components/Hooks/useWishs";
 
 const Searchbar = () => {
   const { user, logOut } = useAuth();
+
   const handleLogOut = () => {
     logOut().catch((error) => console.log(error));
   };
 
   const [isOpen, setIsOpen] = React.useState(false);
+  
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState);
   };
