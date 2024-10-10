@@ -3,13 +3,17 @@ import useBlogs from "../../Components/Hooks/useBlogs";
 import useAuth from "../../Components/Hooks/useAuth";
 import toast from "react-hot-toast";
 import { FaCopy } from "react-icons/fa";
+import { useState } from "react";
+import useAxiosPublic from "../../Components/Hooks/useAxiosPublic";
 
 const BlogDetails = () => {
   const { user } = useAuth();
-  const [blogs] = useBlogs();
+  const [blogs, refetch] = useBlogs();
   const blogDetails = useLoaderData();
+  // console.log(blogDetails)
+  const axiosPublic = useAxiosPublic();
 
-  const { title, publishDate, description, blogImage, tags, comments, blogCategories } = blogDetails;
+  const { blogTitle, publishDate, blogDescription, blogImage, blogTags, blogComments, blogCategories } = blogDetails;
   const recentBlogs = [...blogs].sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));
 
   const handleCopyLink = () => {
@@ -23,6 +27,42 @@ const BlogDetails = () => {
       });
   };
 
+  refetch()
+
+  const [comment, setComment] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const newComment = {
+      commentName: user?.displayName || "Anonymous",
+      comment,
+      commentsUrl: user?.photoURL || "https://your-image-url.com",
+      commentEmail: user?.email || "user.email@gmail.com",
+    };
+
+    // console.log(newComment)
+
+    try {
+      // Send a POST request to the backend to add the comment
+      const response = await axiosPublic.post(`/blogs/${blogDetails._id}/comments`, newComment);
+
+      if (response.status === 200) {
+        alert("Comment added successfully!");
+        setComment("");
+        refetch()
+      }
+    } catch (error) {
+      console.error("Failed to add comment", error);
+      alert("Error 404 ...There was an issue adding your comment.");
+    }
+    refetch()
+  };
+
+  refetch()
+
+
+
   return (
     <div className="container mx-auto px-4">
       <div className="flex flex-col lg:flex-row justify-between gap-4">
@@ -30,37 +70,42 @@ const BlogDetails = () => {
         {/* BlogDetails Left Side */}
         <div className="w-full lg:w-3/4 lg:p-4">
           <div>
-            <h1 className="text-3xl lg:text-5xl font-bold text-black my-4 mb-8">{title}</h1>
+            <h1 className="text-3xl lg:text-5xl font-bold text-black my-4 mb-8">{blogTitle}</h1>
 
             <img src={blogImage} alt="GifTap has No Photo" className="w-full rounded-lg" />
-            <p className="text-lg lg:text-xl font-semibold text-gray-500 mt-8">{description}</p>
+            <p className="text-lg lg:text-xl font-semibold text-gray-500 mt-8">{blogDescription}</p>
 
             <h1 className="text-2xl lg:text-3xl font-bold text-black my-4 mb-4">Comments</h1>
 
             {/* input Comment */}
-            {user ? (
-              <div className="flex flex-col lg:flex-row">
-                <textarea placeholder="Write Your Comment..." className="textarea textarea-bordered border-blue-400 textarea-sm lg:textarea-md w-full lg:max-w-xs mb-2 lg:mb-0"></textarea>
-                <button className="btn btn-primary text-sm lg:text-xl font-bold text-black mt-2 lg:mt-0 lg:ml-2">Submit</button>
-              </div>
-            ) : (
-              <div className="flex flex-col lg:flex-row">
-                <textarea placeholder="Write your comment..." className="textarea textarea-bordered border-blue-400 textarea-sm lg:textarea-md w-full lg:max-w-xs mb-2 lg:mb-0"></textarea>
-                <Link to="/login">
-                  <button className="btn btn-primary text-sm lg:text-xl font-bold text-black mt-2 lg:mt-0 lg:ml-2">Login</button>
-                </Link>
-              </div>
-            )}
+            <form onSubmit={handleSubmit}>
+              {user ? (
+                <div className="flex flex-col lg:flex-row">
+                  <textarea value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                    required 
+                    placeholder="Write Your Comment..." className="textarea textarea-bordered border-blue-400 textarea-sm lg:textarea-md w-full lg:max-w-xs mb-2 lg:mb-0"></textarea>
+                  <button className="btn btn-primary text-sm lg:text-xl font-bold text-black mt-2 lg:mt-0 lg:ml-2" type="submit">Submit</button>
+                </div>
+              ) : (
+                <div className="flex flex-col lg:flex-row">
+                  <textarea placeholder="Write your comment..." className="textarea textarea-bordered border-blue-400 textarea-sm lg:textarea-md w-full lg:max-w-xs mb-2 lg:mb-0"></textarea>
+                  <Link to="/login">
+                    <button className="btn btn-primary text-sm lg:text-xl font-bold text-black mt-2 lg:mt-0 lg:ml-2">Login</button>
+                  </Link>
+                </div>
+              )}
 
+            </form>
             {/* Show Comment */}
             <div className="mt-10">
-              {blogDetails.comments.map(comment => (
+              {blogDetails.blogComments.map(comment => (
                 <div key={comment._id} className="mb-4">
                   <div className="flex items-start">
-                    <img src={comment.userImage} alt="" className="h-8 w-8 lg:h-10 lg:w-10 object-cover rounded-full mr-2" />
+                    <img src={comment.commentsUrl} alt="" className="h-8 w-8 lg:h-10 lg:w-10 object-cover rounded-full mr-2" />
                     <div>
                       <div className="bg-gray-300 rounded-2xl p-2">
-                        <h1 className="text-[16px] lg:text-[18px] font-bold text-black">{comment.name}</h1>
+                        <h1 className="text-[16px] lg:text-[18px] font-bold text-black">{comment.commentName}</h1>
                         <p className="ml-4 font-medium text-gray-700">{comment.comment}</p>
                       </div>
                       <div className="flex text-blue-600 ml-4 lg:ml-10 font-medium cursor-pointer">
@@ -125,9 +170,9 @@ const BlogDetails = () => {
                     </Link>
                     <div>
                       <Link to={`/BlogDetails/${blog._id}`}>
-                        <h1 className="font-bold text-sm lg:text-[17px] text-gray-600 hover:text-primary">{blog.title}</h1>
+                        <h1 className="font-bold text-sm lg:text-[17px] text-gray-600 hover:text-primary">{blog.blogTitle}</h1>
                       </Link>
-                      <p className="text-gray-500 text-xs lg:text-sm">{blog.publishDate}</p>
+                      <p className="text-gray-500 text-xs lg:text-sm">{blog.blogPublishDate}</p>
                     </div>
                   </div>
                 ))}
@@ -149,12 +194,12 @@ const BlogDetails = () => {
               </div>
             </div>
 
-            {/* Blog  Tags */}
+            {/* Blog  blogTags... */}
             <div>
               <h1 className="text-gray-500 font-bold text-2xl">Tags</h1>
               <hr className="text-gray-500 mt-2" />
               <div className="mt-2 flex flex-wrap gap-2">
-                {tags?.map((tag, index) => (
+                {blogTags?.map((tag, index) => (
                   <Link key={index}>
                     <div className="border hover:border-primary font-medium text-gray-600 p-2 rounded-lg hover:text-primary">
                       {tag}
