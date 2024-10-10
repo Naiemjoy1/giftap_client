@@ -7,6 +7,9 @@ import Dashboard from "../../Pages/Dashboard/Admin/Dashboard/Dashboard";
 import SellerRequest from "../../Pages/Dashboard/Admin/SellerRequest/SellerRequest";
 import { FaArrowsDownToPeople } from "react-icons/fa6";
 import { PiUsersThree } from "react-icons/pi";
+import Products from "../../Pages/Dashboard/Admin/Products/Products";
+import AddProducts from "../../Pages/Dashboard/Admin/AddProducts/AddProducts";
+import Users from "../../Pages/Dashboard/Admin/Users/Users";
 
 const useAdminTabs = () => {
   const tabsData = [
@@ -26,19 +29,19 @@ const useAdminTabs = () => {
       name: "products",
       icon: <MdProductionQuantityLimits />,
       tab: 2,
-      page: <SellerRequest></SellerRequest>,
+      page: <Products></Products>,
     },
     {
       name: "add product",
       icon: <MdAddShoppingCart />,
       tab: 3,
-      page: <SellerRequest></SellerRequest>,
+      page: <AddProducts></AddProducts>,
     },
     {
       name: "users",
       icon: <PiUsersThree />,
       tab: 4,
-      page: <SellerRequest></SellerRequest>,
+      page: <Users></Users>,
     },
   ];
   return [tabsData];

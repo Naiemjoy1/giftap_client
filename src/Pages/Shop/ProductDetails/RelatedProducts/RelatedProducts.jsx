@@ -51,7 +51,7 @@ const RelatedProducts = ({ id }) => {
       price: discountedPrice,
       quantity: 1,
       name: item.name,
-      image: item.image.itemImg1,
+      image: item.image.cardImg1,
       delivery: deliveryData,
       category: item.category,
     };
@@ -128,7 +128,7 @@ const RelatedProducts = ({ id }) => {
         return (
           <div className="relative group" key={item._id}>
             <figure>
-              <img src={item.image.itemImg1} alt={item.name} />
+              <img src={item.image.cardImg1} alt={item.name} />
             </figure>
             <div className="mt-4 space-y-2">
               <p className="text-lg font-medium">

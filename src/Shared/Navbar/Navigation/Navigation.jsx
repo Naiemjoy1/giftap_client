@@ -86,14 +86,6 @@ const Navigation = () => {
     </>
   );
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <span className="loading loading-spinner loading-lg text-primary"></span>
-      </div>
-    );
-  }
-
   return (
     <div className="border-t">
       <div className="flex justify-between items-center container mx-auto">
