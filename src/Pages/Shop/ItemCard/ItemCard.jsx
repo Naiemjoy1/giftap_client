@@ -70,7 +70,7 @@ const ItemCard = ({ item }) => {
       price: discountedPrice,
       quantity: 1,
       name: name,
-      image: image.itemImg,
+      image: image.cardImg1,
       delivery: deliveryData,
       category: category,
     };
@@ -146,7 +146,7 @@ const ItemCard = ({ item }) => {
         )}
 
         <img
-          src={image.cardImg}
+          src={image.cardImg1}
           alt={name}
           className="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
         />

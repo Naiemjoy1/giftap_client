@@ -17,7 +17,7 @@ const Image = ({ product }) => {
           }`}
         >
           <img
-            src={image?.itemImg}
+            src={image?.cardImg2}
             alt="Item Image 1"
             className="w-full object-cover"
           />
@@ -28,7 +28,7 @@ const Image = ({ product }) => {
           }`}
         >
           <img
-            src={image?.itemImg1}
+            src={image?.cardImg3}
             alt="Item Image 2"
             className="w-full object-cover"
           />
@@ -45,7 +45,7 @@ const Image = ({ product }) => {
             currentImage === 0 ? "bg-gray-900 text-white" : "bg-gray-200"
           }  rounded`}
         >
-          <img src={image?.itemImg} className="w-10 h-10" alt="" />
+          <img src={image?.cardImg2} className="w-10 h-10" alt="" />
         </button>
         <button
           onClick={() => handleImageChange(1)}
@@ -53,7 +53,7 @@ const Image = ({ product }) => {
             currentImage === 1 ? "bg-gray-900 text-white" : "bg-gray-200"
           }  rounded`}
         >
-          <img src={image?.itemImg1} className="w-10 h-10" alt="" />
+          <img src={image?.cardImg3} className="w-10 h-10" alt="" />
         </button>
       </div>
     </div>
