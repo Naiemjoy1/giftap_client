@@ -30,6 +30,8 @@ const Cart = () => {
   const [selectedDelivery, setSelectedDelivery] = useState("localPickup");
   const [shippingOption, setShippingOption] = useState("flatRate");
   const [coupon, setCoupon] = useState();
+  const [promo] = usePromo();
+  const [applyPromo, setApplyPromo] = useState("");
 
   useEffect(() => {
     const initialQuantities = carts.reduce((acc, cart) => {
@@ -50,6 +52,12 @@ const Cart = () => {
 
   const shippingCost = shippingOption === "flatRate" ? 5.0 : 0.0;
   const total = subtotal + shippingCost;
+
+  const discountValue = applyPromo?.discount?.includes("%")
+    ? (parseFloat(applyPromo.discount) / 100) * total
+    : parseFloat(applyPromo.discount) || 0;
+
+  const coupontotal = total - discountValue;
 
   const progressValue = (subtotal / 50) * 100;
 
@@ -81,9 +89,24 @@ const Cart = () => {
     setShippingOption(option);
   };
 
-  const handleCoupon = async (e) => {
+  const handleCoupon = (e) => {
     e.preventDefault();
-    console.log(coupon);
+
+    const matchedPromo = promo.find(
+      (p) => p.promoCode === coupon && p.status === "active"
+    );
+
+    if (!matchedPromo) {
+      toast.error("Invalid or expired coupon code");
+      setApplyPromo("");
+      return;
+    } else {
+      const promoData = {
+        discount: matchedPromo.discount,
+      };
+      toast.success("Coupon Applied");
+      setApplyPromo(promoData);
+    }
   };
 
   const handleRemove = (cartId) => {
@@ -142,11 +165,11 @@ const Cart = () => {
 
     const paymentData = {
       email: user.email,
-      total: total.toFixed(2),
+      total: coupontotal.toFixed(2),
       cartIds: userCarts.map((cart) => cart._id),
       productId: userCarts.map((cart) => cart.productId),
       user: usersDetails,
-      amount: total.toFixed(2),
+      amount: coupontotal.toFixed(2),
       currency: "USD",
       name: user.displayName,
       date: new Date(),
@@ -455,8 +478,13 @@ const Cart = () => {
               </section>
               <div className="border-b my-2"></div>
               <section className="flex justify-between items-center">
+                <p>Coupon</p>
+                {applyPromo.discount ? <p>{applyPromo.discount}</p> : "$0.00"}
+              </section>
+              <div className="border-b my-2"></div>
+              <section className="flex justify-between items-center">
                 <p>Total</p>
-                <p>${total.toFixed(2)}</p> {/* Total calculated */}
+                <p>${coupontotal.toFixed(2)}</p>
               </section>
               <div className="border-b my-2"></div>
               <button
