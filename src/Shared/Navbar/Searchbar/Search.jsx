@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const Search = () => {
   const [product] = useProducts();
+
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleChange = (event) => {
@@ -62,7 +63,7 @@ const Search = () => {
                   >
                     <section className="w-1/3">
                       <img
-                        src={result.image.itemImg}
+                        src={result.image.cardImg1}
                         alt={result.name}
                         className="w-full h-24 object-cover rounded-md"
                       />

@@ -29,6 +29,7 @@ const Cart = () => {
   const [date, setDate] = useState(new Date());
   const [selectedDelivery, setSelectedDelivery] = useState("localPickup");
   const [shippingOption, setShippingOption] = useState("flatRate");
+  const [coupon, setCoupon] = useState();
 
   useEffect(() => {
     const initialQuantities = carts.reduce((acc, cart) => {
@@ -41,7 +42,6 @@ const Cart = () => {
   const usersDetails = users.find((u) => u?.email === user?.email);
 
   const userCarts = carts.filter((cart) => cart?.email === user?.email);
-  console.log("userCarts", userCarts);
 
   const subtotal = userCarts.reduce((acc, cart) => {
     const quantity = quantities[cart._id] || cart.quantity;
@@ -79,6 +79,11 @@ const Cart = () => {
 
   const handleShippingChange = (option) => {
     setShippingOption(option);
+  };
+
+  const handleCoupon = async (e) => {
+    e.preventDefault();
+    console.log(coupon);
   };
 
   const handleRemove = (cartId) => {
@@ -398,8 +403,13 @@ const Cart = () => {
                   type="text"
                   placeholder="Add coupon here"
                   className="input input-bordered w-full max-w-xs"
+                  value={coupon}
+                  onChange={(e) => setCoupon(e.target.value)}
                 />
-                <button className="btn btn-primary text-white">
+                <button
+                  onClick={handleCoupon}
+                  className="btn btn-primary text-white"
+                >
                   Apply coupon
                 </button>
               </div>

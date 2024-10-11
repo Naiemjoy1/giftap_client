@@ -13,13 +13,27 @@ import ProductReview from "./Reviews/ProductReview";
 import Information from "./Information/Information";
 import RelatedProducts from "./RelatedProducts/RelatedProducts";
 import RecentView from "../RecentView/RecentView";
+import useReviews from "../../../Components/Hooks/useReviews";
 
 const ProductDeatails = () => {
   const { id } = useParams();
   const [products, loading] = useProducts();
 
   const product = products.find((p) => p._id === id);
-  const { name } = product ?? {};
+  const { _id, name } = product ?? {};
+
+  const [reviews] = useReviews();
+
+  const productReviews = reviews.filter((review) => review.productId === _id);
+
+  // Calculate average rating
+  const averageRating =
+    productReviews.length > 0
+      ? (
+          productReviews.reduce((sum, review) => sum + review.rating, 0) /
+          productReviews.length
+        ).toFixed(1)
+      : 0;
 
   const [activeTab, setActiveTab] = useState("description");
 
@@ -38,8 +52,8 @@ const ProductDeatails = () => {
           <p className=" text-xl font-semibold">{name}</p>
           <div className="flex gap-4 text-xs mt-4">
             <section className="flex gap-2 items-center">
-              <Rating style={{ maxWidth: 80 }} value={3} readOnly />
-              <p className="uppercase">1 review</p>
+              <Rating style={{ maxWidth: 80 }} value={averageRating} readOnly />
+              <p className="uppercase">{productReviews.length} review</p>
             </section>
             <p>|</p>
             <p>
@@ -96,7 +110,7 @@ const ProductDeatails = () => {
                 activeTab === "review" ? "font-bold" : ""
               }`}
             >
-              Review (0)
+              Review ({productReviews.length})
             </p>
           </section>
           <div className="divider divider-primary"></div>

@@ -1,19 +1,24 @@
-import React, { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import useAuth from "./useAuth";
+import useAxiosPublic from "./useAxiosPublic";
 
 const useReviews = () => {
-  const [reviews, setReviews] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const axiosPublic = useAxiosPublic();
+  const { user } = useAuth();
 
-  useEffect(() => {
-    fetch("http://localhost:3000/review")
-      .then((res) => res.json())
-      .then((data) => {
-        setReviews(data);
-        setLoading(false);
-      });
-  }, []);
+  const {
+    refetch,
+    data: reviews = [],
+    isLoading,
+  } = useQuery({
+    queryKey: ["reviews", user?.email],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/reviews");
+      return res.data;
+    },
+  });
 
-  return [reviews, loading];
+  return [reviews, refetch, isLoading];
 };
 
 export default useReviews;

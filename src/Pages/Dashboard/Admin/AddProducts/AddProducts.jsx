@@ -84,18 +84,18 @@ const AddProducts = () => {
         },
         category: data.category,
         subCategory: data.subCategory,
-        price: isDigitalGift ? undefined : parseFloat(data.price), // Only parse if not a digital gift
+        price: isDigitalGift ? undefined : parseFloat(data.price),
         priceGroup: data.priceGroup.map((priceGroupItem, index) => ({
           ...priceGroupItem,
           price: {
             ...priceGroupItem.price,
-            amount: parseFloat(priceGroupItem.price.amount), // Convert to float
+            amount: parseFloat(priceGroupItem.price.amount),
           },
-          quantity: parseFloat(priceGroupItem.quantity), // Convert to float
+          quantity: parseFloat(priceGroupItem.quantity),
           image: uploadedTierImages[index],
         })),
         mention: data.mention,
-        quantity: isDigitalGift ? undefined : parseFloat(data.quantity), // Only parse if not a digital gift
+        quantity: isDigitalGift ? undefined : parseFloat(data.quantity),
         discount: parseFloat(data.discount),
       };
 
@@ -321,7 +321,6 @@ const AddProducts = () => {
           </div>
         </div>
 
-        {/* PriceGroup for Digital Gifts */}
         {/* Price Group for Digital Gifts */}
         {isDigitalGift && (
           <div className="space-y-4">
