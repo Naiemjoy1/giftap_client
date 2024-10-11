@@ -22,11 +22,11 @@ const NewProduct = () => {
     // this card style will get on ReUseCard Component
     <div className="container mx-auto p-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 p-4">
-        {product.slice(0, 10).map(item => (
+        {product.slice(0, 10).map((item) => (
           <ReUseCard
             key={item._id}
             productId={item._id}
-            productImage={item.image.itemImg}
+            productImage={item.image.cardImg1}
             productPrice={item.price}
             productTitle={item.name}
             productReview={"1"}

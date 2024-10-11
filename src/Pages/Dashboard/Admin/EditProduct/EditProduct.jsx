@@ -316,176 +316,180 @@ const EditProduct = ({ handleBackClick, productId }) => {
             />
           </div>
         </div>
-
-        {/* Price Group Section */}
-        <div className="flex justify-between gap-4">
-          {priceGroup.map((tier, index) => (
-            <div className="grid grid-cols-2 gap-4">
-              <div className="form-control" key={index}>
-                <input
-                  type="text"
-                  placeholder="Tier Name"
-                  className="input input-bordered"
-                  value={tier.tier}
-                  onChange={(e) => {
-                    const newTier = { ...tier, tier: e.target.value };
-                    setPriceGroup((prev) => {
-                      const newPriceGroup = [...prev];
-                      newPriceGroup[index] = newTier;
-                      return newPriceGroup;
-                    });
-                  }}
-                />
-                {errors.priceGroup?.[index]?.tier && (
-                  <p className="text-red-600">Tier name is required.</p>
-                )}
-              </div>
-              {/* Currency Dropdown */}
-              <div className="form-control">
-                <select
-                  className="select select-bordered"
-                  value={tier.price?.currency || ""}
-                  onChange={(e) => {
-                    const newTier = {
-                      ...tier,
-                      price: { ...tier.price, currency: e.target.value },
-                    };
-                    setPriceGroup((prev) => {
-                      const newPriceGroup = [...prev];
-                      newPriceGroup[index] = newTier;
-                      return newPriceGroup;
-                    });
-                  }}
-                >
-                  <option value="">Select Currency</option>
-                  <option value="USD">USD</option>
-                  <option value="BDT">BDT</option>
-                  <option value="EUR">EUR</option>
-                </select>
-                {errors[`priceGroup.${index}.price.currency`] && (
-                  <p className="text-red-600">Currency is required.</p>
-                )}
-              </div>
-              {/* Price Input */}
-              <div className="form-control">
-                <input
-                  type="number"
-                  step="0.01"
-                  placeholder="Price"
-                  className="input input-bordered"
-                  value={tier.price?.amount || ""}
-                  onChange={(e) => {
-                    const newTier = {
-                      ...tier,
-                      price: { ...tier.price, amount: e.target.value },
-                    };
-                    setPriceGroup((prev) => {
-                      const newPriceGroup = [...prev];
-                      newPriceGroup[index] = newTier;
-                      return newPriceGroup;
-                    });
-                  }}
-                />
-                {errors[`priceGroup.${index}.price.amount`] && (
-                  <p className="text-red-600">Price is required.</p>
-                )}
-              </div>
-              <div className="form-control">
-                <input
-                  type="text"
-                  placeholder="Duration (e.g., 1 month)"
-                  className="input input-bordered"
-                  value={tier.price?.duration || ""}
-                  onChange={(e) => {
-                    const newTier = {
-                      ...tier,
-                      price: { ...tier.price, duration: e.target.value },
-                    };
-                    setPriceGroup((prev) => {
-                      const newPriceGroup = [...prev];
-                      newPriceGroup[index] = newTier;
-                      return newPriceGroup;
-                    });
-                  }}
-                />
-              </div>
-              {/* Image Upload Section */}
-              <div className="form-control">
-                <div className="flex justify-center items-center">
-                  <label
-                    htmlFor={`tierImg${index}`}
-                    className="border border-dashed p-2 text-2xl flex justify-center items-center text-primary cursor-pointer w-full"
-                  >
-                    {imagePreviews[`tierImg${index}`] ? (
-                      <img
-                        src={imagePreviews[`tierImg${index}`]}
-                        alt="Preview"
-                        className="h-8"
-                      />
-                    ) : product.priceGroup[index]?.image ? (
-                      <img
-                        src={product.priceGroup[index].image}
-                        alt="Existing Preview"
-                        className="h-8"
-                      />
-                    ) : (
-                      <IoCloudUploadSharp />
-                    )}
-                  </label>
+        {selectedCategory === "digital gift" ? (
+          <div className="flex justify-between gap-4">
+            {priceGroup.map((tier, index) => (
+              <div className="grid grid-cols-2 gap-4">
+                <div className="form-control" key={index}>
                   <input
-                    type="file"
-                    id={`tierImg${index}`}
-                    className="sr-only"
-                    accept="image/*"
-                    {...register(`priceGroup.${index}.image`)}
-                    onChange={(e) => handleImageChange(e, `tierImg${index}`)}
+                    type="text"
+                    placeholder="Tier Name"
+                    className="input input-bordered"
+                    value={tier.tier}
+                    onChange={(e) => {
+                      const newTier = { ...tier, tier: e.target.value };
+                      setPriceGroup((prev) => {
+                        const newPriceGroup = [...prev];
+                        newPriceGroup[index] = newTier;
+                        return newPriceGroup;
+                      });
+                    }}
+                  />
+                  {errors.priceGroup?.[index]?.tier && (
+                    <p className="text-red-600">Tier name is required.</p>
+                  )}
+                </div>
+                {/* Currency Dropdown */}
+                <div className="form-control">
+                  <select
+                    className="select select-bordered"
+                    value={tier.price?.currency || ""}
+                    onChange={(e) => {
+                      const newTier = {
+                        ...tier,
+                        price: { ...tier.price, currency: e.target.value },
+                      };
+                      setPriceGroup((prev) => {
+                        const newPriceGroup = [...prev];
+                        newPriceGroup[index] = newTier;
+                        return newPriceGroup;
+                      });
+                    }}
+                  >
+                    <option value="">Select Currency</option>
+                    <option value="USD">USD</option>
+                    <option value="BDT">BDT</option>
+                    <option value="EUR">EUR</option>
+                  </select>
+                  {errors[`priceGroup.${index}.price.currency`] && (
+                    <p className="text-red-600">Currency is required.</p>
+                  )}
+                </div>
+                {/* Price Input */}
+                <div className="form-control">
+                  <input
+                    type="number"
+                    step="0.01"
+                    placeholder="Price"
+                    className="input input-bordered"
+                    value={tier.price?.amount || ""}
+                    onChange={(e) => {
+                      const newTier = {
+                        ...tier,
+                        price: { ...tier.price, amount: e.target.value },
+                      };
+                      setPriceGroup((prev) => {
+                        const newPriceGroup = [...prev];
+                        newPriceGroup[index] = newTier;
+                        return newPriceGroup;
+                      });
+                    }}
+                  />
+                  {errors[`priceGroup.${index}.price.amount`] && (
+                    <p className="text-red-600">Price is required.</p>
+                  )}
+                </div>
+                <div className="form-control">
+                  <input
+                    type="text"
+                    placeholder="Duration (e.g., 1 month)"
+                    className="input input-bordered"
+                    value={tier.price?.duration || ""}
+                    onChange={(e) => {
+                      const newTier = {
+                        ...tier,
+                        price: { ...tier.price, duration: e.target.value },
+                      };
+                      setPriceGroup((prev) => {
+                        const newPriceGroup = [...prev];
+                        newPriceGroup[index] = newTier;
+                        return newPriceGroup;
+                      });
+                    }}
                   />
                 </div>
-                {errors[`priceGroup.${index}.image`] && (
-                  <p className="text-red-600">Image is required.</p>
-                )}
+                {/* Image Upload Section */}
+                <div className="form-control">
+                  <div className="flex justify-center items-center">
+                    <label
+                      htmlFor={`tierImg${index}`}
+                      className="border border-dashed p-2 text-2xl flex justify-center items-center text-primary cursor-pointer w-full"
+                    >
+                      {imagePreviews[`tierImg${index}`] ? (
+                        <img
+                          src={imagePreviews[`tierImg${index}`]}
+                          alt="Preview"
+                          className="h-8"
+                        />
+                      ) : product.priceGroup[index]?.image ? (
+                        <img
+                          src={product.priceGroup[index].image}
+                          alt="Existing Preview"
+                          className="h-8"
+                        />
+                      ) : (
+                        <IoCloudUploadSharp />
+                      )}
+                    </label>
+                    <input
+                      type="file"
+                      id={`tierImg${index}`}
+                      className="sr-only"
+                      accept="image/*"
+                      {...register(`priceGroup.${index}.image`)}
+                      onChange={(e) => handleImageChange(e, `tierImg${index}`)}
+                    />
+                  </div>
+                  {errors[`priceGroup.${index}.image`] && (
+                    <p className="text-red-600">Image is required.</p>
+                  )}
+                </div>
+                <div className="form-control">
+                  <input
+                    type="number"
+                    placeholder="Quantity"
+                    className="input input-bordered"
+                    value={tier.quantity || ""}
+                    onChange={(e) => {
+                      const newTier = { ...tier, quantity: e.target.value };
+                      setPriceGroup((prev) => {
+                        const newPriceGroup = [...prev];
+                        newPriceGroup[index] = newTier;
+                        return newPriceGroup;
+                      });
+                    }}
+                  />
+                  {errors[`priceGroup.${index}.quantity`] && (
+                    <p className="text-red-600">Quantity is required.</p>
+                  )}
+                </div>
+                <button
+                  type="button"
+                  className="btn btn-error btn-sm text-white"
+                  onClick={() => remove(index)}
+                >
+                  Remove
+                </button>
               </div>
-              <div className="form-control">
-                <input
-                  type="number"
-                  placeholder="Quantity"
-                  className="input input-bordered"
-                  value={tier.quantity || ""}
-                  onChange={(e) => {
-                    const newTier = { ...tier, quantity: e.target.value };
-                    setPriceGroup((prev) => {
-                      const newPriceGroup = [...prev];
-                      newPriceGroup[index] = newTier;
-                      return newPriceGroup;
-                    });
-                  }}
-                />
-                {errors[`priceGroup.${index}.quantity`] && (
-                  <p className="text-red-600">Quantity is required.</p>
-                )}
-              </div>
-              <button
-                type="button"
-                className="btn btn-error btn-sm text-white"
-                onClick={() => remove(index)}
-              >
-                Remove
-              </button>
-            </div>
-          ))}
-          <button
-            type="button"
-            className="btn btn-secondary mt-2"
-            onClick={() =>
-              setPriceGroup([
-                ...priceGroup,
-                { tier: "", price: {}, image: "", quantity: 1 },
-              ])
-            }
-          >
-            Add Price Group
-          </button>
-        </div>
+            ))}
+            <button
+              type="button"
+              className="btn btn-secondary mt-2"
+              onClick={() =>
+                setPriceGroup([
+                  ...priceGroup,
+                  { tier: "", price: {}, image: "", quantity: 1 },
+                ])
+              }
+            >
+              Add Price Group
+            </button>
+          </div>
+        ) : (
+          ""
+        )}
+
+        {/* Price Group Section */}
 
         <button type="submit" className="btn btn-primary w-full text-white">
           {loading ? (
