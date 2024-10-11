@@ -388,6 +388,9 @@ const Shop = () => {
                   </p>
                 </section>
               </div>
+              <div className=" hidden md:block">
+                <HotSale></HotSale>
+              </div>
             </div>
           </Drawer>
 
