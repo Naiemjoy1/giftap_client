@@ -57,7 +57,7 @@ const ProductDeatails = () => {
             </section>
             <p>|</p>
             <p>
-              <span className=" text-gray-400">SKU:</span> KTRL59
+              <span className=" text-gray-400">SKU:</span> {product.sku}
             </p>
           </div>
           <div className="lg:flex justify-between gap-8 mt-4 space-y-4">

@@ -501,10 +501,21 @@ const Cart = () => {
                     Confirm Checkout
                   </h3>
                   <p>Are you sure you want to proceed with the payment?</p>
-                  <ConfirmPay
-                    payment={payment}
-                    setIsModalVisible={setIsModalVisible}
-                  ></ConfirmPay>
+                  {usersDetails.name ? (
+                    <ConfirmPay
+                      payment={payment}
+                      setIsModalVisible={setIsModalVisible}
+                    ></ConfirmPay>
+                  ) : (
+                    <div>
+                      <p className="text-center">
+                        Please update your profile{" "}
+                        <span className="font-semibold text-primary">
+                          <a href="/profile">here</a>
+                        </span>
+                      </p>
+                    </div>
+                  )}
                 </div>
               </dialog>
             )}
