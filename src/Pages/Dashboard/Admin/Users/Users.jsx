@@ -73,7 +73,6 @@ const Users = () => {
 
   return (
     <div>
-      <p>Total Users: {users.length}</p>
       <div className="overflow-x-auto">
         <div className="overflow-y-auto max-h-[600px]">
           <table className="table">

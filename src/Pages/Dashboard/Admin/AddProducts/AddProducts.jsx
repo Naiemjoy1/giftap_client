@@ -62,16 +62,19 @@ const AddProducts = () => {
         uploadImageToImgBB(data.image.cardImg3[0]),
       ]);
 
-      const uploadedTierImages = await Promise.all(
-        fields.map((_, index) => {
-          const tierImageFile = tierImages[`tierImg${index}`];
-          if (tierImageFile) {
-            return uploadImageToImgBB(tierImageFile);
-          }
-          return Promise.resolve("");
-        })
-      );
+      const uploadedTierImages = isDigitalGift
+        ? await Promise.all(
+            fields.map((_, index) => {
+              const tierImageFile = tierImages[`tierImg${index}`];
+              if (tierImageFile) {
+                return uploadImageToImgBB(tierImageFile);
+              }
+              return Promise.resolve("");
+            })
+          )
+        : [];
 
+      // Create the product data object
       const productData = {
         name: data.name,
         seller_name: data.seller_name,
@@ -85,19 +88,24 @@ const AddProducts = () => {
         category: data.category,
         subCategory: data.subCategory,
         price: isDigitalGift ? undefined : parseFloat(data.price),
-        priceGroup: data.priceGroup.map((priceGroupItem, index) => ({
-          ...priceGroupItem,
-          price: {
-            ...priceGroupItem.price,
-            amount: parseFloat(priceGroupItem.price.amount),
-          },
-          quantity: parseFloat(priceGroupItem.quantity),
-          image: uploadedTierImages[index],
-        })),
         mention: data.mention,
         quantity: isDigitalGift ? undefined : parseFloat(data.quantity),
         discount: parseFloat(data.discount),
       };
+
+      if (isDigitalGift) {
+        productData.priceGroup = data.priceGroup.map(
+          (priceGroupItem, index) => ({
+            ...priceGroupItem,
+            price: {
+              ...priceGroupItem.price,
+              amount: parseFloat(priceGroupItem.price.amount),
+            },
+            quantity: parseFloat(priceGroupItem.quantity),
+            image: uploadedTierImages[index],
+          })
+        );
+      }
 
       console.log(productData);
       const res = await axiosPublic.post("/products", productData);
@@ -412,6 +420,7 @@ const AddProducts = () => {
                         <p className="text-red-600">Image is required.</p>
                       )}
                     </div>
+                    {/* Quantity for each price group */}
                     <div className="form-control">
                       <input
                         type="number"
@@ -419,6 +428,7 @@ const AddProducts = () => {
                         className="input input-bordered"
                         {...register(`priceGroup.${index}.quantity`, {
                           required: true,
+                          valueAsNumber: true, // This ensures quantity is treated as a number
                         })}
                       />
                       {errors[`priceGroup.${index}.quantity`] && (
