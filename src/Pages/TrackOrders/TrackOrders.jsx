@@ -206,15 +206,26 @@ const TrackOrders = () => {
                                   </p>
                                 </td>
                                 <td>
-                                  {paymentData.delivery[index]
-                                    .toLowerCase()
-                                    .split(" ")
-                                    .map(
-                                      (word) =>
-                                        word.charAt(0).toUpperCase() +
-                                        word.slice(1)
-                                    )
-                                    .join(" ") || "Status not available"}
+                                  {isNaN(
+                                    Date.parse(paymentData.delivery[index])
+                                  ) ? (
+                                    paymentData.delivery[index]
+                                      .toLowerCase()
+                                      .split(" ")
+                                      .map(
+                                        (word) =>
+                                          word.charAt(0).toUpperCase() +
+                                          word.slice(1)
+                                      )
+                                      .join(" ") || "Status not available"
+                                  ) : (
+                                    <span>
+                                      <strong>Date:</strong>{" "}
+                                      {new Date(
+                                        paymentData.delivery[index]
+                                      ).toLocaleString()}
+                                    </span>
+                                  )}
                                 </td>
                                 <th>
                                   {paymentData?.delivery[
