@@ -38,7 +38,7 @@ const EditProduct = ({ handleBackClick, productId }) => {
         price: product.price,
         quantity: product.quantity,
         discount: product.discount,
-        priceGroup: product.priceGroup || [],
+        priceGroup: product.priceGroup,
       });
       setImagePreviews({
         cardImg1: product.image?.cardImg1,
@@ -242,7 +242,11 @@ const EditProduct = ({ handleBackClick, productId }) => {
               </option>
               {categories.map((category) => (
                 <option key={category} value={category}>
-                  {category}
+                  {category
+                    .toLowerCase()
+                    .split(" ")
+                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                    .join(" ")}
                 </option>
               ))}
             </select>
@@ -284,10 +288,15 @@ const EditProduct = ({ handleBackClick, productId }) => {
                   step="0.01"
                   placeholder="Price"
                   className="input input-bordered"
-                  {...register("price", { required: true })}
+                  {...register("price", {
+                    required: true,
+                    valueAsNumber: true, // This ensures that the value is treated as a number
+                  })}
                 />
                 {errors.price && (
-                  <p className="text-red-600">Price is required.</p>
+                  <p className="text-red-600">
+                    Price is required and should be a number.
+                  </p>
                 )}
               </div>
 
@@ -297,10 +306,15 @@ const EditProduct = ({ handleBackClick, productId }) => {
                   type="number"
                   placeholder="Quantity"
                   className="input input-bordered"
-                  {...register("quantity", { required: true })}
+                  {...register("quantity", {
+                    required: true,
+                    valueAsNumber: true, // Ensure value is treated as a number
+                  })}
                 />
                 {errors.quantity && (
-                  <p className="text-red-600">Quantity is required.</p>
+                  <p className="text-red-600">
+                    Quantity is required and should be a number.
+                  </p>
                 )}
               </div>
             </>
@@ -312,7 +326,9 @@ const EditProduct = ({ handleBackClick, productId }) => {
               step="0.01"
               placeholder="Discount Percentage"
               className="input input-bordered"
-              {...register("discount")}
+              {...register("discount", {
+                valueAsNumber: true, // Treat discount as a number
+              })}
             />
           </div>
         </div>
@@ -365,7 +381,8 @@ const EditProduct = ({ handleBackClick, productId }) => {
                     <p className="text-red-600">Currency is required.</p>
                   )}
                 </div>
-                {/* Price Input */}
+
+                {/* Price Input in Price Group */}
                 <div className="form-control">
                   <input
                     type="number"
@@ -376,7 +393,10 @@ const EditProduct = ({ handleBackClick, productId }) => {
                     onChange={(e) => {
                       const newTier = {
                         ...tier,
-                        price: { ...tier.price, amount: e.target.value },
+                        price: {
+                          ...tier.price,
+                          amount: parseFloat(e.target.value),
+                        }, // Convert to number
                       };
                       setPriceGroup((prev) => {
                         const newPriceGroup = [...prev];
@@ -385,10 +405,8 @@ const EditProduct = ({ handleBackClick, productId }) => {
                       });
                     }}
                   />
-                  {errors[`priceGroup.${index}.price.amount`] && (
-                    <p className="text-red-600">Price is required.</p>
-                  )}
                 </div>
+
                 <div className="form-control">
                   <input
                     type="text"
@@ -408,6 +426,7 @@ const EditProduct = ({ handleBackClick, productId }) => {
                     }}
                   />
                 </div>
+
                 {/* Image Upload Section */}
                 <div className="form-control">
                   <div className="flex justify-center items-center">
@@ -444,6 +463,8 @@ const EditProduct = ({ handleBackClick, productId }) => {
                     <p className="text-red-600">Image is required.</p>
                   )}
                 </div>
+
+                {/* Quantity Input in Price Group */}
                 <div className="form-control">
                   <input
                     type="number"
@@ -451,7 +472,10 @@ const EditProduct = ({ handleBackClick, productId }) => {
                     className="input input-bordered"
                     value={tier.quantity || ""}
                     onChange={(e) => {
-                      const newTier = { ...tier, quantity: e.target.value };
+                      const newTier = {
+                        ...tier,
+                        quantity: parseInt(e.target.value, 10),
+                      }; // Convert to integer
                       setPriceGroup((prev) => {
                         const newPriceGroup = [...prev];
                         newPriceGroup[index] = newTier;
@@ -459,10 +483,8 @@ const EditProduct = ({ handleBackClick, productId }) => {
                       });
                     }}
                   />
-                  {errors[`priceGroup.${index}.quantity`] && (
-                    <p className="text-red-600">Quantity is required.</p>
-                  )}
                 </div>
+
                 <button
                   type="button"
                   className="btn btn-error btn-sm text-white"

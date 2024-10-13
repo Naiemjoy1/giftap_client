@@ -74,7 +74,6 @@ const AccountDetails = () => {
         });
 
         const result = await response.json();
-        // console.log("Image upload result:", result); // Log image upload result
 
         if (result.success) {
           displayUrl = result.data.display_url;
@@ -94,14 +93,10 @@ const AccountDetails = () => {
           type: userDetail.type,
         };
 
-        // console.log("Updating user info:", updateInfo); // Log the update info
-
         const updateResponse = await axiosPublic.patch(
           `/users/${userDetail._id}`,
           updateInfo
         );
-
-        // console.log("Update response:", updateResponse); // Log the update response
 
         if (updateResponse.status === 200) {
           await updateUserProfile(name, displayUrl);
@@ -141,11 +136,11 @@ const AccountDetails = () => {
 
         <div className="form-control relative">
           <label className="label">
-            <span className="label-text">Display Name</span>
+            <span className="label-text">User Name</span>
           </label>
           <input
             type="text"
-            placeholder="Display Name"
+            placeholder="User Name"
             {...register("displayName", {
               required: "Display Name is required",
             })}
