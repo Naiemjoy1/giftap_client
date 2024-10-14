@@ -1,5 +1,6 @@
 *****************WEEK 3********************
-Introduction
+
+ 
 This documentation details the front-end development of the Giftap website, a platform focused on simplifying the process of sending gifts. Unlike a typical e-commerce platform, Giftap is tailored specifically for gifting. The following documentation highlights the development of the homepage, including its structure, functionality, and design, carried out by Arif Adnan, the front-end developer for Giftap.
 Developer Overview
 Developer Name: Arif Adnan
