@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "./useAxiosPublic";
 
-const useBlogs = () => {
-    const axiosPublic = useAxiosPublic(); // Correctly use useAxiosPublic
+const useBlogs = (search) => {
+    const axiosPublic = useAxiosPublic();  
   
     const { refetch, data: blogs = [] } = useQuery({
-      queryKey: ["blogs",], // Query key should be user-specific if needed
+      queryKey: ["blogs",], 
       queryFn: async () => {
-        const res = await axiosPublic.get("/blogs"); // Fixed the URL string
+        const res = await axiosPublic.get(`/blogs?search=${search}`);  
         return res.data;
       },
     });
