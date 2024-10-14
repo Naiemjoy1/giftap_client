@@ -6,7 +6,7 @@ import usePayment from "../../../../Components/Hooks/usePayment";
 
 const Orders = () => {
   const [payments] = usePayment();
-  const [products] = useProducts(); 
+  const [products] = useProducts();
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
 
@@ -32,7 +32,9 @@ const Orders = () => {
     <div className="overflow-x-auto lg:flex justify-between space-y-4 gap-4">
       {OrderProducts?.length === 0 ? (
         <div className="text-center my-4 lg:w-[60%]">
-          <h3 className="text-lg font-semibold">No products found for your orders.</h3>
+          <h3 className="text-lg font-semibold">
+            No products found for your orders.
+          </h3>
         </div>
       ) : (
         <table className="table w-full border border-gray-300">

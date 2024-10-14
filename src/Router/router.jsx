@@ -15,6 +15,7 @@ import LiveChat from "../Pages/LiveChat/LiveChat";
 import ProfileDetails from "../Pages/Dashboard/User/ProfileDetails";
 import Cart from "../Pages/Shop/Cart/Cart";
 import Admin from "../Pages/Dashboard/Admin/Admin";
+import Seller from "../Pages/Dashboard/Seller/Seller";
 
 export const router = createBrowserRouter([
   {
@@ -79,6 +80,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Admin></Admin>,
+      },
+      {
+        path: "/sellerdashboard",
+        element: <Seller></Seller>,
       },
     ],
   },

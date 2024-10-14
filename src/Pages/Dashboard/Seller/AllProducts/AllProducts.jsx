@@ -1,15 +1,26 @@
+import { useState } from "react";
 import useProducts from "../../../../Components/Hooks/useProducts";
+import useAxiosPublic from "../../../../Components/Hooks/useAxiosPublic";
 import { FaEdit } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
-import useAxiosPublic from "../../../../Components/Hooks/useAxiosPublic";
-import { useState } from "react";
-import EditProduct from "../EditProduct/EditProduct";
+import EditProduct from "../../Admin/EditProduct/EditProduct";
+import useAuth from "../../../../Components/Hooks/useAuth";
+import useUsers from "../../../../Components/Hooks/useUsers";
 
-const Products = () => {
+const AllProducts = () => {
   const [products, loading, refetch] = useProducts();
   const axiosPublic = useAxiosPublic();
+  const { user } = useAuth();
+
+  const [users] = useUsers();
+
+  const useDetails = users.find((userId) => userId.email === user.email);
+
+  const userProducts = products.filter(
+    (product) => product.userId === useDetails._id
+  );
 
   const [editProductId, setEditProductId] = useState(null);
 
@@ -81,7 +92,7 @@ const Products = () => {
                 </tr>
               </thead>
               <tbody>
-                {products.map((product) => (
+                {userProducts?.map((product) => (
                   <tr key={product._id}>
                     <th>
                       <button
@@ -162,4 +173,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default AllProducts;

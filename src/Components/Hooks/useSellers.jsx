@@ -2,23 +2,19 @@ import useAxiosPublic from "./useAxiosPublic";
 import useAuth from "./useAuth";
 import { useQuery } from "@tanstack/react-query";
 
-const useApplys = () => {
+const useSellers = () => {
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
 
-  const {
-    refetch,
-    data: applys = [],
-    isLoading,
-  } = useQuery({
-    queryKey: ["applys", user?.email],
+  const { refetch, data: sellers = [] } = useQuery({
+    queryKey: ["sellers", user?.email],
     queryFn: async () => {
-      const res = await axiosPublic.get("/applys");
+      const res = await axiosPublic.get("/sellers");
       return res.data;
     },
   });
 
-  return [applys, refetch, isLoading];
+  return [sellers, refetch];
 };
 
-export default useApplys;
+export default useSellers;

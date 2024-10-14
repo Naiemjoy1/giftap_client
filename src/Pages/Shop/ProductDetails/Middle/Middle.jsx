@@ -39,6 +39,7 @@ const Middle = ({ product }) => {
     priceGroup,
     discount,
     image,
+    store_name,
   } = product ?? {};
 
   const [selectedTier, setSelectedTier] = useState(null);
@@ -94,7 +95,7 @@ const Middle = ({ product }) => {
         price: discountedPrice,
         quantity: quantitySelected,
         name: name,
-        image: image.itemImg,
+        image: image.cardImg1,
         message: message,
         delivery: deliveryData,
         category: category,
@@ -367,6 +368,9 @@ const Middle = ({ product }) => {
 
       <p className="text-sm text-gray-400">
         Category: <span className="text-black">{category}</span>
+      </p>
+      <p className="text-sm text-gray-400">
+        Store Name: <span className="text-black">{store_name}</span>
       </p>
 
       <section className="space-x-2">

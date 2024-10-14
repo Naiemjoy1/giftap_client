@@ -83,6 +83,20 @@ const Navigation = () => {
           </a>
         </li>
       )}
+      {user && (
+        <li>
+          <a
+            href="/sellerdashboard"
+            className={`px-4 py-2 rounded-md text-sm ${
+              location.pathname === "/sellerdashboard"
+                ? "bg-primary text-white"
+                : "hover:bg-primary hover:text-white"
+            }`}
+          >
+            seller Dashboard
+          </a>
+        </li>
+      )}
     </>
   );
 

@@ -1,14 +1,25 @@
 import React, { useState } from "react";
-import { useForm, useFieldArray } from "react-hook-form";
+import useSellers from "../../../../Components/Hooks/useSellers";
+import useUsers from "../../../../Components/Hooks/useUsers";
+import useAuth from "../../../../Components/Hooks/useAuth";
 import useProducts from "../../../../Components/Hooks/useProducts";
-import { IoCloudUploadSharp } from "react-icons/io5";
 import useAxiosPublic from "../../../../Components/Hooks/useAxiosPublic";
+import { useFieldArray, useForm } from "react-hook-form";
+import { IoCloudUploadSharp } from "react-icons/io5";
 import toast from "react-hot-toast";
 
-const AddProducts = () => {
+const AddPro = () => {
+  const [sellers] = useSellers();
+  const { user } = useAuth();
   const [products] = useProducts();
   const categories = [...new Set(products.map((item) => item.category))];
   const axiosPublic = useAxiosPublic();
+
+  const [users] = useUsers();
+
+  const useDetails = users.find((userId) => userId.email === user.email);
+
+  const storeDetails = sellers.find((store) => store.email === user.email);
 
   const {
     register,
@@ -58,14 +69,14 @@ const AddProducts = () => {
 
     let sku;
     let attempts = 0;
-    const maxAttempts = 1000;
+    const maxAttempts = 1000; // To prevent potential infinite loops
 
     do {
       const randomString = Math.random()
         .toString(36)
         .substring(2, 6)
         .toUpperCase();
-      const randomNumber = Math.floor(1000 + Math.random() * 9000);
+      const randomNumber = Math.floor(1000 + Math.random() * 9000); // 4-digit random number
       const namePart = productName
         .split(" ")
         .slice(0, 2)
@@ -111,9 +122,10 @@ const AddProducts = () => {
       const generatedSKU = generateSKU(data.name, data.category);
 
       const productData = {
+        userId: useDetails?._id,
         name: data.name,
-        seller_name: data.seller_name,
-        store_name: data.store_name,
+        seller_name: useDetails?.name,
+        store_name: storeDetails?.shopName,
         description: data.description,
         sku: generatedSKU,
         image: {
@@ -150,14 +162,15 @@ const AddProducts = () => {
         toast.success("New Product Added");
       }
     } catch (error) {
-      console.error("Error uploading images:", error);
+      console.error("Error uploading images or generating SKU:", error);
+      toast.error("Failed to add product. Please try again.");
     } finally {
       setLoadingImages(false);
     }
   };
 
   const categoryChangeHandler = (event) => {
-    setIsDigitalGift(event.target.value === "digital gift");
+    setIsDigitalGift(event.target.value.toLowerCase() === "digital gift");
   };
 
   const handleImageChange = (event, field) => {
@@ -200,26 +213,30 @@ const AddProducts = () => {
           <div className="form-control w-1/3">
             <input
               type="text"
+              value={useDetails?.name || ""}
               placeholder="Seller Name"
               className="input input-bordered"
               {...register("seller_name", { required: true })}
+              readOnly
             />
-            {errors.seller_name && (
+            {/* {errors.seller_name && (
               <p className="text-red-600">Seller name is required.</p>
-            )}
+            )} */}
           </div>
 
           {/* Store Name */}
           <div className="form-control w-1/3">
             <input
               type="text"
+              value={storeDetails?.shopName || ""}
               placeholder="Store Name"
               className="input input-bordered"
               {...register("store_name", { required: true })}
+              readOnly
             />
-            {errors.store_name && (
+            {/* {errors.store_name && (
               <p className="text-red-600">Store name is required.</p>
-            )}
+            )} */}
           </div>
         </div>
 
@@ -330,7 +347,7 @@ const AddProducts = () => {
                   step="0.01"
                   placeholder="Price"
                   className="input input-bordered"
-                  {...register("price", { required: !isDigitalGift })}
+                  {...register("price", { required: true })}
                 />
                 {errors.price && (
                   <p className="text-red-600">
@@ -382,6 +399,9 @@ const AddProducts = () => {
                           required: true,
                         })}
                       />
+                      {errors.priceGroup?.[index]?.tier && (
+                        <p className="text-red-600">Tier name is required.</p>
+                      )}
                     </div>
                     {/* Currency Dropdown */}
                     <div className="form-control">
@@ -396,7 +416,7 @@ const AddProducts = () => {
                         <option value="BDT">BDT</option>
                         <option value="EUR">EUR</option>
                       </select>
-                      {errors[`priceGroup.${index}.price.currency`] && (
+                      {errors.priceGroup?.[index]?.price?.currency && (
                         <p className="text-red-600">Currency is required.</p>
                       )}
                     </div>
@@ -411,7 +431,7 @@ const AddProducts = () => {
                           required: true,
                         })}
                       />
-                      {errors[`priceGroup.${index}.price.amount`] && (
+                      {errors.priceGroup?.[index]?.price?.amount && (
                         <p className="text-red-600">Price is required.</p>
                       )}
                     </div>
@@ -424,6 +444,9 @@ const AddProducts = () => {
                           required: true,
                         })}
                       />
+                      {errors.priceGroup?.[index]?.price?.duration && (
+                        <p className="text-red-600">Duration is required.</p>
+                      )}
                     </div>
                     {/* Image Upload Section */}
                     <div className="form-control">
@@ -447,12 +470,15 @@ const AddProducts = () => {
                           id={`tierImg${index}`}
                           className="sr-only"
                           accept="image/*"
+                          {...register(`priceGroup.${index}.image`, {
+                            required: true,
+                          })}
                           onChange={(e) =>
                             handleImageChange(e, `tierImg${index}`)
                           }
                         />
                       </div>
-                      {errors[`priceGroup.${index}.image`] && (
+                      {errors.priceGroup?.[index]?.image && (
                         <p className="text-red-600">Image is required.</p>
                       )}
                     </div>
@@ -467,7 +493,7 @@ const AddProducts = () => {
                           valueAsNumber: true, // This ensures quantity is treated as a number
                         })}
                       />
-                      {errors[`priceGroup.${index}.quantity`] && (
+                      {errors.priceGroup?.[index]?.quantity && (
                         <p className="text-red-600">Quantity is required.</p>
                       )}
                     </div>
@@ -516,4 +542,4 @@ const AddProducts = () => {
   );
 };
 
-export default AddProducts;
+export default AddPro;

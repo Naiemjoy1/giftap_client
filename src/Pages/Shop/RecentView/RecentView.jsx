@@ -56,7 +56,7 @@ const RecentView = ({ id }) => {
       price: discountedPrice,
       quantity: 1,
       name: recent.name,
-      image: recent.image.itemImg1,
+      image: recent.image.cardImg1,
       delivery: deliveryData,
       category: recent.category,
     };
@@ -87,7 +87,7 @@ const RecentView = ({ id }) => {
       {filteredRecentProducts.slice(0, 4).map((recent) => (
         <div className="relative group" key={recent._id}>
           <figure>
-            <img src={recent.image.itemImg1} alt={recent.name} />
+            <img src={recent.image.cardImg1} alt={recent.name} />
           </figure>
           <div className="mt-4 space-y-2">
             <p className="text-lg font-medium">
