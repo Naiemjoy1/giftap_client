@@ -1,0 +1,55 @@
+******************WEEK 3*****************
+Project Overview: 
+
+Giftap is an innovative e-commerce platform with a focus on gift-giving. Unlike traditional e-commerce websites, Giftap allows users to easily select, purchase, and send gifts to loved ones. The platform's features are designed to simplify the gift-giving experience, providing users with a wide range of categories, products, and options to suit any occasion. The user interface is clean, intuitive, and tailored to enhance user satisfaction.
+
+My Role: As the front-end developer on the Giftap project, I played a significant role in designing and implementing various key sections of the website. One of my primary contributions was developing the Shop Page, which is crucial for browsing and purchasing products. My work on the shop page included several important features aimed at enhancing the user experience.
+
+Key Contributions:
+
+Shop Page Development:
+
+I was responsible for designing and developing the complete shop page. The shop page is the heart of Giftap's user interaction, providing a seamless shopping experience for users.
+Responsiveness:
+
+Ensured that the shop page was fully responsive, making it adaptable to various screen sizes, including mobile, tablet, and desktop devices. This allowed users to have a smooth browsing and shopping experience across all devices.
+Card Design:
+
+Developed attractive and user-friendly product cards that display essential product information, such as product images, name, price, and an "Add to Cart" button. The design is clean and engaging, encouraging users to explore more products.
+
+Sorting Functionality:
+
+Implemented sorting features that allow users to organize products by price, popularity, and relevance. This feature helps users easily find the products they are looking for, improving the overall shopping experience.
+Filtering Options:
+
+Added filtering options for users to narrow down their product search based on various criteria such as price range, availability, and ratings.
+Category-wise Filtering:
+
+Enabled category-wise filtering so that users can browse products by specific gift categories (e.g., electronics, fashion, etc.). This helps users quickly access the type of gifts they are interested in.
+Search Functionality:
+
+Implemented a search bar that allows users to search for products directly on the shop page. This feature offers quick access to specific items, making it easier for users to find exactly what they need.
+Impact: My contributions to the shop page greatly improved the user experience on Giftap. The responsive design, combined with the effective filtering, sorting, and search functionalities, ensures that users can browse, find, and purchase products efficiently. This has helped to make the shopping experience more intuitive and enjoyable, driving engagement and satisfaction for Giftap's users.
+
+Conclusion: 
+The shop page is a central feature of the platform, and my work has contributed to the overall success of Giftap as a user-friendly and well-designed gift-giving solution.
+
+This document highlights my role and the impact of my contributions to the Giftap website, particularly focusing on the development of the shop page.
+
+*************WEEK 4****************
+Seller Dashboard Documentation
+1. Dashboard Overview
+Summary:
+The dashboard overview provides sellers with a comprehensive summary of their account and activities. This section includes quick insights into total sales, active listings, recent orders, and performance metrics, enabling sellers to monitor their business at a glance.
+
+2. Payment Management
+Summary:
+The payment management section allows sellers to manage and view pending payments, set up payout methods, and track the status of their earnings. This ensures that sellers have control over their financial transactions and can easily manage incoming payments.
+
+3. Payment History
+Summary:
+The payment history section provides a detailed record of all past transactions, including dates, amounts, and payment statuses. Sellers can review their earning history, download reports, and analyze their revenue trends over time.
+
+4. User Management
+Summary:
+In the user management section, sellers can view and manage their customer base. This feature allows sellers to delete user accounts or upgrade users to premium membership status, enabling customized user management and tailored customer experiences.

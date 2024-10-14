@@ -3,7 +3,7 @@ import usePromo from "../../../Components/Hooks/usePromo";
 import toast from "react-hot-toast";
 
 const Offerbar = () => {
-  const [promo] = usePromo();
+  const [promo, refetch] = usePromo();
 
   const activePromo = promo.find((p) => p.status === "active");
 
@@ -53,6 +53,14 @@ const Offerbar = () => {
   const hasPromoExpired =
     activePromo &&
     new Date(activePromo.finishDate).getTime() < new Date().getTime();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      refetch();
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, [refetch]);
 
   return (
     <div className="bg-primary flex justify-center text-white py-2 gap-4 font-gabarito text-sm">
