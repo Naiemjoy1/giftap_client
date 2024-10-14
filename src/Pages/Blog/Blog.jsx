@@ -73,7 +73,7 @@ const Blog = () => {
             <div className="flex relative justify-center lg:ml-96 rounded-md w-full px-4 max-w-xl lg:mt-0">
               <input
                 type="text"
-                placeholder="Search Blog..."
+                placeholder="Search Blog Title ..."
                 className="w-full p-3 rounded-md mt-24 md:mt-4 md:ml-28 lg:mt-4 border-blue-300 input-bordered border"
                 {...register('search')}
               />

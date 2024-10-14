@@ -15,6 +15,8 @@ const BlogDetails = () => {
   const [blogs] = useBlogs(searchTerm);
   const [comments, setComments] = useState(blogDetails.blogComments);
 
+  // console.log(comments)
+
   const { blogTitle, publishDate, blogDescription, blogImage, blogTags, blogCategories } = blogDetails;
 
   const recentBlogs = [...blogs].sort(
@@ -95,12 +97,25 @@ const BlogDetails = () => {
                     <button type="button" className="text-gray-600 hover:text-primary"><em>I</em></button>
                     <button type="button" className="text-gray-600 hover:text-primary"><u>U</u></button>
                   </div>
-                  <button
-                    type="submit"
-                    className="px-4 py-2 text-white bg-primary rounded hover:bg-primary"
-                  >
-                    Submit
-                  </button>
+                  {
+                    user ? <>
+                      <button
+                        type="submit"
+                        className="px-4 py-2 text-white bg-primary rounded hover:bg-primary"
+                      >
+                        Submit
+                      </button>
+                    </> : <>
+                      <Link to={"/login"}>
+                        <button
+                          type="submit"
+                          className="px-4 py-2 text-white bg-primary rounded hover:bg-primary"
+                        >
+                          LogIn
+                        </button>
+                      </Link>
+                    </>
+                  }
                 </div>
               </form>
             </div>
@@ -126,6 +141,8 @@ const BlogDetails = () => {
                 </div>
               ))}
             </div>
+
+
           </div>
         </div>
 
@@ -135,7 +152,7 @@ const BlogDetails = () => {
             <div className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:justify-center sm:-mx-2">
               <textarea
                 className="resize-none w-full   border rounded-md focus:outline-none focus:ring focus:ring-primary text-black"
-                placeholder={`Comment as ${user.displayName}`}
+                placeholder={`Comment as ${user?.displayName}`}
               />
 
               <div className="flex items-center justify-between mt-2">
@@ -232,6 +249,7 @@ const BlogDetails = () => {
               </div>
             </div>
 
+            {/* Copy blog url */}
             <button onClick={handleCopyLink} className="btn btn-outline btn-primary">
               <FaCopy className="mr-2" /> Copy Blog URL
             </button>
