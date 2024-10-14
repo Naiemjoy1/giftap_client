@@ -1,0 +1,26 @@
+***********WEEK 3***************
+Initial Plan and Development: "First, I made a plan with my team to decide on the style of our project and its key features. After that, I focused on creating the Blog and Contact pages.
+Blog Page Design: On the Blog page, there is a list of blogs with a title, an overview of gift products, and a brief description. When users click on a blog post, they are directed to the blog details page. On this page, they can read the full article, see user comments, and view reviews.
+For the design:
+The Blog listing page features a clean layout with a card-based design for each post, showing the blog title, image, and a short excerpt.
+The Blog details page has a minimalist design to keep the focus on the content. User comments and reviews are displayed in a collapsible or sectioned format for easy navigation.
+Contact Page Design: The Contact page contains our team's contact information, along with a form where users can send us a message directly.
+For the design:
+The form is designed to be user-friendly with labelled fields (name, email, message) and a clear "Send" button.
+A responsive layout ensures that users can easily view and interact with the form on both desktop and mobile devices.
+Finally, I ensured that both pages maintain a consistent colour scheme, typography, and responsive design, providing a cohesive user experience across the entire site
+
+*****************WEEK 4**********************
+Title: Contact Page Redesign with Google Maps Integration
+
+Overview: This week, I focused on redesigning the contact page, enhancing its usability and aesthetics. I also integrated Google Maps to provide users with easy access to location information. Here is a breakdown of the work:
+
+1. Contact Page Redesign
+Layout Optimization: Improved the layout for a more intuitive user experience, focusing on clean design and accessibility.
+Responsive Design: Ensured the contact page is fully responsive, maintaining a consistent look and feel on both desktop and mobile devices.
+Contact Form Update: Refined the contact form with user-friendly fields for name, email, subject, and message to facilitate direct communication.
+2. Google Maps Integration
+Location Embedding: Embedded Google Maps directly into the contact page, displaying the precise location of the business for easy navigation.
+Interactive Map Features: Enabled zoom and pan features, allowing users to explore the area around the location for additional context.
+Summary
+This week, I revamped the contact page by redesigning its layout and adding Google Maps integration. The updated design ensures a smoother user experience, while the embedded map helps users easily find the business location. This enhancement makes the contact page more informative and user-friendly.
