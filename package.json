@@ -37,6 +37,7 @@
     "react-paginate": "^8.2.0",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.26.2",
+    "react-table": "^7.8.0",
     "react-tabs": "^6.0.2",
     "react-tooltip": "^5.28.0",
     "recharts": "^2.12.7",

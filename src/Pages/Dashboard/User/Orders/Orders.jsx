@@ -1,8 +1,6 @@
 import React from "react";
-import { AiFillDelete } from "react-icons/ai"; // Import the delete icon
 import useAuth from "../../../../Components/Hooks/useAuth";
 import useProducts from "../../../../Components/Hooks/useProducts";
-import toast from "react-hot-toast";
 import useAxiosPublic from "../../../../Components/Hooks/useAxiosPublic";
 import usePayment from "../../../../Components/Hooks/usePayment";
 
@@ -11,20 +9,25 @@ const Orders = () => {
   const [products] = useProducts(); 
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
+
+  
   const myOrders = payments.filter(item => item?.cus_email === user?.email);
   const productIds = myOrders.flatMap(item => item?.productId);
+
   const OrderProducts = products?.filter(product => productIds.includes(product._id));
-  const info = myOrders.map((item) => ({
-    amount: item.amount,
-    date: new Date(item.date).toLocaleDateString(), 
-    shippingEmail: item.shippingEmail,
-  
-    delivery: item.delivery?.[0], 
-  }));
 
+ 
+  const info = myOrders.flatMap(order =>
+    order.productId.map((id, index) => ({
+      productId: id,
+      amount: order.amount,
+      paymentId: order.paymentId,
+      date: new Date(order.date).toLocaleDateString(),
+      shippingEmail: order.shippingEmail,
+      delivery: order.delivery?.[index],
+    }))
+  );
 
-  console.log(info); 
-  
   return (
     <div className="overflow-x-auto lg:flex justify-between space-y-4 gap-4">
       {OrderProducts?.length === 0 ? (
@@ -32,53 +35,68 @@ const Orders = () => {
           <h3 className="text-lg font-semibold">No products found for your orders.</h3>
         </div>
       ) : (
-        <table className="table w-full">
+        <table className="table w-full border border-gray-300">
           {/* Table Head */}
           <thead className="bg-primary text-white">
             <tr>
-            
-            <th></th>
-           
-            <th>Product Name</th>
-              <th>Amount</th>
-              <th>Date</th>
-              <th>Shipping Email</th>
-            
-              
-              <th>DeliveryStatus</th>
-             
-              
+              <th className="border border-gray-300">Payment ID</th>
+              <th className="border border-gray-300">Product</th>
+              <th className="border border-gray-300">Status</th>
+              <th className="border border-gray-300">Amount</th>
+              <th className="border border-gray-300">Date</th>
             </tr>
           </thead>
           {/* Table Body */}
           <tbody>
-            {OrderProducts?.map((product, index) => (
-              <tr key={product._id}>
-               
-               <td>{index+1}</td>
-               <td>{product?.name}</td>
-                <td>${info[index]?.amount}</td>
-                <td>{info[index]?.date}</td>
-                <td>{info[index]?.shippingEmail || "N/A"}</td>
-               
-                <td>{info[index]?.delivery || "No delivery info"}</td>
-                
-                
-              
-               
-              </tr>
-            ))}
+            {myOrders.map((order, orderIndex) => {
+              const relatedProducts = order.productId.map(productId =>
+                OrderProducts.find(product => product._id === productId)
+              );
+              const numberOfProducts = relatedProducts.length;  
+
+              return (
+                <React.Fragment key={`order-${orderIndex}`}>
+                  {relatedProducts.map((product, productIndex) => {
+                    const productInfo = info.find(item => item.productId === product?._id);
+                    return (
+                      <tr key={`product-${productIndex}`}>
+                      
+                        {productIndex === 0 && (
+                          <>
+                            <td rowSpan={numberOfProducts} className="border border-gray-300">
+                              {order.paymentId}
+                            </td>
+                          </>
+                        )}
+                        <td className="border border-gray-300">{product?.name || "No product name"}</td>
+                        <td className="border border-gray-300">{productInfo?.delivery || "No delivery info"}</td>
+                        {productIndex === 0 && (
+                          <>
+                            <td rowSpan={numberOfProducts} className="border border-gray-300">
+                              ${order.amount}
+                            </td>
+                            <td rowSpan={numberOfProducts} className="border border-gray-300">
+                              {new Date(order.date).toLocaleDateString()}
+                            </td>
+                          </>
+                        )}
+                      </tr>
+                    );
+                  })}
+                </React.Fragment>
+              );
+            })}
           </tbody>
         </table>
       )}
-       {/* Dummy Text Section */}
-       <div className=" items-center p-4 border  rounded-md border-primary lg:w-[40%] ">
+      {/* Dummy Text Section */}
+      <div className="items-center p-4 border rounded-md border-primary lg:w-[40%]">
         <h2 className="flex justify-center items-center text-xl font-semibold mr-4">About Our Website</h2>
         <p className="items-center my-4">
-    Welcome to <span className="text-primary">GiftTap</span>! Here you can explore a wide range of products tailored to meet your needs. Our wishlist feature allows you to save your favorite items for future reference. 
-    Add $50.00 to your cart and enjoy free shipping on your order! Plus, you can expect delivery within 3-4 days. 
-    We strive to provide an exceptional shopping experience and look forward to serving you. Happy shopping!
-  </p>
+          Welcome to <span className="text-primary">GiftTap</span>! Here you can explore a wide range of products tailored to meet your needs. Our wishlist feature allows you to save your favorite items for future reference. 
+          Add $50.00 to your cart and enjoy free shipping on your order! Plus, you can expect delivery within 3-4 days. 
+          We strive to provide an exceptional shopping experience and look forward to serving you. Happy shopping!
+        </p>
       </div>
     </div>
   );
