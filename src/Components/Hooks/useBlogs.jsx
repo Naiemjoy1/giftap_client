@@ -4,7 +4,7 @@ import useAxiosPublic from "./useAxiosPublic";
 const useBlogs = (search) => {
     const axiosPublic = useAxiosPublic();  
   
-    const { refetch, data: blogs = [] } = useQuery({
+    const { refetch, data: blogs = [],  } = useQuery({
       queryKey: ["blogs",], 
       queryFn: async () => {
         const res = await axiosPublic.get(`/blogs?search=${search}`);  

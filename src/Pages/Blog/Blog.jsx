@@ -63,6 +63,7 @@ const Blog = () => {
     refetch();
   };
 
+ 
   return (
     <div className="container mx-auto my-5 flex flex-col md:flex-row">
       <div className="">
@@ -72,7 +73,7 @@ const Blog = () => {
             <div className="flex relative justify-center lg:ml-96 rounded-md w-full px-4 max-w-xl lg:mt-0">
               <input
                 type="text"
-                placeholder="Search Caption..."
+                placeholder="Search Blog..."
                 className="w-full p-3 rounded-md mt-24 md:mt-4 md:ml-28 lg:mt-4 border-blue-300 input-bordered border"
                 {...register('search')}
               />
@@ -121,8 +122,12 @@ const Blog = () => {
                 </span>
               </div>
               <p className="text-gray-400 font-medium text-[16px] text-start">
-                {blog.blogDescription.split(' ').slice(0, 22).join(' ')}...
+                {blog.blogDescription.slice(0, 110)}...
+                <Link to={`/BlogDetails/${blog._id}`} className="text-primary">
+                  Read More
+                </Link>
               </p>
+
             </div>
           ))}
         </div>
