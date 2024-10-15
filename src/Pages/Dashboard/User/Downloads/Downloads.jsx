@@ -14,6 +14,7 @@ const Downloads = () => {
   const [payments] = usePayment();
   const [products] = useProducts();
   const { user } = useAuth();
+  console.log(payments)
   console.log(user)
  
   const myOrders = payments?.filter(item => item?.cus_email === user?.email);
