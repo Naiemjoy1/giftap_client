@@ -8,9 +8,9 @@ import UserChat from "../../../Pages/Support/UserChat/UserChat";
 import AdminChat from "../../../Pages/Support/AdminChat/AdminChat";
 
 const Navigation = () => {
-  const { user, loading } = useAuth();
+  const { user } = useAuth();
   const [users] = useUsers();
-  const currentUsers = users.filter((login) => login?.email === user?.email);
+  const currentUsers = users.find((login) => login?.email === user?.email);
 
   const [products] = useProducts();
   const categories = [...new Set(products.map((item) => item.category))];
@@ -69,7 +69,7 @@ const Navigation = () => {
           Contact
         </a>
       </li>
-      {user && (
+      {currentUsers?.type === "admin" && (
         <li>
           <a
             href="/dashboard"
@@ -83,7 +83,7 @@ const Navigation = () => {
           </a>
         </li>
       )}
-      {user && (
+      {currentUsers?.type === "seller" && (
         <li>
           <a
             href="/sellerdashboard"
@@ -93,7 +93,7 @@ const Navigation = () => {
                 : "hover:bg-primary hover:text-white"
             }`}
           >
-            seller Dashboard
+            Dashboard
           </a>
         </li>
       )}
