@@ -155,7 +155,7 @@ const AddPro = () => {
         );
       }
 
-      console.log(productData);
+      // console.log(productData);
       const res = await axiosPublic.post("/products", productData);
       if (res.data.insertedId) {
         reset();
