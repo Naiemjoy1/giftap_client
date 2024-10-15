@@ -1,0 +1,44 @@
+ ********** WEEK 3   *******
+ #Endgame Project Documentation
+
+
+## 1. **Shop Details Page**
+   - Developed a detailed shop page showcasing product and shop-specific information.
+   - Implemented a **tab functionality** to navigate between sections like product details, reviews, and delivery details.
+   - Added shipping and delivery information for enhanced user experience.
+
+## 2. **Footer Design**
+   - Created a responsive footer with essential links, such as terms of service, contact info, and social media.
+
+
+## 3. **Wishlist Button Functionality**
+   - Implemented wishlist buttons, allowing users to save products.
+   - Developed a POST API and stored wishlist data in MongoDB for user-specific persistence.
+
+## 4. **Recent View Product Feature**
+   - Added a feature to track and display recently viewed products.
+   - Implemented **POST and GET APIs** to save and retrieve recently viewed product data for each user.
+
+
+## 5. **Error Page Development**
+   - Developed a custom error page using React and integrated a Lottie animation for improved user interaction during errors.
+
+     ***********WEEK 4**************
+
+     Title: User Dashboard Tab Design: Order List and Wishlist
+
+Overview: This update covers the design and organization of the user dashboard, specifically focusing on the order list and wishlist tabs. Below is a breakdown of the work done:
+
+1. User Dashboard Tabs Design
+Tab Layout Creation: Created a clean, user-friendly layout with distinct tabs for easy navigation between different sections of the dashboard.
+Responsive Design: Ensured that the tabs are fully responsive and optimized for both desktop and mobile devices, providing a consistent user experience across devices.
+2. Order List Tab
+Order Summary Display: Designed a section to display an overview of all orders placed by the user, including order number, date, status, and total cost.
+Order Details Access: Added functionality to allow users to click on an order to view detailed information, such as individual items, quantities, and delivery information.
+Filter and Sort Options: Implemented basic filtering and sorting options to help users find specific orders based on date or status.
+3. Wishlist Tab
+Product Listing: Designed a wishlist tab that displays all items added by the user, including product images, names, prices, and availability.
+Add to Cart Functionality: Enabled users to add items directly from the wishlist to their cart for a seamless shopping experience.
+Remove from Wishlist Option: Added an option for users to remove items from their wishlist if they no longer wish to save them.
+Summary
+In this update, I designed the user dashboard's tabs for order list and wishlist. The order list provides a detailed overview of the user's orders, with easy access to order details and filtering options. The wishlist tab displays saved products, allowing users to quickly add them to their cart or remove them from the list. These enhancements improve user experience by making order management and wishlist access more efficient and user-friendly.

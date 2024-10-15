@@ -1,6 +1,5 @@
 [
   {
-    "_id": "670b4d566254121f90e8f52a",
     "seller_name": "John Doe",
     "store_name": "Doe's Gifts",
     "name": "Plants & Planters",
@@ -18,7 +17,6 @@
     "discount": 20
   },
   {
-    "_id": "670b4d566254121f90e8f52b",
     "seller_name": "John Doe",
     "store_name": "Doe's Gifts",
     "name": "Aromatherapy Kit",
@@ -36,7 +34,6 @@
     "discount": 15
   },
   {
-    "_id": "670b4d566254121f90e8f52c",
     "seller_name": "John Doe",
     "store_name": "Doe's Gifts",
     "name": "Home Décor",
@@ -55,7 +52,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f52d",
     "seller_name": "Jane Smith",
     "store_name": "Smith's Treasures",
     "name": "Gourmet Food Hamper",
@@ -74,7 +70,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f52e",
     "seller_name": "Jane Smith",
     "store_name": "Smith's Treasures",
     "name": "Remote Cars and Drones",
@@ -93,7 +88,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f52f",
     "seller_name": "Jane Smith",
     "store_name": "Smith's Treasures",
     "name": "Custom T-Shirt",
@@ -112,7 +106,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f530",
     "seller_name": "Michael Johnson",
     "store_name": "Johnson's Boutique",
     "name": "Cushions and Throws",
@@ -131,7 +124,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f531",
     "seller_name": "Michael Johnson",
     "store_name": "Johnson's Boutique",
     "name": "Skincare and Bath Set",
@@ -150,7 +142,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f532",
     "seller_name": "Michael Johnson",
     "store_name": "Johnson's Boutique",
     "name": "Fitness Gear",
@@ -169,7 +160,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f533",
     "seller_name": "Emily Davis",
     "store_name": "Davis Delights",
     "name": "Action Figures and Collectibles",
@@ -188,7 +178,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f534",
     "seller_name": "Emily Davis",
     "store_name": "Davis Delights",
     "name": "Watches and Jewelry",
@@ -207,7 +196,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f535",
     "seller_name": "Emily Davis",
     "store_name": "Davis Delights",
     "name": "Name-Engraved Jewelry",
@@ -226,7 +214,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f536",
     "seller_name": "Robert Brown",
     "store_name": "Brown's Emporium",
     "name": "Coffee and Tea Set",
@@ -245,7 +232,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f537",
     "seller_name": "Robert Brown",
     "store_name": "Brown's Emporium",
     "name": "Designer Handbag",
@@ -264,7 +250,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f538",
     "seller_name": "Robert Brown",
     "store_name": "Brown's Emporium",
     "name": "Casual Footwear",
@@ -283,7 +268,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f539",
     "seller_name": "Laura Wilson",
     "store_name": "Wilson's Wonders",
     "name": "Educational Toys",
@@ -302,7 +286,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f53a",
     "seller_name": "Laura Wilson",
     "store_name": "Wilson's Wonders",
     "name": "Plush Toys and Dolls",
@@ -321,7 +304,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f53b",
     "seller_name": "Laura Wilson",
     "store_name": "Wilson's Wonders",
     "name": "Personalized Mug",
@@ -340,7 +322,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f53c",
     "seller_name": "David Martinez",
     "store_name": "Martinez Market",
     "name": "Custom Photo Frame",
@@ -359,7 +340,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f53d",
     "seller_name": "David Martinez",
     "store_name": "Martinez Market",
     "name": "Organic & Health Food Package",
@@ -377,7 +357,6 @@
     "discount": 20
   },
   {
-    "_id": "670b4d566254121f90e8f53e",
     "seller_name": "David Martinez",
     "store_name": "Martinez Market",
     "name": "Sunglasses",
@@ -396,7 +375,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f53f",
     "seller_name": "Sophia Lee",
     "store_name": "Lee's Creations",
     "name": "Scented Candles and Diffusers",
@@ -415,7 +393,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f540",
     "seller_name": "Sophia Lee",
     "store_name": "Lee's Creations",
     "name": "Kitchen Gadgets and Tools",
@@ -434,7 +411,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f541",
     "seller_name": "Sophia Lee",
     "store_name": "Lee's Creations",
     "name": "Ties",
@@ -453,7 +429,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f542",
     "seller_name": "James Harris",
     "store_name": "Harris's Haven",
     "name": "Personalized Gift Box",
@@ -472,7 +447,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f543",
     "seller_name": "James Harris",
     "store_name": "Harris's Haven",
     "name": "Spa & Relaxation Gift",
@@ -491,7 +465,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f544",
     "seller_name": "James Harris",
     "store_name": "Harris's Haven",
     "name": "Self-Care Gift Set",
@@ -510,7 +483,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f545",
     "seller_name": "Olivia Clark",
     "store_name": "Clark's Curiosities",
     "name": "Artisan Chocolates and Confectionery",
@@ -529,7 +501,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f546",
     "seller_name": "Olivia Clark",
     "store_name": "Clark's Curiosities",
     "name": "Baking Kit",
@@ -548,7 +519,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f547",
     "seller_name": "Olivia Clark",
     "store_name": "Clark's Curiosities",
     "name": "Puzzles and Board Games",
@@ -567,7 +537,6 @@
     "priceGroup": []
   },
   {
-    "_id": "670b4d566254121f90e8f548",
     "seller_name": "Netflix Inc.",
     "store_name": "Netflix Store",
     "name": "Netflix Subscription",
@@ -627,7 +596,6 @@
     "discount": 10
   },
   {
-    "_id": "670b4d566254121f90e8f549",
     "seller_name": "Spotify",
     "store_name": "Spotify Premium Store",
     "name": "Spotify Premium",
@@ -687,7 +655,6 @@
     "discount": 10
   },
   {
-    "_id": "670b4d566254121f90e8f54a",
     "seller_name": "Amazon",
     "store_name": "Amazon Gift Cards",
     "name": "Amazon Gift Card",
@@ -733,7 +700,6 @@
     "discount": 5
   },
   {
-    "_id": "670b4d566254121f90e8f54b",
     "seller_name": "Apple Inc.",
     "store_name": "Apple Gift Cards",
     "name": "Apple Gift Card",
@@ -779,7 +745,6 @@
     "discount": null
   },
   {
-    "_id": "670b4d566254121f90e8f54c",
     "seller_name": "Hulu",
     "store_name": "Hulu Store",
     "name": "Hulu Subscription",
@@ -825,7 +790,6 @@
     "discount": 10
   },
   {
-    "_id": "670b4d566254121f90e8f54d",
     "seller_name": "PlayStation",
     "store_name": "PlayStation Store",
     "name": "PlayStation Plus Subscription",
@@ -885,7 +849,6 @@
     "discount": 12
   },
   {
-    "_id": "670b4d566254121f90e8f54e",
     "seller_name": "Xbox",
     "store_name": "Xbox Store",
     "name": "Xbox Game Pass",
@@ -931,7 +894,6 @@
     "discount": 10
   },
   {
-    "_id": "670b4d566254121f90e8f54f",
     "seller_name": "Google",
     "store_name": "Google Play Store",
     "name": "Google Play Gift Card",
@@ -977,7 +939,6 @@
     "discount": null
   },
   {
-    "_id": "670b4d566254121f90e8f550",
     "seller_name": "Disney+",
     "store_name": "Disney+ Store",
     "name": "Disney+ Subscription",
@@ -1023,7 +984,6 @@
     "discount": 10
   },
   {
-    "_id": "670b4d566254121f90e8f551",
     "seller_name": "Microsoft",
     "store_name": "Microsoft Store",
     "name": "Microsoft 365 Subscription",
@@ -1069,7 +1029,6 @@
     "discount": 5
   },
   {
-    "_id": "670b60ecaf1e9e11d3ddd3aa",
     "name": "Elegant Photo Frame",
     "seller_name": "Jane Smith",
     "store_name": "Home Essentials",
@@ -1087,7 +1046,6 @@
     "discount": 10
   },
   {
-    "_id": "670b61bdaf1e9e11d3ddd3ab",
     "name": "Complete Kitchen Set",
     "seller_name": "Michael Johnson",
     "store_name": "Kitchenware Hub",
