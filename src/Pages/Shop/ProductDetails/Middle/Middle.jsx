@@ -17,6 +17,7 @@ import toast from "react-hot-toast";
 import useWishs from "../../../../Components/Hooks/useWishs";
 import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/material_green.css";
+import Compare from "../../Compare/Compare";
 
 const Middle = ({ product }) => {
   const { user } = useAuth();
@@ -72,6 +73,10 @@ const Middle = ({ product }) => {
 
   const handleDecrease = () => {
     setQuantitySelected((prev) => (prev > 1 ? prev - 1 : 1));
+  };
+
+  const handleCloseModal = () => {
+    modalRef.current?.close();
   };
 
   const handleAddToCart = async () => {
@@ -356,12 +361,28 @@ const Middle = ({ product }) => {
           </button>
         )}
 
-        <p className="flex uppercase items-center gap-2 text-xs border py-2 px-4 rounded-full">
+        <button
+          onClick={() => document.getElementById("compare").showModal()}
+          className="flex uppercase items-center gap-2 text-xs border py-2 px-4 rounded-full"
+        >
           <span>
             <LuArrowDownUp />
           </span>
           compare
-        </p>
+        </button>
+        {/* Open the modal using document.getElementById('ID').showModal() method */}
+        <dialog id="compare" className="modal">
+          <div className="modal-box">
+            <Compare
+              id={_id}
+              handleCloseModal={handleCloseModal}
+              modalRef={modalRef}
+            />
+          </div>
+          <form method="dialog" className="modal-backdrop">
+            <button>close</button>
+          </form>
+        </dialog>
       </section>
 
       <div className="divider"></div>
