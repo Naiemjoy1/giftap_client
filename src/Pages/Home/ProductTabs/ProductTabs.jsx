@@ -14,9 +14,9 @@ const ProductTabs = () => {
   const [activeTab, setActiveTab] = useState("newProduct");
 
   return (
-    <div className="pt-[150px] max-w-6xl mx-auto"> 
+    <div className="pt-[50px] max-w-6xl mx-auto"> 
       
-      <div className="mt-10 w-full">
+      <div className="mt-10 w-full mx-auto">
        
         <Tabs
           value={activeTab}
@@ -24,9 +24,9 @@ const ProductTabs = () => {
           onChange={(value) => setActiveTab(value)}
         >
           <TabsHeader
-            className=""
+            className="lg:w-[50%]"
             indicatorProps={{
-              className: "bg-primary/50 shadow-none !text-gray-900",
+              className: "bg-primary/50 shadow-none w-[150px] mx-auto !text-gray-900",
             }}
           >
             <Tab
@@ -34,21 +34,21 @@ const ProductTabs = () => {
               onClick={() => setActiveTab("newProduct")}
               className={activeTab === "newProduct" ? "text-black" : "text-gray-500"}
             >
-              <h1>New Product</h1>
+              <h1 className="md:text-2xl">New Product</h1>
             </Tab>
             <Tab
               value="topProduct"
               onClick={() => setActiveTab("topProduct")}
               className={activeTab === "topProduct" ? "text-black" : "text-gray-500"}
             >
-              <h1>Top Product</h1>
+              <h1 className="md:text-2xl">Top Product</h1>
             </Tab>
             <Tab
               value="topSeller"
               onClick={() => setActiveTab("topSeller")}
               className={activeTab === "topSeller" ? "text-black" : "text-gray-500"}
             >
-              <h1>Top Seller</h1>
+              <h1 className="md:text-2xl">Top Seller</h1>
             </Tab>
           </TabsHeader>
 

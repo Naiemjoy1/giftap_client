@@ -8,6 +8,7 @@ import FeatureSection from "./FeatureSection/FeatureSection";
 import ProductTabs from "./ProductTabs/ProductTabs";
 import RecentBlog from "./RecentBlog/RecentBlog";
 import TrustedShop from "./TrustedShop/TrustedShop";
+import OfferBanner from "./OfferBanner/OfferBanner";
 
 const Home = () => {
   return (
@@ -15,7 +16,7 @@ const Home = () => {
       <Banner></Banner>
       <BannerFeature></BannerFeature>
       <Category></Category>
-
+      <OfferBanner></OfferBanner>
       <ProductTabs></ProductTabs>
       <TrustedShop></TrustedShop>
       <FeatureSection></FeatureSection>
