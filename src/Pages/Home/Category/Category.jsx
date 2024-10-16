@@ -22,13 +22,13 @@ const Category = () => {
 
   return (
     <div>
-      {/* this is section heading this style get homeSectionHeading components */}
+     
       <HomeSectionHeading
         subTitle={"shop with giftap"}
         title={"Shop by category"}
       ></HomeSectionHeading>
 
-      {/* Center the carousel container */}
+      
       <div className="max-w-screen-xl mx-auto">
         <Carousel
           additionalTransfrom={0}
@@ -68,7 +68,7 @@ const Category = () => {
             tablet: {
               breakpoint: {
                 max: 1024,
-                min: 464,
+                min: 512,
               },
               items: 3,
               partialVisibilityGutter: 30,
@@ -101,7 +101,7 @@ const Category = () => {
         </Carousel>
         <div className="flex justify-center">
           <button
-            className="btn text-white py-3 px-6 md:py-[16px] md:px-[40px] rounded-3xl flex items-center justify-center gap-2 border-2 border-transparent hover:border-black hover:bg-red-700 transition-all duration-500 ease-in-out"
+            className="btn text-white py-3 px-6 mt-10 md:py-[16px] md:px-[40px] rounded-xl flex items-center justify-center gap-2 border-2 border-transparent hover:border-black hover:bg-red-700 transition-all duration-500 ease-in-out"
             style={{ backgroundColor: "rgb(240, 72, 84)" }}
           >
             See All

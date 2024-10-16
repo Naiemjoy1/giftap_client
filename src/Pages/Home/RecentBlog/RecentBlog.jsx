@@ -1,5 +1,6 @@
 import React from "react";
 import HomeSectionHeading from "../../../ReUseComponents/HomeSectionHeading/HomeSectionHeading";
+import { Link } from "react-router-dom";
 
 const RecentBlog = () => {
   return (
@@ -36,9 +37,9 @@ const RecentBlog = () => {
             </div>
           </a>
 
-          {/* Smaller Blogs */}
+          
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {/* Blog Card 1 */}
+            
             <a
               rel="noopener noreferrer"
               href="#"
@@ -114,15 +115,17 @@ const RecentBlog = () => {
             </a>
           </div>
 
-          {/* View All Blogs Button */}
-          
+
+
           <div className="flex justify-center">
-            <button
-              className="btn text-white py-3 px-6 md:py-[16px] md:px-[40px] rounded-3xl flex items-center justify-center gap-2 border-2 border-transparent hover:border-black hover:bg-red-700 transition-all duration-500 ease-in-out"
-              style={{ backgroundColor: "rgb(240, 72, 84)" }}
-            >
-              See All Blogs
-            </button>
+            <Link to='/blog'>
+              <button
+                className="btn text-white py-3 px-6 md:py-[16px] md:px-[40px] rounded-3xl flex items-center justify-center gap-2 border-2 border-transparent hover:border-black hover:bg-red-700 transition-all duration-500 ease-in-out"
+                style={{ backgroundColor: "rgb(240, 72, 84)" }}
+              >
+                See All Blogs
+              </button>
+            </Link>
           </div>
         </div>
       </section>
