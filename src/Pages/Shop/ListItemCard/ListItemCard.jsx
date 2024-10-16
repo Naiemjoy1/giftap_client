@@ -71,8 +71,9 @@ const ListItemCard = ({ item }) => {
       price: discountedPrice,
       quantity: 1,
       name: name,
-      image: image.itemImg,
+      image: image.cardImg1,
       delivery: deliveryData,
+      category: category,
     };
     try {
       const res = await axiosPublic.post("/carts", purchase);
@@ -129,7 +130,7 @@ const ListItemCard = ({ item }) => {
   return (
     <div className="flex border border-gray-200 rounded-lg p-4 bg-white shadow-md hover:shadow-lg transition duration-300">
       <img
-        src={image.cardImg}
+        src={image.cardImg1}
         alt={name}
         className="h-40 w-40 object-cover rounded-l-lg"
       />

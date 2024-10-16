@@ -20,8 +20,6 @@ const Category = () => {
     fetchProducts();
   }, [axiosPublic]);
 
-  console.log(product);
-
   return (
     <div>
       {/* this is section heading this style get homeSectionHeading components */}
@@ -92,7 +90,7 @@ const Category = () => {
             >
               <div className="w-32 h-32 rounded-full overflow-hidden shadow-lg">
                 <img
-                  src={item.image.itemImg1}
+                  src={item.image.cardImg1}
                   alt={item.name}
                   className="object-cover w-full h-full"
                 />

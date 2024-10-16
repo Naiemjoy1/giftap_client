@@ -29,6 +29,9 @@ const Cart = () => {
   const [date, setDate] = useState(new Date());
   const [selectedDelivery, setSelectedDelivery] = useState("localPickup");
   const [shippingOption, setShippingOption] = useState("flatRate");
+  const [coupon, setCoupon] = useState();
+  const [promo] = usePromo();
+  const [applyPromo, setApplyPromo] = useState("");
 
   useEffect(() => {
     const initialQuantities = carts.reduce((acc, cart) => {
@@ -49,6 +52,12 @@ const Cart = () => {
 
   const shippingCost = shippingOption === "flatRate" ? 5.0 : 0.0;
   const total = subtotal + shippingCost;
+
+  const discountValue = applyPromo?.discount?.includes("%")
+    ? (parseFloat(applyPromo.discount) / 100) * total
+    : parseFloat(applyPromo.discount) || 0;
+
+  const coupontotal = total - discountValue;
 
   const progressValue = (subtotal / 50) * 100;
 
@@ -78,6 +87,26 @@ const Cart = () => {
 
   const handleShippingChange = (option) => {
     setShippingOption(option);
+  };
+
+  const handleCoupon = (e) => {
+    e.preventDefault();
+
+    const matchedPromo = promo.find(
+      (p) => p.promoCode === coupon && p.status === "active"
+    );
+
+    if (!matchedPromo) {
+      toast.error("Invalid or expired coupon code");
+      setApplyPromo("");
+      return;
+    } else {
+      const promoData = {
+        discount: matchedPromo.discount,
+      };
+      toast.success("Coupon Applied");
+      setApplyPromo(promoData);
+    }
   };
 
   const handleRemove = (cartId) => {
@@ -136,17 +165,22 @@ const Cart = () => {
 
     const paymentData = {
       email: user.email,
-      total: total.toFixed(2),
+      total: coupontotal.toFixed(2),
       cartIds: userCarts.map((cart) => cart._id),
       productId: userCarts.map((cart) => cart.productId),
       user: usersDetails,
-      amount: total.toFixed(2),
+      amount: coupontotal.toFixed(2),
       currency: "USD",
       name: user.displayName,
       date: new Date(),
       message: userCarts.map((cart) => cart.message),
+      category: userCarts.map((cart) => cart.category),
       delivery: userCarts.map((cart) => cart.delivery),
       shippingEmail: shippingEmail,
+      quantities: userCarts.map(
+        (cart) => quantities[cart._id] || cart.quantity
+      ),
+      tier: userCarts.map((cart) => cart.tier),
     };
 
     setPayment(paymentData);
@@ -392,8 +426,13 @@ const Cart = () => {
                   type="text"
                   placeholder="Add coupon here"
                   className="input input-bordered w-full max-w-xs"
+                  value={coupon}
+                  onChange={(e) => setCoupon(e.target.value)}
                 />
-                <button className="btn btn-primary text-white">
+                <button
+                  onClick={handleCoupon}
+                  className="btn btn-primary text-white"
+                >
                   Apply coupon
                 </button>
               </div>
@@ -439,8 +478,13 @@ const Cart = () => {
               </section>
               <div className="border-b my-2"></div>
               <section className="flex justify-between items-center">
+                <p>Coupon</p>
+                {applyPromo.discount ? <p>{applyPromo.discount}</p> : "$0.00"}
+              </section>
+              <div className="border-b my-2"></div>
+              <section className="flex justify-between items-center">
                 <p>Total</p>
-                <p>${total.toFixed(2)}</p> {/* Total calculated */}
+                <p>${coupontotal.toFixed(2)}</p>
               </section>
               <div className="border-b my-2"></div>
               <button
@@ -457,10 +501,21 @@ const Cart = () => {
                     Confirm Checkout
                   </h3>
                   <p>Are you sure you want to proceed with the payment?</p>
-                  <ConfirmPay
-                    payment={payment}
-                    setIsModalVisible={setIsModalVisible}
-                  ></ConfirmPay>
+                  {usersDetails.name ? (
+                    <ConfirmPay
+                      payment={payment}
+                      setIsModalVisible={setIsModalVisible}
+                    ></ConfirmPay>
+                  ) : (
+                    <div>
+                      <p className="text-center">
+                        Please update your profile{" "}
+                        <span className="font-semibold text-primary">
+                          <a href="/profile">here</a>
+                        </span>
+                      </p>
+                    </div>
+                  )}
                 </div>
               </dialog>
             )}

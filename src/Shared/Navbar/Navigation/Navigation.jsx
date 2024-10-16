@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { useLocation } from "react-router-dom"; // Import useLocation
 import useProducts from "../../../Components/Hooks/useProducts";
 import { FaBars } from "react-icons/fa";
 import useChat from "../../../Components/Hooks/useChat";
@@ -8,94 +8,94 @@ import UserChat from "../../../Pages/Support/UserChat/UserChat";
 import AdminChat from "../../../Pages/Support/AdminChat/AdminChat";
 
 const Navigation = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const [users] = useUsers();
   const currentUsers = users.filter((login) => login?.email === user?.email);
-  // console.log("currentUsers", currentUsers);
 
-  const [products, loading] = useProducts();
-
+  const [products] = useProducts();
   const categories = [...new Set(products.map((item) => item.category))];
 
-  const [chats, refetch] = useChat();
+  const [chats] = useChat();
+
+  const location = useLocation();
 
   const navLinks = (
     <>
       <li>
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            `px-4 py-2 rounded transition-colors ${
-              isActive
-                ? "bg-primary text-white"
-                : "hover:bg-primary hover:text-white"
-            }`
-          }
+        <a
+          href="/"
+          className={`px-4 py-2 rounded-md text-sm ${
+            location.pathname === "/"
+              ? "bg-primary text-white"
+              : "hover:bg-primary hover:text-white"
+          }`}
         >
           Home
-        </NavLink>
+        </a>
       </li>
       <li>
-        <NavLink
-          to="/shop"
-          className={({ isActive }) =>
-            `px-4 py-2 rounded transition-colors ${
-              isActive
-                ? "bg-primary text-white"
-                : "hover:bg-primary hover:text-white"
-            }`
-          }
+        <a
+          href="/shop"
+          className={`px-4 py-2 rounded-md text-sm ${
+            location.pathname === "/shop"
+              ? "bg-primary text-white"
+              : "hover:bg-primary hover:text-white"
+          }`}
         >
           Shop
-        </NavLink>
+        </a>
       </li>
       <li>
-        <NavLink
-          to="/blog"
-          className={({ isActive }) =>
-            `px-4 py-2 rounded transition-colors ${
-              isActive
-                ? "bg-primary text-white"
-                : "hover:bg-primary hover:text-white"
-            }`
-          }
+        <a
+          href="/blog"
+          className={`px-4 py-2 rounded-md text-sm ${
+            location.pathname === "/blog"
+              ? "bg-primary text-white"
+              : "hover:bg-primary hover:text-white"
+          }`}
         >
           Blog
-        </NavLink>
+        </a>
       </li>
       <li>
-        <NavLink
-          to="/contact"
-          className={({ isActive }) =>
-            `px-4 py-2 rounded transition-colors ${
-              isActive
-                ? "bg-primary text-white"
-                : "hover:bg-primary hover:text-white"
-            }`
-          }
+        <a
+          href="/contact"
+          className={`px-4 py-2 rounded-md text-sm ${
+            location.pathname === "/contact"
+              ? "bg-primary text-white"
+              : "hover:bg-primary hover:text-white"
+          }`}
         >
           Contact
-        </NavLink>
+        </a>
       </li>
-      {user ? (
-        <>
-          <li>
-            <NavLink
-              to="/Dashboard"
-              className={({ isActive }) =>
-                `px-4 py-2 rounded transition-colors ${
-                  isActive
-                    ? "bg-primary text-white"
-                    : "hover:bg-primary hover:text-white"
-                }`
-              }
-            >
-              Dashboard
-            </NavLink>
-          </li>
-        </>
-      ) : (
-        <></>
+      {user && (
+        <li>
+          <a
+            href="/dashboard"
+            className={`px-4 py-2 rounded-md text-sm ${
+              location.pathname === "/dashboard"
+                ? "bg-primary text-white"
+                : "hover:bg-primary hover:text-white"
+            }`}
+          >
+            Dashboard
+          </a>
+        </li>
+      )}
+      {user && (
+        <li>
+          <a
+            href="/sellerdashboard"
+            className={`px-4 py-2 rounded-md text-sm ${
+              location.pathname === "/sellerdashboard"
+                ? "bg-primary text-white"
+                : "hover:bg-primary hover:text-white"
+            }`}
+          >
+            seller Dashboard
+          </a>
+        </li>
       )}
     </>
   );
@@ -109,17 +109,21 @@ const Navigation = () => {
             <option disabled>All Categories</option>
             {categories.map((category, index) => (
               <option key={index} className="bg-primary text-white">
-                {category}
+                {category
+                  .toLowerCase()
+                  .split(" ")
+                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                  .join(" ")}{" "}
               </option>
             ))}
           </select>
         </section>
 
-        <section className="flex justify-center items-center gap-4">
-          <ul className="menu menu-horizontal">{navLinks}</ul>
+        <section className="flex justify-center items-center gap-4 py-3">
+          <ul className="flex gap-2 justify-center items-center">{navLinks}</ul>
           <section className="flex justify-center gap-4">
-            <UserChat></UserChat>
-            <AdminChat currentUsers={currentUsers} chats={chats}></AdminChat>
+            <UserChat />
+            <AdminChat currentUsers={currentUsers} chats={chats} />
           </section>
         </section>
       </div>

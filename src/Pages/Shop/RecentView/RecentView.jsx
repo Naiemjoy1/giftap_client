@@ -28,7 +28,6 @@ const RecentView = ({ id }) => {
     userRecents.some((recent) => recent.productId === product._id)
   );
 
-  // Exclude the product with the specified id
   const filteredRecentProducts = recentProducts.filter(
     (recent) => recent._id !== id
   );
@@ -42,12 +41,14 @@ const RecentView = ({ id }) => {
       recent.price,
       recent.discount
     ).toFixed(2);
+
     let deliveryData;
-    if (category === "digital gift") {
+    if (recent.category === "digital gift") {
       deliveryData = selectedDelivery === "localPickup" ? date : "instant";
     } else {
       deliveryData = "home";
     }
+
     const purchase = {
       userID: usersDetails?._id,
       email: user?.email,
@@ -55,8 +56,9 @@ const RecentView = ({ id }) => {
       price: discountedPrice,
       quantity: 1,
       name: recent.name,
-      image: recent.image.itemImg1,
+      image: recent.image.cardImg1,
       delivery: deliveryData,
+      category: recent.category,
     };
 
     try {
@@ -85,7 +87,7 @@ const RecentView = ({ id }) => {
       {filteredRecentProducts.slice(0, 4).map((recent) => (
         <div className="relative group" key={recent._id}>
           <figure>
-            <img src={recent.image.itemImg1} alt={recent.name} />
+            <img src={recent.image.cardImg1} alt={recent.name} />
           </figure>
           <div className="mt-4 space-y-2">
             <p className="text-lg font-medium">

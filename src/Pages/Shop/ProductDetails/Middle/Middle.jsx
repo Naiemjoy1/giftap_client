@@ -39,6 +39,7 @@ const Middle = ({ product }) => {
     priceGroup,
     discount,
     image,
+    store_name,
   } = product ?? {};
 
   const [selectedTier, setSelectedTier] = useState(null);
@@ -80,28 +81,25 @@ const Middle = ({ product }) => {
           ? calculateDiscountedPrice(selectedTier?.price.amount).toFixed(2)
           : calculateDiscountedPrice(price).toFixed(2);
 
-      // Determine delivery based on the category
       let deliveryData;
       if (category === "digital gift") {
-        // For digital gift, allow user to select between date and instant
         deliveryData = selectedDelivery === "localPickup" ? date : "instant";
       } else {
-        // For other categories, set delivery to home
         deliveryData = "home";
       }
 
       const purchase = {
-        category: category,
         userID: usersDetails?._id,
         email: user.email,
         productId: _id,
         price: discountedPrice,
         quantity: quantitySelected,
-        tier: selectedTier?.tier,
         name: name,
-        image: image.itemImg,
+        image: image.cardImg1,
         message: message,
         delivery: deliveryData,
+        category: category,
+        tier: selectedTier?.tier,
       };
 
       const res = await axiosPublic.post("/carts", purchase);
@@ -370,6 +368,9 @@ const Middle = ({ product }) => {
 
       <p className="text-sm text-gray-400">
         Category: <span className="text-black">{category}</span>
+      </p>
+      <p className="text-sm text-gray-400">
+        Store Name: <span className="text-black">{store_name}</span>
       </p>
 
       <section className="space-x-2">
