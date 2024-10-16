@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HomeSectionHeading from "../../../ReUseComponents/HomeSectionHeading/HomeSectionHeading";
 import { Link } from "react-router-dom";
+import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 
 const RecentBlog = () => {
+  const [blog, setBlog] = useState([]);
+  const axiosPublic = useAxiosPublic();
+  useEffect(() => {
+    const blogFetching = async () => {
+      try {
+        const response = await axiosPublic.get('/blogs')
+        setBlog(response.data)
+      }
+      catch (error) {
+        console.log('Internal Server Error', error)
+      }
+    }
+    blogFetching()
+  }, [axiosPublic])
   return (
     <>
       <HomeSectionHeading
@@ -19,27 +34,26 @@ const RecentBlog = () => {
             className="block max-w-sm gap-6 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 bg-white dark:bg-gray-50 shadow-lg rounded-lg transition-transform transform hover:scale-105 duration-300"
           >
             <img
-              src="https://i.ytimg.com/vi/O306ET58M4E/maxresdefault.jpg"
+              src={`${blog[12]?.blogImage}`}
               alt="Featured Blog"
               className="object-cover w-full h-64 rounded-t-lg sm:h-96 lg:rounded-t-none lg:rounded-l-lg lg:col-span-7 dark:bg-gray-500"
             />
             <div className="p-6 space-y-3 lg:col-span-5 flex flex-col justify-center">
               <h3 className="text-3xl font-semibold sm:text-4xl text-gray-800 dark:text-gray-900 group-hover:underline group-focus:underline">
-                How to Choose the Perfect Dress for a Girl: Your Ultimate Guide
+                {`${blog[12]?.blogTitle}`}
               </h3>
               <span className="text-sm text-gray-600 dark:text-gray-600">
-                February 19, 2021
+                {`${blog[12]?.blogPublishDate}`}
               </span>
               <p className="text-gray-700 dark:text-gray-700">
-                Ei delenit sensibus liberavisse pri. Quod suscipit no nam. Est
-                in graece fuisset, eos affert putent doctus id.
+                {`${blog[12]?.blogDescription}`}
               </p>
             </div>
           </a>
 
-          
+          {/* Smaller Blogs */}
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            
+
             <a
               rel="noopener noreferrer"
               href="#"
