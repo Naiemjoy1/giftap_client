@@ -6,7 +6,7 @@ import { PDFDownloadLink } from "@react-pdf/renderer";
 import InvoiceDocument from "./InvoiceDocument";  
 
 const generateInvoiceId = (paymentId) => {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxy0123456789';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let invoiceId = '';
   for (let i = 0; i < 10; i++) {
     invoiceId += characters.charAt(Math.floor(Math.random() * characters.length));
