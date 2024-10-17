@@ -1,4 +1,3 @@
-import React from "react";
 import { FaStar } from "react-icons/fa";
 import useReviews from "../../../Components/Hooks/useReviews";
 import ReviewCard from "./ReviewCard";
@@ -9,7 +8,7 @@ const Review = () => {
 
   return (
     <div>
-      <div className="bg-gradient-to-r from-slate-200 to-pink-200 py-4">
+      <div className="bg-gradient-to-r from-slate-200 to-pink-200 pb-4">
         <div className="relative z-10 p-8">
           <h1 className="text-center text-3xl font-medium">
             CUSTOMERS REVIEWS

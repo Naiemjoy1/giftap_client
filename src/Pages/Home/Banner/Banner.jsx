@@ -10,7 +10,7 @@ const Banner = () => {
       <section className="">
         {/* <Category /> */}
         <img
-          className="min-h-[80vh]"
+          className="min-h-[80vh] hidden md:flex"
           src="https://ap-aprin.myshopify.com/cdn/shop/files/right.png?v=1711787624&width=3000"
           alt="get discount"
         />

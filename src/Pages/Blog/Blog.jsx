@@ -1,186 +1,165 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-// import { demoPosts } from './demoPosts';
 import useBlogs from '../../Components/Hooks/useBlogs';
 import { FaArrowRight, FaCommentDots } from 'react-icons/fa';
-import ReactPaginate from 'react-paginate';
-
+import { useForm } from 'react-hook-form';
+import { IoSearch } from 'react-icons/io5';
+import { GrNext, GrPrevious } from 'react-icons/gr';
 
 const Blog = () => {
-  // Pagination logic
-
-  const [blogs] = useBlogs();
+  const [search, setSearch] = useState('');
+  const [blogs, refetch] = useBlogs(search);
+  const [currentPage, setCurrentPage] = useState(1);
 
   // console.log(blogs)
 
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const postsPerPage = 6;
 
-  // const indexOfLastPost = currentPage * postsPerPage;
-  // const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  // const currentPosts = blogs.slice(indexOfFirstPost, indexOfLastPost);
+  const itemsPerPage = 6;
 
-  // const totalPages = Math.ceil(blogs.length / postsPerPage);
+  const totalPages = Math.ceil(blogs.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentProducts = blogs.slice(startIndex, startIndex + itemsPerPage);
 
-  // const handlePrevious = () => {
-  //   if (currentPage > 1) setCurrentPage(currentPage - 1);
-  // };
-
-  // const handleNext = () => {
-  //   if (currentPage < totalPages) setCurrentPage(currentPage + 1);
-  // };
-
-
-
-  const [itemOffset, setItemOffset] = useState(0);
-
-  const itemsPerPage = 4;
-
-  const endOffset = itemOffset + itemsPerPage;
-  console.log(`Loading blogs from ${itemOffset} to ${endOffset}`);
-  const currentItems = blogs.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(blogs.length / itemsPerPage);
-
-  // Invoke when user click to request another page.
-  const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % blogs.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
-    setItemOffset(newOffset);
+  const handlePageClick = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
 
+  // Previous page
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+  // Next page
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
+  // Pagination Calculation
+  const getPageNumbers = () => {
+    const pageNumbers = [];
+    const maxVisiblePages = 3;
+    let startPage = Math.max(1, currentPage - 1);
+    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
 
-  // console.log(currentPosts)
+    if (endPage - startPage < maxVisiblePages - 1) {
+      startPage = Math.max(1, endPage - (maxVisiblePages - 1));
+    }
 
+    for (let i = startPage; i <= endPage; i++) {
+      pageNumbers.push(i);
+    }
 
+    return pageNumbers;
+  };
+
+  // Search Bar Handle
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const onSubmit = (data) => {
+    setSearch(data.search);
+    refetch();
+  };
+
+ 
   return (
     <div className="container mx-auto my-5 flex flex-col md:flex-row">
+      <div className="">
+        {/*----------- Search Bar Start ------------*/}
+        <div className="">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="flex relative justify-center lg:ml-96 rounded-md w-full px-4 max-w-xl lg:mt-0">
+              <input
+                type="text"
+                placeholder="Search Blog Title ..."
+                className="w-full p-3 rounded-md mt-24 md:mt-4 md:ml-28 lg:mt-4 border-blue-300 input-bordered border"
+                {...register('search')}
+              />
+              {errors.search}
+              <button
+                className="inline-flex items-center mt-24 md:mt-4 lg:mt-4 gap-2 bg-primary hover:bg-primary text-white text-lg font-semibold px-3 rounded-r-md"
+              >
+                <span>Search</span>
+                <span className="hidden md:block">
+                  <IoSearch />
+                </span>
+              </button>
+            </div>
+          </form>
+        </div>
+        {/*------------ Search Bar End ------------*/}
 
-      <div className="   ">
-        <h1 className="text-2xl font-bold mb-5 text-gray-400">Blogs</h1>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-4 ">
-          {
-            blogs.map((blog) => (
-
-              <div key={blog.id} className="">
-
-                <div className='relative overflow-hidden group '>
-                  <Link to={`/BlogDetails/${blog._id}`}>
-                    {/* Image */}
-                    <img src={blog.blogImage} alt={blog.title} className="w-full h-80 object-cover mb-2 transition-transform duration-700 ease-in-out group-hover:scale-105" />
-
-                    {/* image Icon */}
-                    <div className="absolute inset-0 flex items-end mb-6 mr-6 justify-end opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100">
-                      <div className="bg-white p-4  rounded-full shadow-lg hover:text-primary">
-                        <FaArrowRight className=' text-2xl' />
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-
+        {/*------------ Blogs Start ------------*/}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-4">
+          {currentProducts.map((blog) => (
+            <div key={blog.id} className="">
+              <div className="relative overflow-hidden group">
                 <Link to={`/BlogDetails/${blog._id}`}>
-                  <h2 className="font-bold text-3xl mt-4 hover:text-primary">{blog.title}</h2>
+                  {/* image */}
+                  <img
+                    src={blog.blogImage}
+                    alt={blog.title}
+                    className="w-full h-80 object-cover mb-2 transition-transform duration-700 ease-in-out group-hover:scale-105 rounded-lg"
+                  />
+                  {/* image Icon */}
+                  <div className="absolute inset-0 flex items-end mb-6 mr-6 justify-end opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100">
+                    <div className="bg-white p-4 rounded-full shadow-lg hover:text-primary">
+                      <FaArrowRight className="text-2xl" />
+                    </div>
+                  </div>
                 </Link>
-
-                <div className="flex justify-between  text-sm mb-2">
-                  <span className='mt-2 text-xl font-semibold text-gray-500'>{blog.publishDate}</span>
-                  <span className="flex items-center text-gray-500">
-                    <FaCommentDots className=' text-[17px] mt-2 mr-2' />
-                    <p className='mt-2 text-[17px] font-semibold '>{blog.comments.length} Comments</p>
-                  </span>
-                </div>
-
-
-                {/* 
-                <p className="text-gray-400 font-medium text-xl text-start ">
-                  {blog.description.split(' ').slice(0, 22).join(' ') + (blog.description.split(' ').length > 15 ? '...' : '')}
-                </p> */}
-
-                <p className='text-gray-400 font-medium text-xl text-start '>
-                  {blog.description.split(" ").slice(0, 22).join(" ") + "..."}
-                </p>
-
-
               </div>
+              <Link to={`/BlogDetails/${blog._id}`}>
+                <h2 className="font-bold text-2xl mt-4 hover:text-primary">{blog.blogTitle}</h2>
+              </Link>
+              <div className="flex justify-between text-sm mb-2">
+                <span className="mt-2 text-xl font-semibold text-gray-500">{blog.blogPublishDate}</span>
+                <span className="flex items-center text-gray-500">
+                  <FaCommentDots className="text-[17px] mt-2 mr-2" />
+                  <p className="mt-2 text-[17px] font-semibold">{blog.blogComments.length} Comments</p>
+                </span>
+              </div>
+              <p className="text-gray-400 font-medium text-[16px] text-start">
+                {blog.blogDescription.slice(0, 110)}...
+                <Link to={`/BlogDetails/${blog._id}`} className="text-primary">
+                  Read More
+                </Link>
+              </p>
 
-            ))
-          }
+            </div>
+          ))}
         </div>
 
-
-
-
-
-
-
-
-
-
-
-        {/* Blog Pagination */}
-        {/* <div className="flex justify-center mt-5 items-center">
+        {/* ------------ Pagination Start------------*/}
+        <div className="flex justify-center mt-8 gap-2">
           <button
-            onClick={handlePrevious}
-            className={`bg-black text-white p-2 rounded ${currentPage === 1 && 'opacity-50 cursor-not-allowed'}`}
+            onClick={handlePreviousPage}
+            className={`px-4 py-2 text-white bg-primary rounded ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
             disabled={currentPage === 1}
           >
-            Previous
+            <GrPrevious />
           </button>
-          <div className="space-x-2">
-            {Array.from({ length: totalPages }, (_, index) => (
-              <button
-                key={index + 1}
-                onClick={() => setCurrentPage(index + 1)}
-                className={`p-2 rounded ${currentPage === index + 1 ? 'bg-black text-white' : 'bg-gray-300'}`}
-              >
-                {index + 1}
-              </button>
-            ))}
-          </div>
+          {getPageNumbers().map((number) => (
+            <button
+              key={number}
+              onClick={() => handlePageClick(number)}
+              className={`px-4 py-2 rounded-full ${number === currentPage ? 'bg-primary text-white' : 'bg-gray-200 text-black'}`}
+            >
+              {number}
+            </button>
+          ))}
           <button
-            onClick={handleNext}
-            className={`bg-black text-white p-2 rounded ${currentPage === totalPages && 'opacity-50 cursor-not-allowed'}`}
+            onClick={handleNextPage}
+            className={`px-4 py-2 text-white bg-primary rounded ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
             disabled={currentPage === totalPages}
           >
-            Next
+            <GrNext />
           </button>
-        </div> */}
-
-
-
-
-        {/* ----------- Pagination Start ---------- */}
-        <div className="text-center mb-6 mt-4 pagination">
-
-          <div className="grid grid-cols-1 justify-center items-center p-4 space-x-4 md:grid-cols-2 lg:grid-cols-3">
-            {currentItems &&
-              currentItems.map((item) => (
-                <div key={item} >
-                  {/* <AllCard allCaption={item}></AllCard> */}
-                  <h3>{console.log(item)}</h3>
-                </div>
-              ))}
-          </div>
-
-          <ReactPaginate
-            className={currentItems === pageCount ? `bg-blue-200  text-black hover:text-black ml-2` : ` 
-                text-black hover:text-black ml-2`}
-            breakLabel="..."
-            nextLabel="next >"
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={3}
-            pageCount={pageCount}
-            previousLabel="< previous"
-            renderOnZeroPageCount={null}
-          />
-
-
         </div>
-        {/* ----------- Pagination End ---------- */}
       </div>
+      {/* ------------ Pagination StarEnd------------*/}
     </div>
   );
 };

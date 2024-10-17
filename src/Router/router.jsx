@@ -12,9 +12,10 @@ import AuthPage from "../Pages/SignIn&SignUp/AuthPage";
 import About from "../Pages/About/About";
 import ProductDeatails from "../Pages/Shop/ProductDetails/ProductDeatails";
 import LiveChat from "../Pages/LiveChat/LiveChat";
-import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
-import PrivetRoute from "./PrivetRoute/PrivetRoute";
 import ProfileDetails from "../Pages/Dashboard/User/ProfileDetails";
+import Cart from "../Pages/Shop/Cart/Cart";
+import Admin from "../Pages/Dashboard/Admin/Admin";
+import Seller from "../Pages/Dashboard/Seller/Seller";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,14 @@ export const router = createBrowserRouter([
       {
         path: "/shop",
         element: <Shop></Shop>,
+      },
+      {
+        path: "/shop/:id",
+        element: <ProductDeatails></ProductDeatails>,
+      },
+      {
+        path: "/cart",
+        element: <Cart></Cart>,
       },
       {
         path: "/about",
@@ -69,16 +78,12 @@ export const router = createBrowserRouter([
         element: <LiveChat></LiveChat>,
       },
       {
-        path: "/Dashboard",
-        element: <AdminDashboard></AdminDashboard>,
+        path: "/dashboard",
+        element: <Admin></Admin>,
       },
       {
-        path: "/productDetails/:id",
-        element: <ProductDeatails></ProductDeatails>,
-      },
-      {
-        path: "/Dashboard",
-        element: <AdminDashboard></AdminDashboard>,
+        path: "/sellerdashboard",
+        element: <Seller></Seller>,
       },
     ],
   },

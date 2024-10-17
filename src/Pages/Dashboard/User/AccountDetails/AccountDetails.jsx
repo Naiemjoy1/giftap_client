@@ -109,6 +109,7 @@ const AccountDetails = () => {
         toast.warning("User not found");
       }
     } catch (error) {
+      console.error("Error updating profile:", error);
       toast.error("Error updating profile");
     }
   };
@@ -135,11 +136,11 @@ const AccountDetails = () => {
 
         <div className="form-control relative">
           <label className="label">
-            <span className="label-text">Display Name</span>
+            <span className="label-text">User Name</span>
           </label>
           <input
             type="text"
-            placeholder="Display Name"
+            placeholder="User Name"
             {...register("displayName", {
               required: "Display Name is required",
             })}

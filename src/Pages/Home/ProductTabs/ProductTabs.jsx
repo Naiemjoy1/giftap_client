@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Tabs,
   TabsHeader,
@@ -6,65 +6,74 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
+import NewProduct from "./BestProduct/NewProduct/NewProduct";
 import TopSeller from "./TopSeller/TopSeller";
 import BestProduct from "./BestProduct/BestProduct";
-import NewProduct from "./BestProduct/NewProduct/NewProduct";
 
 const ProductTabs = () => {
-  const [activeTab, setActiveTab] = React.useState("newProduct");
+  const [activeTab, setActiveTab] = useState("newProduct");
 
   return (
-    <div className="pt-[150px]">
-      <Tabs value={activeTab} onChange={(value) => setActiveTab(value)}>
-        <TabsHeader
-          className="rounded-none text-gray-500 border-blue-gray-50 bg-transparent p-0"
-          indicatorProps={{
-            className:
-              "bg-transparent border-gray-900 shadow-none rounded-none"
-          }}
+    <div className="pt-[50px] max-w-6xl mx-auto"> 
+      
+      <div className="mt-10 w-full mx-auto">
+       
+        <Tabs
+          value={activeTab}
+          className="w-full"
+          onChange={(value) => setActiveTab(value)}
         >
-          <Tab
-            value="topSeller"
-            onClick={() => setActiveTab("topSeller")}
-            className={
-              activeTab === "topSeller" ? "text-black" : "text-gray-500"
-            }
+          <TabsHeader
+            className="lg:w-[50%]"
+            indicatorProps={{
+              className: "bg-primary/50 shadow-none w-[150px] mx-auto !text-gray-900",
+            }}
           >
-            <h1 className="text-2xl md:text-3xl xl:text-4xl uppercase">Top Seller</h1>
-          </Tab>
-          <Tab
-            value="bestProduct"
-            onClick={() => setActiveTab("bestProduct")}
-            className={
-              activeTab === "bestProduct" ? "text-black" : "text-gray-500"
-            }
-          >
-            <h1 className="text-4xl uppercase">Best Product</h1>
-          </Tab>
-          <Tab
-            value="newProduct"
-            onClick={() => setActiveTab("newProduct")}
-            className={
-              activeTab === "newProduct" ? "text-black" : "text-gray-500"
-            }
-          >
-            <h1 className="text-4xl uppercase">New Product</h1>
-          </Tab>
-        </TabsHeader>
-        <div className="mt-10">
-          <TabsBody>
-            <TabPanel value="topSeller">
-              <TopSeller />
-            </TabPanel>
-            <TabPanel value="bestProduct">
-              <BestProduct />
-            </TabPanel>
-            <TabPanel value="newProduct">
-              <NewProduct />
-            </TabPanel>
-          </TabsBody>
-        </div>
-      </Tabs>
+            <Tab
+              value="newProduct"
+              onClick={() => setActiveTab("newProduct")}
+              className={activeTab === "newProduct" ? "text-black" : "text-gray-500"}
+            >
+              <h1 className="md:text-2xl">New Product</h1>
+            </Tab>
+            <Tab
+              value="topProduct"
+              onClick={() => setActiveTab("topProduct")}
+              className={activeTab === "topProduct" ? "text-black" : "text-gray-500"}
+            >
+              <h1 className="md:text-2xl">Top Product</h1>
+            </Tab>
+            <Tab
+              value="topSeller"
+              onClick={() => setActiveTab("topSeller")}
+              className={activeTab === "topSeller" ? "text-black" : "text-gray-500"}
+            >
+              <h1 className="md:text-2xl">Top Seller</h1>
+            </Tab>
+          </TabsHeader>
+
+          
+          <div className="w-full flex justify-center mt-5">
+            <TabsBody>
+              <TabPanel value="newProduct">
+                <div className="w-full h-full overflow-y-auto">
+                  <NewProduct />
+                </div>
+              </TabPanel>
+              <TabPanel value="topProduct">
+                <div className="w-full h-full overflow-y-auto">
+                  <BestProduct />
+                </div>
+              </TabPanel>
+              <TabPanel value="topSeller">
+                <div className="w-full h-full overflow-y-auto">
+                  <TopSeller />
+                </div>
+              </TabPanel>
+            </TabsBody>
+          </div>
+        </Tabs>
+      </div>
     </div>
   );
 };
