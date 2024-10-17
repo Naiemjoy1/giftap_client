@@ -105,21 +105,30 @@ const Dashboard = () => {
         </div>
       </div>
       <div className=" w-[45%]">
-        <h1>Right side</h1>
+        {/* <h1>Right side</h1> */}
 
-        <div className=" border w-48 h-40 p-3 rounded-xl mt-20 bg-[#E1F7F5]">
-          <div className="flex space-x-20 items-center">
-            <h1 className="text-4xl font-semibold mt-2">25</h1>
-            <div className="text-4xl">
-              <FaMapLocationDot />
+        <div className="flex space-x-9 items-center mt-7">
+          <div className=" border w-48 h-40 p-3 rounded-xl mt-20 bg-[#E1F7F5]">
+            <div className="flex space-x-20 items-center">
+              <h1 className="text-4xl font-semibold mt-2">25</h1>
+              <div className="text-4xl">
+                <FaMapLocationDot />
+              </div>
             </div>
+            <h1 className="text-base font-medium mt-2">
+              Users in your business area
+            </h1>
+            <button className="btn btn-xs w-full mt-2 bg-slate-600 text-white">
+              view users
+            </button>
           </div>
-          <h1 className="text-base font-medium mt-2">
-            Users in your business area
-          </h1>
-          <button className="btn btn-xs w-full mt-2 bg-slate-600 text-white">
-            view users
-          </button>
+          <div>
+            <img
+              className="h-40 w-full mt-20"
+              src="https://i.ibb.co.com/cT7rKQB/Screenshot-2024-10-18-020856.png"
+              alt=""
+            />
+          </div>
         </div>
         <div className="p-4 bg-[#E1F7F5] mt-7 rounded-2xl">
           <h1 className="text-lg font-semibold">Notice board</h1>
