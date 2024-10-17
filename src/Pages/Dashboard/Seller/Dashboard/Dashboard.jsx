@@ -118,7 +118,7 @@ const Dashboard = () => {
             <h1 className="text-base font-medium mt-2">
               Users in your business area
             </h1>
-            <button className="btn btn-xs w-full mt-2 bg-slate-600 text-white">
+            <button className="btn btn-xs w-full mt-2 bg-blue-950 text-white">
               view users
             </button>
           </div>
