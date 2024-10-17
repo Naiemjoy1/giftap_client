@@ -9,23 +9,27 @@ import { IoCalendarOutline } from "react-icons/io5";
 const Dashboard = () => {
   return (
     <div className="flex space-x-5">
-      <div className="border border-green-500 w-[55%]">
-        <h1>Hi, user</h1>
-        <h1>
+      <div className=" w-[55%]">
+        <h1 className="text-3xl font-semibold">Hi, user</h1>
+        <h1 className="text-base font-medium mt-2">
           Welcome to 'Giftap' We are so delighted about your arrival on our
           platform.
         </h1>
-        <h1>You can see your desired from your personalized dashboard</h1>
-        <div className="flex space-x-5 border rounded-2xl p-2 bg-[#E1F7F5]">
+        <h1 className="text-base font-medium">
+          You can see your desired from your personalized dashboard
+        </h1>
+        <div className="flex space-x-16  border mt-4 rounded-2xl p-3 bg-[#E1F7F5]">
           <div>
-            <h1>15 % </h1>
-            <h1>
+            <h1 className="text-4xl font-bold">15% </h1>
+            <h1 className="text-base font-medium mt-2">
               of your profile is <br /> complete
             </h1>
           </div>
           <div>
-            <h1>Complete & Organized profile</h1>
-            <h1>
+            <h1 className="text-lg font-semibold">
+              Complete & Organized profile
+            </h1>
+            <h1 className="mt-2 text-base font-medium">
               Completing your profile 100% can significantly improve <br /> your
               chances of getting seller faster
             </h1>
@@ -34,7 +38,7 @@ const Dashboard = () => {
             </button>
           </div>
         </div>
-        <div className="flex space-x-4">
+        <div className="flex space-x-4 mt-5">
           <div className="flex space-x-10 items-center border w-52 h-28 p-3 rounded-xl mt-4 bg-[#E1F7F5]">
             <div>
               <h1 className="text-base font-semibold">Total product</h1>
@@ -103,7 +107,7 @@ const Dashboard = () => {
       <div className="border border-red-500 w-[45%]">
         <h1>Right side</h1>
 
-        <div className=" border w-48 h-40 p-3 rounded-xl mt-4 bg-[#E1F7F5]">
+        <div className=" border w-48 h-40 p-3 rounded-xl mt-20 bg-[#E1F7F5]">
           <div className="flex space-x-20 items-center">
             <h1 className="text-4xl font-semibold mt-2">25</h1>
             <div className="text-4xl">
@@ -117,7 +121,7 @@ const Dashboard = () => {
             view users
           </button>
         </div>
-        <div className="p-4 bg-[#E1F7F5] mt-5 rounded-2xl">
+        <div className="p-4 bg-[#E1F7F5] mt-4 rounded-2xl">
           <h1 className="text-lg font-semibold">Notice board</h1>
           <div className="border border-b border-black mt-2"></div>
           <h1 className="text-base font-semibold mt-3">
