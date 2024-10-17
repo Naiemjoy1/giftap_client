@@ -16,7 +16,6 @@ const UserChat = ({ id }) => {
   const [products] = useProducts();
 
   const currentProduct = products.find((product) => product._id === id);
-
   const [newText, setNewText] = useState("");
   const [currentChat, setCurrentChat] = useState([]);
   const [socket, setSocket] = useState(null);
@@ -60,6 +59,22 @@ const UserChat = ({ id }) => {
     }
   }, [socket, axiosPublic]);
 
+  // Fix: use currentProductChat instead of undefined selectedChat
+  useEffect(() => {
+    if (socket) {
+      socket.on("chatEnded", (data) => {
+        if (currentProductChat?._id === data.chatId) {
+          setIsChatboxOpen(false); // Close the chatbox
+          refetch(); // Refetch chats after ending
+        }
+      });
+
+      return () => {
+        socket.off("chatEnded");
+      };
+    }
+  }, [socket, currentProductChat, refetch]);
+
   useEffect(() => {
     const fetchCurrentChat = async () => {
       if (currentProductChat) {
@@ -88,7 +103,7 @@ const UserChat = ({ id }) => {
     };
 
     try {
-      const response = await axiosPublic.post("/chats", chatData);
+      await axiosPublic.post("/chats", chatData);
       refetch();
     } catch (error) {
       console.error("Error starting chat:", error.message);
@@ -131,16 +146,13 @@ const UserChat = ({ id }) => {
     }
   };
 
-  const toggleClose = () => {
-    setIsChatboxOpen(true);
-  };
-
   const handleDeleteChat = async () => {
     if (currentProductChat) {
       const chatId = currentProductChat._id;
 
       try {
-        const response = await axiosPublic.delete(`/chats/${chatId}`);
+        await axiosPublic.delete(`/chats/${chatId}`);
+        socket.emit("chatEnded", { chatId });
         refetch();
         setCurrentChat([]);
         setIsChatboxOpen(false);
@@ -159,7 +171,7 @@ const UserChat = ({ id }) => {
   return (
     <div>
       {currentProductChat ? (
-        <button onClick={toggleClose} className="relative">
+        <button onClick={() => setIsChatboxOpen(true)} className="relative">
           <p className="text-primary text-2xl">
             <PiChatsDuotone />
           </p>

@@ -361,7 +361,6 @@ const Middle = ({ product }) => {
             add to wishlist
           </button>
         )}
-
         <button
           onClick={() => document.getElementById("compare").showModal()}
           className="flex uppercase items-center gap-2 text-xs border py-2 px-4 rounded-full"
@@ -371,7 +370,6 @@ const Middle = ({ product }) => {
           </span>
           compare
         </button>
-        {/* Open the modal using document.getElementById('ID').showModal() method */}
         <dialog id="compare" className="modal">
           <div className="modal-box">
             <Compare
@@ -391,12 +389,14 @@ const Middle = ({ product }) => {
       <p className="text-sm text-gray-400">
         Category: <span className="text-black">{category}</span>
       </p>
-      <div className="flex items-center justify-between">
+      <div className="lg:flex md:flex md:justify-start items-center lg:justify-between gap-4 md:space-y-0 space-y-4">
         <p className="text-sm text-gray-400">
-          Store Name: <span className="text-black">{store_name}</span>
+          Store : <span className="text-black">{store_name}</span>
         </p>
-        <p className="text-sm ">Contact with Seller: </p>
-        <UserChat id={_id}></UserChat>
+        <p className="flex items-center gap-2">
+          <span className="text-sm text-gray-400">Contact Seller :</span>
+          <UserChat id={_id}></UserChat>
+        </p>
       </div>
 
       <section className="space-x-2">

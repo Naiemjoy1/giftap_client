@@ -102,8 +102,8 @@ const Navigation = () => {
 
   return (
     <div className="border-t">
-      <div className="flex justify-between items-center container mx-auto">
-        <section className="flex justify-center items-center gap-2 bg-primary text-white px-5 py-2 rounded-3xl">
+      <div className="flex justify-end items-center container mx-auto">
+        {/* <section className="flex justify-center items-center gap-2 bg-primary text-white px-5 py-2 rounded-3xl">
           <FaBars />
           <select className="bg-primary text-white border-none outline-none">
             <option disabled>All Categories</option>
@@ -117,14 +117,14 @@ const Navigation = () => {
               </option>
             ))}
           </select>
-        </section>
+        </section> */}
 
         <section className="flex justify-center items-center gap-4 py-3">
           <ul className="flex gap-2 justify-center items-center">{navLinks}</ul>
-          <section className="flex justify-center gap-4">
+          {/* <section className="flex justify-center gap-4">
             <UserChat />
             <AdminChat currentUsers={currentUsers} chats={chats} />
-          </section>
+          </section> */}
         </section>
       </div>
     </div>

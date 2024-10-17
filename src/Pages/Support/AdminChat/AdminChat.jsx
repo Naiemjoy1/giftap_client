@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaBell } from "react-icons/fa";
+import { io } from "socket.io-client"; // Import socket.io-client
 import useAuth from "../../../Components/Hooks/useAuth";
 import useChat from "../../../Components/Hooks/useChat";
 import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
@@ -13,16 +14,12 @@ const AdminChat = () => {
   const { user } = useAuth();
   const [users] = useUsers();
   const currentUser = users?.find((u) => u.email === user.email);
-
   const [userType] = useType();
-
   const [chats, refetch, isLoadingChats] = useChat();
   const currentSellerChat = chats?.filter(
     (chat) => chat?.sellerId === currentUser?._id
   );
-
   const [products] = useProducts();
-
   const axiosPublic = useAxiosPublic();
 
   const [selectedChat, setSelectedChat] = useState(null);
@@ -31,6 +28,37 @@ const AdminChat = () => {
   const [isChatboxOpen, setIsChatboxOpen] = useState(false);
   const chatboxRef = useRef(null);
   const messagesEndRef = useRef(null);
+  const [socket, setSocket] = useState(null);
+
+  useEffect(() => {
+    const newSocket = io("http://localhost:3000", {
+      transports: ["websocket", "polling"],
+      reconnection: true,
+    });
+    setSocket(newSocket);
+
+    return () => {
+      newSocket.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on("chatEnded", (data) => {
+        const { chatId } = data;
+
+        if (selectedChat?._id === chatId) {
+          setSelectedChat(null);
+          setIsChatboxOpen(false);
+          refetch();
+        }
+      });
+
+      return () => {
+        socket.off("chatEnded");
+      };
+    }
+  }, [socket, selectedChat, refetch]);
 
   const fetchChatDetails = async (chatId) => {
     setLoading(true);
@@ -80,7 +108,6 @@ const AdminChat = () => {
 
     try {
       const chatId = selectedChat._id;
-
       await axiosPublic.patch(`/chats/${chatId}`, {
         $push: { messages: newMessage },
       });
@@ -98,6 +125,7 @@ const AdminChat = () => {
     }
   };
 
+  // Toggle chatbox
   const toggleChatbox = () => {
     setIsChatboxOpen((prev) => {
       if (prev) {
@@ -110,9 +138,9 @@ const AdminChat = () => {
   const handleDeleteChat = async () => {
     if (selectedChat) {
       const chatId = selectedChat._id;
-
       try {
         await axiosPublic.delete(`/chats/${chatId}`);
+        socket.emit("chatEnded", { chatId });
         refetch();
         setSelectedChat(null);
         setIsChatboxOpen(false);
