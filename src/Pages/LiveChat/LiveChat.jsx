@@ -9,7 +9,7 @@ const LiveChat = () => {
 
   const currentUsers = users.filter((u) => u?.email === user?.email);
 
-  const isAdmin = currentUsers.length > 0 && currentUsers[0]?.type === "admin";
+  const isAdmin = currentUsers.length > 0 && currentUsers[0]?.type === "seller";
   const isUser = currentUsers.length > 0 && currentUsers[0]?.type === "user";
 
   return (

@@ -4,11 +4,25 @@ import useAuth from "../../../Components/Hooks/useAuth";
 import useChat from "../../../Components/Hooks/useChat";
 import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 import useType from "../../../Components/Hooks/useType";
+import useUsers from "../../../Components/Hooks/useUsers";
+import useProducts from "../../../Components/Hooks/useProducts";
+import { IoIosArrowForward } from "react-icons/io";
+import { RxCross2 } from "react-icons/rx";
 
-const AdminChat = ({ currentUsers }) => {
+const AdminChat = () => {
   const { user } = useAuth();
+  const [users] = useUsers();
+  const currentUser = users?.find((u) => u.email === user.email);
+
   const [userType] = useType();
+
   const [chats, refetch, isLoadingChats] = useChat();
+  const currentSellerChat = chats?.filter(
+    (chat) => chat?.sellerId === currentUser?._id
+  );
+
+  const [products] = useProducts();
+
   const axiosPublic = useAxiosPublic();
 
   const [selectedChat, setSelectedChat] = useState(null);
@@ -58,7 +72,7 @@ const AdminChat = ({ currentUsers }) => {
     setLoading(true);
     const newMessage = {
       text: newText,
-      name: user?.displayName,
+      name: "Seller",
       email: user?.email,
       time: new Date().toISOString(),
     };
@@ -69,7 +83,7 @@ const AdminChat = ({ currentUsers }) => {
       await axiosPublic.patch(`/chats/${chatId}`, {
         $push: { messages: newMessage },
       });
-
+      refetch();
       setSelectedChat((prevChat) => ({
         ...prevChat,
         messages: [...prevChat.messages, newMessage],
@@ -84,7 +98,12 @@ const AdminChat = ({ currentUsers }) => {
   };
 
   const toggleChatbox = () => {
-    setIsChatboxOpen((prev) => !prev);
+    setIsChatboxOpen((prev) => {
+      if (prev) {
+        setSelectedChat(null);
+      }
+      return !prev;
+    });
   };
 
   const handleDeleteChat = async () => {
@@ -102,22 +121,18 @@ const AdminChat = ({ currentUsers }) => {
     }
   };
 
-  // if (isLoading) {
-  //   return (
-  //     <div className="flex items-center justify-center h-screen">
-  //       <span className="loading loading-spinner loading-lg text-primary"></span>
-  //     </div>
-  //   );
-  // }
+  const currentProduct = products?.find(
+    (product) => product?._id === selectedChat?.productId
+  );
 
   return (
     <div>
-      {userType === "admin" && (
+      {userType === "seller" && (
         <button onClick={toggleChatbox} className="relative">
           <p className="text-xl">
             <FaBell />
           </p>
-          {chats.length > 0 && (
+          {currentSellerChat.length > 0 && (
             <div className="absolute -top-1 right-0 transform translate-x-1 -translate-y-1 flex items-center justify-center text-xs">
               <p className="text-2xl text-primary">*</p>
             </div>
@@ -132,32 +147,50 @@ const AdminChat = ({ currentUsers }) => {
         >
           <section className="flex justify-between mb-4">
             <h2 className="font-bold text-lg">Chat</h2>
-            <button className="btn btn-primary btn-sm" onClick={toggleChatbox}>
-              Close
+            <button
+              className="btn btn-primary btn-sm text-white"
+              onClick={toggleChatbox}
+            >
+              <RxCross2 />
             </button>
           </section>
 
           {!selectedChat && (
             <section className="border rounded-lg p-4 space-y-4">
               {isLoadingChats ? (
-                <div>Loading chats...</div>
+                <div className="flex items-center justify-center h-screen">
+                  <span className="loading loading-spinner loading-lg text-primary"></span>
+                </div>
               ) : (
-                chats.map((chat) => (
-                  <div className="flex justify-between gap-4" key={chat._id}>
-                    <h2 className="card-title">{chat.name}</h2>
-                    <button
-                      className="btn btn-primary btn-sm"
-                      onClick={() => fetchChatDetails(chat._id)}
-                      disabled={loading}
+                currentSellerChat.map((chat) => {
+                  const product = products.find(
+                    (p) => p._id === chat.productId
+                  ); // Find the product
+                  return (
+                    <div
+                      className="flex justify-between items-center gap-4"
+                      key={chat._id}
                     >
-                      {loading ? (
-                        <span className="loading loading-spinner text-primary"></span>
-                      ) : (
-                        "Open"
-                      )}
-                    </button>
-                  </div>
-                ))
+                      <h2 className="flex flex-col">
+                        <span>{chat.name}</span>{" "}
+                        <span className="text-xs">
+                          {product && ` ${product.sku}`}
+                        </span>
+                      </h2>
+                      <button
+                        className="btn btn-primary btn-sm text-white"
+                        onClick={() => fetchChatDetails(chat._id)}
+                        disabled={loading}
+                      >
+                        {loading ? (
+                          <span className="loading loading-spinner text-primary"></span>
+                        ) : (
+                          <IoIosArrowForward />
+                        )}
+                      </button>
+                    </div>
+                  );
+                })
               )}
             </section>
           )}
@@ -165,8 +198,12 @@ const AdminChat = ({ currentUsers }) => {
           {selectedChat && (
             <div className="h-64 overflow-y-auto border border-gray-300 rounded-md p-2">
               <div className="chat-details">
-                <h2 className="text-xl">Chat with {selectedChat.name}</h2>
-                <div className="chat-messages mt-4">
+                <h2 className="text-lg">Chat with {selectedChat.name}</h2>
+                <p className=" text-xs">
+                  {currentProduct.name} : {currentProduct.sku}
+                </p>
+
+                <div className="chat-messages mt-2">
                   {selectedChat.messages.map((message, index) => (
                     <div key={index} className="flex space-x-4">
                       <p className="font-semibold">{message.name} :</p>
@@ -174,7 +211,7 @@ const AdminChat = ({ currentUsers }) => {
                     </div>
                   ))}
                   <button
-                    className="btn btn-xs btn-error mt-5"
+                    className="btn btn-xs btn-error mt-3 text-white"
                     onClick={handleDeleteChat}
                     disabled={loading}
                   >

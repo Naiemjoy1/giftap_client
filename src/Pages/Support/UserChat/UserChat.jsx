@@ -1,17 +1,21 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PiChatsDuotone } from "react-icons/pi";
 import useAuth from "../../../Components/Hooks/useAuth";
 import useChat from "../../../Components/Hooks/useChat";
 import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 import { io } from "socket.io-client";
-import useUsers from "../../../Components/Hooks/useUsers";
 import useType from "../../../Components/Hooks/useType";
+import useProducts from "../../../Components/Hooks/useProducts";
+import { RxCross2 } from "react-icons/rx";
 
-const UserChat = () => {
+const UserChat = ({ id }) => {
   const { user } = useAuth();
-  const [userType, isLoading] = useType();
+  const [userType] = useType();
   const [chats, refetch] = useChat();
   const axiosPublic = useAxiosPublic();
+
+  const [products] = useProducts();
+  const currentProduct = products.find((product) => product._id === id);
 
   const [newText, setNewText] = useState("");
   const [currentChat, setCurrentChat] = useState([]);
@@ -21,7 +25,10 @@ const UserChat = () => {
 
   const chatboxRef = useRef(null);
 
-  const currentUsers = chats.filter((u) => u?.email === user?.email);
+  const currentProductChat = chats.find(
+    (chatProduct) =>
+      chatProduct?.productId === id && chatProduct?.email === user?.email
+  );
 
   useEffect(() => {
     const newSocket = io("http://localhost:3000", {
@@ -55,19 +62,21 @@ const UserChat = () => {
 
   useEffect(() => {
     const fetchCurrentChat = async () => {
-      if (currentUsers.length > 0) {
-        const chatId = currentUsers[0]._id;
+      if (currentProductChat) {
+        const chatId = currentProductChat._id;
         const response = await axiosPublic.get(`/chats/${chatId}`);
         setCurrentChat(response.data.messages || []);
       }
     };
     fetchCurrentChat();
-  }, [currentUsers, axiosPublic]);
+  }, [currentProductChat, axiosPublic]);
 
   const handleChat = async () => {
     const chatData = {
       name: user?.displayName,
       email: user?.email,
+      productId: id,
+      sellerId: currentProduct.userId,
       messages: [
         {
           text: "Hi",
@@ -81,7 +90,6 @@ const UserChat = () => {
     try {
       const response = await axiosPublic.post("/chats", chatData);
       refetch();
-      console.log("Chat started successfully:", response.data);
     } catch (error) {
       console.error("Error starting chat:", error.message);
     }
@@ -100,8 +108,8 @@ const UserChat = () => {
     setLoading(true);
 
     try {
-      if (currentUsers.length > 0) {
-        const chatId = currentUsers[0]._id;
+      if (currentProductChat) {
+        const chatId = currentProductChat._id;
         await axiosPublic.patch(`/chats/${chatId}`, {
           $push: { messages: newMessage },
         });
@@ -124,13 +132,20 @@ const UserChat = () => {
     }
   };
 
+  const toggleChat = () => {
+    setIsChatboxOpen((prev) => !prev);
+  };
+
+  const toggleClose = () => {
+    setIsChatboxOpen(false);
+  };
+
   const handleDeleteChat = async () => {
-    if (currentUsers.length > 0) {
-      const chatId = currentUsers[0]._id;
+    if (currentProductChat) {
+      const chatId = currentProductChat._id;
 
       try {
         const response = await axiosPublic.delete(`/chats/${chatId}`);
-        console.log("Chat deleted successfully:", response.data);
         refetch();
         setCurrentChat([]);
         setIsChatboxOpen(false);
@@ -140,16 +155,27 @@ const UserChat = () => {
     }
   };
 
-  const [users] = useUsers();
-  const usersDetails = users.filter((u) => u?.email === user?.email);
-  // const isUser = usersDetails.length > 0 && usersDetails[0]?.type === "user";
-
   return (
     <div>
-      {userType === "user" && (
-        <button className="text-primary text-2xl" onClick={toggleChatbox}>
-          <PiChatsDuotone />
+      {currentProductChat ? (
+        <button onClick={toggleChat} className="relative">
+          <p className="text-primary text-2xl">
+            <PiChatsDuotone />
+          </p>
+          {currentProductChat && (
+            <div className="absolute -top-1 right-0 transform translate-x-1 -translate-y-1 flex items-center justify-center text-xs">
+              <p className="text-2xl text-primary">*</p>
+            </div>
+          )}
         </button>
+      ) : (
+        <>
+          {userType === "user" && (
+            <button className="text-primary text-2xl" onClick={toggleChatbox}>
+              <PiChatsDuotone />
+            </button>
+          )}
+        </>
       )}
 
       {isChatboxOpen && (
@@ -157,10 +183,13 @@ const UserChat = () => {
           ref={chatboxRef}
           className="absolute right-4 bottom-16 w-96 bg-white shadow-lg rounded-lg p-4 z-10"
         >
-          <section className="flex justify-between">
+          <section className="flex justify-between items-center mb-2">
             <h2 className="font-bold text-lg">Chat</h2>
-            <button className="btn btn-primary" onClick={handleDeleteChat}>
-              Close
+            <button
+              className="btn btn-primary btn-sm text-white"
+              onClick={toggleClose}
+            >
+              <RxCross2 />
             </button>
           </section>
           <div className="h-64 overflow-y-auto border border-gray-300 rounded-md p-2">
@@ -169,6 +198,17 @@ const UserChat = () => {
                 <strong>{message.name}:</strong> {message.text}
               </div>
             ))}
+            <button
+              className="btn btn-xs btn-error mt-3 text-white"
+              onClick={handleDeleteChat}
+              disabled={loading}
+            >
+              {loading ? (
+                <span className="loading loading-spinner text-primary"></span>
+              ) : (
+                "End Chat"
+              )}
+            </button>
           </div>
           <section className="flex mt-2">
             <input
@@ -182,7 +222,7 @@ const UserChat = () => {
             <button
               className="btn btn-primary ml-2"
               onClick={handleNewChat}
-              disabled={loading}
+              disabled={loading || newText.trim() === ""}
             >
               {loading ? (
                 <span className="loading loading-spinner text-primary"></span>
