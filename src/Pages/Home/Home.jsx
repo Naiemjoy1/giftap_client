@@ -16,13 +16,13 @@ const Home = () => {
       <Banner></Banner>
       <BannerFeature></BannerFeature>
       <Category></Category>
-      <OfferBanner></OfferBanner>
+      {/* <OfferBanner></OfferBanner> */}
       <ProductTabs></ProductTabs>
       <TrustedShop></TrustedShop>
       <FeatureSection></FeatureSection>
       <RecentBlog></RecentBlog>
-      <Faq></Faq>
       <Review></Review>
+      <Faq></Faq>
     </div>
   );
 };

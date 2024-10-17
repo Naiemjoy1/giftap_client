@@ -1,6 +1,4 @@
 import { Pagination, Autoplay } from "swiper/modules";
-import MovingText from 'react-moving-text'
-
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -17,7 +15,7 @@ const Carousel = () => {
           clickable: true,
         }}
         autoplay={{
-          delay: 3000,
+          delay: 4000,
           disableOnInteraction: false,
         }}
         modules={[Pagination, Autoplay]}
@@ -28,19 +26,11 @@ const Carousel = () => {
             className="w-full min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] flex justify-center items-center"
             style={{
               backgroundImage: `url(${img4})`,
-              backgroundSize: "cover", // Ensure the background image covers the area
-              backgroundPosition: "center", // Center the background image
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
           >
-            <MovingText
-              type="unfold"
-              duration="1000ms"
-              delay="0s"
-              direction="normal"
-              timing="ease"
-              iteration="1"
-              fillMode="none"
-            >
+           
               <div className="flex flex-col justify-center items-center space-y-5 text-center px-4">
                 <p className="uppercase text-primary text-sm md:text-base font-medium">
                   print with perfection
@@ -61,7 +51,7 @@ const Carousel = () => {
                   </button>
                 </div>
               </div>
-            </MovingText>
+            
           </div>
         </SwiperSlide>
         
@@ -70,19 +60,11 @@ const Carousel = () => {
             className="w-full min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] flex justify-center items-center"
             style={{
               backgroundImage: `url(${img4})`,
-              backgroundSize: "cover", // Ensure the background image covers the area
-              backgroundPosition: "center", // Center the background image
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
           >
-            <MovingText
-              type="unfold"
-              duration="1000ms"
-              delay="0s"
-              direction="normal"
-              timing="ease"
-              iteration="1"
-              fillMode="none"
-            >
+           
               <div className="flex flex-col justify-center items-center space-y-5 text-center px-4">
                 <p className="uppercase text-[#f04854] text-sm md:text-base font-medium">
                   print with perfection
@@ -103,7 +85,7 @@ const Carousel = () => {
                   </button>
                 </div>
               </div>
-            </MovingText>
+            
           </div>
         </SwiperSlide>
         
@@ -112,19 +94,10 @@ const Carousel = () => {
             className="w-full min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] flex justify-center items-center"
             style={{
               backgroundImage: `url(${img4})`,
-              backgroundSize: "cover", // Ensure the background image covers the area
-              backgroundPosition: "center", // Center the background image
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
           >
-            <MovingText
-              type="unfold"
-              duration="1000ms"
-              delay="0s"
-              direction="normal"
-              timing="ease"
-              iteration="1"
-              fillMode="none"
-            >
               <div className="flex flex-col justify-center items-center space-y-5 text-center px-4">
                 <p className="uppercase text-[#f04854] text-sm md:text-base font-medium">
                   print with perfection
@@ -145,7 +118,7 @@ const Carousel = () => {
                   </button>
                 </div>
               </div>
-            </MovingText>
+            
           </div>
         </SwiperSlide>
         

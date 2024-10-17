@@ -54,7 +54,7 @@ const Category = () => {
                 max: 3000,
                 min: 1024,
               },
-              items: 4,
+              items: 6,
               partialVisibilityGutter: 40,
             },
             mobile: {
@@ -83,7 +83,7 @@ const Category = () => {
           slidesToSlide={1}
           swipeable
         >
-          {product.slice(0, 10).map((item) => (
+          {product.slice(0, 15).map((item) => (
             <div
               key={item._id}
               className="flex flex-col justify-center items-center p-4"
