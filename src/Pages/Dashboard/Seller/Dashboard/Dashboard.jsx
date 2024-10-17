@@ -4,6 +4,7 @@ import { MdCancel } from "react-icons/md";
 import { SiTicktick } from "react-icons/si";
 import { FaClock } from "react-icons/fa6";
 import { FaHandMiddleFinger } from "react-icons/fa6";
+import { FaMapLocationDot } from "react-icons/fa6";
 const Dashboard = () => {
   return (
     <div className="flex space-x-5">
@@ -90,9 +91,36 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+        <div>
+          <img
+            className="w-full mt-4 rounded-2xl h-96"
+            src="https://i.ibb.co.com/b5KtCpd/Screenshot-2024-10-18-012240.png"
+            alt=""
+          />
+        </div>
       </div>
       <div className="border border-red-500 w-[45%]">
         <h1>Right side</h1>
+
+        <div className=" border w-48 h-40 p-3 rounded-xl mt-4 bg-[#E1F7F5]">
+          <div className="flex space-x-20 items-center">
+            <h1 className="text-4xl font-semibold mt-2">25</h1>
+            <div className="text-4xl">
+              <FaMapLocationDot />
+            </div>
+          </div>
+          <h1 className="text-base font-medium mt-2">
+            Users in your business area
+          </h1>
+          <button className="btn btn-xs w-full mt-2 bg-slate-600 text-white">
+            view users
+          </button>
+        </div>
+        <img
+          className="w-full rounded-2xl h-96 mt-72"
+          src="https://i.ibb.co.com/vV7L7Xk/Screenshot-2024-10-18-012549.png"
+          alt=""
+        />
       </div>
     </div>
   );
