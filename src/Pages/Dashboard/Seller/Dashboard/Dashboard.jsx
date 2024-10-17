@@ -5,6 +5,7 @@ import { SiTicktick } from "react-icons/si";
 import { FaClock } from "react-icons/fa6";
 import { FaHandMiddleFinger } from "react-icons/fa6";
 import { FaMapLocationDot } from "react-icons/fa6";
+import { IoCalendarOutline } from "react-icons/io5";
 const Dashboard = () => {
   return (
     <div className="flex space-x-5">
@@ -115,6 +116,26 @@ const Dashboard = () => {
           <button className="btn btn-xs w-full mt-2 bg-slate-600 text-white">
             view users
           </button>
+        </div>
+        <div className="p-4 bg-[#E1F7F5] mt-5 rounded-2xl">
+          <h1 className="text-lg font-semibold">Notice board</h1>
+          <div className="border border-b border-black mt-2"></div>
+          <h1 className="text-base font-semibold mt-3">
+            Your plan is at least 80 % complete
+          </h1>
+          <h1 className="mt-2 text-sm font-medium ">
+            The seller noticeboard is a dedicated space for important updates,
+            announcements, and guidelines for all sellers. It provides essential
+            information on upcoming sales, policy changes, promotions, and best
+            practices to ensure a smooth and successful selling experience. Stay
+            informed and connected!
+          </h1>
+          <div className="flex items-center mt-2 space-x-3">
+            <div>
+              <IoCalendarOutline />
+            </div>
+            <h1 className="text-base font-medium">18 october 2024</h1>
+          </div>
         </div>
         <img
           className="w-full rounded-2xl h-96 mt-72"
