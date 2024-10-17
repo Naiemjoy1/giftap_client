@@ -15,6 +15,13 @@ const ConfirmPay = ({ setIsModalVisible, payment }) => {
   const shippingInfo = usersDetails?.address?.shipping[0];
 
   const handleConfirm = () => {
+    if (!shippingInfo?.email) {
+      toast.error(
+        "Shipping email is missing. Please provide a valid shipping address."
+      );
+      return;
+    }
+
     axiosPublic
       .post("/payments", payment)
       .then((response) => {
@@ -169,7 +176,7 @@ const ConfirmPay = ({ setIsModalVisible, payment }) => {
         <button
           onClick={handleConfirm}
           className="btn btn-primary text-white"
-          disabled={!billingInfo || !shippingInfo}
+          disabled={!billingInfo.email || !shippingInfo.email}
         >
           Confirm
         </button>

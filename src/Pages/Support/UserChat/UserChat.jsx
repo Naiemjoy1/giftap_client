@@ -5,9 +5,11 @@ import useChat from "../../../Components/Hooks/useChat";
 import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 import { io } from "socket.io-client";
 import useUsers from "../../../Components/Hooks/useUsers";
+import useType from "../../../Components/Hooks/useType";
 
 const UserChat = () => {
   const { user } = useAuth();
+  const [userType, isLoading] = useType();
   const [chats, refetch] = useChat();
   const axiosPublic = useAxiosPublic();
 
@@ -140,11 +142,11 @@ const UserChat = () => {
 
   const [users] = useUsers();
   const usersDetails = users.filter((u) => u?.email === user?.email);
-  const isUser = usersDetails.length > 0 && usersDetails[0]?.type === "user";
+  // const isUser = usersDetails.length > 0 && usersDetails[0]?.type === "user";
 
   return (
     <div>
-      {isUser && (
+      {userType === "user" && (
         <button className="text-primary text-2xl" onClick={toggleChatbox}>
           <PiChatsDuotone />
         </button>

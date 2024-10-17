@@ -3,9 +3,11 @@ import { FaBell } from "react-icons/fa";
 import useAuth from "../../../Components/Hooks/useAuth";
 import useChat from "../../../Components/Hooks/useChat";
 import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
+import useType from "../../../Components/Hooks/useType";
 
 const AdminChat = ({ currentUsers }) => {
   const { user } = useAuth();
+  const [userType] = useType();
   const [chats, refetch, isLoadingChats] = useChat();
   const axiosPublic = useAxiosPublic();
 
@@ -100,9 +102,17 @@ const AdminChat = ({ currentUsers }) => {
     }
   };
 
+  // if (isLoading) {
+  //   return (
+  //     <div className="flex items-center justify-center h-screen">
+  //       <span className="loading loading-spinner loading-lg text-primary"></span>
+  //     </div>
+  //   );
+  // }
+
   return (
     <div>
-      {currentUsers?.length > 0 && currentUsers[0]?.type === "admin" && (
+      {userType === "admin" && (
         <button onClick={toggleChatbox} className="relative">
           <p className="text-xl">
             <FaBell />
@@ -114,6 +124,7 @@ const AdminChat = ({ currentUsers }) => {
           )}
         </button>
       )}
+
       {isChatboxOpen && (
         <div
           ref={chatboxRef}
