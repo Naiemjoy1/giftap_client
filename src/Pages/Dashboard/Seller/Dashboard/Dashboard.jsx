@@ -98,13 +98,13 @@ const Dashboard = () => {
         </div>
         <div>
           <img
-            className="w-full mt-4 rounded-2xl h-96"
+            className="w-full mt-6 rounded-2xl h-96"
             src="https://i.ibb.co.com/b5KtCpd/Screenshot-2024-10-18-012240.png"
             alt=""
           />
         </div>
       </div>
-      <div className="border border-red-500 w-[45%]">
+      <div className=" w-[45%]">
         <h1>Right side</h1>
 
         <div className=" border w-48 h-40 p-3 rounded-xl mt-20 bg-[#E1F7F5]">
@@ -121,7 +121,7 @@ const Dashboard = () => {
             view users
           </button>
         </div>
-        <div className="p-4 bg-[#E1F7F5] mt-4 rounded-2xl">
+        <div className="p-4 bg-[#E1F7F5] mt-7 rounded-2xl">
           <h1 className="text-lg font-semibold">Notice board</h1>
           <div className="border border-b border-black mt-2"></div>
           <h1 className="text-base font-semibold mt-3">
@@ -142,7 +142,7 @@ const Dashboard = () => {
           </div>
         </div>
         <img
-          className="w-full rounded-2xl h-96 mt-72"
+          className="w-full rounded-2xl h-96 mt-6"
           src="https://i.ibb.co.com/vV7L7Xk/Screenshot-2024-10-18-012549.png"
           alt=""
         />
