@@ -30,6 +30,7 @@ const AdminChat = () => {
   const [loading, setLoading] = useState(false);
   const [isChatboxOpen, setIsChatboxOpen] = useState(false);
   const chatboxRef = useRef(null);
+  const messagesEndRef = useRef(null);
 
   const fetchChatDetails = async (chatId) => {
     setLoading(true);
@@ -125,6 +126,12 @@ const AdminChat = () => {
     (product) => product?._id === selectedChat?.productId
   );
 
+  useEffect(() => {
+    if (selectedChat && messagesEndRef.current) {
+      messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
+    }
+  }, [selectedChat?.messages]);
+
   return (
     <div>
       {userType === "seller" && (
@@ -196,58 +203,63 @@ const AdminChat = () => {
           )}
 
           {selectedChat && (
-            <div className="h-64 overflow-y-auto border border-gray-300 rounded-md p-2">
+            <div
+              className="h-80 overflow-y-auto border border-gray-300 rounded-md p-2"
+              ref={messagesEndRef}
+            >
               <div className="chat-details">
                 <h2 className="text-lg">Chat with {selectedChat.name}</h2>
-                <p className=" text-xs">
-                  {currentProduct.name} : {currentProduct.sku}
-                </p>
-
-                <div className="chat-messages mt-2">
-                  {selectedChat.messages.map((message, index) => (
-                    <div key={index} className="flex space-x-4">
-                      <p className="font-semibold">{message.name} :</p>
-                      <p>{message.text}</p>
-                    </div>
-                  ))}
-                  <button
-                    className="btn btn-xs btn-error mt-3 text-white"
-                    onClick={handleDeleteChat}
-                    disabled={loading}
-                  >
-                    {loading ? (
-                      <span className="loading loading-spinner text-primary"></span>
-                    ) : (
-                      "End Chat"
-                    )}
-                  </button>
-                </div>
+                <p>Product: {currentProduct && currentProduct.sku}</p>
+                <button
+                  className="btn btn-xs btn-error text-white"
+                  onClick={handleDeleteChat}
+                >
+                  End chat
+                </button>
               </div>
-            </div>
-          )}
 
-          {selectedChat && (
-            <section className="flex mt-4">
-              <input
-                type="text"
-                placeholder="Type here"
-                className="input input-bordered w-full max-w-xs"
-                value={newText}
-                onChange={(e) => setNewText(e.target.value)}
-                disabled={loading}
-              />
-              <button
-                className="btn btn-primary ml-2"
-                onClick={handleNewChat}
-                disabled={loading || newText.trim() === ""}
+              <div className="messages flex flex-col gap-2 mt-4">
+                {selectedChat.messages.map((message, index) => (
+                  <div
+                    key={index}
+                    className={`p-2 rounded-lg ${
+                      message.email === user?.email
+                        ? "bg-primary text-white self-end"
+                        : "bg-gray-200 self-start"
+                    }`}
+                  >
+                    <p>{message.text}</p>
+                    <p className="text-xs">
+                      {new Date(message.time).toLocaleString()}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <form
+                onSubmit={handleNewChat}
+                className="mt-4 flex items-center gap-2"
               >
-                {loading ? (
-                  <span className="loading loading-spinner text-primary"></span>
-                ) : (
-                  "Send"
-                )}
-              </button>
-            </section>
+                <input
+                  type="text"
+                  className="w-full p-2 border border-gray-300 rounded-md"
+                  placeholder="Type a message"
+                  value={newText}
+                  onChange={(e) => setNewText(e.target.value)}
+                />
+                <button
+                  type="submit"
+                  className="btn btn-primary text-white"
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <span className="loading loading-spinner text-primary"></span>
+                  ) : (
+                    "Send"
+                  )}
+                </button>
+              </form>
+            </div>
           )}
         </div>
       )}
