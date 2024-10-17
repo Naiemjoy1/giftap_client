@@ -16,6 +16,7 @@ import ProfileDetails from "../Pages/Dashboard/User/ProfileDetails";
 import Cart from "../Pages/Shop/Cart/Cart";
 import Admin from "../Pages/Dashboard/Admin/Admin";
 import Seller from "../Pages/Dashboard/Seller/Seller";
+import PrivetRoute from "./PrivetRoute/PrivetRoute";
 
 export const router = createBrowserRouter([
   {
@@ -79,11 +80,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <Admin></Admin>,
+        element: (
+          <PrivetRoute>
+            <Admin></Admin>
+          </PrivetRoute>
+        ),
       },
       {
         path: "/sellerdashboard",
-        element: <Seller></Seller>,
+        element: (
+          <PrivetRoute>
+            <Seller></Seller>
+          </PrivetRoute>
+        ),
       },
     ],
   },
