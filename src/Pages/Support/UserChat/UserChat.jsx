@@ -131,6 +131,10 @@ const UserChat = ({ id }) => {
     }
   };
 
+  const toggleClose = () => {
+    setIsChatboxOpen(true);
+  };
+
   const handleDeleteChat = async () => {
     if (currentProductChat) {
       const chatId = currentProductChat._id;
@@ -155,7 +159,7 @@ const UserChat = ({ id }) => {
   return (
     <div>
       {currentProductChat ? (
-        <button onClick={toggleChatbox} className="relative">
+        <button onClick={toggleClose} className="relative">
           <p className="text-primary text-2xl">
             <PiChatsDuotone />
           </p>
