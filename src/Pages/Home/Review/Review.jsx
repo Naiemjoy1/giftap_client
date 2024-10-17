@@ -8,7 +8,7 @@ const Review = () => {
 
   return (
     <div>
-      <div className="bg-gradient-to-r from-slate-200 to-pink-200 pb-4">
+      <div className="bg-gradient-to-r from-slate-200 to-pink-200 py-4">
         <div className="relative z-10 p-8">
           <h1 className="text-center text-3xl font-medium">
             CUSTOMERS REVIEWS
@@ -33,8 +33,11 @@ const Review = () => {
         <Marquee pauseOnHover className="[--duration:20s]">
           {/* Your customer review cards go here */}
           <div className="grid grid-cols-5 gap-4 mt-7">
-            {reviews.map((review) => (
-              <ReviewCard key={review._id} review={review}></ReviewCard>
+            {reviews.map((singleReview) => (
+              <ReviewCard
+                key={singleReview._id}
+                singleReview={singleReview}
+              ></ReviewCard>
             ))}
           </div>
         </Marquee>

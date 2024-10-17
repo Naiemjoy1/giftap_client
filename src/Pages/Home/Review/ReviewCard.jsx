@@ -1,8 +1,8 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
 
-const ReviewCard = ({ review }) => {
-  const { user_image, user_name, profession, rating, description } = review;
+const ReviewCard = ({ singleReview }) => {
+  const { user_image, user_name, profession, rating, review } = singleReview;
   return (
     <div className="bg-white border w-[300px] rounded-2xl p-5">
       <div className="flex items-center space-x-5">
@@ -20,7 +20,7 @@ const ReviewCard = ({ review }) => {
         </div>
       </div>
       <div class="border-b-2 border-slate-300 mt-5 ..."></div>
-      <h1 className="mt-4 text-base font-medium">{description}</h1>
+      <h1 className="mt-4 text-base font-medium">{review}</h1>
     </div>
   );
 };
