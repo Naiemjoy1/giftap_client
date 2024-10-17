@@ -1,7 +1,9 @@
 import { FaProductHunt } from "react-icons/fa6";
 import { HiMiniCurrencyDollar } from "react-icons/hi2";
 import { MdCancel } from "react-icons/md";
-
+import { SiTicktick } from "react-icons/si";
+import { FaClock } from "react-icons/fa6";
+import { FaHandMiddleFinger } from "react-icons/fa6";
 const Dashboard = () => {
   return (
     <div className="flex space-x-5">
@@ -51,31 +53,31 @@ const Dashboard = () => {
           </div>
           <div className="flex space-x-10 items-center border w-52 h-28 p-3 rounded-xl mt-4 bg-[#E1F7F5]">
             <div>
-              <h1 className="text-base font-semibold">Total product</h1>
-              <h1 className="text-2xl font-bold mt-2">65</h1>
+              <h1 className="text-base font-semibold">Total order</h1>
+              <h1 className="text-2xl font-bold mt-2">258</h1>
             </div>
             <div className="text-4xl">
-              <FaProductHunt />
+              <FaHandMiddleFinger />
             </div>
           </div>
         </div>
         <div className="flex space-x-4">
           <div className="flex space-x-10 items-center border w-52 h-28 p-3 rounded-xl mt-4 bg-[#E1F7F5]">
             <div>
-              <h1 className="text-base font-semibold">Total product</h1>
-              <h1 className="text-2xl font-bold mt-2">65</h1>
+              <h1 className="text-base font-semibold">Order confirm</h1>
+              <h1 className="text-2xl font-bold mt-2">158</h1>
             </div>
             <div className="text-4xl">
-              <FaProductHunt />
+              <SiTicktick />
             </div>
           </div>
           <div className="flex space-x-10 items-center border w-52 h-28 p-3 rounded-xl mt-4 bg-[#E1F7F5]">
             <div>
-              <h1 className="text-base font-semibold">Total product</h1>
-              <h1 className="text-2xl font-bold mt-2">65</h1>
+              <h1 className="text-base font-semibold">Order pending</h1>
+              <h1 className="text-2xl font-bold mt-2">25</h1>
             </div>
             <div className="text-4xl">
-              <FaProductHunt />
+              <FaClock />
             </div>
           </div>
           <div className="flex space-x-10 items-center border w-52 h-28 p-3 rounded-xl mt-4 bg-[#E1F7F5]">
