@@ -7,6 +7,7 @@ import useAxiosPublic from "../../Components/Hooks/useAxiosPublic";
 import { MdCancel } from "react-icons/md";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import useType from "../../Components/Hooks/useType";
 
 const TrackOrders = () => {
   const [track, setTrack] = useState("");
@@ -15,6 +16,9 @@ const TrackOrders = () => {
   const [payments, refetch] = usePayment();
   const [products] = useProducts();
   const axiosPublic = useAxiosPublic();
+
+  const [userType] = useType();
+  console.log(userType);
 
   const handleTrack = async (e) => {
     e.preventDefault();
