@@ -22,6 +22,7 @@ const ItemCard = ({ item }) => {
     category,
     priceGroup,
     discount,
+    store_name,
   } = item;
 
   const usersDetails = users.find((u) => u?.email === user?.email);
@@ -167,6 +168,9 @@ const ItemCard = ({ item }) => {
               </span>
             </p>
           )}
+          <p className="text-sm text-gray-400">
+            Store : <span className="text-black">{store_name}</span>
+          </p>
 
           <h3 className="mt-1.5 text-lg font-medium text-gray-900">
             {truncatedName}
