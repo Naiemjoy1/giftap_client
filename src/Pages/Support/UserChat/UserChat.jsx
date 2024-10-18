@@ -34,7 +34,16 @@ const UserChat = ({ id }) => {
       transports: ["websocket", "polling"],
       reconnection: true,
     });
+
     setSocket(newSocket);
+
+    newSocket.on("connect", () => {
+      console.log("Connected to WebSocket server");
+    });
+
+    newSocket.on("connect_error", (err) => {
+      console.error("Connection error:", err);
+    });
 
     return () => {
       newSocket.disconnect();
