@@ -3,7 +3,7 @@ import Carousel from "./Carousel/Carousel";
 
 const Banner = () => {
   return (
-    <div className="">
+    <div className="border max-w-screen-xl mx-auto">
       <section>
         <Carousel />
       </section>
