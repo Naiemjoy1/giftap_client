@@ -5,6 +5,7 @@ import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 
 const RecentBlog = () => {
   const [blog, setBlog] = useState([]);
+  console.log(blog)
   const axiosPublic = useAxiosPublic();
   useEffect(() => {
     const blogFetching = async () => {

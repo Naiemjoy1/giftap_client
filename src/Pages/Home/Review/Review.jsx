@@ -5,7 +5,6 @@ import Marquee from "react-fast-marquee";
 
 const Review = () => {
   const [reviews, loading] = useReviews();
-
   return (
     <div>
       <div className="bg-gradient-to-r from-slate-200 to-pink-200 pb-4">
