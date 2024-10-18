@@ -132,7 +132,7 @@ const ListItemCard = ({ item }) => {
       <img
         src={image.cardImg1}
         alt={name}
-        className="h-40 w-40 object-cover rounded-l-lg"
+        className="h-44 w-44 object-cover rounded-l-lg"
       />
 
       <div className="flex-grow pl-4">
