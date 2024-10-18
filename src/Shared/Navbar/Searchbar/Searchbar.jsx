@@ -62,7 +62,7 @@ const Searchbar = () => {
                   {userCarts.length}
                 </div>
               </Link>
-              <AdminChat></AdminChat>
+              {user && <AdminChat></AdminChat>}
             </section>
           </section>
         </div>
