@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../../Components/Hooks/useAuth";
 import useUsers from "../../../../Components/Hooks/useUsers";
@@ -14,6 +14,7 @@ const AccountDetails = () => {
   const [users, refetch] = useUsers();
   const { user, updateUserProfile } = useAuth();
   const axiosPublic = useAxiosPublic();
+  const [loading, setLoading] = useState(false);
 
   const usersDetails = users.find((u) => u?.email === user?.email);
   const image_hosting_key = import.meta.env.VITE_IMGBB_API;
@@ -61,6 +62,7 @@ const AccountDetails = () => {
         toast.error("Display Name is already taken");
         return;
       }
+      setLoading(true);
 
       let displayUrl = usersDetails?.image;
 
@@ -79,6 +81,7 @@ const AccountDetails = () => {
           displayUrl = result.data.display_url;
         } else {
           toast.error("Image upload failed");
+          setLoading(false);
           return;
         }
       }
@@ -111,6 +114,8 @@ const AccountDetails = () => {
     } catch (error) {
       console.error("Error updating profile:", error);
       toast.error("Error updating profile");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -189,7 +194,13 @@ const AccountDetails = () => {
           </div>
         </div>
         <div className="form-control mt-6">
-          <button className="btn btn-primary text-white">Save Changes</button>
+          <button className="btn btn-primary text-white">
+            {loading ? (
+              <span className="loading loading-ring loading-sm"></span>
+            ) : (
+              "Save Changes"
+            )}
+          </button>
         </div>
       </form>
 

@@ -22,6 +22,7 @@ const ItemCard = ({ item }) => {
     category,
     priceGroup,
     discount,
+    store_name,
   } = item;
 
   const usersDetails = users.find((u) => u?.email === user?.email);
@@ -145,11 +146,13 @@ const ItemCard = ({ item }) => {
           </button>
         )}
 
-        <img
-          src={image.cardImg1}
-          alt={name}
-          className="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
-        />
+        <div className="aspect-square bg-gray-200">
+          <img
+            src={image.cardImg1}
+            alt={name}
+            className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+          />
+        </div>
 
         <div className="relative border border-gray-200 bg-white p-6">
           {category === "digital gift" ? (
@@ -165,6 +168,9 @@ const ItemCard = ({ item }) => {
               </span>
             </p>
           )}
+          <p className="text-sm text-gray-400">
+            Store : <span className="text-black">{store_name}</span>
+          </p>
 
           <h3 className="mt-1.5 text-lg font-medium text-gray-900">
             {truncatedName}

@@ -19,10 +19,12 @@ import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/material_green.css";
 import Compare from "../../Compare/Compare";
 import UserChat from "../../../Support/UserChat/UserChat";
+import useType from "../../../../Components/Hooks/useType";
 
 const Middle = ({ product }) => {
   const { user } = useAuth();
   const [users] = useUsers();
+  const [userType] = useType();
   const [carts, refetch] = useCart();
   const [wishlists, refetchWish] = useWishs();
   const axiosPublic = useAxiosPublic();
@@ -393,10 +395,12 @@ const Middle = ({ product }) => {
         <p className="text-sm text-gray-400">
           Store : <span className="text-black">{store_name}</span>
         </p>
-        <p className="flex items-center gap-2">
-          <span className="text-sm text-gray-400">Contact Seller :</span>
-          <UserChat id={_id}></UserChat>
-        </p>
+        {userType === "user" && (
+          <p className="flex items-center gap-2">
+            <span className="text-sm text-gray-400">Contact Seller :</span>
+            <UserChat id={_id}></UserChat>
+          </p>
+        )}
       </div>
 
       <section className="space-x-2">

@@ -107,7 +107,7 @@ const Navigation = () => {
           <ul className="flex gap-2 justify-center items-center">{navLinks}</ul>
           <section className="flex justify-center gap-4">
             {/* <UserChat /> */}
-            <AdminChat currentUsers={currentUsers} chats={chats} />
+            {user && <AdminChat currentUsers={currentUsers} chats={chats} />}
           </section>
         </section>
       </div>

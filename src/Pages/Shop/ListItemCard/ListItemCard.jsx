@@ -23,6 +23,7 @@ const ListItemCard = ({ item }) => {
     category,
     priceGroup,
     discount,
+    store_name,
   } = item;
 
   const usersDetails = users.find((u) => u?.email === user?.email);
@@ -132,7 +133,7 @@ const ListItemCard = ({ item }) => {
       <img
         src={image.cardImg1}
         alt={name}
-        className="h-40 w-40 object-cover rounded-l-lg"
+        className="h-52 w-44 object-cover rounded-l-lg"
       />
 
       <div className="flex-grow pl-4">
@@ -150,6 +151,7 @@ const ListItemCard = ({ item }) => {
               </span>
             </p>
           )}
+
           {wishProduct ? (
             <button
               onClick={() => handleRemove(wishProduct._id)}
@@ -166,6 +168,9 @@ const ListItemCard = ({ item }) => {
             </button>
           )}
         </div>
+        <p className="text-sm text-gray-400">
+          Store : <span className="text-black">{store_name}</span>
+        </p>
 
         <h3 className="mt-2 text-lg font-medium text-gray-900">
           {truncatedName}

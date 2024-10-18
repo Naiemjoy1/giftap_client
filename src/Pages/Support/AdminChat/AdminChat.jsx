@@ -35,7 +35,16 @@ const AdminChat = () => {
       transports: ["websocket", "polling"],
       reconnection: true,
     });
+
     setSocket(newSocket);
+
+    newSocket.on("connect", () => {
+      console.log("Connected to WebSocket server");
+    });
+
+    newSocket.on("connect_error", (err) => {
+      console.error("Connection error:", err);
+    });
 
     return () => {
       newSocket.disconnect();
@@ -125,7 +134,6 @@ const AdminChat = () => {
     }
   };
 
-  // Toggle chatbox
   const toggleChatbox = () => {
     setIsChatboxOpen((prev) => {
       if (prev) {
@@ -169,7 +177,7 @@ const AdminChat = () => {
           </p>
           {currentSellerChat.length > 0 && (
             <div className="absolute -top-1 right-0 transform translate-x-1 -translate-y-1 flex items-center justify-center text-xs">
-              <p className="text-2xl text-primary">*</p>
+              <p className="lg:text-2xl text-lg text-primary">*</p>
             </div>
           )}
         </button>
@@ -178,7 +186,7 @@ const AdminChat = () => {
       {isChatboxOpen && (
         <div
           ref={chatboxRef}
-          className="absolute right-4 bottom-16 w-96 bg-white shadow-lg rounded-lg p-4 z-10"
+          className="fixed right-4 bottom-4 w-96 bg-white shadow-lg rounded-lg p-4 z-50"
         >
           <section className="flex justify-between mb-4">
             <h2 className="font-bold text-lg">Chat</h2>
@@ -231,37 +239,39 @@ const AdminChat = () => {
           )}
 
           {selectedChat && (
-            <div
-              className="h-80 overflow-y-auto border border-gray-300 rounded-md p-2"
-              ref={messagesEndRef}
-            >
-              <div className="chat-details">
-                <h2 className="text-lg">Chat with {selectedChat.name}</h2>
-                <p>Product: {currentProduct && currentProduct.sku}</p>
-                <button
-                  className="btn btn-xs btn-error text-white"
-                  onClick={handleDeleteChat}
-                >
-                  End chat
-                </button>
-              </div>
-
-              <div className="messages flex flex-col gap-2 mt-4">
-                {selectedChat.messages.map((message, index) => (
-                  <div
-                    key={index}
-                    className={`p-2 rounded-lg ${
-                      message.email === user?.email
-                        ? "bg-primary text-white self-end"
-                        : "bg-gray-200 self-start"
-                    }`}
+            <div className=" ">
+              <div
+                className="h-80 overflow-y-auto border border-gray-300 rounded-md p-2"
+                ref={messagesEndRef}
+              >
+                <div className="chat-details">
+                  <h2 className="text-lg">Chat with {selectedChat.name}</h2>
+                  <p>Product: {currentProduct && currentProduct.sku}</p>
+                  <button
+                    className="btn btn-xs btn-error text-white"
+                    onClick={handleDeleteChat}
                   >
-                    <p>{message.text}</p>
-                    <p className="text-xs">
-                      {new Date(message.time).toLocaleString()}
-                    </p>
-                  </div>
-                ))}
+                    End chat
+                  </button>
+                </div>
+
+                <div className="messages flex flex-col gap-2 mt-4">
+                  {selectedChat.messages.map((message, index) => (
+                    <div
+                      key={index}
+                      className={`p-2 rounded-lg ${
+                        message.email === user?.email
+                          ? "bg-primary text-white self-end"
+                          : "bg-gray-200 self-start"
+                      }`}
+                    >
+                      <p>{message.text}</p>
+                      <p className="text-xs">
+                        {new Date(message.time).toLocaleString()}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               <form
@@ -274,11 +284,12 @@ const AdminChat = () => {
                   placeholder="Type a message"
                   value={newText}
                   onChange={(e) => setNewText(e.target.value)}
+                  disabled={loading}
                 />
                 <button
                   type="submit"
                   className="btn btn-primary text-white"
-                  disabled={loading}
+                  disabled={loading || newText.trim() === ""}
                 >
                   {loading ? (
                     <span className="loading loading-spinner text-primary"></span>
