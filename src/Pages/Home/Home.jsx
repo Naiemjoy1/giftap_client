@@ -9,6 +9,7 @@ import ProductTabs from "./ProductTabs/ProductTabs";
 import RecentBlog from "./RecentBlog/RecentBlog";
 import TrustedShop from "./TrustedShop/TrustedShop";
 import OfferBanner from "./OfferBanner/OfferBanner";
+import Subscription from "./Subscription/Subscription";
 
 const Home = () => {
   return (
@@ -16,13 +17,14 @@ const Home = () => {
       <Banner></Banner>
       <BannerFeature></BannerFeature>
       <Category></Category>
-      <OfferBanner></OfferBanner>
+      {/* <OfferBanner></OfferBanner> */}
       <ProductTabs></ProductTabs>
+      <Subscription></Subscription>
       <TrustedShop></TrustedShop>
       <FeatureSection></FeatureSection>
       <RecentBlog></RecentBlog>
-      <Faq></Faq>
       <Review></Review>
+      <Faq></Faq>
     </div>
   );
 };
