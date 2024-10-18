@@ -1,5 +1,4 @@
 import Carousel from "./Carousel/Carousel";
-// import Category from "./Category/Category";
 
 const Banner = () => {
   return (
@@ -7,7 +6,6 @@ const Banner = () => {
       <section>
         <Carousel />
       </section>
-      
     </div>
   );
 };

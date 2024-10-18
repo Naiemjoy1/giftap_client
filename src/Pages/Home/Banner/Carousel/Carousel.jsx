@@ -1,9 +1,7 @@
 import { Pagination, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-
 import "swiper/css";
 import "swiper/css/pagination";
-import img4 from "./../../../../assets/Images/Banner/Mask_group_48.webp";
 
 const Carousel = () => {
   return (
@@ -21,17 +19,40 @@ const Carousel = () => {
         modules={[Pagination, Autoplay]}
         className="mySwiper"
       >
-
-
         <SwiperSlide>
-          <div className="">
+          <div className="h-[70vh] flex items-center justify-center bg-gray-100">
             <div>
-              <img className="" src="https://i.ibb.co.com/Tt4z6zZ/Green-and-Yellow-Simple-Clean-Shoes-Sale-Banner-1.png" alt="" />
+              <img
+                className="max-h-full object-contain"
+                src="https://i.ibb.co/Tt4z6zZ/Green-and-Yellow-Simple-Clean-Shoes-Sale-Banner-1.png"
+                alt="Banner"
+              />
             </div>
           </div>
         </SwiperSlide>
 
-
+        <SwiperSlide>
+          <div className="h-[70vh] flex items-center justify-center bg-gray-100">
+            <div>
+              <img
+                className="max-h-full object-contain"
+                src="https://i.ibb.co.com/6tR71tb/Simple-Modern-Photo-Collage-Autumn-Fashion-Sale-Banner-1.png"
+                alt="Fashion"
+              />
+            </div>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="h-[70vh] flex items-center justify-center bg-gray-100">
+            <div>
+              <img
+                className="max-h-full object-contain"
+                src="https://i.ibb.co.com/zbHkDSF/Grey-Minimalist-Special-Offer-Banner-Landscape-1.png"
+                alt="Fashion"
+              />
+            </div>
+          </div>
+        </SwiperSlide>
 
       </Swiper>
     </div>

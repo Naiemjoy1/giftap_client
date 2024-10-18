@@ -9,6 +9,8 @@ import { BiSolidOffer } from "react-icons/bi";
 import Promotions from "../../Pages/Dashboard/Seller/Promotions/Promotions";
 import AllProducts from "../../Pages/Dashboard/Seller/AllProducts/AllProducts";
 import AddPro from "../../Pages/Dashboard/Seller/AddPro/AddPro";
+import { RiAdvertisementFill } from "react-icons/ri";
+import RequestBanner from "../../Pages/Dashboard/Seller/RequestBanner/RequestBanner";
 
 const useSellerTabs = () => {
   const tabsData = [
@@ -36,6 +38,12 @@ const useSellerTabs = () => {
       tab: 5,
       page: <Promotions></Promotions>,
     },
+    {
+      name: "REquest Banner",
+      icon: <RiAdvertisementFill />,
+      tab: 7,
+      page: <RequestBanner />
+    }
   ];
   return [tabsData];
 };
