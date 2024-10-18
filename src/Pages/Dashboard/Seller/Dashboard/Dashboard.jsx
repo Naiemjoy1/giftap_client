@@ -6,6 +6,7 @@ import { FaClock } from "react-icons/fa6";
 import { FaHandMiddleFinger } from "react-icons/fa6";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { IoCalendarOutline } from "react-icons/io5";
+import { FaCartPlus } from "react-icons/fa";
 const Dashboard = () => {
   return (
     <div className="flex space-x-5">
@@ -63,7 +64,7 @@ const Dashboard = () => {
               <h1 className="text-2xl font-bold mt-2">258</h1>
             </div>
             <div className="text-4xl">
-              <FaHandMiddleFinger />
+              <FaCartPlus />
             </div>
           </div>
         </div>
