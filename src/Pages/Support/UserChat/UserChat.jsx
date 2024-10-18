@@ -59,13 +59,12 @@ const UserChat = ({ id }) => {
     }
   }, [socket, axiosPublic]);
 
-  // Fix: use currentProductChat instead of undefined selectedChat
   useEffect(() => {
     if (socket) {
       socket.on("chatEnded", (data) => {
         if (currentProductChat?._id === data.chatId) {
-          setIsChatboxOpen(false); // Close the chatbox
-          refetch(); // Refetch chats after ending
+          setIsChatboxOpen(false);
+          refetch();
         }
       });
 
@@ -190,7 +189,7 @@ const UserChat = ({ id }) => {
       {isChatboxOpen && (
         <div
           ref={chatboxRef}
-          className="absolute right-4 bottom-16 w-96 bg-white shadow-lg rounded-lg p-4 z-10"
+          className="fixed right-4 bottom-4 w-96 bg-white shadow-lg rounded-lg p-4 z-50"
         >
           <section className="flex justify-between items-center mb-2">
             <h2 className="font-bold text-lg">Chat</h2>

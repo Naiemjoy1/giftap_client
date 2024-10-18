@@ -74,10 +74,10 @@ export const router = createBrowserRouter([
         path: "/profile",
         element: <ProfileDetails></ProfileDetails>,
       },
-      {
-        path: "/support",
-        element: <LiveChat></LiveChat>,
-      },
+      // {
+      //   path: "/support",
+      //   element: <LiveChat></LiveChat>,
+      // },
       {
         path: "/dashboard",
         element: (
