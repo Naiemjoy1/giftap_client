@@ -11,11 +11,11 @@ import BlogDetails from "../Pages/Blog/BlogDetails";
 import AuthPage from "../Pages/SignIn&SignUp/AuthPage";
 import About from "../Pages/About/About";
 import ProductDeatails from "../Pages/Shop/ProductDetails/ProductDeatails";
-import LiveChat from "../Pages/LiveChat/LiveChat";
 import ProfileDetails from "../Pages/Dashboard/User/ProfileDetails";
 import Cart from "../Pages/Shop/Cart/Cart";
 import Admin from "../Pages/Dashboard/Admin/Admin";
 import Seller from "../Pages/Dashboard/Seller/Seller";
+import PrivetRoute from "./PrivetRoute/PrivetRoute";
 
 export const router = createBrowserRouter([
   {
@@ -73,17 +73,22 @@ export const router = createBrowserRouter([
         path: "/profile",
         element: <ProfileDetails></ProfileDetails>,
       },
-      {
-        path: "/support",
-        element: <LiveChat></LiveChat>,
-      },
+
       {
         path: "/dashboard",
-        element: <Admin></Admin>,
+        element: (
+          <PrivetRoute>
+            <Admin></Admin>
+          </PrivetRoute>
+        ),
       },
       {
         path: "/sellerdashboard",
-        element: <Seller></Seller>,
+        element: (
+          <PrivetRoute>
+            <Seller></Seller>
+          </PrivetRoute>
+        ),
       },
     ],
   },

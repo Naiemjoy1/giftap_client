@@ -39,12 +39,13 @@ const Seller = () => {
               }
               onClick={() => handleTabs(aTabs.tab)}
             >
-              <span className="flex items-center gap-2">
+              <span className="flex items-center cursor-pointer gap-2">
                 {aTabs.icon}
                 {aTabs.name}
               </span>
             </p>
           ))}
+         
           <Link
             to="/"
             className="flex gap-2 items-center text-gray-400 px-2 rounded-md py-2"

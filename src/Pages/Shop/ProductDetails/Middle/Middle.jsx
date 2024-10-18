@@ -18,10 +18,13 @@ import useWishs from "../../../../Components/Hooks/useWishs";
 import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/material_green.css";
 import Compare from "../../Compare/Compare";
+import UserChat from "../../../Support/UserChat/UserChat";
+import useType from "../../../../Components/Hooks/useType";
 
 const Middle = ({ product }) => {
   const { user } = useAuth();
   const [users] = useUsers();
+  const [userType] = useType();
   const [carts, refetch] = useCart();
   const [wishlists, refetchWish] = useWishs();
   const axiosPublic = useAxiosPublic();
@@ -308,7 +311,7 @@ const Middle = ({ product }) => {
                 value={date}
                 onChange={([date]) => setDate(date)}
                 options={{
-                  minDate: "today", // Allow only future dates
+                  minDate: "today",
                   static: true,
                 }}
                 className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-primary"
@@ -360,7 +363,6 @@ const Middle = ({ product }) => {
             add to wishlist
           </button>
         )}
-
         <button
           onClick={() => document.getElementById("compare").showModal()}
           className="flex uppercase items-center gap-2 text-xs border py-2 px-4 rounded-full"
@@ -370,7 +372,6 @@ const Middle = ({ product }) => {
           </span>
           compare
         </button>
-        {/* Open the modal using document.getElementById('ID').showModal() method */}
         <dialog id="compare" className="modal">
           <div className="modal-box">
             <Compare
@@ -385,14 +386,22 @@ const Middle = ({ product }) => {
         </dialog>
       </section>
 
-      <div className="divider"></div>
+      <div className=" border-t "></div>
 
       <p className="text-sm text-gray-400">
         Category: <span className="text-black">{category}</span>
       </p>
-      <p className="text-sm text-gray-400">
-        Store Name: <span className="text-black">{store_name}</span>
-      </p>
+      <div className="lg:flex md:flex md:justify-start items-center lg:justify-between gap-4 md:space-y-0 space-y-4">
+        <p className="text-sm text-gray-400">
+          Store : <span className="text-black">{store_name}</span>
+        </p>
+        {userType === "user" && (
+          <p className="flex items-center gap-2">
+            <span className="text-sm text-gray-400">Contact Seller :</span>
+            <UserChat id={_id}></UserChat>
+          </p>
+        )}
+      </div>
 
       <section className="space-x-2">
         <button className="bg-blue-600 p-2 text-white rounded-full">
