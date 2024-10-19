@@ -143,7 +143,6 @@ const AddProducts = () => {
         );
       }
 
-      console.log(productData);
       const res = await axiosPublic.post("/products", productData);
       if (res.data.insertedId) {
         reset();
