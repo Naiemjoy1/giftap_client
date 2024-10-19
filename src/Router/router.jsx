@@ -16,6 +16,8 @@ import Cart from "../Pages/Shop/Cart/Cart";
 import Admin from "../Pages/Dashboard/Admin/Admin";
 import Seller from "../Pages/Dashboard/Seller/Seller";
 import PrivetRoute from "./PrivetRoute/PrivetRoute";
+import AdminRoute from "./AdminRoute/AdminRoute";
+import SellerRoute from "./SellerRoute/SellerRoute";
 
 export const router = createBrowserRouter([
   {
@@ -41,7 +43,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <Cart></Cart>,
+        element: (
+          <PrivetRoute>
+            <Cart></Cart>
+          </PrivetRoute>
+        ),
       },
       {
         path: "/about",
@@ -71,23 +77,27 @@ export const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <ProfileDetails></ProfileDetails>,
+        element: (
+          <PrivetRoute>
+            <ProfileDetails></ProfileDetails>
+          </PrivetRoute>
+        ),
       },
 
       {
         path: "/dashboard",
         element: (
-          <PrivetRoute>
+          <AdminRoute>
             <Admin></Admin>
-          </PrivetRoute>
+          </AdminRoute>
         ),
       },
       {
         path: "/sellerdashboard",
         element: (
-          <PrivetRoute>
+          <SellerRoute>
             <Seller></Seller>
-          </PrivetRoute>
+          </SellerRoute>
         ),
       },
     ],

@@ -39,11 +39,11 @@ const AdminChat = () => {
     setSocket(newSocket);
 
     newSocket.on("connect", () => {
-      console.log("Connected to WebSocket server");
+      // console.log("Connected to WebSocket server");
     });
 
     newSocket.on("connect_error", (err) => {
-      console.error("Connection error:", err);
+      // console.error("Connection error:", err);
     });
 
     return () => {

@@ -6,6 +6,7 @@ import useAxiosPublic from "../../../../Components/Hooks/useAxiosPublic";
 import { IoCheckmarkCircle } from "react-icons/io5";
 import { FaCircleXmark } from "react-icons/fa6";
 import toast from "react-hot-toast";
+import useAxiosSecure from "../../../../Components/Hooks/useAxiosSecure";
 
 const AccountDetails = () => {
   const [image, setImage] = useState(null);
@@ -13,7 +14,7 @@ const AccountDetails = () => {
   const [isDisplayNameTaken, setIsDisplayNameTaken] = useState(false);
   const [users, refetch] = useUsers();
   const { user, updateUserProfile } = useAuth();
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const [loading, setLoading] = useState(false);
 
   const usersDetails = users.find((u) => u?.email === user?.email);
@@ -96,7 +97,7 @@ const AccountDetails = () => {
           type: userDetail.type,
         };
 
-        const updateResponse = await axiosPublic.patch(
+        const updateResponse = await axiosSecure.patch(
           `/users/${userDetail._id}`,
           updateInfo
         );
