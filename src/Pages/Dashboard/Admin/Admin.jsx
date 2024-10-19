@@ -124,7 +124,7 @@ const Admin = () => {
           </div>
         </div>
 
-        <div className="p-4">
+        <div className="p-4 bg-[#f8f8f8]">
           {tabsData.map(
             (aTabs) =>
               tab === aTabs.tab && <div key={aTabs.tab}>{aTabs.page}</div>

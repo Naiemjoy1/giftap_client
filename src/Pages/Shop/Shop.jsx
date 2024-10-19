@@ -13,28 +13,22 @@ import "react-modern-drawer/dist/index.css";
 const Shop = () => {
   const [products, loading] = useProducts();
 
-  const categories = ["All", ...new Set(products.map((item) => item.category))];
+  const categories = [...new Set(products.map((item) => item.category))];
 
   const [currentPage, setCurrentPage] = useState(1);
-
   const [viewMode, setViewMode] = useState("grid");
 
   const itemsPerPage = viewMode === "grid" ? 6 : 5;
-
   const [sortOption, setSortOption] = useState("default");
 
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
 
   const [selectedCategories, setSelectedCategories] = useState(new Set());
-
   const [expandedCategory, setExpandedCategory] = useState(null);
 
   const [inStockOnly, setInStockOnly] = useState(false);
   const [onSaleOnly, setOnSaleOnly] = useState(false);
-
-  const totalPages = Math.ceil(products.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
 
   const [isOpen, setIsOpen] = React.useState(false);
   const toggleDrawer = () => {
@@ -56,8 +50,10 @@ const Shop = () => {
       updatedCategories.add(category);
     }
     setSelectedCategories(updatedCategories);
+    setCurrentPage(1);
   };
 
+  // Filter products
   const filteredProducts = products.filter((product) => {
     const productPrice = product.price;
     const isAboveMin = minPrice === "" || productPrice >= parseFloat(minPrice);
@@ -81,12 +77,21 @@ const Shop = () => {
     );
   });
 
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+
   const sortedProducts = [...filteredProducts].sort((a, b) => {
+    if (onSaleOnly) {
+      return b.discount - a.discount;
+    }
+
     if (sortOption === "lowToHigh") {
       return a.price - b.price;
     } else if (sortOption === "highToLow") {
       return b.price - a.price;
     }
+
     return 0;
   });
 
@@ -109,6 +114,27 @@ const Shop = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
     }
+  };
+
+  const handleViewModeChange = (mode) => {
+    setViewMode(mode);
+    setCurrentPage(1);
+  };
+
+  const handleSortChange = (e) => {
+    setSortOption(e.target.value);
+    setCurrentPage(1);
+  };
+
+  const handleInStockChange = () => {
+    setInStockOnly(!inStockOnly);
+    setCurrentPage(1);
+  };
+
+  const handlePriceChange = (e, type) => {
+    if (type === "min") setMinPrice(e.target.value);
+    if (type === "max") setMaxPrice(e.target.value);
+    setCurrentPage(1);
   };
 
   const getPageNumbers = () => {
@@ -234,8 +260,8 @@ const Shop = () => {
                 className="size-4 rounded border-gray-300"
                 id="inStock"
                 checked={inStockOnly}
-                onChange={() => setInStockOnly(!inStockOnly)}
-              />{" "}
+                onChange={handleInStockChange}
+              />
               In Stock
             </p>
             <p className="flex justify-start gap-4 items-center">
@@ -245,7 +271,7 @@ const Shop = () => {
                 checked={onSaleOnly}
                 onChange={() => setOnSaleOnly(!onSaleOnly)}
                 className="size-4 rounded border-gray-300"
-              />{" "}
+              />
               On Sale
             </p>
           </section>
@@ -348,14 +374,15 @@ const Shop = () => {
                     placeholder="Min"
                     className="input input-bordered w-full max-w-xs text-black"
                     value={minPrice}
-                    onChange={(e) => setMinPrice(e.target.value)}
+                    onChange={(e) => handlePriceChange(e, "min")}
                   />
+
                   <input
                     type="number"
                     placeholder="Max"
                     className="input input-bordered w-full max-w-xs text-black"
                     value={maxPrice}
-                    onChange={(e) => setMaxPrice(e.target.value)}
+                    onChange={(e) => handlePriceChange(e, "max")}
                   />
                 </section>
               </div>
@@ -397,13 +424,13 @@ const Shop = () => {
           <div className="flex justify-center gap-4">
             <section className="flex justify-end gap-2 items-center text-xl">
               <button
-                onClick={() => setViewMode("grid")}
+                onClick={() => handleViewModeChange("grid")}
                 className={viewMode === "grid" ? "text-primary" : ""}
               >
                 <BsFillGrid3X2GapFill />
               </button>
               <button
-                onClick={() => setViewMode("list")}
+                onClick={() => handleViewModeChange("list")}
                 className={viewMode === "list" ? "text-primary" : ""}
               >
                 <MdViewList />
@@ -413,7 +440,7 @@ const Shop = () => {
             <select
               className="border text-black"
               value={sortOption}
-              onChange={(e) => setSortOption(e.target.value)}
+              onChange={handleSortChange}
             >
               <option value="default">Default Sort</option>
               <option value="lowToHigh">Price low to high</option>

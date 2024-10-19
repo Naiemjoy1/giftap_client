@@ -1,12 +1,16 @@
-import React from "react";
 import useAuth from "../../Components/Hooks/useAuth";
 import { Navigate, useLocation } from "react-router-dom";
+import useType from "../../Components/Hooks/useType";
 
-const PrivetRoute = ({ children }) => {
+const SellerRoute = ({ children }) => {
   const { user, loading } = useAuth();
+  const [userType, isLoading] = useType();
+
   const location = useLocation();
 
-  if (loading) {
+  const sellerLoading = loading || isLoading;
+
+  if (sellerLoading) {
     return (
       <div className="absolute inset-0 flex items-center justify-center bg-gray-200 bg-opacity-75 z-50">
         <div
@@ -18,11 +22,12 @@ const PrivetRoute = ({ children }) => {
       </div>
     );
   }
-  if (user) {
+
+  if (user && userType === "seller") {
     return children;
   }
 
-  return <Navigate to="/login" state={{ from: location }} replace></Navigate>;
+  return <Navigate to="/" state={{ from: location }} replace />;
 };
 
-export default PrivetRoute;
+export default SellerRoute;

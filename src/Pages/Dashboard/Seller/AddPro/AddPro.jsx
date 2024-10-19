@@ -13,6 +13,7 @@ const AddPro = () => {
   const { user } = useAuth();
   const [products] = useProducts();
   const categories = [...new Set(products.map((item) => item.category))];
+  const subCategories = [...new Set(products.map((item) => item.subCategory))];
   const axiosPublic = useAxiosPublic();
 
   const [users] = useUsers();
@@ -155,7 +156,7 @@ const AddPro = () => {
         );
       }
 
-      console.log(productData);
+      // console.log(productData);
       const res = await axiosPublic.post("/products", productData);
       if (res.data.insertedId) {
         reset();
@@ -317,12 +318,21 @@ const AddPro = () => {
 
           {/* SubCategory */}
           <div className="form-control">
-            <input
-              type="text"
-              placeholder="SubCategory"
-              className="input input-bordered"
+            <select
+              className="select select-bordered"
               {...register("subCategory", { required: true })}
-            />
+            >
+              <option value="">Select SubCategory</option>
+              {subCategories.map((subCategory, idx) => (
+                <option key={idx} value={subCategory}>
+                  {subCategory
+                    .toLowerCase()
+                    .split(" ")
+                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                    .join(" ")}
+                </option>
+              ))}
+            </select>
             {errors.subCategory && (
               <p className="text-red-600">SubCategory is required.</p>
             )}

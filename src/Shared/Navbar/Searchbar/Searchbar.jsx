@@ -10,6 +10,7 @@ import NavDrawer from "../Drawer/NavDrawer";
 import Search from "./Search";
 import useCart from "../../../Components/Hooks/useCart";
 import useWishs from "../../../Components/Hooks/useWishs";
+import AdminChat from "../../../Pages/Support/AdminChat/AdminChat";
 
 const Searchbar = () => {
   const { user, logOut } = useAuth();
@@ -19,7 +20,7 @@ const Searchbar = () => {
   };
 
   const [isOpen, setIsOpen] = React.useState(false);
-  
+
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState);
   };
@@ -52,15 +53,16 @@ const Searchbar = () => {
               <p className="font-semibold">$0.00</p>
             </section>
 
-            <section>
+            <section className="flex justify-between items-baseline gap-4">
               <Link to="/cart" className="relative">
                 <p className="text-2xl">
                   <HiOutlineShoppingBag />
                 </p>
-                <div className="bg-primary absolute -top-2 -right-2 transform translate-x-1 -translate-y-1 rounded-full w-6 h-6 flex items-center justify-center text-white text-xs">
+                <div className="bg-primary absolute top-0 -right-1 transform translate-x-1 -translate-y-1 rounded-full w-4 h-4 flex items-center justify-center text-white text-xs">
                   {userCarts.length}
                 </div>
               </Link>
+              {user && <AdminChat></AdminChat>}
             </section>
           </section>
         </div>

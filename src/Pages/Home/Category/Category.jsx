@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -20,15 +20,22 @@ const Category = () => {
     fetchProducts();
   }, [axiosPublic]);
 
+ 
+  const category = product.reduce((acc, current) => { 
+    const categoryExists = acc.find(item => item.category === current.category);
+    if (!categoryExists) {
+      acc.push(current);
+    }
+    return acc;
+  }, []);
+
   return (
     <div>
-      {/* this is section heading this style get homeSectionHeading components */}
       <HomeSectionHeading
         subTitle={"shop with giftap"}
         title={"Shop by category"}
-      ></HomeSectionHeading>
+      />
 
-      {/* Center the carousel container */}
       <div className="max-w-screen-xl mx-auto">
         <Carousel
           additionalTransfrom={0}
@@ -54,7 +61,7 @@ const Category = () => {
                 max: 3000,
                 min: 1024,
               },
-              items: 4,
+              items: 6,
               partialVisibilityGutter: 40,
             },
             mobile: {
@@ -68,7 +75,7 @@ const Category = () => {
             tablet: {
               breakpoint: {
                 max: 1024,
-                min: 464,
+                min: 512,
               },
               items: 3,
               partialVisibilityGutter: 30,
@@ -83,7 +90,7 @@ const Category = () => {
           slidesToSlide={1}
           swipeable
         >
-          {product.slice(0, 10).map((item) => (
+          {category.map((item) => (
             <div
               key={item._id}
               className="flex flex-col justify-center items-center p-4"
@@ -95,13 +102,14 @@ const Category = () => {
                   className="object-cover w-full h-full"
                 />
               </div>
-              <p className="text-lg font-medium mt-4">{item.name}</p>
+              <p className="text-lg font-medium mt-4">{item.category}</p>
             </div>
           ))}
         </Carousel>
+
         <div className="flex justify-center">
           <button
-            className="btn text-white py-3 px-6 md:py-[16px] md:px-[40px] rounded-3xl flex items-center justify-center gap-2 border-2 border-transparent hover:border-black hover:bg-red-700 transition-all duration-500 ease-in-out"
+            className="btn text-white py-3 px-6 mt-10 md:py-[16px] md:px-[40px] rounded-xl flex items-center justify-center gap-2 border-2 border-transparent hover:border-black hover:bg-red-700 transition-all duration-500 ease-in-out"
             style={{ backgroundColor: "rgb(240, 72, 84)" }}
           >
             See All

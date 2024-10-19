@@ -10,6 +10,7 @@ import useCart from "../../../../Components/Hooks/useCart";
 import toast from "react-hot-toast";
 import useAxiosPublic from "../../../../Components/Hooks/useAxiosPublic";
 import useWishs from "../../../../Components/Hooks/useWishs";
+import useReviews from "../../../../Components/Hooks/useReviews";
 
 const RelatedProducts = ({ id }) => {
   const { user } = useAuth();
@@ -18,6 +19,7 @@ const RelatedProducts = ({ id }) => {
   const [products, loading] = useProducts();
   const [wishlists, refetchWish] = useWishs();
   const axiosPublic = useAxiosPublic();
+  const [reviews] = useReviews();
 
   const product = products.find((p) => p._id === id);
   const related = products.filter(
@@ -124,6 +126,19 @@ const RelatedProducts = ({ id }) => {
         const wishProduct = usersWishs.find(
           (wish) => wish.productId === item._id
         );
+        const productReviews = reviews.filter(
+          (review) => review.productId === item._id
+        );
+
+        const averageRating =
+          productReviews?.length > 0
+            ? (
+                productReviews?.reduce(
+                  (sum, review) => sum + review.rating,
+                  0
+                ) / productReviews?.length
+              ).toFixed(1)
+            : 0;
 
         return (
           <div className="relative group" key={item._id}>
@@ -148,10 +163,10 @@ const RelatedProducts = ({ id }) => {
               <p className="flex gap-2 items-center">
                 <Rating
                   style={{ maxWidth: 80 }}
-                  value={item.rating || 3}
+                  value={averageRating}
                   readOnly
                 />
-                <span>{item.rating || 3}</span>
+                <span>{productReviews?.length}</span>
               </p>
 
               {item.category === "digital gift" ? (
