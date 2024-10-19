@@ -1,6 +1,7 @@
-module.exports = {
-    transform: {
-      "^.+\\.jsx?$": "babel-jest"
-    }
-  };
+export const transform = {
+  "^.+\\.jsx?$": "babel-jest",
+  "setupFilesAfterEnv": [
+    "<rootDir>/src/setupTests.ts"
+  ]
+};
   
