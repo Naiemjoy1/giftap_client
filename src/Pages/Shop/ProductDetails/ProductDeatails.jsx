@@ -30,9 +30,9 @@ const ProductDeatails = () => {
   const averageRating =
     productReviews.length > 0
       ? (
-          productReviews.reduce((sum, review) => sum + review.rating, 0) /
-          productReviews.length
-        ).toFixed(1)
+        productReviews.reduce((sum, review) => sum + review.rating, 0) /
+        productReviews.length
+      ).toFixed(1)
       : 0;
 
   const [activeTab, setActiveTab] = useState("description");
@@ -44,6 +44,10 @@ const ProductDeatails = () => {
       </div>
     );
   }
+
+  // Title
+  document.title = `GifTap || ${name}`;
+
 
   return (
     <div className="bg-neutral py-10">
@@ -90,25 +94,22 @@ const ProductDeatails = () => {
           <section className="flex gap-6 uppercase">
             <p
               onClick={() => setActiveTab("description")}
-              className={`cursor-pointer ${
-                activeTab === "description" ? "font-bold" : ""
-              }`}
+              className={`cursor-pointer ${activeTab === "description" ? "font-bold" : ""
+                }`}
             >
               Description
             </p>
             <p
               onClick={() => setActiveTab("information")}
-              className={`cursor-pointer ${
-                activeTab === "information" ? "font-bold" : ""
-              }`}
+              className={`cursor-pointer ${activeTab === "information" ? "font-bold" : ""
+                }`}
             >
               additional Information
             </p>
             <p
               onClick={() => setActiveTab("review")}
-              className={`cursor-pointer ${
-                activeTab === "review" ? "font-bold" : ""
-              }`}
+              className={`cursor-pointer ${activeTab === "review" ? "font-bold" : ""
+                }`}
             >
               Review ({productReviews.length})
             </p>

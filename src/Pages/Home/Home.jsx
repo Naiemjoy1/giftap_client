@@ -12,6 +12,11 @@ import OfferBanner from "./OfferBanner/OfferBanner";
 import Subscription from "./Subscription/Subscription";
 
 const Home = () => {
+
+    // Title
+    document.title = `GifTap || Home`;
+
+
   return (
     <div className=" mb-10 space-y-5">
       <Banner></Banner>
