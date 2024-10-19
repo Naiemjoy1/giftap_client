@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import useBlogs from "../../Components/Hooks/useBlogs";
 import { FaArrowRight, FaCommentDots } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
-import '@testing-library/jest-dom/extend-expect';
+
 const Blog = () => {
   const [blogs] = useBlogs();
 
