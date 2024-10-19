@@ -70,15 +70,15 @@ const Complain = () => {
                                     defaultValue={user.email}
                                     className="input input-bordered w-80 lg:w-96"
                                     disabled
-                                // {...register("customerEmail", { required: true })}
                                 />
 
 
                             </div>
                         </div>
 
+                        {/* Complaint Form Section */}
                         <div className="lg:flex justify-around mt-2">
-                            {/* Shop Category Section */}
+                            {/* Name */}
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Shop Name</span>
