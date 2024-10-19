@@ -13,28 +13,22 @@ import "react-modern-drawer/dist/index.css";
 const Shop = () => {
   const [products, loading] = useProducts();
 
-  const categories = ["All", ...new Set(products.map((item) => item.category))];
+  const categories = [...new Set(products.map((item) => item.category))];
 
   const [currentPage, setCurrentPage] = useState(1);
-
   const [viewMode, setViewMode] = useState("grid");
 
   const itemsPerPage = viewMode === "grid" ? 6 : 5;
-
   const [sortOption, setSortOption] = useState("default");
 
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
 
   const [selectedCategories, setSelectedCategories] = useState(new Set());
-
   const [expandedCategory, setExpandedCategory] = useState(null);
 
   const [inStockOnly, setInStockOnly] = useState(false);
   const [onSaleOnly, setOnSaleOnly] = useState(false);
-
-  const totalPages = Math.ceil(products.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
 
   const [isOpen, setIsOpen] = React.useState(false);
   const toggleDrawer = () => {
@@ -59,6 +53,7 @@ const Shop = () => {
     setCurrentPage(1);
   };
 
+  // Filter products
   const filteredProducts = products.filter((product) => {
     const productPrice = product.price;
     const isAboveMin = minPrice === "" || productPrice >= parseFloat(minPrice);
@@ -81,6 +76,10 @@ const Shop = () => {
       (!onSaleOnly || onSale)
     );
   });
+
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
 
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     if (onSaleOnly) {

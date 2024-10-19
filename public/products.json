@@ -1,610 +1,774 @@
 [
   {
-    "seller_name": "John Doe",
-    "store_name": "Doe's Gifts",
+    "_id": "670e167fcbcd40c2ccedc3bf",
+    "userId": "670612936fbe064617e73386",
     "name": "Plants & Planters",
+    "seller_name": "Naiem Hasan",
+    "store_name": "Gifz BD",
     "description": "Brighten up your home or office with beautiful indoor plants. Paired with stylish planters, these make for thoughtful and eco-friendly gifts.",
+    "sku": "PLAN-HOM-BXV1-3418",
     "image": {
-      "cardImg1": "https://i.ibb.co.com/JC5jRNp/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/bPMchvp/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/p1Mzxg9/blob.jpg"
+      "cardImg1": "https://i.ibb.co.com/TPSbVmc/blob.jpg",
+      "cardImg2": "https://i.ibb.co.com/4jJ1kFC/blob-2.jpg",
+      "cardImg3": "https://i.ibb.co.com/y4yH6f1/blob-1.jpg"
     },
-    "price": 29.99,
     "category": "Home & Living",
     "subCategory": "Plants & Planters",
+    "price": 29.99,
     "mention": "For Women, Occasions",
-    "quantity": 20,
-    "discount": 20
+    "quantity": 19,
+    "discount": 13
   },
   {
-    "seller_name": "John Doe",
-    "store_name": "Doe's Gifts",
+    "_id": "670e17a2cbcd40c2ccedc3c4",
+    "userId": "670612936fbe064617e73386",
     "name": "Aromatherapy Kit",
+    "seller_name": "Naiem Hasan",
+    "store_name": "Gifz BD",
     "description": "Relax and rejuvenate with aromatherapy kits featuring essential oils and diffusers. Ideal for creating a calming and serene environment.",
+    "sku": "AROM-BEA-KDQ9-5527",
     "image": {
-      "cardImg1": "https://i.ibb.co.com/JsgfV4H/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/Xzqq9HT/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/yV9kqVM/blob.jpg"
+      "cardImg1": "https://i.ibb.co.com/rsw6V0Q/blob-5.jpg",
+      "cardImg2": "https://i.ibb.co.com/DM6r8gf/blob-3.jpg",
+      "cardImg3": "https://i.ibb.co.com/6WL3PjC/blob-4.jpg"
     },
-    "price": 29.99,
     "category": "Beauty & Wellness",
     "subCategory": "Essential Oils & Diffusers",
+    "price": 29.99,
     "mention": "For Women, Occasions",
     "quantity": 47,
-    "discount": 15
-  },
-  {
-    "seller_name": "John Doe",
-    "store_name": "Doe's Gifts",
-    "name": "Home Décor",
-    "description": "Elevate any space with stunning home décor pieces. From custom wall art to elegant decorative items, there's something to suit every style.",
-    "image": {
-      "cardImg1": "https://i.ibb.co.com/pPb0vcr/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/w0NJPxG/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/rMNYhcN/blob.jpg"
-    },
-    "price": 24.99,
-    "category": "Home & Living",
-    "subCategory": "Wall Art, Decorative Items",
-    "mention": "For Women, Occasions",
-    "quantity": 57,
-    "discount": 10,
-    "priceGroup": []
-  },
-  {
-    "seller_name": "Jane Smith",
-    "store_name": "Smith's Treasures",
-    "name": "Gourmet Food Hamper",
-    "description": "Indulge in a selection of gourmet treats, including artisanal cheeses, chocolates, and fine wines, all beautifully packaged in a luxurious hamper.",
-    "image": {
-      "cardImg1": "https://i.ibb.co.com/x2tHjX6/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/myfCjkQ/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/ySqFW1j/blob.jpg"
-    },
-    "price": 29.99,
-    "category": "Food & Beverage",
-    "subCategory": "Hampers",
-    "mention": "For Women, Men, Occasions",
-    "quantity": 18,
-    "discount": 10,
-    "priceGroup": []
-  },
-  {
-    "seller_name": "Jane Smith",
-    "store_name": "Smith's Treasures",
-    "name": "Remote Cars and Drones",
-    "description": "Take fun to the next level with remote-controlled cars and drones, perfect for adventure lovers and hobbyists.",
-    "image": {
-      "cardImg1": "https://i.ibb.co.com/5T307PY/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/f0sDL5b/blob.webp",
-      "cardImg3": "https://i.ibb.co.com/BK4zvcf/blob.jpg"
-    },
-    "price": 29.99,
-    "category": "Toys & Games",
-    "subCategory": "RC Cars & Drones",
-    "mention": "For Men, Women, Occasions",
-    "quantity": 35,
-    "discount": 5,
-    "priceGroup": []
-  },
-  {
-    "seller_name": "Jane Smith",
-    "store_name": "Smith's Treasures",
-    "name": "Custom T-Shirt",
-    "description": "Show off your style with custom-printed T-shirts and hoodies. Add your favorite designs, slogans, or names to create something truly one-of-a-kind.",
-    "image": {
-      "cardImg1": "https://i.ibb.co.com/5Fg0rXT/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/vX8FZQj/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/jLszBpK/blob.jpg"
-    },
-    "price": 19.99,
-    "category": "Personalized Gifts",
-    "subCategory": "Apparel",
-    "mention": "For Men, Women, Occasions",
-    "quantity": 72,
-    "discount": 20,
-    "priceGroup": []
-  },
-  {
-    "seller_name": "Michael Johnson",
-    "store_name": "Johnson's Boutique",
-    "name": "Cushions and Throws",
-    "description": "Add a personal touch to any living space with customized cushions and throws. Choose from a variety of designs and colors to match any home décor.",
-    "image": {
-      "cardImg1": "https://i.ibb.co.com/b6F4n89/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/HrpLy8P/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/YdQ3gc0/blob.jpg"
-    },
-    "price": 19.99,
-    "category": "Home & Living",
-    "subCategory": "Cushions & Throws",
-    "mention": "For Women, Occasions",
-    "quantity": 39,
-    "discount": 10,
-    "priceGroup": []
-  },
-  {
-    "seller_name": "Michael Johnson",
-    "store_name": "Johnson's Boutique",
-    "name": "Skincare and Bath Set",
-    "description": "Pamper yourself or a loved one with luxurious skincare and bath sets. Includes moisturizers, bath bombs, and other spa essentials.",
-    "image": {
-      "cardImg1": "https://i.ibb.co.com/m44GRqW/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/j4frm58/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/cFwjw7N/blob.jpg"
-    },
-    "price": 24.99,
-    "category": "Beauty & Wellness",
-    "subCategory": "Skincare & Bath",
-    "mention": "For Women, Occasions",
-    "quantity": 69,
-    "discount": 10,
-    "priceGroup": []
-  },
-  {
-    "seller_name": "Michael Johnson",
-    "store_name": "Johnson's Boutique",
-    "name": "Fitness Gear",
-    "description": "Stay fit and active with high-quality fitness gear like yoga mats and resistance bands. Ideal for both beginners and fitness enthusiasts.",
-    "image": {
-      "cardImg1": "https://i.ibb.co.com/Gdsvwsv/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/j5fS7Rd/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/12Gw2hX/blob.jpg"
-    },
-    "price": 29.99,
-    "category": "Beauty & Wellness",
-    "subCategory": "Fitness",
-    "mention": "For Men, Women, Occasions",
-    "quantity": 59,
-    "discount": 5,
-    "priceGroup": []
-  },
-  {
-    "seller_name": "Emily Davis",
-    "store_name": "Davis Delights",
-    "name": "Action Figures and Collectibles",
-    "description": "Find your favorite characters and collect them all with our action figures and collectibles, ideal for fans of all ages.",
-    "image": {
-      "cardImg1": "https://i.ibb.co.com/vLtmK9k/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/S7bKxXX/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/1v8pPgF/blob.jpg"
-    },
-    "price": 19.99,
-    "category": "Toys & Games",
-    "subCategory": "Action Figures & Collectibles",
-    "mention": "For Men, Women, Occasions",
-    "quantity": 28,
-    "discount": 20,
-    "priceGroup": []
-  },
-  {
-    "seller_name": "Emily Davis",
-    "store_name": "Davis Delights",
-    "name": "Watches and Jewelry",
-    "description": "Explore our stunning range of watches and jewelry, featuring timeless designs and high-quality craftsmanship, perfect for any occasion.",
-    "image": {
-      "cardImg1": "https://i.ibb.co.com/31S4gdh/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/sKJZQ3Q/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/SJZQwyf/blob.jpg"
-    },
-    "price": 24.99,
-    "category": "Fashion & Accessories",
-    "subCategory": "Watches & Jewelry",
-    "mention": "For Men, Women, Occasions",
-    "quantity": 48,
-    "discount": 15,
-    "priceGroup": []
-  },
-  {
-    "seller_name": "Emily Davis",
-    "store_name": "Davis Delights",
-    "name": "Name-Engraved Jewelry",
-    "description": "Beautifully crafted jewelry engraved with names or initials, perfect for a personal and thoughtful gift. Choose from rings, bracelets, necklaces, and more.",
-    "image": {
-      "cardImg1": "https://i.ibb.co.com/Wkh9gPW/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/5h8tby3/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/pfKRRTy/blob.jpg"
-    },
-    "price": 29.99,
-    "category": "Personalized Gifts",
-    "subCategory": "Jewelry",
-    "mention": "For Women, Occasions",
-    "quantity": 29,
-    "discount": 15,
-    "priceGroup": []
-  },
-  {
-    "seller_name": "Robert Brown",
-    "store_name": "Brown's Emporium",
-    "name": "Coffee and Tea Set",
-    "description": "Delight coffee and tea lovers with specialty blends, paired with beautiful accessories like mugs, teapots, and infusers.",
-    "image": {
-      "cardImg1": "https://i.ibb.co.com/M8xMpDX/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/64s9jyM/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/qrftF3K/blob.webp"
-    },
-    "price": 24.99,
-    "category": "Food & Beverage",
-    "subCategory": "Coffee & Tea",
-    "mention": "For Men, Women, Occasions",
-    "quantity": 39,
-    "discount": 10,
-    "priceGroup": []
-  },
-  {
-    "seller_name": "Robert Brown",
-    "store_name": "Brown's Emporium",
-    "name": "Designer Handbag",
-    "description": "Elevate your style with a collection of designer handbags and wallets, perfect for adding a touch of luxury to any outfit.",
-    "image": {
-      "cardImg1": "https://i.ibb.co.com/BwH0Qtz/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/t8dfGp9/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/7nKZmMT/blob.jpg"
-    },
-    "price": 29.99,
-    "category": "Fashion & Accessories",
-    "subCategory": "Handbags & Wallets",
-    "mention": "For Women, Occasions",
-    "quantity": 29,
-    "discount": 10,
-    "priceGroup": []
-  },
-  {
-    "seller_name": "Robert Brown",
-    "store_name": "Brown's Emporium",
-    "name": "Casual Footwear",
-    "description": "Step into style with our selection of footwear, offering a range of options from casual sneakers to formal dress shoes.",
-    "image": {
-      "cardImg1": "https://i.ibb.co.com/020t38t/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/PzdhxSC/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/J5q1HVd/blob.jpg"
-    },
-    "price": 29.99,
-    "category": "Fashion & Accessories",
-    "subCategory": "Footwear",
-    "mention": "For Men, Women, Occasions",
-    "quantity": 39,
-    "discount": 20,
-    "priceGroup": []
-  },
-  {
-    "seller_name": "Laura Wilson",
-    "store_name": "Wilson's Wonders",
-    "name": "Educational Toys",
-    "description": "Inspire learning through play with our range of educational toys and STEM kits, designed to foster creativity and critical thinking.",
-    "image": {
-      "cardImg1": "https://i.ibb.co.com/ZKkK2vH/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/b23PzLx/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/7tLbzcL/blob.jpg"
-    },
-    "price": 24.99,
-    "category": "Toys & Games",
-    "subCategory": "Educational Toys",
-    "mention": "For Baby, Occasions",
-    "quantity": 49,
-    "discount": 10,
-    "priceGroup": []
-  },
-  {
-    "seller_name": "Laura Wilson",
-    "store_name": "Wilson's Wonders",
-    "name": "Plush Toys and Dolls",
-    "description": "Discover a range of soft and cuddly plush toys and dolls, perfect for children and collectors alike.",
-    "image": {
-      "cardImg1": "https://i.ibb.co.com/Y7rpg16/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/RTSftb0/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/xXCXVSS/blob.jpg"
-    },
-    "price": 19.99,
-    "category": "Toys & Games",
-    "subCategory": "Plush Toys & Dolls",
-    "mention": "For Baby, Occasions",
-    "quantity": 7,
-    "discount": 10,
-    "priceGroup": []
-  },
-  {
-    "seller_name": "Laura Wilson",
-    "store_name": "Wilson's Wonders",
-    "name": "Personalized Mug",
-    "description": "Sip in style with custom mugs and tumblers featuring your own designs, names, or special messages. Ideal for daily use or as a special gift.",
-    "image": {
-      "cardImg1": "https://i.ibb.co.com/9339h1h/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/2kgnnvL/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/TPyBDT9/blob.jpg"
-    },
-    "price": 12.99,
-    "category": "Personalized Gifts",
-    "subCategory": "Kitchen & Dining",
-    "mention": "For Men, Women, Occasions",
-    "quantity": 9,
-    "discount": null,
-    "priceGroup": []
-  },
-  {
-    "seller_name": "David Martinez",
-    "store_name": "Martinez Market",
-    "name": "Custom Photo Frame",
-    "description": "Frame your favorite memories with custom photo frames. Add personalized messages or dates to make them truly unique and meaningful.",
-    "image": {
-      "cardImg1": "https://i.ibb.co.com/W5LhLZM/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/4Nvxx0f/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/rbbx7xC/blob.jpg"
-    },
-    "price": 19.99,
-    "category": "Personalized Gifts",
-    "subCategory": "Home Decor",
-    "mention": "For Women, Men, Occasions",
-    "quantity": 49,
-    "discount": 10,
-    "priceGroup": []
-  },
-  {
-    "seller_name": "David Martinez",
-    "store_name": "Martinez Market",
-    "name": "Organic & Health Food Package",
-    "description": "Enjoy a selection of healthy and organic snacks, perfect for health-conscious individuals or anyone looking to add some nutritious options to their diet.",
-    "image": {
-      "cardImg1": "https://i.ibb.co/M88W7xB/Untitled-design.jpg",
-      "cardImg2": "https://i.ibb.co/gypTtfq/pexels-punttim-139764.jpg",
-      "cardImg3": "https://i.ibb.co/2q4QXVq/pexels-wangming-photo-115695-354939.jpg"
-    },
-    "price": 29.99,
-    "category": "Food & Beverage",
-    "subCategory": "Health Food Packages",
-    "mention": "For Men, Women, Occasions",
-    "quantity": 29,
     "discount": 20
   },
   {
-    "seller_name": "David Martinez",
-    "store_name": "Martinez Market",
-    "name": "Sunglasses",
-    "description": "Protect your eyes in style with our collection of sunglasses and eyewear. Choose from trendy designs that suit any look.",
+    "_id": "670e1b0fcbcd40c2ccedc3c8",
+    "userId": "670612936fbe064617e73386",
+    "name": "Home Décor",
+    "seller_name": "Naiem Hasan",
+    "store_name": "Gifz BD",
+    "description": "Elevate any space with stunning home décor pieces. From custom wall art to elegant decorative items, there's something to suit every style.",
+    "sku": "HOME-HOM-SGDW-4849",
     "image": {
-      "cardImg1": "https://i.ibb.co.com/dmW7hqk/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/BzfLn1K/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/n0xCmjB/blob.jpg"
+      "cardImg1": "https://i.ibb.co.com/YbrBt8n/blob-6.jpg",
+      "cardImg2": "https://i.ibb.co.com/GpWV5dZ/blob-7.jpg",
+      "cardImg3": "https://i.ibb.co.com/8PVDQpy/blob-8.jpg"
     },
-    "price": 14.99,
+    "category": "Home & Living",
+    "subCategory": "Wall Art, Decorative Items",
+    "price": 24.99,
+    "mention": "For Women, Occasions",
+    "quantity": 50,
+    "discount": 10
+  },
+  {
+    "_id": "670e9679efef56dc82a42e78",
+    "userId": "670e94b73b5cc0d0811f7900",
+    "name": "Plants & Planters",
+    "seller_name": "Rashedul Haque Rasel",
+    "store_name": "Rasel's shop",
+    "description": "Brighten up your home or office with beautiful indoor plants. Paired with stylish planters, these make for thoughtful and eco-friendly gifts.",
+    "sku": "PLAN-HOM-D03O-4372",
+    "image": {
+      "cardImg1": "https://i.ibb.co/rfmpk7Z/blob.jpg",
+      "cardImg2": "https://i.ibb.co/2jbVc69/blob-2.jpg",
+      "cardImg3": "https://i.ibb.co/zrxgnX5/blob-1.jpg"
+    },
+    "category": "Home & Living",
+    "subCategory": "Plants & Planters",
+    "price": 149.99,
+    "mention": "For Women, Occasions",
+    "quantity": 10,
+    "discount": 10,
+    "priceGroup": []
+  },
+  {
+    "_id": "670e9d7800ba3d59515bd763",
+    "userId": "670e94b73b5cc0d0811f7900",
+    "name": "Aromatherapy Kit",
+    "seller_name": "Rashedul Haque Rasel",
+    "store_name": "Rasel's shop",
+    "description": "Relax and rejuvenate with aromatherapy kits featuring essential oils and diffusers. Ideal for creating a calming and serene environment.",
+    "sku": "AROM-BEA-EZZA-7894",
+    "image": {
+      "cardImg1": "https://i.ibb.co/dcJ2vCj/blob-5.jpg",
+      "cardImg2": "https://i.ibb.co/4YBygFg/blob-4.jpg",
+      "cardImg3": "https://i.ibb.co/pdJ6f0S/blob-3.jpg"
+    },
+    "category": "Beauty & Wellness",
+    "subCategory": "Essential Oils & Diffusers",
+    "price": 69.99,
+    "mention": "For Women, Occasions",
+    "quantity": 12,
+    "discount": 5,
+    "priceGroup": []
+  },
+  {
+    "_id": "670ea0b1becefcb626763acb",
+    "userId": "670e94b73b5cc0d0811f7900",
+    "name": "Home Décor",
+    "seller_name": "Rashedul Haque Rasel",
+    "store_name": "Rasel's shop",
+    "description": "Elevate any space with stunning home décor pieces. From custom wall art to elegant decorative items, there's something to suit every style.",
+    "sku": "DOE'-HOM-2WAH-9332",
+    "image": {
+      "cardImg1": "https://i.ibb.co/WtfhdP4/blob-6.jpg",
+      "cardImg2": "https://i.ibb.co/dKYtfpL/blob-7.jpg",
+      "cardImg3": "https://i.ibb.co/tK8F8yC/blob-8.jpg"
+    },
+    "category": "Home & Living",
+    "subCategory": "Wall Art, Decorative Items",
+    "price": 49.99,
+    "mention": "For Women, Occasions",
+    "quantity": 9,
+    "discount": 0,
+    "priceGroup": []
+  },
+  {
+    "_id": "670ea2447b895e542bb29dc1",
+    "userId": "670e94b73b5cc0d0811f7900",
+    "name": "Remote Cars and Drones",
+    "seller_name": "Rashedul Haque Rasel",
+    "store_name": "Rasel's shop",
+    "description": "Take fun to the next level with remote-controlled cars and drones, perfect for adventure lovers and hobbyists.",
+    "sku": "REMO-TOY-0FK0-9283",
+    "image": {
+      "cardImg1": "https://i.ibb.co/YLkJjm2/blob-9.jpg",
+      "cardImg2": "https://i.ibb.co/GWTDN9M/blob-10.jpg",
+      "cardImg3": "https://i.ibb.co/RSLdCGC/blob.webp"
+    },
+    "category": "Toys & Games",
+    "subCategory": "RC Cars & Drones",
+    "price": 499.99,
+    "mention": "For Men, Women, Occasions",
+    "quantity": 5,
+    "discount": 6
+  },
+  {
+    "_id": "670ea34e7b895e542bb29dc2",
+    "userId": "670e94b73b5cc0d0811f7900",
+    "name": "Custom T-Shirt",
+    "seller_name": "Rashedul Haque Rasel",
+    "store_name": "Rasel's shop",
+    "description": "Show off your style with custom-printed T-shirts and hoodies. Add your favorite designs, slogans, or names to create something truly one-of-a-kind.",
+    "sku": "CUST-PER-NQ41-5360",
+    "image": {
+      "cardImg1": "https://i.ibb.co/QQ68J6s/blob-11.jpg",
+      "cardImg2": "https://i.ibb.co/HHpG3dm/blob-13.jpg",
+      "cardImg3": "https://i.ibb.co/XLLSZw1/blob-12.jpg"
+    },
+    "category": "Personalized Gifts",
+    "subCategory": "Apparel",
+    "price": 345.99,
+    "mention": "For Men, Women, Occasions",
+    "quantity": 7,
+    "discount": 10
+  },
+  {
+    "_id": "6711b52fcc7e25730e9031b5",
+    "userId": "670612936fbe064617e73386",
+    "name": "Gourmet Food Hamper",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
+    "description": "Indulge in a selection of gourmet treats, including artisanal cheeses, chocolates, and fine wines, all beautifully packaged in a luxurious hamper.",
+    "sku": "GOUR-FOO-6MJX-4009",
+    "image": {
+      "cardImg1": "https://i.ibb.co.com/MC9h9Bp/blob-9.jpg",
+      "cardImg2": "https://i.ibb.co.com/C70DMhC/blob-10.jpg",
+      "cardImg3": "https://i.ibb.co.com/ZW2wQkS/blob-11.jpg"
+    },
+    "category": "Food & Beverage",
+    "subCategory": "Hampers",
+    "price": 29.99,
+    "mention": "For Women, Men, Occasions",
+    "quantity": 10,
+    "discount": 13
+  },
+  {
+    "_id": "6711b594cc7e25730e9031b6",
+    "userId": "670612936fbe064617e73386",
+    "name": "Remote Cars and Drones",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
+    "description": "Take fun to the next level with remote-controlled cars and drones, perfect for adventure lovers and hobbyists.",
+    "sku": "REMO-TOY-U2BT-7947",
+    "image": {
+      "cardImg1": "https://i.ibb.co.com/WsJCxWt/blob-12.jpg",
+      "cardImg2": "https://i.ibb.co.com/qxck7kM/blob-13.jpg",
+      "cardImg3": "https://i.ibb.co.com/SRbmdxp/blob.webp"
+    },
+    "category": "Toys & Games",
+    "subCategory": "RC Cars & Drones",
+    "price": 29.99,
+    "mention": "For Men, Women, Occasions",
+    "quantity": 15,
+    "discount": 10
+  },
+  {
+    "_id": "6711b602cc7e25730e9031b7",
+    "userId": "670612936fbe064617e73386",
+    "name": "Custom T-Shirt",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
+    "description": "Show off your style with custom-printed T-shirts and hoodies. Add your favorite designs, slogans, or names to create something truly one-of-a-kind.",
+    "sku": "CUST-PER-WRC5-3158",
+    "image": {
+      "cardImg1": "https://i.ibb.co.com/93NnLh0/blob-14.jpg",
+      "cardImg2": "https://i.ibb.co.com/0Y8rMNb/blob-15.jpg",
+      "cardImg3": "https://i.ibb.co.com/PML9JDF/blob-16.jpg"
+    },
+    "category": "Personalized Gifts",
+    "subCategory": "Apparel",
+    "price": 19.99,
+    "mention": "For Men, Women, Occasions",
+    "quantity": 18,
+    "discount": 10
+  },
+  {
+    "_id": "6711b68dcc7e25730e9031b8",
+    "userId": "670612936fbe064617e73386",
+    "name": "Cushions and Throws",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
+    "description": "Add a personal touch to any living space with customized cushions and throws. Choose from a variety of designs and colors to match any home décor.",
+    "sku": "CUSH-HOM-XB1E-6712",
+    "image": {
+      "cardImg1": "https://i.ibb.co.com/jffKxNV/blob-17.jpg",
+      "cardImg2": "https://i.ibb.co.com/JRcLb50/blob-18.jpg",
+      "cardImg3": "https://i.ibb.co.com/yN3nj07/blob-19.jpg"
+    },
+    "category": "Home & Living",
+    "subCategory": "Cushions & Throws",
+    "price": 19.99,
+    "mention": "For Women, Occasions",
+    "quantity": 22,
+    "discount": 5
+  },
+  {
+    "_id": "6711b6fecc7e25730e9031b9",
+    "userId": "670612936fbe064617e73386",
+    "name": "Skincare and Bath Set",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
+    "description": "Pamper yourself or a loved one with luxurious skincare and bath sets. Includes moisturizers, bath bombs, and other spa essentials.",
+    "sku": "SKIN-BEA-6CP7-8353",
+    "image": {
+      "cardImg1": "https://i.ibb.co.com/q7d7JCC/blob-20.jpg",
+      "cardImg2": "https://i.ibb.co.com/dDpQnHB/blob-21.jpg",
+      "cardImg3": "https://i.ibb.co.com/BNxCqJ2/blob-22.jpg"
+    },
+    "category": "Beauty & Wellness",
+    "subCategory": "Skincare & Bath",
+    "price": 24.99,
+    "mention": "For Women, Occasions",
+    "quantity": 22,
+    "discount": 7
+  },
+  {
+    "_id": "6711ba9fcc7e25730e9031bb",
+    "userId": "670612936fbe064617e73386",
+    "name": "Action Figures and Collectibles",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
+    "description": "Find your favorite characters and collect them all with our action figures and collectibles, ideal for fans of all ages.",
+    "sku": "ACTI-TOY-K1IX-4098",
+    "image": {
+      "cardImg1": "https://i.ibb.co.com/MZ6Z2Gn/blob-24.jpg",
+      "cardImg2": "https://i.ibb.co.com/y4F5RWY/blob-24.jpg",
+      "cardImg3": "https://i.ibb.co.com/JQvTwwC/blob-23.jpg"
+    },
+    "category": "Toys & Games",
+    "subCategory": "Action Figures & Collectibles",
+    "price": 19.99,
+    "mention": "For Men, Women, Occasions",
+    "quantity": 22,
+    "discount": 4
+  },
+  {
+    "_id": "6711ecc82504de4e2ba1fede",
+    "userId": "670612936fbe064617e73386",
+    "name": "Watches and Jewelry",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
+    "description": "Explore our stunning range of watches and jewelry, featuring timeless designs and high-quality craftsmanship, perfect for any occasion.",
+    "sku": "WATC-FAS-UI6U-2735",
+    "image": {
+      "cardImg1": "https://i.ibb.co.com/Y38My7d/blob-25.jpg",
+      "cardImg2": "https://i.ibb.co.com/Kyg3RH5/blob-26.jpg",
+      "cardImg3": "https://i.ibb.co.com/HPHHZB4/blob-27.jpg"
+    },
+    "category": "Fashion & Accessories",
+    "subCategory": "Watches & Jewelry",
+    "price": 24.99,
+    "mention": "For Men, Women, Occasions",
+    "quantity": 16,
+    "discount": 5
+  },
+  {
+    "_id": "6711ed362504de4e2ba1fedf",
+    "userId": "670612936fbe064617e73386",
+    "name": "Name-Engraved Jewelry",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
+    "description": "Beautifully crafted jewelry engraved with names or initials, perfect for a personal and thoughtful gift. Choose from rings, bracelets, necklaces, and more.",
+    "sku": "NAME-PER-51DW-8016",
+    "image": {
+      "cardImg1": "https://i.ibb.co.com/YNm1bq1/blob-28.jpg",
+      "cardImg2": "https://i.ibb.co.com/N7mhKx8/blob-30.jpg",
+      "cardImg3": "https://i.ibb.co.com/v4PqpVb/blob-29.jpg"
+    },
+    "category": "Personalized Gifts",
+    "subCategory": "Jewelry",
+    "price": 29.99,
+    "mention": "For Women, Occasions",
+    "quantity": 22,
+    "discount": 20
+  },
+  {
+    "_id": "6711edc22504de4e2ba1fee0",
+    "userId": "670612936fbe064617e73386",
+    "name": "Coffee and Tea Set",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
+    "description": "Delight coffee and tea lovers with specialty blends, paired with beautiful accessories like mugs, teapots, and infusers.",
+    "sku": "COFF-FOO-IZKF-4508",
+    "image": {
+      "cardImg1": "https://i.ibb.co.com/LJ3Y9Qq/blob-31.jpg",
+      "cardImg2": "https://i.ibb.co.com/DknPD95/blob-32.jpg",
+      "cardImg3": "https://i.ibb.co.com/N77pZPP/blob-1.webp"
+    },
+    "category": "Food & Beverage",
+    "subCategory": "Coffee & Tea",
+    "price": 24.99,
+    "mention": "For Men, Women, Occasions",
+    "quantity": 10,
+    "discount": 4
+  },
+  {
+    "_id": "6711ef382504de4e2ba1fee1",
+    "userId": "670612936fbe064617e73386",
+    "name": "Designer Handbag",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
+    "description": "Elevate your style with a collection of designer handbags and wallets, perfect for adding a touch of luxury to any outfit.",
+    "sku": "DESI-FAS-NZNK-4717",
+    "image": {
+      "cardImg1": "https://i.ibb.co.com/h7SdfNJ/blob-33.jpg",
+      "cardImg2": "https://i.ibb.co.com/tmcC24F/blob-34.jpg",
+      "cardImg3": "https://i.ibb.co.com/d0xfSmn/blob-35.jpg"
+    },
+    "category": "Fashion & Accessories",
+    "subCategory": "Handbags & Wallets",
+    "price": 29.99,
+    "mention": "For Women, Occasions",
+    "quantity": 16,
+    "discount": 3
+  },
+  {
+    "_id": "6711f00e2504de4e2ba1fee2",
+    "userId": "670612936fbe064617e73386",
+    "name": "Fitness Gear",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
+    "description": "Stay fit and active with high-quality fitness gear like yoga mats and resistance bands. Ideal for both beginners and fitness enthusiasts.",
+    "sku": "FITN-BEA-C0QN-3061",
+    "image": {
+      "cardImg1": "https://i.ibb.co.com/WfVR9m1/blob-36.jpg",
+      "cardImg2": "https://i.ibb.co.com/m6jPz3k/blob-37.jpg",
+      "cardImg3": "https://i.ibb.co.com/cN8ZPqY/blob-38.jpg"
+    },
+    "category": "Beauty & Wellness",
+    "subCategory": "Fitness",
+    "price": 29.99,
+    "mention": "For Men, Women, Occasions",
+    "quantity": 26,
+    "discount": 12
+  },
+  {
+    "_id": "6711f09d2504de4e2ba1fee3",
+    "userId": "670612936fbe064617e73386",
+    "name": "Casual Footwear",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
+    "description": "Step into style with our selection of footwear, offering a range of options from casual sneakers to formal dress shoes.",
+    "sku": "CASU-FAS-1A8G-6385",
+    "image": {
+      "cardImg1": "https://i.ibb.co.com/k1BpJQP/blob-39.jpg",
+      "cardImg2": "https://i.ibb.co.com/P1Bvxtw/blob-40.jpg",
+      "cardImg3": "https://i.ibb.co.com/ssQmCw8/blob-41.jpg"
+    },
+    "category": "Fashion & Accessories",
+    "subCategory": "Footwear",
+    "price": 29.99,
+    "mention": "For Men, Women, Occasions",
+    "quantity": 23,
+    "discount": 10
+  },
+  {
+    "_id": "6711f1902504de4e2ba1fee4",
+    "userId": "670612936fbe064617e73386",
+    "name": "Educational Toys",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
+    "description": "Inspire learning through play with our range of educational toys and STEM kits, designed to foster creativity and critical thinking.",
+    "sku": "EDUC-TOY-59AP-1688",
+    "image": {
+      "cardImg1": "https://i.ibb.co.com/5R9nZ3V/blob-42.jpg",
+      "cardImg2": "https://i.ibb.co.com/CHSk2dS/blob-43.jpg",
+      "cardImg3": "https://i.ibb.co.com/3FsML7d/blob-44.jpg"
+    },
+    "category": "Toys & Games",
+    "subCategory": "Educational Toys",
+    "price": 24.99,
+    "mention": "For Baby, Occasions",
+    "quantity": 22,
+    "discount": 12
+  },
+  {
+    "_id": "6711f2132504de4e2ba1fee5",
+    "userId": "670612936fbe064617e73386",
+    "name": "Plush Toys and Dolls",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
+    "description": "Discover a range of soft and cuddly plush toys and dolls, perfect for children and collectors alike.",
+    "sku": "PLUS-TOY-TZO8-3606",
+    "image": {
+      "cardImg1": "https://i.ibb.co.com/jfPqJVV/blob-45.jpg",
+      "cardImg2": "https://i.ibb.co.com/chHpVQk/blob-46.jpg",
+      "cardImg3": "https://i.ibb.co.com/Kw7bgmL/blob-47.jpg"
+    },
+    "category": "Toys & Games",
+    "subCategory": "Plush Toys & Dolls",
+    "price": 19.99,
+    "mention": "For Baby, Occasions",
+    "quantity": 15,
+    "discount": 12
+  },
+  {
+    "_id": "6711f2a22504de4e2ba1fee6",
+    "userId": "670612936fbe064617e73386",
+    "name": "Personalized Mug",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
+    "description": "Sip in style with custom mugs and tumblers featuring your own designs, names, or special messages. Ideal for daily use or as a special gift.",
+    "sku": "PERS-PER-V4VZ-4096",
+    "image": {
+      "cardImg1": "https://i.ibb.co.com/HDBfBCs/blob-48.jpg",
+      "cardImg2": "https://i.ibb.co.com/89z8j7C/blob-49.jpg",
+      "cardImg3": "https://i.ibb.co.com/zR5sv05/blob-50.jpg"
+    },
+    "category": "Personalized Gifts",
+    "subCategory": "Kitchen & Dining",
+    "price": 12.99,
+    "mention": "For Men, Women, Occasions",
+    "quantity": 10,
+    "discount": 5
+  },
+  {
+    "_id": "6711f3342504de4e2ba1fee7",
+    "userId": "670612936fbe064617e73386",
+    "name": "Custom Photo Frame",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
+    "description": "Frame your favorite memories with custom photo frames. Add personalized messages or dates to make them truly unique and meaningful.",
+    "sku": "CUST-PER-GZBP-3446",
+    "image": {
+      "cardImg1": "https://i.ibb.co.com/3SYVxd5/blob-51.jpg",
+      "cardImg2": "https://i.ibb.co.com/GcbcfYF/blob-52.jpg",
+      "cardImg3": "https://i.ibb.co.com/y08XZkq/blob-53.jpg"
+    },
+    "category": "Personalized Gifts",
+    "subCategory": "Home Decor",
+    "price": 19.99,
+    "mention": "For Women, Men, Occasions",
+    "quantity": 22,
+    "discount": 8
+  },
+  {
+    "_id": "6711f3a72504de4e2ba1fee8",
+    "userId": "670612936fbe064617e73386",
+    "name": "Organic & Health Food Package",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
+    "description": "Enjoy a selection of healthy and organic snacks, perfect for health-conscious individuals or anyone looking to add some nutritious options to their diet.",
+    "sku": "ORGA-FOO-R7B9-7954",
+    "image": {
+      "cardImg1": "https://i.ibb.co.com/PcFy0wV/Untitled-design.jpg",
+      "cardImg2": "https://i.ibb.co.com/1zbdf7h/pexels-punttim-139764.jpg",
+      "cardImg3": "https://i.ibb.co.com/7JVWNpS/pexels-wangming-photo-115695-354939.jpg"
+    },
+    "category": "Food & Beverage",
+    "subCategory": "Health Food Packages",
+    "price": 29.99,
+    "mention": "For Men, Women, Occasions",
+    "quantity": 25,
+    "discount": 7
+  },
+  {
+    "_id": "6711f58c2504de4e2ba1fee9",
+    "userId": "670612936fbe064617e73386",
+    "name": "Sunglasses",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
+    "description": "Protect your eyes in style with our collection of sunglasses and eyewear. Choose from trendy designs that suit any look.",
+    "sku": "SUNG-FAS-L085-6654",
+    "image": {
+      "cardImg1": "https://i.ibb.co.com/2kt2JYJ/blob-54.jpg",
+      "cardImg2": "https://i.ibb.co.com/Sw8Ydd5/blob-55.jpg",
+      "cardImg3": "https://i.ibb.co.com/N60j64W/blob-56.jpg"
+    },
     "category": "Fashion & Accessories",
     "subCategory": "Sunglasses & Eyewear",
-    "mention": "For Men, Women, Occasions",
-    "quantity": 6,
-    "discount": 5,
-    "priceGroup": []
+    "price": 14.99,
+    "mention": " For Men, Women, Occasions",
+    "quantity": 26,
+    "discount": 3
   },
   {
-    "seller_name": "Sophia Lee",
-    "store_name": "Lee's Creations",
+    "_id": "6711f5ff2504de4e2ba1feea",
+    "userId": "670612936fbe064617e73386",
     "name": "Scented Candles and Diffusers",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
     "description": "Bring warmth and fragrance into any room with premium scented candles and diffusers. Perfect for creating a relaxing and inviting atmosphere.",
+    "sku": "SCEN-HOM-5516-5707",
     "image": {
-      "cardImg1": "https://i.ibb.co.com/z67kZGK/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/gJ1Cwkm/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/0t7phdW/blob.jpg"
+      "cardImg1": "https://i.ibb.co.com/x1F4Qjs/blob-57.jpg",
+      "cardImg2": "https://i.ibb.co.com/qFBst4v/blob-58.jpg",
+      "cardImg3": "https://i.ibb.co.com/4TQRdGJ/blob-59.jpg"
     },
-    "price": 14.99,
     "category": "Home & Living",
     "subCategory": "Candles & Diffusers",
+    "price": 14.99,
     "mention": "For Men, Women, Occasions",
-    "quantity": 17,
-    "discount": 15,
-    "priceGroup": []
+    "quantity": 25,
+    "discount": 12
   },
   {
-    "seller_name": "Sophia Lee",
-    "store_name": "Lee's Creations",
+    "_id": "6711f6b82504de4e2ba1feeb",
+    "userId": "670612936fbe064617e73386",
     "name": "Kitchen Gadgets and Tools",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
     "description": "Make cooking fun and efficient with innovative kitchen gadgets and tools. Ideal for food lovers and those who enjoy spending time in the kitchen.",
+    "sku": "KITC-HOM-YOPV-3252",
     "image": {
-      "cardImg1": "https://i.ibb.co.com/yn1wy07/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/277dfvy/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/q97pNVv/blob.jpg"
+      "cardImg1": "https://i.ibb.co.com/7Jfhk7w/blob-60.jpg",
+      "cardImg2": "https://i.ibb.co.com/3sqxNkX/blob-61.jpg",
+      "cardImg3": "https://i.ibb.co.com/ZJfJvvg/blob-62.jpg"
     },
-    "price": 29.99,
     "category": "Home & Living",
     "subCategory": "Kitchen Tools",
+    "price": 29.99,
     "mention": "For Men, Women, Occasions",
-    "quantity": 4,
-    "discount": 5,
-    "priceGroup": []
+    "quantity": 23,
+    "discount": 6
   },
   {
-    "seller_name": "Sophia Lee",
-    "store_name": "Lee's Creations",
+    "_id": "6711f71e2504de4e2ba1feec",
+    "userId": "670612936fbe064617e73386",
     "name": "Ties",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
     "description": "Complete your outfit with elegant scarves, ties, and accessories, designed to add a touch of sophistication to your wardrobe.",
+    "sku": "TIES-FAS-RKFW-3580",
     "image": {
-      "cardImg1": "https://i.ibb.co.com/CQWZGJH/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/WypsSzJ/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/51d0jdz/blob.jpg"
+      "cardImg1": "https://i.ibb.co.com/RSZmWPH/blob-63.jpg",
+      "cardImg2": "https://i.ibb.co.com/bFQY9MG/blob-64.jpg",
+      "cardImg3": "https://i.ibb.co.com/1RYGPLB/blob-65.jpg"
     },
-    "price": 19.99,
     "category": "Fashion & Accessories",
     "subCategory": "Scarves & Ties",
+    "price": 19.99,
     "mention": "For Men, Women, Occasions",
-    "quantity": 59,
-    "discount": 10,
-    "priceGroup": []
+    "quantity": 10,
+    "discount": 4
   },
   {
-    "seller_name": "James Harris",
-    "store_name": "Harris's Haven",
+    "_id": "6711f7802504de4e2ba1feed",
+    "userId": "670612936fbe064617e73386",
     "name": "Personalized Gift Box",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
     "description": "Curate a custom gift box filled with thoughtful items and a personalized message, perfect for any occasion like birthdays, anniversaries, or holidays.",
+    "sku": "PERS-PER-SJ6W-6304",
     "image": {
-      "cardImg1": "https://i.ibb.co.com/LJQTnKh/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/vH2Fhgm/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/jMkdT8m/blob.jpg"
+      "cardImg1": "https://i.ibb.co.com/Sm5WjPD/blob-66.jpg",
+      "cardImg2": "https://i.ibb.co.com/Xfn1mtm/blob-67.jpg",
+      "cardImg3": "https://i.ibb.co.com/rwy9gPv/blob-68.jpg"
     },
-    "price": 29.99,
     "category": "Personalized Gifts",
     "subCategory": "Gift Boxes",
+    "price": 29.99,
     "mention": "For Baby, Women, Occasions",
-    "quantity": 39,
-    "discount": 10,
-    "priceGroup": []
+    "quantity": 8,
+    "discount": 2
   },
   {
-    "seller_name": "James Harris",
-    "store_name": "Harris's Haven",
+    "_id": "6711f8092504de4e2ba1feee",
+    "userId": "670612936fbe064617e73386",
     "name": "Spa & Relaxation Gift",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
     "description": "Unwind with luxurious spa gifts, including bath salts, body lotions, and massagers. A perfect way to indulge in some self-care.",
+    "sku": "SPA&-BEA-ICCX-8899",
     "image": {
-      "cardImg1": "https://i.ibb.co.com/cCw3M95/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/M5JmYxP/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/Z696xPh/blob.jpg"
+      "cardImg1": "https://i.ibb.co.com/kQr9P08/blob-69.jpg",
+      "cardImg2": "https://i.ibb.co.com/MfTjSkg/blob-70.jpg",
+      "cardImg3": "https://i.ibb.co.com/wCJq6m8/blob-71.jpg"
     },
-    "price": 19.99,
     "category": "Beauty & Wellness",
     "subCategory": "Spa & Relaxation",
+    "price": 19.99,
     "mention": "For Women, Occasions",
-    "quantity": 23,
-    "discount": 10,
-    "priceGroup": []
+    "quantity": 28,
+    "discount": 22
   },
   {
-    "seller_name": "James Harris",
-    "store_name": "Harris's Haven",
+    "_id": "6711f8712504de4e2ba1feef",
+    "userId": "670612936fbe064617e73386",
     "name": "Self-Care Gift Set",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
     "description": "Treat yourself or someone special with self-care gift sets, including face masks, serums, and beauty tools for the ultimate pampering experience.",
+    "sku": "SELF-BEA-9MBU-8013",
     "image": {
-      "cardImg1": "https://i.ibb.co.com/m44GRqW/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/MkSCYDD/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/MkSCYDD/blob.jpg"
+      "cardImg1": "https://i.ibb.co.com/dDpQnHB/blob-21.jpg",
+      "cardImg2": "https://i.ibb.co.com/Dt8nByY/blob-73.jpg",
+      "cardImg3": "https://i.ibb.co.com/dDpQnHB/blob-21.jpg"
     },
-    "price": 24.99,
     "category": "Beauty & Wellness",
     "subCategory": "Self-Care",
+    "price": 24.99,
     "mention": "For Women, Occasions",
-    "quantity": 29,
-    "discount": 20,
-    "priceGroup": []
+    "quantity": 20,
+    "discount": 12
   },
   {
-    "seller_name": "Olivia Clark",
-    "store_name": "Clark's Curiosities",
+    "_id": "6711f8d22504de4e2ba1fef0",
+    "userId": "670612936fbe064617e73386",
     "name": "Artisan Chocolates and Confectionery",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
     "description": "Savor the finest handcrafted chocolates and confectionery, made with premium ingredients for a rich and indulgent experience.",
+    "sku": "ARTI-FOO-G8E3-6033",
     "image": {
-      "cardImg1": "https://i.ibb.co.com/YdgMsGs/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/n0wzz3K/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/pQwDKYS/blob.jpg"
+      "cardImg1": "https://i.ibb.co.com/R387NNw/blob-74.jpg",
+      "cardImg2": "https://i.ibb.co.com/8bvF5JJ/blob-75.jpg",
+      "cardImg3": "https://i.ibb.co.com/KKh0nhr/blob-76.jpg"
     },
-    "price": 19.99,
     "category": "Food & Beverage",
     "subCategory": "Chocolates & Confectionery",
+    "price": 19.99,
     "mention": "For Women, Occasions",
-    "quantity": 4,
-    "discount": 15,
-    "priceGroup": []
+    "quantity": 20,
+    "discount": 12
   },
   {
-    "seller_name": "Olivia Clark",
-    "store_name": "Clark's Curiosities",
+    "_id": "6711f9dfd7803306c6c1ec8f",
+    "userId": "670612936fbe064617e73386",
     "name": "Baking Kit",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
     "description": "Whip up delicious treats at home with our DIY baking kits, complete with all the ingredients and instructions for easy and fun baking.",
+    "sku": "BAKI-FOO-3Q1G-4440",
     "image": {
-      "cardImg1": "https://i.ibb.co.com/w4Pkd5Q/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/wQRdH7Q/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/vP2C3Nc/blob.jpg"
+      "cardImg1": "https://i.ibb.co.com/kcp4jDM/blob-77.jpg",
+      "cardImg2": "https://i.ibb.co.com/Z2vd1pt/blob-78.jpg",
+      "cardImg3": "https://i.ibb.co.com/TRQ9hxz/blob-79.jpg"
     },
-    "price": 14.99,
     "category": "Food & Beverage",
     "subCategory": "Baking Kits",
+    "price": 14.99,
     "mention": "For Women, Occasions",
-    "quantity": 5,
-    "discount": 5,
-    "priceGroup": []
+    "quantity": 50,
+    "discount": 4
   },
   {
-    "seller_name": "Olivia Clark",
-    "store_name": "Clark's Curiosities",
+    "_id": "6711fa30d7803306c6c1ec90",
+    "userId": "670612936fbe064617e73386",
     "name": "Puzzles and Board Games",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
     "description": "Challenge your mind with our collection of puzzles and board games, offering hours of entertainment for family and friends.",
+    "sku": "PUZZ-TOY-UED1-6108",
     "image": {
-      "cardImg1": "https://i.ibb.co.com/gVmQ0HC/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/PGVNPjs/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/F6WsvhF/blob.jpg"
+      "cardImg1": "https://i.ibb.co.com/jT0Mkx3/blob-80.jpg",
+      "cardImg2": "https://i.ibb.co.com/TWQ76yG/blob-81.jpg",
+      "cardImg3": "https://i.ibb.co.com/61KzWwj/blob-82.jpg"
     },
-    "price": 14.99,
     "category": "Toys & Games",
     "subCategory": "Puzzles & Games",
+    "price": 14.99,
     "mention": "For Baby, Men, Women, Occasions",
-    "quantity": 59,
-    "discount": 15,
-    "priceGroup": []
+    "quantity": 18,
+    "discount": 5
   },
   {
-    "seller_name": "Netflix Inc.",
-    "store_name": "Netflix Store",
+    "_id": "6711fb09d7803306c6c1ec91",
+    "userId": "670612936fbe064617e73386",
     "name": "Netflix Subscription",
-    "description": "Enjoy unlimited streaming of movies and TV shows with Netflix.",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
+    "description": "Enjoy unlimited streaming of movies and TV shows with Netflix.Visit Netflix.com/redeem and enter your code.Valid for 1 year from purchase.",
+    "sku": "NETF-DIG-E7I4-2598",
     "image": {
-      "cardImg1": "https://i.ibb.co.com/nrGjhDs/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/WPcN7s4/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/0J7v3wh/blob.jpg"
+      "cardImg1": "https://i.ibb.co.com/QdJG4TY/blob-83.jpg",
+      "cardImg2": "https://i.ibb.co.com/Cv7Wff5/blob-84.jpg",
+      "cardImg3": "https://i.ibb.co.com/s5LyYxS/blob-85.jpg"
     },
+    "category": "digital gift",
+    "subCategory": "streaming",
+    "mention": "Gift of entertainment for any movie lover.",
+    "discount": 5,
     "priceGroup": [
       {
         "tier": "Basic",
         "price": {
-          "currency": "USD",
           "amount": 9.99,
-          "duration": "1 month"
+          "duration": "1 month",
+          "currency": "USD"
         },
-        "image": "https://i.ibb.co.com/tZxwms4/blob.webp",
-        "quantity": 4,
-        "redeemInstructions": "Visit Netflix.com/redeem and enter your code.",
-        "validity": "Valid for 1 year from purchase.",
-        "region": "US and Canada",
-        "terms": "Non-transferable. Cannot be exchanged for cash."
+        "image": "https://i.ibb.co.com/NxjjCcs/blob-2.webp",
+        "quantity": 10
       },
       {
         "tier": "Standard",
         "price": {
-          "currency": "USD",
           "amount": 15.49,
-          "duration": "1 month"
+          "duration": "1 month",
+          "currency": "USD"
         },
-        "image": "https://i.ibb.co.com/JRsSvbT/blob.webp",
-        "quantity": 10,
-        "redeemInstructions": "Visit Netflix.com/redeem and enter your code.",
-        "validity": "Valid for 1 year from purchase.",
-        "region": "US and Canada",
-        "terms": "Non-transferable. Cannot be exchanged for cash."
+        "image": "https://i.ibb.co.com/tmYdCNp/blob-2.webp",
+        "quantity": 10
       },
       {
         "tier": "Premium",
         "price": {
-          "currency": "USD",
           "amount": 19.99,
-          "duration": "1 month"
+          "duration": "1 month",
+          "currency": "USD"
         },
-        "image": "https://i.ibb.co.com/cbf4XDm/blob.webp",
-        "quantity": 10,
-        "redeemInstructions": "Visit Netflix.com/redeem and enter your code.",
-        "validity": "Valid for 1 year from purchase.",
-        "region": "US and Canada",
-        "terms": "Non-transferable. Cannot be exchanged for cash."
+        "image": "https://i.ibb.co.com/2cmpH5S/blob-2.webp",
+        "quantity": 1
       }
-    ],
-    "category": "digital gift",
-    "subCategory": "streaming",
-    "mention": "Gift of entertainment for any movie lover.",
-    "discount": 10
+    ]
   },
   {
-    "seller_name": "Spotify",
-    "store_name": "Spotify Premium Store",
+    "_id": "6711fc2bd7803306c6c1ec92",
+    "userId": "670612936fbe064617e73386",
     "name": "Spotify Premium",
-    "description": "Stream millions of songs ad-free with Spotify Premium.",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
+    "description": "Stream millions of songs ad-free with Spotify Premium.Go to Spotify.com/redeem and enter your code.Valid for 1 year from purchase.",
+    "sku": "SPOT-DIG-WGEX-9741",
     "image": {
-      "cardImg1": "https://i.ibb.co.com/StfpqWw/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/pw02ypV/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/hd7GtQN/blob.jpg"
+      "cardImg1": "https://i.ibb.co.com/JQw5Zbg/blob-86.jpg",
+      "cardImg2": "https://i.ibb.co.com/XyppxCx/blob-87.jpg",
+      "cardImg3": "https://i.ibb.co.com/4RfgMqz/blob-88.jpg"
     },
+    "category": "digital gift",
+    "subCategory": "Music",
+    "mention": "Perfect for music lovers.",
+    "discount": 4,
     "priceGroup": [
       {
         "tier": "Individual",
@@ -613,12 +777,8 @@
           "amount": 9.99,
           "duration": "1 month"
         },
-        "image": "https://i.ibb.co.com/N2VTGKt/blob.jpg",
-        "quantity": 4,
-        "redeemInstructions": "Go to Spotify.com/redeem and enter your code.",
-        "validity": "Valid for 1 year from purchase.",
-        "region": "Worldwide",
-        "terms": "Non-transferable. Cannot be exchanged for cash."
+        "image": "https://i.ibb.co.com/Lrw4bzF/blob-89.jpg",
+        "quantity": 5
       },
       {
         "tier": "Duo",
@@ -627,178 +787,158 @@
           "amount": 12.99,
           "duration": "1 month"
         },
-        "image": "https://i.ibb.co.com/VwqhrpZ/blob.jpg",
-        "quantity": 49,
-        "redeemInstructions": "Go to Spotify.com/redeem and enter your code.",
-        "validity": "Valid for 1 year from purchase.",
-        "region": "Worldwide",
-        "terms": "Non-transferable. Cannot be exchanged for cash."
+        "image": "https://i.ibb.co.com/f4VGYVp/blob-89.jpg",
+        "quantity": 4
       },
       {
         "tier": "Family",
         "price": {
-          "currency": "USD",
           "amount": 14.99,
-          "duration": "1 month"
+          "duration": "1 month",
+          "currency": "USD"
         },
-        "image": "https://i.ibb.co.com/5RngtH5/blob.jpg",
-        "quantity": 5,
-        "redeemInstructions": "Go to Spotify.com/redeem and enter your code.",
-        "validity": "Valid for 1 year from purchase.",
-        "region": "Worldwide",
-        "terms": "Non-transferable. Cannot be exchanged for cash."
+        "image": "https://i.ibb.co.com/qCBjMZG/blob-89.jpg",
+        "quantity": 1
       }
-    ],
-    "category": "digital gift",
-    "subCategory": "music",
-    "mention": "Perfect for music lovers.",
-    "discount": 10
+    ]
   },
   {
-    "seller_name": "Amazon",
-    "store_name": "Amazon Gift Cards",
+    "_id": "6711fe40d7803306c6c1ec96",
+    "userId": "670612936fbe064617e73386",
     "name": "Amazon Gift Card",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
     "description": "Shop for millions of products with an Amazon gift card.",
+    "sku": "AMAZ-DIG-M6AJ-6208",
     "image": {
-      "cardImg1": "https://i.ibb.co.com/NtkMdV4/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/f0dbPyb/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/7QG86YV/blob.jpg"
+      "cardImg1": "https://i.ibb.co.com/557nGq0/blob-91.jpg",
+      "cardImg2": "https://i.ibb.co.com/Km6MSQ7/blob-92.jpg",
+      "cardImg3": "https://i.ibb.co.com/8rQSbmV/blob-93.jpg"
     },
-    "priceGroup": [
-      {
-        "tier": "Standard",
-        "price": {
-          "currency": "USD",
-          "amount": 25,
-          "duration": "one-time"
-        },
-        "image": "https://i.ibb.co.com/HB11T26/blob.webp",
-        "quantity": 10,
-        "redeemInstructions": "Visit Amazon.com/redeem and enter your code.",
-        "validity": "No expiration date.",
-        "region": "US",
-        "terms": "Non-transferable. Cannot be exchanged for cash."
-      },
-      {
-        "tier": "Premium",
-        "price": {
-          "currency": "USD",
-          "amount": 50,
-          "duration": "one-time"
-        },
-        "image": "https://i.ibb.co.com/nfxDHmZ/blob.webp",
-        "quantity": 7,
-        "redeemInstructions": "Visit Amazon.com/redeem and enter your code.",
-        "validity": "No expiration date.",
-        "region": "US",
-        "terms": "Non-transferable. Cannot be exchanged for cash."
-      }
-    ],
     "category": "digital gift",
     "subCategory": "shopping",
     "mention": "A versatile gift for anyone.",
-    "discount": 5
-  },
-  {
-    "seller_name": "Apple Inc.",
-    "store_name": "Apple Gift Cards",
-    "name": "Apple Gift Card",
-    "description": "Use for apps, music, and more from Apple.",
-    "image": {
-      "cardImg1": "https://i.ibb.co.com/zSv3Bw9/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/qkHHT55/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/tsBSyfN/blob.webp"
-    },
+    "discount": 5,
     "priceGroup": [
       {
         "tier": "Standard",
         "price": {
-          "currency": "USD",
-          "amount": 50,
-          "duration": "one-time"
+          "amount": 25,
+          "duration": "one-time",
+          "currency": "USD"
         },
-        "image": "https://i.ibb.co.com/rMN19GP/blob.webp",
-        "quantity": 27,
-        "redeemInstructions": "Visit apple.com/redeem and enter your code.",
-        "validity": "No expiration date.",
-        "region": "Worldwide",
-        "terms": "Non-transferable. Cannot be exchanged for cash."
+        "image": "https://i.ibb.co.com/557nGq0/blob-91.jpg",
+        "quantity": 10
       },
       {
         "tier": "Premium",
         "price": {
-          "currency": "USD",
-          "amount": 100,
-          "duration": "one-time"
+          "amount": 50,
+          "duration": "one-time",
+          "currency": "USD"
         },
-        "image": "https://i.ibb.co.com/vPDN4Vn/blob.webp",
-        "quantity": 30,
-        "redeemInstructions": "Visit apple.com/redeem and enter your code.",
-        "validity": "No expiration date.",
-        "region": "Worldwide",
-        "terms": "Non-transferable. Cannot be exchanged for cash."
+        "image": "https://i.ibb.co.com/557nGq0/blob-91.jpg",
+        "quantity": 5
       }
-    ],
+    ]
+  },
+  {
+    "_id": "6711ff12d7803306c6c1ec97",
+    "userId": "670612936fbe064617e73386",
+    "name": "Apple Gift Card",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
+    "description": "Use for apps, music, and more from Apple.Visit apple.com/redeem and enter your code.No expiration date.",
+    "sku": "APPL-DIG-EMFQ-3796",
+    "image": {
+      "cardImg1": "https://i.ibb.co.com/9bCKJn4/blob-94.jpg",
+      "cardImg2": "https://i.ibb.co.com/YpchgmW/blob-95.jpg",
+      "cardImg3": "https://i.ibb.co.com/6YtTP4B/blob-3.webp"
+    },
     "category": "digital gift",
     "subCategory": "shopping",
     "mention": "Great for Apple fans.",
-    "discount": null
+    "discount": 0,
+    "priceGroup": [
+      {
+        "tier": "Standard",
+        "price": {
+          "amount": 50,
+          "duration": "one-time",
+          "currency": "USD"
+        },
+        "image": "https://i.ibb.co.com/bH8Tzd8/blob-4.webp",
+        "quantity": 5
+      },
+      {
+        "tier": "Premium",
+        "price": {
+          "amount": 100,
+          "duration": "one-time",
+          "currency": "USD"
+        },
+        "image": "https://i.ibb.co.com/R3K8sP4/blob-4.webp",
+        "quantity": 0
+      }
+    ]
   },
   {
-    "seller_name": "Hulu",
-    "store_name": "Hulu Store",
+    "_id": "67120664d7803306c6c1ec9d",
+    "userId": "670612936fbe064617e73386",
     "name": "Hulu Subscription",
-    "description": "Stream thousands of TV shows and movies with Hulu.",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
+    "description": "Stream thousands of TV shows and movies with Hulu. Go to Hulu.com/redeem and enter your code. Valid for 1 year from purchase.",
+    "sku": "HULU-DIG-NNC9-3406",
     "image": {
-      "cardImg1": "https://i.ibb.co.com/fSSKttq/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/WPcN7s4/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/JCdq53S/blob.jpg"
+      "cardImg1": "https://i.ibb.co.com/fntS1fC/blob-96.jpg",
+      "cardImg2": "https://i.ibb.co.com/Cv7Wff5/blob-84.jpg",
+      "cardImg3": "https://i.ibb.co.com/mvZxHMV/blob-98.jpg"
     },
+    "category": "digital gift",
+    "subCategory": "streaming",
+    "mention": "Perfect for TV show bingers.",
+    "discount": 10,
     "priceGroup": [
       {
         "tier": "Basic",
         "price": {
-          "currency": "USD",
           "amount": 7.99,
-          "duration": "1 month"
+          "duration": "1 month",
+          "currency": "USD"
         },
-        "image": "https://i.ibb.co.com/d6JKXSB/blob.webp",
-        "quantity": 10,
-        "redeemInstructions": "Go to Hulu.com/redeem and enter your code.",
-        "validity": "Valid for 1 year from purchase.",
-        "region": "US",
-        "terms": "Non-transferable. Cannot be exchanged for cash."
+        "image": "https://i.ibb.co.com/9q98pM5/blob-5.webp",
+        "quantity": 10
       },
       {
         "tier": "Premium",
         "price": {
-          "currency": "USD",
           "amount": 14.99,
-          "duration": "1 month"
+          "duration": "1 month",
+          "currency": "USD"
         },
-        "image": "https://i.ibb.co.com/CVyj1z4/blob.webp",
-        "quantity": 10,
-        "redeemInstructions": "Go to Hulu.com/redeem and enter your code.",
-        "validity": "Valid for 1 year from purchase.",
-        "region": "US",
-        "terms": "Non-transferable. Cannot be exchanged for cash."
+        "image": "https://i.ibb.co.com/q7qLZKN/blob-5.webp",
+        "quantity": 5
       }
-    ],
-    "category": "digital gift",
-    "subCategory": "streaming",
-    "mention": "Perfect for TV show bingers.",
-    "discount": 10
+    ]
   },
   {
-    "seller_name": "PlayStation",
-    "store_name": "PlayStation Store",
+    "_id": "671207b6d7803306c6c1ec9e",
+    "userId": "670612936fbe064617e73386",
     "name": "PlayStation Plus Subscription",
-    "description": "Access exclusive games and online multiplayer with PlayStation Plus.",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
+    "description": "Access exclusive games and online multiplayer with PlayStation Plus. Visit playstation.com/redeem and enter your code. Valid for 1 year from purchase. ",
+    "sku": "PLAY-DIG-9TP9-8161",
     "image": {
-      "cardImg1": "https://i.ibb.co.com/tY3zmQ2/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/GHQ3HZx/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/prBNsVG/blob.webp"
+      "cardImg1": "https://i.ibb.co.com/CsbjrFy/blob.jpg",
+      "cardImg2": "https://i.ibb.co.com/3BWRVwM/blob-1.jpg",
+      "cardImg3": "https://i.ibb.co.com/7xDM3FW/blob-1.webp"
     },
+    "category": "digital gift",
+    "subCategory": "gaming",
+    "mention": "Great gift for PlayStation players.",
+    "discount": 12,
     "priceGroup": [
       {
         "tier": "Essential",
@@ -807,12 +947,8 @@
           "amount": 9.99,
           "duration": "1 month"
         },
-        "image": "https://i.ibb.co.com/9wY15nm/blob.webp",
-        "quantity": 49,
-        "redeemInstructions": "Visit playstation.com/redeem and enter your code.",
-        "validity": "Valid for 1 year from purchase.",
-        "region": "Worldwide",
-        "terms": "Non-transferable. Cannot be exchanged for cash."
+        "image": "https://i.ibb.co.com/gzR7BWY/blob.webp",
+        "quantity": 20
       },
       {
         "tier": "Extra",
@@ -821,43 +957,38 @@
           "amount": 14.99,
           "duration": "1 month"
         },
-        "image": "https://i.ibb.co.com/FVGpzc8/blob.webp",
-        "quantity": 50,
-        "redeemInstructions": "Visit playstation.com/redeem and enter your code.",
-        "validity": "Valid for 1 year from purchase.",
-        "region": "Worldwide",
-        "terms": "Non-transferable. Cannot be exchanged for cash."
+        "image": "https://i.ibb.co.com/GJ0H16c/blob.webp",
+        "quantity": 15
       },
       {
         "tier": "Premium",
         "price": {
-          "currency": "USD",
           "amount": 17.99,
-          "duration": "1 month"
+          "duration": "1 month",
+          "currency": "USD"
         },
-        "image": "https://i.ibb.co.com/JddMW0V/blob.webp",
-        "quantity": 50,
-        "redeemInstructions": "Visit playstation.com/redeem and enter your code.",
-        "validity": "Valid for 1 year from purchase.",
-        "region": "Worldwide",
-        "terms": "Non-transferable. Cannot be exchanged for cash."
+        "image": "https://i.ibb.co.com/68Pkpgb/blob.webp",
+        "quantity": 10
       }
-    ],
-    "category": "digital gift",
-    "subCategory": "gaming",
-    "mention": "Great gift for PlayStation players.",
-    "discount": 12
+    ]
   },
   {
-    "seller_name": "Xbox",
-    "store_name": "Xbox Store",
+    "_id": "67120910d7803306c6c1ec9f",
+    "userId": "670612936fbe064617e73386",
     "name": "Xbox Game Pass",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
     "description": "Get access to hundreds of games with Xbox Game Pass.",
+    "sku": "XBOX-DIG-UN50-2670",
     "image": {
-      "cardImg1": "https://i.ibb.co.com/PhN91gV/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/M9jhgNb/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/Bgk9m6Z/blob.jpg"
+      "cardImg1": "https://i.ibb.co.com/b24n9GR/blob-2.jpg",
+      "cardImg2": "https://i.ibb.co.com/X217cDb/blob-3.jpg",
+      "cardImg3": "https://i.ibb.co.com/YX8T1v1/blob-4.jpg"
     },
+    "category": "digital gift",
+    "subCategory": "gaming",
+    "mention": "For the ultimate gaming experience.",
+    "discount": 10,
     "priceGroup": [
       {
         "tier": "Standard",
@@ -866,12 +997,8 @@
           "amount": 9.99,
           "duration": "1 month"
         },
-        "image": "https://i.ibb.co.com/Bgk9m6Z/blob.jpg",
-        "quantity": 7,
-        "redeemInstructions": "Visit xbox.com/redeem and enter your code.",
-        "validity": "Valid for 1 year from purchase.",
-        "region": "Worldwide",
-        "terms": "Non-transferable. Cannot be exchanged for cash."
+        "image": "https://i.ibb.co.com/YX8T1v1/blob-4.jpg",
+        "quantity": 15
       },
       {
         "tier": "Ultimate",
@@ -880,29 +1007,28 @@
           "amount": 14.99,
           "duration": "1 month"
         },
-        "image": "https://i.ibb.co.com/Bgk9m6Z/blob.jpg",
-        "quantity": 34,
-        "redeemInstructions": "Visit xbox.com/redeem and enter your code.",
-        "validity": "Valid for 1 year from purchase.",
-        "region": "Worldwide",
-        "terms": "Non-transferable. Cannot be exchanged for cash."
+        "image": "https://i.ibb.co.com/YX8T1v1/blob-4.jpg",
+        "quantity": 5
       }
-    ],
-    "category": "digital gift",
-    "subCategory": "gaming",
-    "mention": "For the ultimate gaming experience.",
-    "discount": 10
+    ]
   },
   {
-    "seller_name": "Google",
-    "store_name": "Google Play Store",
+    "_id": "671209f8d7803306c6c1eca0",
+    "userId": "670612936fbe064617e73386",
     "name": "Google Play Gift Card",
-    "description": "Buy apps, games, and more with Google Play gift cards.",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
+    "description": "Buy apps, games, and more with Google Play gift cards. Visit play.google.com/redeem and enter your code.",
+    "sku": "GOOG-DIG-0SAS-9326",
     "image": {
-      "cardImg1": "https://i.ibb.co.com/jwRVFNZ/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/s5hK6vj/blob.png",
-      "cardImg3": "https://i.ibb.co.com/vhSy6W4/blob.webp"
+      "cardImg1": "https://i.ibb.co.com/0Dd04kc/blob-5.jpg",
+      "cardImg2": "https://i.ibb.co.com/nk2hfBf/blob.png",
+      "cardImg3": "https://i.ibb.co.com/w0FLH7X/blob-2.webp"
     },
+    "category": "digital gift",
+    "subCategory": "shopping",
+    "mention": "Great for Android users.",
+    "discount": 0,
     "priceGroup": [
       {
         "tier": "Standard",
@@ -911,12 +1037,8 @@
           "amount": 25,
           "duration": "one-time"
         },
-        "image": "https://i.ibb.co.com/1M144KC/blob.jpg",
-        "quantity": 50,
-        "redeemInstructions": "Visit play.google.com/redeem and enter your code.",
-        "validity": "No expiration date.",
-        "region": "Worldwide",
-        "terms": "Non-transferable. Cannot be exchanged for cash."
+        "image": "https://i.ibb.co.com/qk019jT/blob-6.jpg",
+        "quantity": 15
       },
       {
         "tier": "Premium",
@@ -925,29 +1047,28 @@
           "amount": 50,
           "duration": "one-time"
         },
-        "image": "https://i.ibb.co.com/G9tgXhr/blob.jpg",
-        "quantity": 5,
-        "redeemInstructions": "Visit play.google.com/redeem and enter your code.",
-        "validity": "No expiration date.",
-        "region": "Worldwide",
-        "terms": "Non-transferable. Cannot be exchanged for cash."
+        "image": "https://i.ibb.co.com/rmsg1n1/blob-6.jpg",
+        "quantity": 5
       }
-    ],
-    "category": "digital gift",
-    "subCategory": "shopping",
-    "mention": "Great for Android users.",
-    "discount": null
+    ]
   },
   {
-    "seller_name": "Disney+",
-    "store_name": "Disney+ Store",
+    "_id": "67120ac1d7803306c6c1eca1",
+    "userId": "670612936fbe064617e73386",
     "name": "Disney+ Subscription",
-    "description": "Stream Disney classics and new releases on Disney+.",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
+    "description": "Stream Disney classics and new releases on Disney+. Go to disneyplus.com/redeem and enter your code. Valid for 1 year from purchase.",
+    "sku": "DISN-DIG-PACW-7235",
     "image": {
-      "cardImg1": "https://i.ibb.co.com/RPK5gk7/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/mq9HsZ2/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/M9jhgNb/blob.jpg"
+      "cardImg1": "https://i.ibb.co.com/12nZGg1/blob-7.jpg",
+      "cardImg2": "https://i.ibb.co.com/R3z6Gmz/blob-8.jpg",
+      "cardImg3": "https://i.ibb.co.com/X217cDb/blob-3.jpg"
     },
+    "category": "digital gift",
+    "subCategory": "streaming",
+    "mention": "Perfect for Disney fans.",
+    "discount": 5,
     "priceGroup": [
       {
         "tier": "Basic",
@@ -956,12 +1077,8 @@
           "amount": 7.99,
           "duration": "1 month"
         },
-        "image": "https://i.ibb.co.com/Wx1pc6Z/blob.jpg",
-        "quantity": 8,
-        "redeemInstructions": "Go to disneyplus.com/redeem and enter your code.",
-        "validity": "Valid for 1 year from purchase.",
-        "region": "US",
-        "terms": "Non-transferable. Cannot be exchanged for cash."
+        "image": "https://i.ibb.co.com/VwrgtNK/blob-9.jpg",
+        "quantity": 10
       },
       {
         "tier": "Premium",
@@ -970,96 +1087,50 @@
           "amount": 10.99,
           "duration": "1 month"
         },
-        "image": "https://i.ibb.co.com/PYxrgvb/blob.jpg",
-        "quantity": 80,
-        "redeemInstructions": "Go to disneyplus.com/redeem and enter your code.",
-        "validity": "Valid for 1 year from purchase.",
-        "region": "US",
-        "terms": "Non-transferable. Cannot be exchanged for cash."
+        "image": "https://i.ibb.co.com/SsSVmn3/blob-9.jpg",
+        "quantity": 5
       }
-    ],
-    "category": "digital gift",
-    "subCategory": "streaming",
-    "mention": "Perfect for Disney fans.",
-    "discount": 10
+    ]
   },
   {
-    "seller_name": "Microsoft",
-    "store_name": "Microsoft Store",
-    "name": "Microsoft 365 Subscription",
-    "description": "Access Office apps and cloud storage with Microsoft 365.",
-    "image": {
-      "cardImg1": "https://i.ibb.co.com/MR9WznG/blob.jpg",
-      "cardImg2": "https://i.ibb.co.com/bWN31N5/blob.jpg",
-      "cardImg3": "https://i.ibb.co.com/6tT9d1D/blob.jpg"
-    },
-    "priceGroup": [
-      {
-        "tier": "Personal",
-        "price": {
-          "currency": "USD",
-          "amount": 6.99,
-          "duration": "1 month"
-        },
-        "image": "https://i.ibb.co.com/MR9WznG/blob.jpg",
-        "quantity": 50,
-        "redeemInstructions": "Go to microsoft.com/redeem and enter your code.",
-        "validity": "Valid for 1 year from purchase.",
-        "region": "Worldwide",
-        "terms": "Non-transferable. Cannot be exchanged for cash."
-      },
-      {
-        "tier": "Family",
-        "price": {
-          "currency": "USD",
-          "amount": 9.99,
-          "duration": "1 month"
-        },
-        "image": "https://i.ibb.co.com/MR9WznG/blob.jpg",
-        "quantity": 50,
-        "redeemInstructions": "Go to microsoft.com/redeem and enter your code.",
-        "validity": "Valid for 1 year from purchase.",
-        "region": "Worldwide",
-        "terms": "Non-transferable. Cannot be exchanged for cash."
-      }
-    ],
-    "category": "digital gift",
-    "subCategory": "software",
-    "mention": "Ideal for professionals and students.",
-    "discount": 5
-  },
-  {
+    "_id": "67120b72d7803306c6c1eca2",
+    "userId": "670612936fbe064617e73386",
     "name": "Elegant Photo Frame",
-    "seller_name": "Jane Smith",
-    "store_name": "Home Essentials",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
     "description": "Showcase your cherished memories with our elegant photo frame, perfect for any kitchen or home decor. Made from high-quality materials, it adds a touch of sophistication to your space.",
+    "sku": "ELEG-HOM-R108-7588",
     "image": {
-      "cardImg1": "https://i.ibb.co.com/phRTV2R/Untitled-design.jpg",
-      "cardImg2": "https://i.ibb.co.com/DffQxxZ/pexels-wangming-photo-115695-354939.jpg",
-      "cardImg3": "https://i.ibb.co.com/G5h3kB5/pexels-punttim-139764.jpg"
+      "cardImg1": "https://i.ibb.co.com/7JVWNpS/pexels-wangming-photo-115695-354939.jpg",
+      "cardImg2": "https://i.ibb.co.com/1zbdf7h/pexels-punttim-139764.jpg",
+      "cardImg3": "https://i.ibb.co.com/7JVWNpS/pexels-wangming-photo-115695-354939.jpg"
     },
     "category": "Home & Living",
-    "subCategory": "Photo Frames",
+    "subCategory": "photo frames",
     "price": 19.99,
     "mention": "For Home Decor, Gifts",
-    "quantity": 44,
+    "quantity": 15,
     "discount": 10
   },
   {
+    "_id": "67120c29d7803306c6c1eca3",
+    "userId": "670612936fbe064617e73386",
     "name": "Complete Kitchen Set",
-    "seller_name": "Michael Johnson",
-    "store_name": "Kitchenware Hub",
+    "seller_name": "Hasan Naiem",
+    "store_name": "Gifz BD",
     "description": "Upgrade your cooking experience with our complete kitchen set. This set includes high-quality cookware, utensils, and gadgets, designed for both novice and experienced chefs.",
+    "sku": "COMP-HOM-9YFP-8113",
     "image": {
-      "cardImg1": "https://i.ibb.co.com/W6cWqnC/Untitled-design-1.jpg",
-      "cardImg2": "https://i.ibb.co.com/JBfCmPM/pexels-rachel-claire-5490925.jpg",
-      "cardImg3": "https://i.ibb.co.com/QQg6Kn0/pexels-skylar-kang-6207510.jpg"
+      "cardImg1": "https://i.ibb.co.com/1Mm7xDd/Untitled-design-1.jpg",
+      "cardImg2": "https://i.ibb.co.com/GnzdMdY/pexels-rachel-claire-5490925.jpg",
+      "cardImg3": "https://i.ibb.co.com/NNwzhZQ/pexels-skylar-kang-6207510.jpg"
     },
     "category": "Home & Living",
-    "subCategory": "Kitchen Sets",
+    "subCategory": "kitchen sets",
     "price": 99.99,
     "mention": "For Cooking Enthusiasts, Housewarming Gifts",
     "quantity": 10,
-    "discount": 12
+    "discount": 12,
+    "priceGroup": []
   }
 ]

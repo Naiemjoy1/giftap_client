@@ -7,6 +7,7 @@ import useAuth from "../../../../../Components/Hooks/useAuth";
 import useUsers from "../../../../../Components/Hooks/useUsers";
 import useAxiosPublic from "../../../../../Components/Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
+import useAxiosSecure from "../../../../../Components/Hooks/useAxiosSecure";
 
 const Billing = ({ onClose }) => {
   const [division] = useDivision();
@@ -14,7 +15,7 @@ const Billing = ({ onClose }) => {
   const [ISDcode] = useISDcode();
   const { user } = useAuth();
   const [users, refetch] = useUsers();
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   const [selectedDivision, setSelectedDivision] = useState("");
   const [selectedISD, setSelectedISD] = useState("");
@@ -91,7 +92,7 @@ const Billing = ({ onClose }) => {
     };
 
     try {
-      const updateResponse = await axiosPublic.patch(
+      const updateResponse = await axiosSecure.patch(
         `/users/${usersDetails._id}`,
         billing
       );
