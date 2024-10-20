@@ -23,7 +23,7 @@ const Admin = () => {
   };
 
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between bg-[#f8f8f8]">
       <div className="w-[20%] pl-10 pr-4 py-4 bg-black space-y-4 h-screen">
         <p className="text-white text-xl font-bold uppercase">Giftap</p>
         <div className="border-t border-gray-400"></div>
@@ -124,7 +124,7 @@ const Admin = () => {
           </div>
         </div>
 
-        <div className="p-4 bg-[#f8f8f8]">
+        <div className="p-4 ">
           {tabsData.map(
             (aTabs) =>
               tab === aTabs.tab && <div key={aTabs.tab}>{aTabs.page}</div>
