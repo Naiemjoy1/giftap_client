@@ -23,7 +23,24 @@ const NoticeBoard = () => {
             <div className='border-dotted border-primary p-10 rounded-lg flex-1'>
                 <h2 className='text-2xl flex justify-center items-center text-secondary'>Your Notice</h2>
              
-             
+                {
+  notice.map((n, index) => (
+    <div className="my-6 p-4 border-b border-gray-300" key={n._id}>
+      <h3 className="text-lg font-semibold text-green-600 mb-2 flex justify-center items-center">
+         Notice:{index + 1}.
+      </h3>
+      <p className="text-gray-800 text-base mb-2 text-start">
+        Dear Seller, 
+      </p>
+      <p className="text-gray-800 text-base mb-2 ">
+        {n.notice} 
+      </p>
+      <p className="text-sm text-gray-500">
+        <span className="font-bold">Published Date:</span> {n.date}
+      </p>
+    </div>
+  ))
+}
                 </div> 
             </div>
                 </div> 
