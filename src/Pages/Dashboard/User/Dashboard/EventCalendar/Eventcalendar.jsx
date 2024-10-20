@@ -10,8 +10,7 @@ import parseISO from 'date-fns/parseISO';
 import startOfToday from 'date-fns/startOfToday';
 import { Fragment, useState, useEffect } from 'react';
 import axios from 'axios';
-
-
+import { DialogTitle } from '@headlessui/react';
 // Sample events
 const events = [
     { id: 1, name: "New Year's Day", startDatetime: '2024-01-01T00:00' },
@@ -26,8 +25,7 @@ const events = [
     { id: 10, name: "World Chocolate Day", startDatetime: '2024-07-07T00:00' },
     { id: 11, name: "Friendship Day", startDatetime: '2024-08-04T00:00' },
     { id: 13, name: "Halloween", startDatetime: '2024-10-31T00:00' },
-];
-
+  ];
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -52,7 +50,6 @@ const EventCalendar = () => {
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [receivedWishes, setReceivedWishes] = useState([]);
 
-    // Fetch received wishes using axios
     const fetchReceivedWishes = async () => {
         try {
             const response = await axios.get('https://api.your-sms-provider.com/get-wishes', {
@@ -60,13 +57,12 @@ const EventCalendar = () => {
                     'Authorization': 'Bearer YOUR_API_KEY',
                 },
             });
-            setReceivedWishes(response.data.wishes);  // Assuming the response contains a "wishes" array
+            setReceivedWishes(response.data.wishes);
         } catch (error) {
             console.error('Error fetching received wishes:', error);
         }
     };
 
-    // Fetch received wishes on component mount
     useEffect(() => {
         fetchReceivedWishes();
     }, []);
@@ -85,16 +81,17 @@ const EventCalendar = () => {
         setIsModalOpen(false);
         setSmsDetails({ receiverEmail: '', receiverName: '', message: '' });
     };
+
     function previousMonth() {
         let firstDayPreviousMonth = add(firstDayCurrentMonth, { months: -1 });
         setCurrentMonth(format(firstDayPreviousMonth, 'MMM-yyyy'));
     }
+
     function nextMonth() {
         let firstDayNextMonth = add(firstDayCurrentMonth, { months: 1 });
         setCurrentMonth(format(firstDayNextMonth, 'MMM-yyyy'));
     }
 
-    // Send wish using axios (POST)
     const sendWish = async () => {
         try {
             const response = await axios.post('https://api.your-sms-provider.com/send', {
@@ -119,18 +116,23 @@ const EventCalendar = () => {
         }
     };
 
-
     return (
-        <div className="lg:flex lg:space-x-4">
+        <div className="lg:flex lg:space-x-6 p-4">
+           
             {/* Calendar Section */}
-            <div className="lg:w-2/3">
-                <div className="flex justify-between">
-                    <button onClick={previousMonth}><FaAnglesLeft /></button>
-                    <h2>{format(firstDayCurrentMonth, 'MMMM yyyy')}</h2>
-                    <button onClick={nextMonth}><FaAnglesRight /></button>
+            <div className="lg:w-2/3 bg-white p-6 rounded-lg shadow-md">
+            <p className="font-bold text-center mb-7">Event Calendar</p>
+                <div className="flex justify-between items-center mb-6">
+                    <button onClick={previousMonth} className="text-gray-600 hover:text-primary">
+                        <FaAnglesLeft size={20} />
+                    </button>
+                    <h2 className="text-xl font-semibold">{format(firstDayCurrentMonth, 'MMMM yyyy')}</h2>
+                    <button onClick={nextMonth} className="text-gray-600 hover:text-primary">
+                        <FaAnglesRight size={20} />
+                    </button>
                 </div>
 
-                <div className="grid grid-cols-7 gap-1 mt-4">
+                <div className="grid grid-cols-7 gap-2">
                     {days.map((day, index) => {
                         const hasEvent = events.some((event) =>
                             event.startDatetime && isSameDay(parseISO(event.startDatetime), day)
@@ -140,71 +142,44 @@ const EventCalendar = () => {
                             <div key={index} className="text-center">
                                 <button
                                     onClick={() => setSelectedDay(day)}
-                                    className={`${isSameDay(day, selectedDay) ? 'bg-primary text-white' : ''} 
-                    ${hasEvent ? 'bg-yellow-400' : ''} 
-                    py-1 px-2 rounded-full w-8 h-8 flex items-center justify-center border`}
+                                    className={classNames(
+                                        "py-1 px-2 rounded-full w-10 h-10 flex items-center justify-center border transition",
+                                        isSameDay(day, selectedDay) ? 'bg-primary text-white' : 'bg-white text-black',
+                                        hasEvent ? 'border-yellow-400' : 'border-gray-300'
+                                    )}
                                 >
                                     {format(day, 'd')}
                                 </button>
                             </div>
                         );
                     })}
-
                 </div>
 
-                {/* Display events for the selected day */}
-                <div>
+                <div className="mt-6">
                     {selectedDayEvents.map((event) => (
                         <div
                             key={event.id}
-                            onClick={() => openModal(event)}
-                            className="mt-2 p-2   cursor-pointer"
+                            onClick={() => setIsModalOpen(true)}
+                            className="mt-2 p-2 border-b border-gray-300 cursor-pointer hover:bg-gray-100 transition"
                         >
                             {event.name}
                         </div>
                     ))}
                 </div>
 
-                {/* Modal for sending SMS */}
-                <Dialog open={isModalOpen} onClose={closeModal} className="fixed inset-0 z-10">
-                    <Dialog.Overlay className="fixed inset-0 bg-black opacity-50" />
-                    <div className="bg-white p-6 rounded shadow-lg max-w-sm mx-auto">
-                        <Dialog.Title>Send Wish for {selectedEvent?.name}</Dialog.Title>
-                        <input
-                            name="receiverEmail"
-                            value={smsDetails.receiverEmail}
-                            onChange={handleInputChange}
-                            placeholder="Recipient's Email"
-                            className="block mt-2 w-full"
-                        />
-                        <input
-                            name="receiverName"
-                            value={smsDetails.receiverName}
-                            onChange={handleInputChange}
-                            placeholder="Recipient's Name"
-                            className="block mt-2 w-full"
-                        />
-                        <textarea
-                            name="message"
-                            value={smsDetails.message}
-                            onChange={handleInputChange}
-                            placeholder="Your Wish Message"
-                            className="block mt-2 w-full"
-                        />
-                        <button onClick={sendWish} className="bg-blue-500 text-white mt-4">Send Wish</button>
-                    </div>
-                </Dialog>
+              
+              
             </div>
 
-            {/* Right-side panel for viewing received wishes */}
-            <div className="lg:w-1/3">
-                <h3 className="font-bold text-lg">Received Wishes</h3>
+            {/* Right-side for viewing received wishes */}
+            <div className="lg:w-1/3 bg-white p-6 rounded-lg shadow-md">
+                <h3 className="text-xl font-bold mb-4">Received Wishes</h3>
                 {receivedWishes.length === 0 ? (
                     <p>No wishes received yet.</p>
                 ) : (
-                    <ul>
+                    <ul className="space-y-4">
                         {receivedWishes.map((wish) => (
-                            <li key={wish.id} className="border-b py-2">
+                            <li key={wish.id} className="border-b pb-2">
                                 <p><strong>From:</strong> {wish.senderName}</p>
                                 <p><strong>Message:</strong> {wish.message}</p>
                             </li>

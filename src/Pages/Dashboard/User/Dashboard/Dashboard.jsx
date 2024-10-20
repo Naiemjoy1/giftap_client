@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineShoppingCart, AiOutlineDollar } from "react-icons/ai";
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { Dialog } from '@headlessui/react'; // Importing Dialog for modal
 import Subscriptions from "../../../Subscriptions/Subscriptions";
 import usePayment from "../../../../Components/Hooks/usePayment";
 import useAuth from "../../../../Components/Hooks/useAuth"; 
@@ -24,6 +25,31 @@ const Dashboard = () => {
 
   const totalOrderAmount = myOrders.reduce((acc, order) => acc + parseFloat(order.amount || 0), 0);
   const formattedTotalOrderAmount = Number(totalOrderAmount) || 0;
+
+  // Modal state
+  const [isOpen, setIsOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    occasionName: '',
+    receiverName: '',
+    email: '',
+    message: ''
+  });
+
+  // Handle form input change
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  // Handle form submission (you can handle the send wish logic here)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add your logic for submitting the wish
+    console.log('Wish Submitted:', formData);
+    setIsOpen(false); // Close the modal after submission
+  };
 
   return (
     <div className="p-6 space-y-6">
@@ -49,8 +75,90 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <p className="font-bold text-center">Event Calendar</p>
-      <EventCalendar></EventCalendar>
+
+      
+      <EventCalendar />
+
+      {/* Sent Wishes Button */}
+      <div className="">
+        <button 
+          onClick={() => setIsOpen(true)} 
+          className="bg-primary text-white px-4 py-2 rounded-lg mt-4">
+          Sent Wishes
+        </button>
+      </div>
+
+      {/* Modal for Sent Wish Form */}
+      <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
+  <div className="fixed inset-0 bg-black bg-opacity-30" />
+  <div className="fixed inset-0 flex items-center justify-center p-4">
+    {/* Updated: Dialog with custom div for content and h2 for title */}
+    <div className="w-full max-w-md bg-white p-6 rounded-lg">
+      <h2 className="text-lg font-bold">Send a Wish</h2> 
+      <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+        {/* Special Occasion Name */}
+        <div>
+          <label className="block text-sm font-medium">Special Occasion Name</label>
+          <input 
+            type="text" 
+            name="occasionName"
+            value={formData.occasionName}
+            onChange={handleInputChange}
+            placeholder="Enter Occasion Name" 
+            className="w-full border border-gray-300 p-2 rounded-md"
+            required 
+          />
+        </div>
+        {/* Receiver Name */}
+        <div>
+          <label className="block text-sm font-medium">Receiver Name</label>
+          <input 
+            type="text" 
+            name="receiverName"
+            value={formData.receiverName}
+            onChange={handleInputChange}
+            placeholder="Enter Receiver's Name" 
+            className="w-full border border-gray-300 p-2 rounded-md"
+            required 
+          />
+        </div>
+        {/* Receiver Email */}
+        <div>
+          <label className="block text-sm font-medium">Receiver Email</label>
+          <input 
+            type="email" 
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            placeholder="Enter Receiver's Email" 
+            className="w-full border border-gray-300 p-2 rounded-md"
+            required 
+          />
+        </div>
+        {/* Wish Message */}
+        <div>
+          <label className="block text-sm font-medium">Message</label>
+          <textarea 
+            name="message"
+            value={formData.message}
+            onChange={handleInputChange}
+            placeholder="Write your wish message here..." 
+            className="w-full border border-gray-300 p-2 rounded-md"
+            rows="4"
+            required
+          />
+        </div>
+        {/* Submit Button */}
+        <div className="text-right">
+          <button type="submit" className="bg-primary text-white px-4 py-2 rounded-lg">
+            Send Wish
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</Dialog>
+
       {/* Pie Chart for Delivery Status */}
       <div className="bg-white p-6 rounded-lg shadow-lg">
         <h3 className="text-xl font-semibold mb-4">Order Delivery Status</h3>
@@ -81,7 +189,7 @@ const Dashboard = () => {
 
       {/* Subscriptions Section */}
       <div>
-        <Subscriptions></Subscriptions>
+        <Subscriptions />
       </div>
     </div>
   );
