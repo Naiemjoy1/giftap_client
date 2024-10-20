@@ -1,20 +1,19 @@
 import React, { useContext } from 'react';
-import useAxiosSecure from '../../Hooks/useAxiosSecure';
-import { AuthContext } from '../../Provider/Provider';
+
+
 import useNotice from '../../Hooks/useNotice';
-import useUser from '../../Hooks/useUser';
+
 import Swal from 'sweetalert2';
 import useAuth from '../../../../Components/Hooks/useAuth';
-import { RiH3 } from 'react-icons/ri';
+import useAxiosPublic from '../../../../Components/Hooks/useAxiosPublic';
+
 
 const AddNotice = () => {
-    const axiosSecure = useAxiosSecure();
-    const {user} = useAuth;
+    const axiosSecure = useAxiosPublic();
+  
     const [notice,,refetch] = useNotice();
     
-   const mynotice = notice.filter(item=> item.Hr_email==user?.email)
-   .sort((a,b)=>new Date(b.date)-new Date(a.date));
-   console.log(mynotice)
+   const {user} = useAuth();
    
     const handleNotice = (e)=>{
  e.preventDefault();
@@ -24,7 +23,7 @@ const AddNotice = () => {
  const notice ={
     notice:data,
     date:date,
-    Hr_email:user?.email,
+   email:user?.email,
  }
  
   axiosSecure.post('/notice',notice)
@@ -58,7 +57,7 @@ const AddNotice = () => {
             <div className='my-10'>
                 <h2 className='text-2xl flex justify-center items-center'>Your Notice</h2>
                 {
-  mynotice.map((n, index) => (
+  notice.map((n, index) => (
     <div className="my-6 p-4 border-b border-gray-300" key={n._id}>
       <h3 className="text-lg font-semibold text-green-600 mb-2 flex justify-center items-center">
          Notice:{index + 1}.
