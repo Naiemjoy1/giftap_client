@@ -49,6 +49,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+      <p className="font-bold text-center">Event Calendar</p>
       <EventCalendar></EventCalendar>
       {/* Pie Chart for Delivery Status */}
       <div className="bg-white p-6 rounded-lg shadow-lg">
