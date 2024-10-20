@@ -2,10 +2,14 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../../../Components/Hooks/useAuth";
 import useProducts from "../../../../Components/Hooks/useProducts";
 import useUsers from "../../../../Components/Hooks/useUsers";
+import useAxiosPublic from "../../../../Components/Hooks/useAxiosPublic";
+import toast from "react-hot-toast";
+
 
 const Complain = () => {
     const { user } = useAuth();
-    const [products, loading] = useProducts();
+    const axiosPublic = useAxiosPublic();
+    const [products, loading, refetch] = useProducts();
     const categories = [...new Set(products.map((item) => item.store_name))];
     // console.log(user)
 
@@ -15,23 +19,34 @@ const Complain = () => {
 
 
     const { displayName, email } = user;
-
+    
     const {
         register,
         handleSubmit,
         formState: { errors },
-        watch,
-        setValue,
     } = useForm();
 
     const onSubmit = async (data) => {
 
         data.customerName = displayName;
         data.customerEmail = email;
-        // data.customerImage = image;
-        console.log(data)
+
+        axiosPublic.post(`/complain`, data)
+        .then(res => {
+            console.log(res.data)
+            toast.success("Complain Submitted Successfully.");
+            refetch()
+
+        })
+        .catch(error => {
+            // alert(error, "NOOOOOOOOOOOOOOO")
+            toast.error("Complain Submitted Failed.");
+        })
+
+        // console.log(data)
     }
 
+    refetch()
 
 
     return (

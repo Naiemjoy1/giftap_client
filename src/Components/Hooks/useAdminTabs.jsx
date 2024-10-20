@@ -11,7 +11,8 @@ import Products from "../../Pages/Dashboard/Admin/Products/Products";
 import AddProducts from "../../Pages/Dashboard/Admin/AddProducts/AddProducts";
 import Users from "../../Pages/Dashboard/Admin/Users/Users";
 import Promos from "../../Pages/Dashboard/Admin/Promos/Promos";
-import { BiSolidOffer } from "react-icons/bi";
+import { BiCommentError, BiSolidOffer } from "react-icons/bi";
+import AllComplain from "../../Pages/Dashboard/Admin/AllComplain/AllComplain";
 
 const useAdminTabs = () => {
   const tabsData = [
@@ -51,6 +52,12 @@ const useAdminTabs = () => {
       tab: 5,
       page: <Promos></Promos>,
     },
+    {
+      name: "complain",
+      icon: <BiCommentError />,
+      tab: 6,
+      page: <AllComplain></AllComplain>,
+    }
   ];
   return [tabsData];
 };
