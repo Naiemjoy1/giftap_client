@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../Components/Hooks/useAuth";
+import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 import { useNavigate } from "react-router-dom";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import { IoIosEyeOff, IoMdEye } from "react-icons/io";
-import useAxiosSecure from "../../../Components/Hooks/useAxiosSecure";
 
 const SignUp = ({ toggleForm, setReset }) => {
   const { createUser, updateUserProfile } = useAuth();
-  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
@@ -44,7 +44,7 @@ const SignUp = ({ toggleForm, setReset }) => {
         type: "user",
       };
 
-      const res = await axiosSecure.post("/users", userInfo);
+      const res = await axiosPublic.post("/users", userInfo);
       if (res.data.insertedId) {
         reset();
         toast.success("User Created Successfully");

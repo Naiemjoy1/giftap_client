@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../../Components/Hooks/useAuth";
+import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
 import Swal from "sweetalert2";
-import useAxiosSecure from "../../../Components/Hooks/useAxiosSecure";
 
 const SocialLogin = () => {
   const { googleSignIn, githubLogin, twitterLogin } = useAuth();
-  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
 
   const handleSocialLogin = (socialProvider) => {
@@ -17,14 +17,12 @@ const SocialLogin = () => {
         const userInfo = {
           name: user?.displayName,
           email: user?.email,
-          provider: user.providerId, // Add provider information
           createdDate: new Date().toISOString(),
           status: "active",
-          type: "admin",
+          type: "user",
         };
 
-        // Send user info to your back-end
-        axiosSecure.post("/users", userInfo).then((res) => {
+        axiosPublic.post("/users", userInfo).then((res) => {
           if (res.data.insertedId) {
             Swal.fire({
               position: "top-end",
