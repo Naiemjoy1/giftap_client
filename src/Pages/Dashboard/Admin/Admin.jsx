@@ -1,7 +1,7 @@
 import { BiSolidDownArrow } from "react-icons/bi";
 import { FaRegEnvelope, FaStore } from "react-icons/fa";
 import { IoMdNotifications } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/material_green.css";
 import useAuth from "../../../Components/Hooks/useAuth";
@@ -11,6 +11,7 @@ import useAdminTabs from "../../../Components/Hooks/useAdminTabs";
 const Admin = () => {
   const { user, logOut } = useAuth();
   const [tabsData] = useAdminTabs();
+  const navigate = useNavigate();
 
   const [tab, setTab] = useState(0);
 
@@ -19,7 +20,11 @@ const Admin = () => {
   };
 
   const handleLogOut = () => {
-    logOut().catch((error) => console.log(error));
+    logOut()
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
