@@ -55,6 +55,13 @@ const AuthProvider = ({ children }) => {
     );
   };
 
+  const updateUserProfile = (name, image, email) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: image,
+    });
+  };
+
   const logOut = () => {
     setLoading(true);
     return signOut(auth).finally(() => setLoading(false));
@@ -79,13 +86,6 @@ const AuthProvider = ({ children }) => {
       unsubscribe();
     };
   }, [axiosPublic]);
-
-  const updateUserProfile = (name, image) => {
-    return updateProfile(auth.currentUser, {
-      displayName: name,
-      photoURL: image,
-    });
-  };
 
   const authInfo = {
     loading,
