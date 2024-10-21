@@ -8,8 +8,9 @@ const AddNotice = () => {
   const axiosPublic = useAxiosPublic();
   const [notice, refetch] = useNotice();
   const { user } = useAuth();
-
-  const sortedNotice = notice?.sort(
+ const mynotice = notice?.filter(n=>n.email==user?.email);
+ console.log(mynotice)
+  const sortedNotice = mynotice?.sort(
     (a, b) => new Date(`${b.date} ${b.time}`) - new Date(`${a.date} ${a.time}`)
   );
 
@@ -44,20 +45,21 @@ const AddNotice = () => {
   };
 
   return (
-    <div className="container mx-auto ">
-      {/* Scrollable Container for both form and notices */}
-      <div className="max-h-[600px] overflow-y-auto p-6 ">
+    <div className="container mx-auto  ">
+    
+      <div className="flex flex-col sm:gap-4 lg:flex-row ">
         
-        {/* Add Notice Form at the top */}
-        <div className="flex flex-col justify-center items-center mb-8">
+      
+        <div className="flex flex-col w-1/2  justify-center items-center ">
           <div>
             <div className="divider"></div>
-            <h1 className="text-2xl text-primary flex justify-center items-center my-4">
-              ------Add Notice For Seller-----
+            <h1 className="text-2xl text-primary  ">
+              ------Add Notice-----
             </h1>
             <div className="divider"></div>
           </div>
-          <form onSubmit={handleNotice}>
+         <div className=' '>
+         <form onSubmit={handleNotice}>
             <textarea name='notice' placeholder="Notice" className="textarea textarea-bordered textarea-md w-full max-w-xs mb-4"></textarea>
             <div>
               <button className='btn btn-wide bg-primary text-white'>
@@ -65,19 +67,21 @@ const AddNotice = () => {
               </button>
             </div>
           </form>
+         </div>
         </div>
 
-        {/* Notices List below the form */}
-        <div className=' border border-primary rounded-lg'>
+       
+        <div className='flex-1 w-1/2 border border-primary rounded-lg'>
           <div>
             <div className="divider"></div>
-            <h1 className="text-2xl text-primary flex justify-center items-center my-2">
+            <h1 className="text-2xl text-primary flex justify-center items-center">
               ------Your Added Notice-----
             </h1>
             <div className="divider"></div>
           </div>
 
-          {sortedNotice.map((n, index) => (
+         <div className='max-h-[500px] overflow-y-auto'>
+         {sortedNotice.map((n, index) => (
             <div className="my-6 p-4 border-b border-gray-300" key={n._id}>
               <h3 className="text-lg font-semibold text-secondary mb-2 flex justify-center items-center underline">
                 Notice: {index + 1}.
@@ -93,6 +97,7 @@ const AddNotice = () => {
               </p>
             </div>
           ))}
+         </div>
         </div>
       </div>
     </div>
