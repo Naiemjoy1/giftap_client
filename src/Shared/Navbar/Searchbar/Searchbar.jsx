@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import useAuth from "../../../Components/Hooks/useAuth";
 import { Link } from "react-router-dom";
 import { HiOutlineShoppingBag } from "react-icons/hi";
@@ -168,7 +168,6 @@ const Searchbar = () => {
       >
         <NavDrawer
           toggleDrawer={toggleDrawer}
-          user={user}
           handleLogOut={handleLogOut}
         ></NavDrawer>
       </Drawer>

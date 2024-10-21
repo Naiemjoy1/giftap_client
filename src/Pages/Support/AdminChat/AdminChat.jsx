@@ -14,12 +14,16 @@ const AdminChat = () => {
   const { user } = useAuth();
   const [users] = useUsers();
   const currentUser = users?.find((u) => u.email === user.email);
+
   const [userType] = useType();
+
   const [chats, refetch, isLoadingChats] = useChat();
   const currentSellerChat = chats?.filter(
     (chat) => chat?.sellerId === currentUser?._id
   );
+
   const [products] = useProducts();
+
   const axiosSecure = useAxiosSecure();
 
   const [selectedChat, setSelectedChat] = useState(null);
@@ -170,7 +174,7 @@ const AdminChat = () => {
 
   return (
     <div>
-      {userType === "seller" && (
+      {userType === "admin" && (
         <button onClick={toggleChatbox} className="relative">
           <p className="text-xl">
             <FaBell />
