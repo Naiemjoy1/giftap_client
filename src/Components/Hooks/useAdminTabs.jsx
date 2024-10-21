@@ -13,6 +13,8 @@ import AddProducts from "../../Pages/Dashboard/Admin/AddProducts/AddProducts";
 import Users from "../../Pages/Dashboard/Admin/Users/Users";
 import Promos from "../../Pages/Dashboard/Admin/Promos/Promos";
 import { BiSolidOffer } from "react-icons/bi";
+import AddNotice from "../../Pages/Dashboard/Admin/AddNotice/AddNotice";
+import { BsClipboard } from "react-icons/bs";
 import Payments from "../../Pages/Dashboard/Admin/Payments/Payments";
 
 const useAdminTabs = () => {
@@ -52,12 +54,6 @@ const useAdminTabs = () => {
       icon: <BiSolidOffer />,
       tab: 5,
       page: <Promos></Promos>,
-    },
-    {
-      name: "payments",
-      icon: <MdOutlinePayments />,
-      tab: 6,
-      page: <Payments></Payments>,
     },
   ];
   return [tabsData];
