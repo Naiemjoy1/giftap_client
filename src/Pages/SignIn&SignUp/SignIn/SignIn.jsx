@@ -4,10 +4,13 @@ import useAuth from "../../../Components/Hooks/useAuth";
 import Swal from "sweetalert2";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import { IoIosEyeOff, IoMdEye } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = ({ toggleForm, setReset }) => {
   const { signIn } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -23,18 +26,25 @@ const SignIn = ({ toggleForm, setReset }) => {
   const onSubmit = async (data) => {
     const { email, password } = data;
 
+    setLoading(true);
+
     try {
       const result = await signIn(email, password);
       const user = result.user;
-      console.log(user);
 
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Login Successfully",
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      if (user) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Login Successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
+      }
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -42,8 +52,18 @@ const SignIn = ({ toggleForm, setReset }) => {
         text: "Invalid email or password!",
       });
       console.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <span className="loading loading-spinner loading-lg text-primary"></span>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col md:flex-row min-h-[calc(100vh-100px)]">
