@@ -11,7 +11,8 @@ import startOfToday from 'date-fns/startOfToday';
 import { Fragment, useState, useEffect } from 'react';
 import axios from 'axios';
 import { DialogTitle } from '@headlessui/react';
-// Sample events
+
+// Updated events array with more special days
 const events = [
     { id: 1, name: "New Year's Day", startDatetime: '2024-01-01T00:00' },
     { id: 2, name: "National Hugging Day", startDatetime: '2024-01-21T00:00' },
@@ -24,8 +25,11 @@ const events = [
     { id: 9, name: "Father's Day", startDatetime: '2024-06-16T00:00' },
     { id: 10, name: "World Chocolate Day", startDatetime: '2024-07-07T00:00' },
     { id: 11, name: "Friendship Day", startDatetime: '2024-08-04T00:00' },
-    { id: 13, name: "Halloween", startDatetime: '2024-10-31T00:00' },
-  ];
+    { id: 12, name: "Halloween", startDatetime: '2024-10-31T00:00' },
+    { id: 13, name: "Christmas Day", startDatetime: '2024-12-25T00:00' }, // Added event
+    { id: 14, name: "Easter Sunday", startDatetime: '2024-04-07T00:00' },  // Added event
+    { id: 15, name: "Independence Day", startDatetime: '2024-07-04T00:00' }, // Added event
+];
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -48,29 +52,6 @@ const EventCalendar = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [smsDetails, setSmsDetails] = useState({ receiverEmail: '', receiverName: '', message: '' });
     const [selectedEvent, setSelectedEvent] = useState(null);
-    const [receivedWishes, setReceivedWishes] = useState([]);
-
-    const fetchReceivedWishes = async () => {
-        try {
-            const response = await axios.get('https://api.your-sms-provider.com/get-wishes', {
-                headers: {
-                    'Authorization': 'Bearer YOUR_API_KEY',
-                },
-            });
-            setReceivedWishes(response.data.wishes);
-        } catch (error) {
-            console.error('Error fetching received wishes:', error);
-        }
-    };
-
-    useEffect(() => {
-        fetchReceivedWishes();
-    }, []);
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setSmsDetails({ ...smsDetails, [name]: value });
-    };
 
     const openModal = (event) => {
         setSelectedEvent(event);
@@ -92,36 +73,12 @@ const EventCalendar = () => {
         setCurrentMonth(format(firstDayNextMonth, 'MMM-yyyy'));
     }
 
-    const sendWish = async () => {
-        try {
-            const response = await axios.post('https://api.your-sms-provider.com/send', {
-                to: smsDetails.receiverEmail,
-                message: smsDetails.message,
-                name: smsDetails.receiverName,
-                event: selectedEvent.name,
-            }, {
-                headers: {
-                    'Authorization': 'Bearer YOUR_API_KEY',
-                },
-            });
-
-            if (response.status === 200) {
-                alert('Wish sent successfully!');
-                closeModal();
-            } else {
-                alert('Failed to send the wish');
-            }
-        } catch (error) {
-            console.error('Error sending wish:', error);
-        }
-    };
-
     return (
         <div className="lg:flex lg:space-x-6 p-4">
            
             {/* Calendar Section */}
             <div className="lg:w-2/3 bg-white p-6 rounded-lg shadow-md">
-            <p className="font-bold text-center mb-7">Event Calendar</p>
+                <p className="font-bold text-center mb-7">Event Calendar</p>
                 <div className="flex justify-between items-center mb-6">
                     <button onClick={previousMonth} className="text-gray-600 hover:text-primary">
                         <FaAnglesLeft size={20} />
@@ -155,37 +112,42 @@ const EventCalendar = () => {
                     })}
                 </div>
 
+                {/* Special Offer Section */}
                 <div className="mt-6">
+                    {selectedDayEvents.length > 0 ? (
+                        <div className="p-4 bg-green-100 text-green-800 rounded-md">
+                            <p className="font-semibold">Special Offer:</p>
+                            <p>Congratulations! It's a special occasion. Enjoy a 25% discount on all purchases today!</p>
+                        </div>
+                    ) : (
+                        <div className="p-4 bg-red-100 text-red-800 rounded-md">
+                            <p>No special occasion today. Regular prices apply.</p>
+                        </div>
+                    )}
+
+                    {/* Show Events */}
                     {selectedDayEvents.map((event) => (
                         <div
                             key={event.id}
-                            onClick={() => setIsModalOpen(true)}
-                            className="mt-2 p-2 border-b border-gray-300 cursor-pointer hover:bg-gray-100 transition"
+                            onClick={() => openModal(event)}
+                            className="mt-2 p-2 border-b border-gray-300 cursor-pointer hover:bg-black transition relative"
                         >
+                            <div className="absolute left-1/2 transform -translate-x-0.5 bottom-full mb-2 w-max px-2 py-1 text-sm text-white bg-black rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                {event.name}
+                            </div>
                             {event.name}
                         </div>
                     ))}
                 </div>
-
-              
-              
             </div>
 
-            {/* Right-side for viewing received wishes */}
+            {/* Right-side for special offer display */}
             <div className="lg:w-1/3 bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-bold mb-4">Received Wishes</h3>
-                {receivedWishes.length === 0 ? (
-                    <p>No wishes received yet.</p>
-                ) : (
-                    <ul className="space-y-4">
-                        {receivedWishes.map((wish) => (
-                            <li key={wish.id} className="border-b pb-2">
-                                <p><strong>From:</strong> {wish.senderName}</p>
-                                <p><strong>Message:</strong> {wish.message}</p>
-                            </li>
-                        ))}
-                    </ul>
-                )}
+                <h3 className="text-xl font-bold mb-4">Special Offer</h3>
+                <div className="bg-white shadow-md rounded-lg p-4">
+                    <p><strong>Today's Offer:</strong> Enjoy a 25% discount on all items for any selected special occasion!</p>
+                    <p className="mt-2 text-gray-500">Select a date on the calendar to see if it's a special occasion and get the offer.</p>
+                </div>
             </div>
         </div>
     );

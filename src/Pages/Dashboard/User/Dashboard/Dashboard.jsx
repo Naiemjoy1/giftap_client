@@ -6,7 +6,7 @@ import Subscriptions from "../../../Subscriptions/Subscriptions";
 import usePayment from "../../../../Components/Hooks/usePayment";
 import useAuth from "../../../../Components/Hooks/useAuth"; 
 import EventCalendar from "./EventCalendar/Eventcalendar";
-
+import { AiOutlineClose } from "react-icons/ai";
 const Dashboard = () => {
   const [payments] = usePayment();
   const { user } = useAuth(); 
@@ -43,12 +43,12 @@ const Dashboard = () => {
     });
   };
 
-  // Handle form submission (you can handle the send wish logic here)
+  // Handle form submission wish
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your logic for submitting the wish
+    
     console.log('Wish Submitted:', formData);
-    setIsOpen(false); // Close the modal after submission
+    setIsOpen(false); 
   };
 
   return (
@@ -93,8 +93,16 @@ const Dashboard = () => {
   <div className="fixed inset-0 bg-black bg-opacity-30" />
   <div className="fixed inset-0 flex items-center justify-center p-4">
     {/* Updated: Dialog with custom div for content and h2 for title */}
-    <div className="w-full max-w-md bg-white p-6 rounded-lg">
-      <h2 className="text-lg font-bold">Send a Wish</h2> 
+    <div className="w-full max-w-md bg-white p-6 rounded-lg relative">
+      {/* Close Button */}
+      <button 
+        onClick={() => setIsOpen(false)} 
+        className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 focus:outline-none"
+      >
+        <AiOutlineClose size={24} />
+      </button>
+      
+      <h2 className="text-lg font-bold">Send a Wish</h2>
       <form onSubmit={handleSubmit} className="space-y-4 mt-4">
         {/* Special Occasion Name */}
         <div>
