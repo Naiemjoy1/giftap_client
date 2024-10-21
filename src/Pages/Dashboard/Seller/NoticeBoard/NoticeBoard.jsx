@@ -8,7 +8,7 @@ const NoticeBoard = () => {
     const sortedNotice =   notice?.sort((a, b) => new Date(`${b.date} ${b.time}`) - new Date(`${a.date} ${a.time}`))
     return (
         <div>
-               {/* <div>
+               <div>
           <div className="divider"></div>
                  <h1 className='text-2xl text-primary  flex justify-center items-center my-4'>------Notice Board-----</h1>
                  <div className="divider "></div>
@@ -42,7 +42,7 @@ sortedNotice.map((n, index) => (
 }
                 </div> 
             </div>
-                </div>  */}
+                </div> 
         </div>
     );
 };
