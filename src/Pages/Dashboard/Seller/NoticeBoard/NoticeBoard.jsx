@@ -4,11 +4,11 @@ import useUsers from '../../../../Components/Hooks/useUsers';
 
 
 const NoticeBoard = () => {
-    const [notice,refetch] = useNotice();
+    // const [notice,refetch] = useNotice();
    
     return (
         <div>
-              <div>
+              {/* <div>
          <div className="divider"></div>
                 <h1 className='text-2xl text-primary  flex justify-center items-center my-4'>------Notice Board-----</h1>
                 <div className="divider "></div>
@@ -43,7 +43,7 @@ const NoticeBoard = () => {
 }
                 </div> 
             </div>
-                </div> 
+                </div>  */}
         </div>
     );
 };

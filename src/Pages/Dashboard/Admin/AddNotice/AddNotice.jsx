@@ -1,53 +1,52 @@
 import React, { useContext } from 'react';
 
-
-import useNotice from '../../Hooks/useNotice';
-
 import Swal from 'sweetalert2';
 import useAuth from '../../../../Components/Hooks/useAuth';
 import useAxiosPublic from '../../../../Components/Hooks/useAxiosPublic';
+import useNotice from '../../../../Components/Hooks/useNotice';
+
 
 
 const AddNotice = () => {
-    const axiosSecure = useAxiosPublic();
+//     const axiosPublic = useAxiosPublic();
   
-    const [notice,,refetch] = useNotice();
+//     const [notice,,refetch] = useNotice();
     
-   const {user} = useAuth();
+//    const {user} = useAuth();
    
-    const handleNotice = (e)=>{
- e.preventDefault();
-  const data = e.target.notice.value;
-  const date = new Date().toLocaleDateString();
+//     const handleNotice = (e)=>{
+//  e.preventDefault();
+//   const data = e.target.notice.value;
+//   const date = new Date().toLocaleDateString();
 
- const notice ={
-    notice:data,
-    date:date,
-   email:user?.email,
- }
+//  const notice ={
+//     notice:data,
+//     date:date,
+//    email:user?.email,
+//  }
  
-  axiosSecure.post('/notice',notice)
-  .then(res=>{
-    console.log(res.data);
-    if(res.data){
-        Swal.fire({
-            title: 'success',
-            text: 'Notice Added Successfully',
-            icon: 'success',
-            confirmButtonText: 'Success'
+//   axiosPublic.post('/notice',notice)
+//   .then(res=>{
+//     console.log(res.data);
+//     if(res.data){
+//         Swal.fire({
+//             title: 'success',
+//             text: 'Notice Added Successfully',
+//             icon: 'success',
+//             confirmButtonText: 'Success'
          
-        })
-        refetch();
-    }
+//         })
+//         refetch();
+//     }
    
 
 
-  })
-  e.target.reset();
-    }
+//   })
+//   e.target.reset();
+//     }
     return (
         <div className='border border-green-200 rounded-lg container mx-auto my-24 p-12'>
-         <div>
+         {/* <div>
          <div className="divider"></div>
                 <h1 className='text-2xl text-primary  flex justify-center items-center my-4'>------Add Notice For Seller-----</h1>
                 <div className="divider "></div>
@@ -86,7 +85,7 @@ const AddNotice = () => {
            </form>
             </div>
          </div>
-            
+             */}
         </div>
     );
 };
