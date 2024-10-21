@@ -35,7 +35,7 @@ const ShowPie = ({ admin }) => {
   return (
     <div
       ref={chartRef}
-      className="w-full h-64 flex justify-center items-center"
+      className="w-full lg:h-64 flex justify-center items-center"
     >
       <PieChart
         series={[

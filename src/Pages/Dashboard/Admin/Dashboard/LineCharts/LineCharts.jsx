@@ -22,8 +22,7 @@ const LineCharts = () => {
   }));
 
   return (
-    <div className="w-full h-44">
-      {" "}
+    <div className="w-full h-96 sm:h-72 md:h-60 lg:h-44">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
