@@ -14,7 +14,6 @@ const useTabs = () => {
     { name: "addresses", page: <Addresses></Addresses> },
     { name: "account details", page: <AccountDetails></AccountDetails> },
     { name: "wishlist", page: <WishList></WishList> },
-   ,
   ];
   return [tabsData];
 };

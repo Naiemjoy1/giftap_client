@@ -1,6 +1,7 @@
 import {
   MdAddShoppingCart,
   MdDashboard,
+  MdOutlinePayments,
   MdProductionQuantityLimits,
 } from "react-icons/md";
 import Dashboard from "../../Pages/Dashboard/Admin/Dashboard/Dashboard";
@@ -14,6 +15,7 @@ import Promos from "../../Pages/Dashboard/Admin/Promos/Promos";
 import { BiSolidOffer } from "react-icons/bi";
 import AddNotice from "../../Pages/Dashboard/Admin/AddNotice/AddNotice";
 import { BsClipboard } from "react-icons/bs";
+import Payments from "../../Pages/Dashboard/Admin/Payments/Payments";
 
 const useAdminTabs = () => {
   const tabsData = [
@@ -53,12 +55,6 @@ const useAdminTabs = () => {
       tab: 5,
       page: <Promos></Promos>,
     },
-    {
-      name: "Add Notice",
-      icon: <BsClipboard />,
-      tab: 6,
-      page: <AddNotice></AddNotice>
-    }
   ];
   return [tabsData];
 };

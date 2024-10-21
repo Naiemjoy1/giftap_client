@@ -1,4 +1,3 @@
-import React from "react";
 import useProducts from "../../../../../Components/Hooks/useProducts";
 
 const StockOut = () => {
@@ -9,62 +8,60 @@ const StockOut = () => {
     }
     return product.quantity < 10;
   });
-  console.log("stockOut", stockOut);
 
   return (
     <div>
-      <div className="overflow-x-auto overflow-y-auto">
+      <div className="overflow-x-auto overflow-y-auto h-[300px]">
         <table className="table">
-          {/* head */}
           <thead>
             <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
               <th></th>
+              <th>Product Details</th>
+              <th>Seller Details</th>
+              <th>Stock Low</th>
             </tr>
           </thead>
           <tbody>
-            {/* row 1 */}
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <td>
-                <div className="flex items-center gap-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle h-12 w-12">
-                      <img
-                        src="https://img.daisyui.com/images/profile/demo/2@94.webp"
-                        alt="Avatar Tailwind CSS Component"
-                      />
+            {stockOut.map((item, index) => (
+              <tr>
+                <th>{index + 1}</th>
+                <td>
+                  <div className="flex items-center gap-3">
+                    <div className="avatar">
+                      <div className="mask mask-squircle h-12 w-12">
+                        <img
+                          src={item.image.cardImg1}
+                          alt="Avatar Tailwind CSS Component"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-bold">{item.name}</div>
                     </div>
                   </div>
-                  <div>
-                    <div className="font-bold">Hart Hagerty</div>
-                    <div className="text-sm opacity-50">United States</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                Zemlak, Daniel and Leannon
-                <br />
-                <span className="badge badge-ghost badge-sm">
-                  Desktop Support Technician
-                </span>
-              </td>
-              <td>Purple</td>
-              <th>
-                <button className="btn btn-ghost btn-xs">details</button>
-              </th>
-            </tr>
+                </td>
+                <td>
+                  <div className="font-bold">{item.store_name}</div>
+                </td>
+                <td className="text-red-600">
+                  {item.category === "digital gift" ? (
+                    <div>
+                      {item.priceGroup
+                        .filter((tier) => tier.quantity < 10)
+                        .map((tier, idx) => (
+                          <div key={idx}>
+                            <span>
+                              {tier.tier}: {tier.quantity}
+                            </span>{" "}
+                          </div>
+                        ))}
+                    </div>
+                  ) : (
+                    <>{item.quantity}</>
+                  )}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
