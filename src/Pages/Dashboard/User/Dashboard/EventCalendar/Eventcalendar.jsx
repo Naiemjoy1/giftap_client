@@ -113,47 +113,40 @@ const EventCalendar = () => {
                 </div>
 
                 {/* Special Offer Section */}
-                <div className="mt-6">
-                    {selectedDayEvents.length > 0 ? (
-                        <div className="p-4 bg-green-100 text-green-800 rounded-md">
-                            <p className="font-semibold">Special Offer:</p>
-                            <p>Congratulations! It's a special occasion. Enjoy a 25% discount on all purchases today!</p>
-                        </div>
-                    ) : (
-                        <div className="p-4 bg-red-100 text-red-800 rounded-md">
-                            <p>No special occasion today. Regular prices apply.</p>
-                        </div>
-                    )}
+              {/* Special Offer Section */}
+<div className="mt-6">
+    {selectedDayEvents.length > 0 ? (
+        <div className="p-4 bg-green-100 text-green-800 rounded-md">
+            <p className="font-semibold">Special Offer:</p>
+            <p>Congratulations! It's <span className="font-bold">{selectedDayEvents[0].name}</span>. Enjoy a 25% discount on all purchases today!</p>
+        </div>
+    ) : (
+        <div className="p-4 bg-red-100 text-red-800 rounded-md">
+            <p>No special occasion today. Regular prices apply.</p>
+        </div>
+    )}
 
-                    {/* Show Events */}
-                    {selectedDayEvents.map((event) => (
-                        <div
-                            key={event.id}
-                            onClick={() => openModal(event)}
-                            className="mt-2 p-2 border-b border-gray-300 cursor-pointer hover:bg-black transition relative"
-                        >
-                            <div className="absolute left-1/2 transform -translate-x-0.5 bottom-full mb-2 w-max px-2 py-1 text-sm text-white bg-black rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                {event.name}
-                            </div>
-                            {event.name}
-                        </div>
-                    ))}
-                </div>
+  
+</div>
+
             </div>
 
             {/* Right-side for special offer display */}
             <div className="lg:w-1/3 bg-white p-6 rounded-lg shadow-md">
     <h3 className="text-xl font-bold mb-4">Special Offer</h3>
     <div className="bg-white shadow-md rounded-lg p-4">
+        <div>
+            <img src="https://img.freepik.com/free-vector/special-offer-creative-sale-banner-design_1017-16284.jpg?t=st=1729603132~exp=1729606732~hmac=86d5cc12cf3a70bd2ed94af1445a6798c26c2083409c9cb3cc834272d9735a0a&w=740" alt="" />
+        </div>
         {/* Check if today's selected day has any events */}
         {selectedDayEvents.length > 0 ? (
             <div>
-                <p className="font-semibold text-green-600">Today has a special occasion!</p>
+                <p className="font-semibold text-green-600">Today has a Special Occasions!</p>
                 <p className="mt-2 text-gray-600">Enjoy a 25% discount on all items for any selected special occasion!</p>
             </div>
         ) : (
             <div>
-                <p className="font-semibold text-red-600">Today doesn't have any special offer.</p>
+                <p className="font-semibold text-red-500">Today doesn't have any special offer.</p>
                 <p className="mt-2 text-gray-500">Check the calendar for upcoming events.</p>
             </div>
         )}
