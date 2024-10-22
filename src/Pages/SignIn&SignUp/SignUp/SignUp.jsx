@@ -53,19 +53,13 @@ const SignUp = ({ toggleForm, setReset }) => {
       if (res.data.insertedId) {
         reset();
         toast.success("User Created Successfully");
-        navigate("/");
+        navigate("/"); // Navigate to home
       }
     } catch (error) {
       console.error("Error in onSubmit:", error);
       toast.error("Error in onSubmit");
-
-      if (error.code === "auth/email-already-in-use") {
-        toast.warning("Email already in use");
-      } else {
-        toast.error("Oops...");
-      }
     } finally {
-      setLoading(false);
+      setLoading(false); // Ensure loading is set to false here
     }
   };
 

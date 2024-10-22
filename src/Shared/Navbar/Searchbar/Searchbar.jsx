@@ -1,6 +1,6 @@
 import React from "react";
 import useAuth from "../../../Components/Hooks/useAuth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { FaBars, FaRegEnvelope, FaRegHeart } from "react-icons/fa";
 import { BiUser } from "react-icons/bi";
@@ -14,9 +14,14 @@ import AdminChat from "../../../Pages/Support/AdminChat/AdminChat";
 
 const Searchbar = () => {
   const { user, logOut } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogOut = () => {
-    logOut().catch((error) => console.log(error));
+    logOut()
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => console.log(error));
   };
 
   const [isOpen, setIsOpen] = React.useState(false);
