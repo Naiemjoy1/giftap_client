@@ -1,21 +1,12 @@
-import { useLocation } from "react-router-dom"; // Import useLocation
-import useProducts from "../../../Components/Hooks/useProducts";
-import { FaBars } from "react-icons/fa";
-import useChat from "../../../Components/Hooks/useChat";
+import { useLocation } from "react-router-dom";
 import useAuth from "../../../Components/Hooks/useAuth";
-import useUsers from "../../../Components/Hooks/useUsers";
-import UserChat from "../../../Pages/Support/UserChat/UserChat";
 import AdminChat from "../../../Pages/Support/AdminChat/AdminChat";
+import useType from "../../../Components/Hooks/useType";
 
 const Navigation = () => {
   const { user } = useAuth();
-  const [users] = useUsers();
-  const currentUsers = users.find((login) => login?.email === user?.email);
 
-  const [products] = useProducts();
-  const categories = [...new Set(products.map((item) => item.category))];
-
-  const [chats] = useChat();
+  const [userType] = user ? useType() : [];
 
   const location = useLocation();
 
@@ -69,7 +60,7 @@ const Navigation = () => {
           Contact
         </a>
       </li>
-      {currentUsers?.type === "admin" && (
+      {userType === "admin" && (
         <li>
           <a
             href="/dashboard"
@@ -83,7 +74,7 @@ const Navigation = () => {
           </a>
         </li>
       )}
-      {currentUsers?.type === "seller" && (
+      {userType === "seller" && (
         <li>
           <a
             href="/sellerdashboard"
@@ -102,28 +93,11 @@ const Navigation = () => {
 
   return (
     <div className="border-t">
-      <div className="flex justify-between items-center container mx-auto">
-        <section className="flex justify-center items-center gap-2 bg-primary text-white px-5 py-2 rounded-3xl">
-          <FaBars />
-          <select className="bg-primary text-white border-none outline-none">
-            <option disabled>All Categories</option>
-            {categories.map((category, index) => (
-              <option key={index} className="bg-primary text-white">
-                {category
-                  .toLowerCase()
-                  .split(" ")
-                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                  .join(" ")}{" "}
-              </option>
-            ))}
-          </select>
-        </section>
-
+      <div className="flex justify-end items-center container mx-auto">
         <section className="flex justify-center items-center gap-4 py-3">
           <ul className="flex gap-2 justify-center items-center">{navLinks}</ul>
           <section className="flex justify-center gap-4">
-            <UserChat />
-            <AdminChat currentUsers={currentUsers} chats={chats} />
+            {user && <AdminChat />}
           </section>
         </section>
       </div>

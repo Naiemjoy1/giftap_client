@@ -14,13 +14,14 @@ import usePromo from "../../../Components/Hooks/usePromo";
 import ConfirmPay from "./ConfirmPay/ConfirmPay";
 import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/material_green.css";
+import useAxiosSecure from "../../../Components/Hooks/useAxiosSecure";
 
 const Cart = () => {
   const { user } = useAuth();
   const [users] = useUsers();
   const [carts, refetch] = useCart();
   const [products, loading] = useProducts();
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const [quantities, setQuantities] = useState({});
   const [message, setMessage] = useState("");
   const [currentCartId, setCurrentCartId] = useState(null);
@@ -120,7 +121,7 @@ const Cart = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosPublic.delete(`/carts/${cartId}`).then((res) => {
+        axiosSecure.delete(`/carts/${cartId}`).then((res) => {
           if (res.data.deletedCount > 0) {
             refetch();
             toast.success("Your item has been deleted.");
@@ -147,7 +148,7 @@ const Cart = () => {
       delivery: deliveryData,
     };
 
-    axiosPublic.patch(`/carts/${currentCartId}`, update).then((res) => {
+    axiosSecure.patch(`/carts/${currentCartId}`, update).then((res) => {
       if (res.data.modifiedCount > 0) {
         refetch();
         setMessage("");

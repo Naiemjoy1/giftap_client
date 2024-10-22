@@ -1,32 +1,28 @@
-import { useContext } from "react";
+import React from "react";
+import useAuth from "../../Components/Hooks/useAuth";
 import { Navigate, useLocation } from "react-router-dom";
-import { AuthContext } from "../../Components/Provider/AuthProvider";
 
 const PrivetRoute = ({ children }) => {
+  const { user, loading } = useAuth();
+  const location = useLocation();
 
-    const { user, loading } = useContext(AuthContext);
-    const location = useLocation();
+  if (loading) {
+    return (
+      <div className="absolute inset-0 flex items-center justify-center bg-gray-200 bg-opacity-75 z-50">
+        <div
+          className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-blue-600"
+          role="status"
+        >
+          <span className="loading loading-spinner text-4xl text-primary"></span>
+        </div>
+      </div>
+    );
+  }
+  if (user) {
+    return children;
+  }
 
-
-    // Data Loading
-    if (loading) {
-        return <>
-            <span className="loading loading-spinner text-primary"></span>
-            <span className="loading loading-spinner text-secondary"></span>
-            <span className="loading loading-spinner text-accent"></span>
-            <span className="loading loading-spinner text-neutral"></span>
-            <span className="loading loading-spinner text-info"></span>
-            <span className="loading loading-spinner text-success"></span>
-            <span className="loading loading-spinner text-warning"></span>
-            <span className="loading loading-spinner text-error"></span></>
-    }
-
-    // User  Check
-    if (user) {
-        return children;
-    }
-
-    return <Navigate to={'/login'} state={{ from: location }} replace></Navigate>;
+  return <Navigate to="/login" state={{ from: location }} replace></Navigate>;
 };
 
 export default PrivetRoute;

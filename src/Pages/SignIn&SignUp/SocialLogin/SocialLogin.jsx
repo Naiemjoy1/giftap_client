@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../../Components/Hooks/useAuth";
 import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
@@ -9,52 +10,48 @@ const SocialLogin = () => {
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
 
-  const handleSocialLogin = (socialProvider) => {
-    socialProvider()
-      .then((result) => {
-        const user = result.user;
+  const handleSocialLogin = async (socialProvider) => {
+    try {
+      const result = await socialProvider();
+      const user = result.user;
 
-        const userInfo = {
-          name: user?.displayName,
-          email: user?.email,
-          provider: user.providerId, // Add provider information
-          createdDate: new Date().toISOString(),
-          status: "active",
-          type: "admin",
-        };
+      const userInfo = {
+        name: user?.displayName,
+        email: user?.email,
+        createdDate: new Date().toISOString(),
+        status: "active",
+        type: "user",
+      };
 
-        // Send user info to your back-end
-        axiosPublic.post("/users", userInfo).then((res) => {
-          if (res.data.insertedId) {
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "User Created Successfully",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          } else if (res.data.message === "User already exists") {
-            Swal.fire({
-              position: "top-end",
-              icon: "info",
-              title: "Welcome Back!",
-              text: "You are already registered.",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          }
-
-          navigate("/");
-        });
-      })
-      .catch((error) => {
-        console.error("Social Sign-In Error:", error);
+      const res = await axiosPublic.post("/users", userInfo);
+      if (res.data.insertedId) {
         Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: `Something went wrong: ${error.message}. Please try again.`,
+          position: "top-end",
+          icon: "success",
+          title: "User Created Successfully",
+          showConfirmButton: false,
+          timer: 1500,
         });
+      } else if (res.data.message === "User already exists") {
+        Swal.fire({
+          position: "top-end",
+          icon: "info",
+          title: "Welcome Back!",
+          text: "You are already registered.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+
+      navigate("/");
+    } catch (error) {
+      console.error("Social Sign-In Error:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `Something went wrong: ${error.message}. Please try again.`,
       });
+    }
   };
 
   return (

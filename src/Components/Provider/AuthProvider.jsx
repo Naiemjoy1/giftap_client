@@ -11,12 +11,14 @@ import {
   TwitterAuthProvider,
 } from "firebase/auth";
 import auth from "../../Firebase/FirebaseConfig";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 export const AuthContext = createContext(auth);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const axiosPublic = useAxiosPublic();
 
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
@@ -53,6 +55,13 @@ const AuthProvider = ({ children }) => {
     );
   };
 
+  const updateUserProfile = (name, image, email) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: image,
+    });
+  };
+
   const logOut = () => {
     setLoading(true);
     return signOut(auth).finally(() => setLoading(false));
@@ -61,17 +70,23 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      if (currentUser) {
+        const userInfo = { email: currentUser.email };
+        console.log(userInfo);
+        axiosPublic.post("/jwt", userInfo).then((res) => {
+          if (res.data.token) {
+            localStorage.setItem("access-token", res.data.token);
+          }
+        });
+      } else {
+        localStorage.removeItem("access-token");
+      }
       setLoading(false);
     });
-    return () => unsubscribe();
-  }, []);
-
-  const updateUserProfile = (name, image) => {
-    return updateProfile(auth.currentUser, {
-      displayName: name,
-      photoURL: image,
-    });
-  };
+    return () => {
+      unsubscribe();
+    };
+  }, [axiosPublic]);
 
   const authInfo = {
     loading,
