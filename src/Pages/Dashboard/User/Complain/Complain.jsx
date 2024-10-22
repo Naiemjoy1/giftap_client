@@ -13,13 +13,29 @@ const Complain = () => {
     const categories = [...new Set(products.map((item) => item.store_name))];
     // console.log(user)
 
-    const [users] = useUsers();
-    const uniqueTypes = [...new Set(users.map(user => user.type))];
+    // const [users] = useUsers();
+    // const uniqueTypes = [...new Set(users.map(user => user.type))];
     // console.log(users)
 
 
-    const { displayName, email } = user;
-    
+    const { displayName, email, photoURL } = user;
+    // console.log(photoURL)
+
+    const specificDateTime = new Date();
+    // Date
+    const submitDate = specificDateTime.toLocaleDateString('en-GB');
+    // Time
+    const submitTime = specificDateTime.toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: true,
+    });
+
+    // console.log(submitTime)
+    // console.log(submitDate)
+
+
     const {
         register,
         handleSubmit,
@@ -30,18 +46,21 @@ const Complain = () => {
 
         data.customerName = displayName;
         data.customerEmail = email;
+        data.photoURL = photoURL;
+        data.submitTime = submitTime;
+        data.submitDate = submitDate;
 
         axiosPublic.post(`/complain`, data)
-        .then(res => {
-            console.log(res.data)
-            toast.success("Complain Submitted Successfully.");
-            refetch()
+            .then(res => {
+                // console.log(res.data)
+                toast.success("Complain Submitted Successfully.");
+                refetch()
 
-        })
-        .catch(error => {
-            // alert(error, "NOOOOOOOOOOOOOOO")
-            toast.error("Complain Submitted Failed.");
-        })
+            })
+            .catch(error => {
+                // alert(error, "NOOOOOOOOOOOOOOO")
+                toast.error("Complain Submitted Failed.");
+            })
 
         // console.log(data)
     }
@@ -93,26 +112,25 @@ const Complain = () => {
 
                         {/* Complaint Form Section */}
                         <div className="lg:flex justify-around mt-2">
-                            {/* Name */}
+
+                            {/* Subject */}
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text">Shop Name</span>
+                                    <span className="label-text">Subject</span>
                                 </label>
-                                <select
-                                    className="input input-bordered w-80 lg:w-96 "
-                                    {...register("name", { required: true })}
-                                >
-                                    <option value="">Select Category</option>
-                                    {uniqueTypes.map((type, index) => (
-                                        <option key={index} value={type}>
-                                            {type.charAt(0).toUpperCase() + type.slice(1)}
-                                        </option>
-                                    ))}
-                                </select>
-                                {errors.name && (
+                                <input
+                                    type="text"
+                                    placeholder="Product Related Problem..."
+                                    className="input input-bordered w-80 lg:w-96"
+                                    {...register("subject", { required: true })}
+
+                                />
+
+                                {errors.subject && (
                                     <span className="text-red-500">This field is required</span>
                                 )}
                             </div>
+
 
                             {/* Shop Category Section */}
                             <div className="form-control ">
@@ -139,6 +157,7 @@ const Complain = () => {
                                     <span className="text-red-500">This field is required</span>
                                 )}
                             </div>
+
                         </div>
 
                         {/* Shop Category Section */}
