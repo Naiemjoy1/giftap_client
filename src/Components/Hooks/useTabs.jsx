@@ -1,3 +1,4 @@
+import AddNotice from "../../Pages/Dashboard/Admin/AddNotice/AddNotice";
 import AccountDetails from "../../Pages/Dashboard/User/AccountDetails/AccountDetails";
 import Addresses from "../../Pages/Dashboard/User/Addresses/Addresses";
 import Complain from "../../Pages/Dashboard/User/Complain/Complain";

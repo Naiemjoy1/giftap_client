@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import useProducts from "../../../Components/Hooks/useProducts";
 import { Link } from "react-router-dom";
 

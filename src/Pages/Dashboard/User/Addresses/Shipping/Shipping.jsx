@@ -7,6 +7,7 @@ import useUsers from "../../../../../Components/Hooks/useUsers";
 import useAxiosPublic from "../../../../../Components/Hooks/useAxiosPublic";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import useAxiosSecure from "../../../../../Components/Hooks/useAxiosSecure";
 
 const Shipping = ({ onClose }) => {
   const [division] = useDivision();
@@ -14,7 +15,7 @@ const Shipping = ({ onClose }) => {
   const [ISDcode] = useISDcode();
   const { user } = useAuth();
   const [users, refetch] = useUsers();
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   const [selectedDivision, setSelectedDivision] = useState("");
   const [selectedISD, setSelectedISD] = useState("");
@@ -91,7 +92,7 @@ const Shipping = ({ onClose }) => {
     };
 
     try {
-      const updateResponse = await axiosPublic.patch(
+      const updateResponse = await axiosSecure.patch(
         `/users/${usersDetails._id}`,
         shipping
       );

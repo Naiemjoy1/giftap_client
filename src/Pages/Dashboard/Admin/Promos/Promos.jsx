@@ -95,7 +95,7 @@ const Promos = () => {
   return (
     <div className="space-y-4">
       <form onSubmit={handleSubmit(onSubmit)} className="">
-        <div className="grid grid-cols-6 gap-4">
+        <div className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-4">
           {/* Promo Text Field */}
           <div className="form-control">
             <label className="label">

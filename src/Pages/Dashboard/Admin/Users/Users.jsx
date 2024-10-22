@@ -1,14 +1,13 @@
-import React from "react";
 import useUsers from "../../../../Components/Hooks/useUsers";
 import { RxCross2 } from "react-icons/rx";
-import useAxiosPublic from "../../../../Components/Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import useAxiosSecure from "../../../../Components/Hooks/useAxiosSecure";
 
 const Users = () => {
   const [users, refetch, isLoading] = useUsers();
 
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   const handleRemove = (userId) => {
     Swal.fire({
@@ -21,7 +20,7 @@ const Users = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosPublic.delete(`/users/${userId}`).then((res) => {
+        axiosSecure.delete(`/users/${userId}`).then((res) => {
           if (res.data.deletedCount > 0) {
             refetch();
             toast.success("User has been deleted.");
@@ -38,7 +37,7 @@ const Users = () => {
       ...user,
       status: newStatus,
     };
-    axiosPublic.patch(`/users/${user._id}`, userDetails).then((res) => {
+    axiosSecure.patch(`/users/${user._id}`, userDetails).then((res) => {
       if (res.data.modifiedCount > 0) {
         refetch();
         toast.success("Status updated successfully.");
@@ -53,7 +52,7 @@ const Users = () => {
       ...user,
       type: newType,
     };
-    axiosPublic.patch(`/users/${user._id}`, userDetails).then((res) => {
+    axiosSecure.patch(`/users/${user._id}`, userDetails).then((res) => {
       if (res.data.modifiedCount > 0) {
         refetch();
         toast.success("User type updated successfully.");
