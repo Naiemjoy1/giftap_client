@@ -143,12 +143,23 @@ const EventCalendar = () => {
 
             {/* Right-side for special offer display */}
             <div className="lg:w-1/3 bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-bold mb-4">Special Offer</h3>
-                <div className="bg-white shadow-md rounded-lg p-4">
-                    <p><strong>Today's Offer:</strong> Enjoy a 25% discount on all items for any selected special occasion!</p>
-                    <p className="mt-2 text-gray-500">Select a date on the calendar to see if it's a special occasion and get the offer.</p>
-                </div>
+    <h3 className="text-xl font-bold mb-4">Special Offer</h3>
+    <div className="bg-white shadow-md rounded-lg p-4">
+        {/* Check if today's selected day has any events */}
+        {selectedDayEvents.length > 0 ? (
+            <div>
+                <p className="font-semibold text-green-600">Today has a special occasion!</p>
+                <p className="mt-2 text-gray-600">Enjoy a 25% discount on all items for any selected special occasion!</p>
             </div>
+        ) : (
+            <div>
+                <p className="font-semibold text-red-600">Today doesn't have any special offer.</p>
+                <p className="mt-2 text-gray-500">Check the calendar for upcoming events.</p>
+            </div>
+        )}
+    </div>
+</div>
+
         </div>
     );
 };
