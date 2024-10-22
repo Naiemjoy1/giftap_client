@@ -1,18 +1,18 @@
-import { Link } from "react-router-dom";
 import useAuth from "../../../Components/Hooks/useAuth";
 import useUsers from "../../../Components/Hooks/useUsers";
-import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 import useCart from "../../../Components/Hooks/useCart";
-import toast from "react-hot-toast";
 import useWishs from "../../../Components/Hooks/useWishs";
+import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
-const ItemCard = ({ item }) => {
+const ItemUser = ({ item }) => {
   const { user } = useAuth();
-  const [users] = useUsers();
+  const [users] = user ? useUsers() : [null];
   const [carts, refetch] = useCart();
   const [wishlists, refetchWish] = useWishs();
   const axiosPublic = useAxiosPublic();
+
   const {
     _id,
     name,
@@ -25,9 +25,15 @@ const ItemCard = ({ item }) => {
     store_name,
   } = item;
 
-  const usersDetails = users.find((u) => u?.email === user?.email);
-  const usersWishs = wishlists.filter((wish) => wish.email === user?.email);
-  const wishProduct = usersWishs.find((item) => item.productId === _id);
+  const usersDetails = user
+    ? users.find((u) => u?.email === user?.email)
+    : null;
+  const usersWishs = user
+    ? wishlists.filter((wish) => wish.email === user?.email)
+    : [];
+  const wishProduct = user
+    ? usersWishs.find((item) => item.productId === _id)
+    : null;
 
   const truncatedName = name.length > 20 ? `${name.slice(0, 20)}...` : name;
   const truncatedDescription =
@@ -38,6 +44,7 @@ const ItemCard = ({ item }) => {
   };
 
   const handleRecent = async () => {
+    if (!usersDetails) return; // Exit if usersDetails is not available
     const recent = {
       userID: usersDetails?._id,
       email: user?.email,
@@ -89,6 +96,7 @@ const ItemCard = ({ item }) => {
   };
 
   const handleAddTowish = async () => {
+    if (!usersDetails) return; // Exit if usersDetails is not available
     if (wishProduct) {
       toast.error("Product is already in your wishlist");
       return;
@@ -126,7 +134,6 @@ const ItemCard = ({ item }) => {
       toast.error("Error removing product from wishlist");
     }
   };
-
   return (
     <div>
       <div className="group relative block overflow-hidden">
@@ -201,7 +208,7 @@ const ItemCard = ({ item }) => {
                     </button>
                   </Link>
                 ) : (
-                  <Link to={`/shop/${_id}`} className="flex-grow">
+                  <Link className="flex-grow">
                     <button className="block w-full rounded bg-gray-200 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105 font-opensans">
                       See More
                     </button>
@@ -220,7 +227,7 @@ const ItemCard = ({ item }) => {
                     </button>
                   </Link>
                 ) : (
-                  <Link to={`/shop/${_id}`} className="flex-grow">
+                  <Link className="flex-grow">
                     <button className="block w-full rounded bg-gray-200 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105 font-opensans">
                       See More
                     </button>
@@ -252,4 +259,4 @@ const ItemCard = ({ item }) => {
   );
 };
 
-export default ItemCard;
+export default ItemUser;

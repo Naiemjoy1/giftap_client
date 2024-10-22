@@ -1,15 +1,14 @@
-import { Link } from "react-router-dom";
 import useAuth from "../../../Components/Hooks/useAuth";
 import useUsers from "../../../Components/Hooks/useUsers";
-import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 import useCart from "../../../Components/Hooks/useCart";
-import toast from "react-hot-toast";
 import useWishs from "../../../Components/Hooks/useWishs";
+import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
-const ListItemCard = ({ item }) => {
+const ListUser = ({ item }) => {
   const { user } = useAuth();
-  const [users] = useUsers();
+  const [users] = user ? useUsers() : [null];
   const [carts, refetch] = useCart();
   const [wishlists, refetchWish] = useWishs();
   const axiosPublic = useAxiosPublic();
@@ -26,9 +25,15 @@ const ListItemCard = ({ item }) => {
     store_name,
   } = item;
 
-  const usersDetails = users.find((u) => u?.email === user?.email);
-  const usersWishs = wishlists.filter((wish) => wish.email === user?.email);
-  const wishProduct = usersWishs.find((item) => item.productId === _id);
+  const usersDetails = user
+    ? users.find((u) => u?.email === user?.email)
+    : null;
+  const usersWishs = user
+    ? wishlists.filter((wish) => wish.email === user?.email)
+    : [];
+  const wishProduct = user
+    ? usersWishs.find((item) => item.productId === _id)
+    : null;
 
   const truncatedName = name.length > 20 ? `${name.slice(0, 20)}...` : name;
   const truncatedDescription =
@@ -200,7 +205,7 @@ const ListItemCard = ({ item }) => {
                   </button>
                 </Link>
               ) : (
-                <Link to={`/shop/${_id}`} className="flex-grow">
+                <Link className="flex-grow">
                   <button className="block w-full rounded bg-gray-200 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105 font-opensans">
                     See More
                   </button>
@@ -219,7 +224,7 @@ const ListItemCard = ({ item }) => {
                   </button>
                 </Link>
               ) : (
-                <Link to={`/shop/${_id}`} className="flex-grow">
+                <Link className="flex-grow">
                   <button className="block w-full rounded bg-gray-200 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105 font-opensans">
                     See More
                   </button>
@@ -250,4 +255,4 @@ const ListItemCard = ({ item }) => {
   );
 };
 
-export default ListItemCard;
+export default ListUser;

@@ -11,7 +11,7 @@ const Dashboard = () => {
 
   return (
     <div className="space-y-4">
-      <section className="lg:flex justify-between gap-4 space-y-4">
+      <section className="lg:flex justify-between gap-4">
         <div className="lg:w-1/2 rounded-lg bg-white p-4 space-y-4">
           <div>
             <p className="text-sm text-primary">Revenue of this month</p>
@@ -28,7 +28,7 @@ const Dashboard = () => {
             <LineCharts />
           </div>
         </div>
-        <div className="lg:w-1/2 grid grid-cols-2 gap-4 justify-between items-center">
+        <div className="lg:w-1/2 grid grid-cols-2 gap-4 justify-between">
           <div className="p-4 rounded-lg bg-white space-y-2">
             <div className="flex justify-between">
               <p className="text-sm">Sales Today</p>
@@ -42,7 +42,7 @@ const Dashboard = () => {
           <div className="p-4 rounded-lg bg-white space-y-2">
             <div className="flex justify-between">
               <p className="text-sm">Total Earning</p>
-              <p className="p-2 bg-green-600 bg-opacity-5 text-green-600 rounded-md text-xl">
+              <p className="p-2 bg-green-600 bg-opacity-10 text-green-600 rounded-md text-xl">
                 <HiOutlineCurrencyDollar />
               </p>
             </div>
@@ -68,7 +68,7 @@ const Dashboard = () => {
           <div className="p-4 rounded-lg bg-white space-y-2">
             <div className="flex justify-between">
               <p className="text-sm">Total Orders</p>
-              <p className="p-2 bg-[#f8f8f8] rounded-md text-xl">
+              <p className="p-2 bg-green-600 bg-opacity-10 text-green-600 rounded-md text-xl">
                 <RiFilePaper2Line />
               </p>
             </div>
@@ -94,7 +94,7 @@ const Dashboard = () => {
           <div className="p-4 rounded-lg bg-white space-y-2">
             <div className="flex justify-between">
               <p className="text-sm">Total Products</p>
-              <p className="p-2 bg-primary bg-opacity-5 text-primary rounded-md text-xl">
+              <p className="p-2 bg-primary bg-opacity-10 text-primary rounded-md text-xl">
                 <MdOutlinePeopleAlt />
               </p>
             </div>
