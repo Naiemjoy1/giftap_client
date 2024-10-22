@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import useAxiosSecure from "../../../../Components/Hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 const RequestBanner = () => {
   const [banner, setBanner] = useState(null); 
@@ -57,7 +58,7 @@ const RequestBanner = () => {
 
         // Send the image URL to your backend to store in MongoDB
         await axiosSecure.post("/banner", { bannerUrl: imgbbUrl });
-        
+        toast.success('Request success wait for admin confirmation')
 
         // Reset state after successful upload
         setBanner(null);
