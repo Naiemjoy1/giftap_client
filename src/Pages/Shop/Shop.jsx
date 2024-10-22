@@ -9,8 +9,12 @@ import HotSale from "./HotSale/HotSale";
 import { CiFilter } from "react-icons/ci";
 import Drawer from "react-modern-drawer";
 import "react-modern-drawer/dist/index.css";
+import useAuth from "../../Components/Hooks/useAuth";
+import ItemUser from "./ItemCard/ItemUser";
+import ListUser from "./ListItemCard/ListUser";
 
 const Shop = () => {
+  const { user } = useAuth();
   const [products, loading] = useProducts();
 
   const categories = [...new Set(products.map((item) => item.category))];
@@ -292,6 +296,7 @@ const Shop = () => {
 
       <div className="lg:w-3/4 p-4">
         <div className="flex justify-between items-center">
+          {}
           <p className="hidden lg:block font-opensans">
             Showing {currentProducts.length} of {filteredProducts.length}{" "}
             results
@@ -459,13 +464,32 @@ const Shop = () => {
         {viewMode === "grid" ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-between items-center mt-4">
             {currentProducts.map((item) => (
-              <ItemCard key={item._id} item={item} />
+              <>
+                {user ? (
+                  <ItemCard key={item._id} item={item} />
+                ) : (
+                  <ItemUser key={item._id} item={item}></ItemUser>
+                )}
+              </>
             ))}
           </div>
         ) : (
           <div className="flex flex-col space-y-4 mt-4">
+            {/* <>
+              {user ? (
+                <ListItemCard key={item._id} item={item} />
+              ) : (
+                <ListUser key={item._id} item={item}></ListUser>
+              )}
+            </> */}
             {currentProducts.map((item) => (
-              <ListItemCard key={item._id} item={item} />
+              <>
+                {user ? (
+                  <ListItemCard key={item._id} item={item} />
+                ) : (
+                  <ListUser key={item._id} item={item}></ListUser>
+                )}
+              </>
             ))}
           </div>
         )}
