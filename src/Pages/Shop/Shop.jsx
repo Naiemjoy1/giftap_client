@@ -172,6 +172,9 @@ const Shop = () => {
     );
   }
 
+  // Title
+  document.title = `GifTap || Shop`;
+
   return (
     <div className="container mx-auto my-10 flex gap-4">
       <div className="space-y-10 w-1/4 bg-primary p-4 rounded-lg text-white hidden lg:block">
@@ -467,9 +470,8 @@ const Shop = () => {
         <div className="flex justify-center mt-8 gap-2">
           <button
             onClick={handlePreviousPage}
-            className={`px-4 py-2 text-white bg-primary rounded ${
-              currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
-            }`}
+            className={`px-4 py-2 text-white bg-primary rounded ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
+              }`}
             disabled={currentPage === 1}
           >
             <GrPrevious />
@@ -479,11 +481,10 @@ const Shop = () => {
             <button
               key={number}
               onClick={() => handlePageClick(number)}
-              className={`px-4 py-2 rounded-full ${
-                number === currentPage
-                  ? "bg-primary text-white"
-                  : "bg-gray-200 text-black"
-              }`}
+              className={`px-4 py-2 rounded-full ${number === currentPage
+                ? "bg-primary text-white"
+                : "bg-gray-200 text-black"
+                }`}
             >
               {number}
             </button>
@@ -491,9 +492,8 @@ const Shop = () => {
 
           <button
             onClick={handleNextPage}
-            className={`px-4 py-2 text-white bg-primary rounded ${
-              currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
-            }`}
+            className={`px-4 py-2 text-white bg-primary rounded ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
+              }`}
             disabled={currentPage === totalPages}
           >
             <GrNext />

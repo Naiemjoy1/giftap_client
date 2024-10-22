@@ -67,6 +67,10 @@ const BlogDetails = () => {
   };
 
 
+  // Title
+  document.title = `GifTap || ${blogTitle}`;
+
+
   return (
     <div className="container mx-auto px-4">
       <div className="flex flex-col lg:flex-row justify-between gap-4">
