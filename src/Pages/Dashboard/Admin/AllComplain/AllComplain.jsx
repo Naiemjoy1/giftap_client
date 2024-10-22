@@ -3,13 +3,11 @@ import { RxCross2 } from "react-icons/rx";
 import useComplain from "../../../../Components/Hooks/useComplain";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../../Components/Hooks/useAxiosPublic";
-import useUsers from "../../../../Components/Hooks/useUsers";
 import toast from "react-hot-toast";
 
 const AllComplain = () => {
     const [activeComplain, setActiveComplain] = useState(null); 
     const [complains, refetch] = useComplain();
-    // const [user] = useUsers();
     const axiosPublic = useAxiosPublic();
 
 
@@ -100,8 +98,8 @@ const AllComplain = () => {
             {/* Modal */}
             {activeComplain && (
                 <div className="fixed inset-0 flex items-center justify-center z-10">
-                    <div className="fixed inset-0 bg-white bg-opacity-40 backdrop-blur-sm animate-fadeIn"></div>
-                    <div className="relative w-[900px] bg-[#1F1F24] text-white rounded-2xl border-none shadow-lg z-20 animate-fadeIn">
+                    <div className="fixed inset-0 bg-white bg-opacity-40 backdrop-blur-sm animate-fadeIn "></div>
+                    <div className="relative w-[900px] bg-white text-black rounded-2xl border-none shadow-lg z-20 animate-fadeIn">
 
                         <div className="text-3xl mt-4 text-center font-bold">Complain Details</div>
 
@@ -119,7 +117,7 @@ const AllComplain = () => {
                         <button
                             onClick={() => setActiveComplain(null)}
                             aria-label="close"
-                            className="absolute top-5 text-xl right-5 border p-2 rounded-2xl  hover:text-black text-gray-500   transition-transform transform hover:scale-110"
+                            className="absolute top-5 text-xl right-5   p-2 rounded-2xl   text-gray-500   transition-transform transform hover:scale-110"
                         >
                             ❌
                         </button>
