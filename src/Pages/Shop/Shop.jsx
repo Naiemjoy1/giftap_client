@@ -176,13 +176,15 @@ const Shop = () => {
     <div className="container mx-auto my-10 flex gap-4">
       <div className="space-y-10 w-1/4 bg-primary p-4 rounded-lg text-white hidden lg:block">
         <div>
-          <p className="text-lg font-medium uppercase">Product Categories</p>
+          <p className="text-lg font-medium uppercase font-poppins">
+            Product Categories
+          </p>
           <div className="divide bg-white h-[1px] my-2"></div>
           <div className=" h-80 overflow-y-auto mt-8">
             <div className="space-y-4">
               {categories.map((category, index) => (
                 <div key={index}>
-                  <p className="flex justify-start gap-2 items-center">
+                  <p className="flex justify-start gap-2 items-center font-opensans">
                     <input
                       type="checkbox"
                       checked={selectedCategories.has(category)}
@@ -205,7 +207,7 @@ const Shop = () => {
                     )}
                   </p>
                   {expandedCategory === category && (
-                    <div className="ml-4 mt-2 text-sm text-gray-300">
+                    <div className="ml-4 mt-2 text-sm text-gray-300 font-opensans">
                       {getSubCategories(category).map(
                         (subCategory, subIndex) => (
                           <p key={subIndex}>
@@ -229,7 +231,7 @@ const Shop = () => {
 
         <div>
           <div className="divide bg-white h-[1px] my-2"></div>
-          <p className="text-lg font-medium uppercase mt-8">
+          <p className="text-lg font-medium uppercase mt-8 font-poppins">
             Filter By Price Range
           </p>
           <section className="flex justify-between gap-4 items-center mt-4">
@@ -252,7 +254,9 @@ const Shop = () => {
 
         <div>
           <div className="divide bg-white h-[1px] my-2"></div>
-          <p className="text-lg font-medium uppercase mt-8">Product Status</p>
+          <p className="text-lg font-medium uppercase mt-8 font-poppins">
+            Product Status
+          </p>
           <section className="mt-4 space-y-4">
             <p className="flex justify-start gap-4 items-center">
               <input
@@ -279,14 +283,16 @@ const Shop = () => {
 
         <div>
           <div className="divide bg-white h-[1px] my-2"></div>
-          <p className="text-lg font-medium uppercase mt-8">Hot Sale Product</p>
+          <p className="text-lg font-medium uppercase mt-8 font-poppins">
+            Hot Sale Product
+          </p>
         </div>
         <HotSale></HotSale>
       </div>
 
       <div className="lg:w-3/4 p-4">
         <div className="flex justify-between items-center">
-          <p className="hidden lg:block">
+          <p className="hidden lg:block font-opensans">
             Showing {currentProducts.length} of {filteredProducts.length}{" "}
             results
           </p>
@@ -305,7 +311,7 @@ const Shop = () => {
           >
             <div className="p-4 bg-primary h-screen space-y-10 text-white">
               <div>
-                <p className="lg:text-lg md:text-lg text-base font-medium uppercase">
+                <p className="lg:text-lg md:text-lg text-base font-medium uppercase font-poppins">
                   Product Categories
                 </p>
                 <div className="divide bg-white h-[1px] my-2"></div>
@@ -313,7 +319,7 @@ const Shop = () => {
                   <div className="space-y-4">
                     {categories.map((category, index) => (
                       <div key={index}>
-                        <p className="flex justify-start gap-2 items-center">
+                        <p className="flex justify-start gap-2 items-center font-opensans">
                           <input
                             type="checkbox"
                             checked={selectedCategories.has(category)}
@@ -338,7 +344,7 @@ const Shop = () => {
                           )}
                         </p>
                         {expandedCategory === category && (
-                          <div className="ml-4 mt-2 text-sm text-gray-300">
+                          <div className="ml-4 mt-2 text-sm text-gray-300 font-opensans">
                             {getSubCategories(category).map(
                               (subCategory, subIndex) => (
                                 <p key={subIndex}>
@@ -365,7 +371,7 @@ const Shop = () => {
               </div>
               <div>
                 <div className="divide bg-white h-[1px] my-2"></div>
-                <p className="lg:text-lg md:text-lg text-base font-medium uppercase mt-8">
+                <p className="lg:text-lg md:text-lg text-base font-medium uppercase mt-8 font-poppins">
                   Filter By Price Range
                 </p>
                 <section className="flex justify-between gap-4 items-center mt-4">
@@ -389,10 +395,10 @@ const Shop = () => {
 
               <div>
                 <div className="divide bg-white h-[1px] my-2"></div>
-                <p className="lg:text-lg md:text-lg text-base font-medium uppercase mt-8">
+                <p className="lg:text-lg md:text-lg text-base font-medium uppercase mt-8 font-poppins">
                   Product Status
                 </p>
-                <section className="mt-4 space-y-4">
+                <section className="mt-4 space-y-4 font-opensans">
                   <p className="flex justify-start gap-4 items-center">
                     <input
                       type="checkbox"
@@ -438,7 +444,7 @@ const Shop = () => {
             </section>
 
             <select
-              className="border text-black"
+              className="border text-black font-opensans"
               value={sortOption}
               onChange={handleSortChange}
             >
