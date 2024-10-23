@@ -155,7 +155,7 @@ const RecentView = ({ id }) => {
             <figure>
               <img src={recent.image.cardImg1} alt={recent.name} />
             </figure>
-            <div className="mt-4 space-y-2">
+            <div className="mt-4 space-y-2 font-poppins">
               <p className="text-lg font-medium">
                 {recent.name.length > 20
                   ? `${recent.name.slice(0, 20)}...`
@@ -163,14 +163,20 @@ const RecentView = ({ id }) => {
               </p>
 
               {recent.category === "digital gift" ? (
-                <p className="text-green-600 uppercase text-xs">In Stock</p>
+                <p className="text-green-600 uppercase text-xs font-opensans">
+                  In Stock
+                </p>
               ) : recent.quantity > 0 ? (
-                <p className="text-green-600 uppercase text-xs">In Stock</p>
+                <p className="text-green-600 uppercase text-xs font-opensans">
+                  In Stock
+                </p>
               ) : (
-                <p className="uppercase text-sm text-red-700">Out of Stock</p>
+                <p className="uppercase text-sm text-red-700 font-opensans">
+                  Out of Stock
+                </p>
               )}
 
-              <p className="flex gap-2 items-center">
+              <p className="flex gap-2 items-center font-opensans">
                 <Rating
                   style={{ maxWidth: 80 }}
                   value={averageRating}
@@ -180,7 +186,7 @@ const RecentView = ({ id }) => {
               </p>
 
               {recent.category === "digital gift" ? (
-                <div className="flex justify-start items-center gap-2 text-sm">
+                <div className="flex justify-start items-center gap-2 text-sm font-opensans">
                   {recent.priceGroup.map((pkg, index) => (
                     <p
                       key={index}
@@ -191,7 +197,7 @@ const RecentView = ({ id }) => {
                   ))}
                 </div>
               ) : (
-                <p className="text-gray-700">
+                <p className="text-gray-700 font-opensans">
                   $
                   {calculateDiscountedPrice(
                     recent.price,

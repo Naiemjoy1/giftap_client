@@ -30,9 +30,9 @@ const ProductDeatails = () => {
   const averageRating =
     productReviews.length > 0
       ? (
-        productReviews.reduce((sum, review) => sum + review.rating, 0) /
-        productReviews.length
-      ).toFixed(1)
+          productReviews.reduce((sum, review) => sum + review.rating, 0) /
+          productReviews.length
+        ).toFixed(1)
       : 0;
 
   const [activeTab, setActiveTab] = useState("description");
@@ -47,7 +47,6 @@ const ProductDeatails = () => {
 
   // Title
   document.title = `GifTap || ${name}`;
-
 
   return (
     <div className="bg-neutral py-10">
@@ -71,7 +70,7 @@ const ProductDeatails = () => {
             <Image product={product}></Image>
 
             <Middle product={product}></Middle>
-            <section className="lg:w-[30%] p-6 bg-gray-100 space-y-6 h-1/2">
+            <section className="lg:w-[30%] p-6 bg-gray-100 space-y-6 h-1/2 font-opensans">
               <p className="flex gap-4 text-sm">
                 <span className=" text-xl">
                   <LiaShippingFastSolid />
@@ -93,26 +92,29 @@ const ProductDeatails = () => {
             </section>
           </div>
         </div>
-        <div className="p-6 bg-white rounded-lg">
+        <div className="p-6 bg-white rounded-lg font-poppins">
           <section className="flex gap-6 uppercase">
             <p
               onClick={() => setActiveTab("description")}
-              className={`cursor-pointer ${activeTab === "description" ? "font-bold" : ""
-                }`}
+              className={`cursor-pointer ${
+                activeTab === "description" ? "font-bold" : ""
+              }`}
             >
               Description
             </p>
             <p
               onClick={() => setActiveTab("information")}
-              className={`cursor-pointer ${activeTab === "information" ? "font-bold" : ""
-                }`}
+              className={`cursor-pointer ${
+                activeTab === "information" ? "font-bold" : ""
+              }`}
             >
               additional Information
             </p>
             <p
               onClick={() => setActiveTab("review")}
-              className={`cursor-pointer ${activeTab === "review" ? "font-bold" : ""
-                }`}
+              className={`cursor-pointer ${
+                activeTab === "review" ? "font-bold" : ""
+              }`}
             >
               Review ({productReviews.length})
             </p>
@@ -127,13 +129,15 @@ const ProductDeatails = () => {
           </section>
         </div>
         <div className=" space-y-2">
-          <p className=" uppercase text-lg font-medium">related products</p>
+          <p className=" uppercase text-lg font-medium font-poppins">
+            related products
+          </p>
           <div className="p-4 bg-white rounded-lg ">
             <RelatedProducts id={id}></RelatedProducts>
           </div>
         </div>
         <div className=" space-y-2">
-          <p className=" uppercase text-lg font-medium">
+          <p className=" uppercase text-lg font-medium font-poppins">
             recently viewed products
           </p>
           <div className="p-4 bg-white rounded-lg">
