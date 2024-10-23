@@ -11,6 +11,8 @@ const ReUseCard = ({
 }) => {
   const [hoveredCard, setHoveredCard] = useState(null);
 
+ 
+
   return (
     <>
       <div
@@ -29,8 +31,8 @@ const ReUseCard = ({
           {/* Icons for Quick View, Wishlist, and Compare */}
           <div
             className={`absolute inset-x-0 bottom-0 flex justify-center space-x-4 pb-3 transition-all duration-300 transform ${hoveredCard === productId
-                ? "translate-y-0 opacity-100"
-                : "translate-y-8 opacity-0"
+              ? "translate-y-0 opacity-100"
+              : "translate-y-8 opacity-0"
               }`}
           >
             {/* Quick View button with tooltip */}
@@ -45,7 +47,7 @@ const ReUseCard = ({
               </div>
             </div>
 
-            
+
             <div className="relative group">
               <button className="bg-white p-2 rounded-full shadow hover:text-[#F25E68] transition-colors">
                 <FaHeart size={18} />
@@ -55,7 +57,7 @@ const ReUseCard = ({
               </div>
             </div>
 
-            
+
             <div className="relative group">
               <button className="bg-white p-2 rounded-full shadow hover:text-[#F25E68] transition-colors">
                 <FaExchangeAlt size={18} />
@@ -89,7 +91,7 @@ const ReUseCard = ({
           </div>
 
           <div className="flex justify-center items-center relative h-12">
-            
+
             <span
               className={`text-lg md:text-2xl font-bold text-gray-900 transition-opacity duration-300 ${hoveredCard === productId ? "opacity-0" : "opacity-100"
                 }`}
@@ -97,11 +99,11 @@ const ReUseCard = ({
               ${productPrice}
             </span>
 
-            
+
             <button
               className={`text-black py-2 hover:border hover:text-[#F04854] hover:border-pink-400 px-4 rounded-lg font-semibold absolute bottom-0 transition-all duration-300 ease-in-out transform ${hoveredCard === productId
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-12 opacity-0"
+                ? "translate-y-0 opacity-100"
+                : "translate-y-12 opacity-0"
                 }`}
             >
               Add to Cart +

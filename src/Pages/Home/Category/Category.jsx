@@ -8,6 +8,7 @@ const Category = () => {
   const [product, setProduct] = useState([]);
   const axiosPublic = useAxiosPublic();
 
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -20,6 +21,11 @@ const Category = () => {
     fetchProducts();
   }, [axiosPublic]);
 
+  const handleFindCategory = async (catName) => {
+    const categoryName = await axiosPublic.get(`/products/category/${catName}`)
+    const res = categoryName.data;
+    console.log(res)
+  }
  
   const category = product.reduce((acc, current) => { 
     const categoryExists = acc.find(item => item.category === current.category);
@@ -95,7 +101,7 @@ const Category = () => {
               key={item._id}
               className="flex flex-col justify-center items-center p-4"
             >
-              <div className="w-32 h-32 rounded-full overflow-hidden shadow-lg">
+              <div onClick={() => handleFindCategory(`${item.category}`)} className="w-32 h-32 rounded-full overflow-hidden shadow-lg">
                 <img
                   src={item.image.cardImg1}
                   alt={item.name}
@@ -107,14 +113,14 @@ const Category = () => {
           ))}
         </Carousel>
 
-        <div className="flex justify-center">
+        {/* <div className="flex justify-center">
           <button
             className="btn text-white py-3 px-6 mt-10 md:py-[16px] md:px-[40px] rounded-xl flex items-center justify-center gap-2 border-2 border-transparent hover:border-black hover:bg-red-700 transition-all duration-500 ease-in-out"
             style={{ backgroundColor: "rgb(240, 72, 84)" }}
           >
             See All
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );
