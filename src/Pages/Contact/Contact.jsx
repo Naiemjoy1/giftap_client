@@ -28,7 +28,7 @@ const Contact = () => {
 
 
 
-
+  // Title
   document.title = "GifTap || Contact";
 
   return (
@@ -94,9 +94,7 @@ const Contact = () => {
           >
             Submit
           </button>
-          {/* <hr className="border-t-2 border-red-400 border-dashed w-1/4 mx-auto my-4" /> */}
         </form>
-        {/* )} */}
       </div>
 
       {/* Info Section */}
