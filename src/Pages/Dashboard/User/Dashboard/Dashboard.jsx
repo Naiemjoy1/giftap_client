@@ -79,14 +79,8 @@ const Dashboard = () => {
       
       <EventCalendar />
 
-      {/* Sent Wishes Button */}
-      <div className="">
-        <button 
-          onClick={() => setIsOpen(true)} 
-          className="bg-primary text-white px-4 py-2 rounded-lg mt-4">
-          Sent Wishes
-        </button>
-      </div>
+    
+      
 
       {/* Modal for Sent Wish Form */}
       <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
