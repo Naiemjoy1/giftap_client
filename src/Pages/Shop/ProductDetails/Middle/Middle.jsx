@@ -166,7 +166,7 @@ const Middle = ({ product }) => {
 
   return (
     <div className="space-y-4 lg:w-[35%]">
-      <div className="flex justify-start gap-4">
+      <div className="flex justify-start gap-4 font-opensans">
         {priceGroup?.map((pkg) => (
           <button
             className={`${
@@ -196,7 +196,7 @@ const Middle = ({ product }) => {
           )}
         </p>
       ) : (
-        <p className="flex gap-2 text-xl text-primary items-center">
+        <p className="flex gap-2 text-xl text-primary items-center font-opensans">
           {discount ? (
             <>
               <span className="text-gray-400 line-through ml-2">${price}</span>$
@@ -208,7 +208,7 @@ const Middle = ({ product }) => {
         </p>
       )}
 
-      <section className="flex">
+      <section className="flex font-opensans">
         {category === "digital gift" ? (
           selectedTier?.quantity > 0 ? (
             <p className="uppercase bg-green-100 text-sm text-green-700 rounded-full font-medium px-4">
@@ -230,9 +230,9 @@ const Middle = ({ product }) => {
         )}
       </section>
 
-      <p>{description}</p>
+      <p className="font-opensans">{description}</p>
 
-      <section className="flex justify-start gap-4 items-center">
+      <section className="flex justify-start gap-4 items-center font-opensans">
         <section className="flex gap-4 items-center justify-between">
           <button
             className="bg-gray-200 p-2 rounded-full text-xl"
@@ -252,14 +252,14 @@ const Middle = ({ product }) => {
           selectedTier?.quantity > 0 ? (
             <button
               onClick={() => modalRef.current.showModal()}
-              className="bg-primary px-6 py-2 rounded-full text-white"
+              className="bg-primary px-6 py-2 rounded-full text-white font-opensans"
             >
               Add to cart
             </button>
           ) : (
             <button
               disabled
-              className="bg-primary px-6 py-2 rounded-full text-white"
+              className="bg-primary px-6 py-2 rounded-full text-white font-opensans"
             >
               Add to cart
             </button>
@@ -267,14 +267,14 @@ const Middle = ({ product }) => {
         ) : quantity > 0 ? (
           <button
             onClick={handleAddToCart}
-            className="bg-primary px-6 py-2 rounded-full text-white"
+            className="bg-primary px-6 py-2 rounded-full text-white font-opensans"
           >
             Add to cart
           </button>
         ) : (
           <button
             disabled
-            className="bg-primary px-6 py-2 rounded-full text-white"
+            className="bg-primary px-6 py-2 rounded-full text-white font-opensans"
           >
             Add to cart
           </button>
@@ -287,7 +287,7 @@ const Middle = ({ product }) => {
               ✕
             </button>
           </form>
-          <h3 className="font-bold text-xl text-center mb-4">
+          <h3 className="font-bold text-xl text-center mb-4 font-poppins">
             Add Your Message
           </h3>
           <textarea
@@ -326,14 +326,14 @@ const Middle = ({ product }) => {
                 checked={selectedDelivery === "instantDelivery"}
                 onChange={() => setSelectedDelivery("instantDelivery")}
               />
-              <p>Instant Delivery</p>
+              <p className="font-opensans">Instant Delivery</p>
             </div>
           </div>
 
           <div className="flex justify-end mt-4">
             <button
               onClick={handleAddToCart}
-              className="btn btn-primary text-white px-6 py-2 rounded-lg hover:bg-primary-focus transition-all duration-300"
+              className="btn btn-primary text-white px-6 py-2 rounded-lg hover:bg-primary-focus transition-all duration-300 font-opensans"
             >
               Submit
             </button>
@@ -341,7 +341,7 @@ const Middle = ({ product }) => {
         </div>
       </dialog>
 
-      <section className="flex justify-start gap-4 items-center">
+      <section className="flex justify-start gap-4 items-center font-opensans">
         {wishProduct ? (
           <button
             onClick={() => handleRemove(wishProduct._id)}
@@ -388,10 +388,10 @@ const Middle = ({ product }) => {
 
       <div className=" border-t "></div>
 
-      <p className="text-sm text-gray-400">
+      <p className="text-sm text-gray-400 font-opensans">
         Category: <span className="text-black">{category}</span>
       </p>
-      <div className="lg:flex md:flex md:justify-start items-center lg:justify-between gap-4 md:space-y-0 space-y-4">
+      <div className="lg:flex md:flex md:justify-start items-center lg:justify-between gap-4 md:space-y-0 space-y-4 font-opensans">
         <p className="text-sm text-gray-400">
           Store : <span className="text-black">{store_name}</span>
         </p>

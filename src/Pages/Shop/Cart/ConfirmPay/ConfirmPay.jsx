@@ -39,7 +39,7 @@ const ConfirmPay = ({ setIsModalVisible, payment }) => {
   };
 
   return (
-    <div>
+    <div className="font-opensans">
       <div className="mt-2">
         <div className="space-y-4">
           <section className="">

@@ -16,8 +16,9 @@ const Dashboard = () => {
   const [payments] = usePayment();
   const { user } = useAuth();
   const myOrders = payments.filter((item) => item?.cus_email === user?.email);
+  const successOrder = myOrders.filter((orders) => orders.status === "success");
 
-  const deliveryStatus = myOrders.flatMap((order) => order.delivery);
+  const deliveryStatus = successOrder.flatMap((order) => order.delivery);
   const homeDeliveries = deliveryStatus.filter(
     (status) => status === "home"
   ).length;
@@ -32,7 +33,7 @@ const Dashboard = () => {
 
   const COLORS = ["#FFBB28", "#FF8042"];
 
-  const totalOrderAmount = myOrders.reduce(
+  const totalOrderAmount = successOrder.reduce(
     (acc, order) => acc + parseFloat(order.amount || 0),
     0
   );
@@ -47,8 +48,10 @@ const Dashboard = () => {
           <AiOutlineShoppingCart className="text-5xl" />
           <div>
             <h3 className="text-xl font-semibold">Total Orders</h3>
-            <p className="text-4xl font-bold mt-2">{myOrders?.length}</p>
-            <p className="mt-2">You have placed {myOrders?.length} orders.</p>
+            <p className="text-4xl font-bold mt-2">{successOrder?.length}</p>
+            <p className="mt-2">
+              You have placed {successOrder?.length} orders.
+            </p>
           </div>
         </div>
 
