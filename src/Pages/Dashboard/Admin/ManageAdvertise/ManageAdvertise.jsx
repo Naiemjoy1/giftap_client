@@ -1,32 +1,27 @@
-import React, { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import useAxiosSecure from "../../../../Components/Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
 
 const ManageAdvertise = () => {
-  const [banners, setBanners] = useState([]);
   const axiosSecure = useAxiosSecure();
 
-  useEffect(() => {
-    // Fetch banners from your API or database
-    const fetchBanners = async () => {
-      try {
-        const response = await axiosSecure.get("/banner");
-        const data = await response.data;
-        setBanners(data);
-      } catch (error) {
-        console.error("Error fetching banners:", error);
-      }
-    };
-
-    fetchBanners();
-  }, []);
+  // Fetching banners with useQuery (React Query automatically handles fetching)
+  const { refetch, data: banners = [] } = useQuery({
+    queryKey: ["banner"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/banner");
+      return res.data;
+    },
+  });
 
   // Filter the banners by type
-  const pendingBanners = banners.filter(banner => banner.type === "pending");
-  const runningBanners = banners.filter(banner => banner.type === "running");
+  const pendingBanners = banners.filter((banner) => banner.type === "pending");
+  const runningBanners = banners.filter((banner) => banner.type === "running");
 
+  // Confirm advertisement
   const confirmAdvertise = (bannerId) => {
     confirmAlert({
       title: "Confirm Advertisement",
@@ -35,15 +30,12 @@ const ManageAdvertise = () => {
         {
           label: "Yes",
           onClick: () => {
-            // API call to update the banner status to 'running'
             axiosSecure.patch(`/banner/${bannerId}`)
               .then((response) => {
                 const data = response.data;
                 if (data.result.modifiedCount > 0) {
-                  setBanners(banners.map(banner => 
-                    banner._id === bannerId ? { ...banner, type: 'running' } : banner
-                  ));
                   toast.success("Banner confirmed successfully!");
+                  refetch(); // Refetch banners after confirming the banner
                 }
               })
               .catch((error) => {
@@ -59,8 +51,8 @@ const ManageAdvertise = () => {
     });
   };
 
+  // Delete advertisement
   const deleteAdvertise = (bannerId) => {
-    // Call API to delete the advertisement
     confirmAlert({
       title: "Delete Advertisement",
       message: "Are you sure you want to delete this advertisement?",
@@ -71,8 +63,8 @@ const ManageAdvertise = () => {
             axiosSecure.delete(`/banner/${bannerId}`)
               .then((response) => {
                 if (response.data.success) {
-                  setBanners(banners.filter((banner) => banner._id !== bannerId));
                   toast.success("Banner deleted successfully!");
+                  refetch(); // Refetch banners after deleting the banner
                 }
               })
               .catch((error) => {
@@ -148,10 +140,10 @@ const ManageAdvertise = () => {
               <h2 className="text-lg font-semibold mb-2">{banner.title}</h2>
               <p className="text-gray-600 mb-4">Seller: {banner.sellerName}</p>
               <button
-                onClick={() => window.open(banner.bannerUrl, "_blank")}
+                onClick={() => deleteAdvertise(banner._id)}
                 className="bg-gray-500 text-white py-1 px-3 rounded-lg hover:bg-gray-600 w-full"
               >
-                Preview Banner
+                Delete Banner
               </button>
             </div>
           ))}
