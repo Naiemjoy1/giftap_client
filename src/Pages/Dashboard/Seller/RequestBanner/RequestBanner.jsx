@@ -60,7 +60,7 @@ const RequestBanner = () => {
         
 
         // Send the image URL to your backend to store in MongoDB
-        await axiosSecure.post("/banner", { bannerUrl: imgbbUrl, sellerName: userName.user.displayName, type: "inactive" });
+        await axiosSecure.post("/banner", { bannerUrl: imgbbUrl, sellerName: userName.user.displayName, type: "pending" });
         toast.success('Request success wait for admin confirmation')
 
         // Reset state after successful upload
