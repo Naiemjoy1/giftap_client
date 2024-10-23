@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import useAxiosSecure from "../../../../Components/Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import useAuth from "../../../../Components/Hooks/useAuth";
+import { AuthContext } from "../../../../Components/Provider/AuthProvider";
 
 const RequestBanner = () => {
   const [banner, setBanner] = useState(null); 
@@ -11,6 +13,7 @@ const RequestBanner = () => {
   
   // Call useAxiosSecure at the top level of the component
   const axiosSecure = useAxiosSecure();
+  const userName = useAuth(AuthContext);
 
   const handleFileChange = (file) => {
     if (file) {
@@ -54,10 +57,10 @@ const RequestBanner = () => {
         const image_hosting_key = import.meta.env.VITE_IMGBB_API;
         const imgbbResponse = await axios.post(`https://api.imgbb.com/1/upload?key=${image_hosting_key}`, formData);
         const imgbbUrl = imgbbResponse.data.data.url;
-        console.log(imgbbUrl);
+        
 
         // Send the image URL to your backend to store in MongoDB
-        await axiosSecure.post("/banner", { bannerUrl: imgbbUrl });
+        await axiosSecure.post("/banner", { bannerUrl: imgbbUrl, sellerName: userName.user.displayName, type: "inactive" });
         toast.success('Request success wait for admin confirmation')
 
         // Reset state after successful upload

@@ -12,6 +12,7 @@ import AddProducts from "../../Pages/Dashboard/Admin/AddProducts/AddProducts";
 import Users from "../../Pages/Dashboard/Admin/Users/Users";
 import Promos from "../../Pages/Dashboard/Admin/Promos/Promos";
 import { BiSolidOffer } from "react-icons/bi";
+import ManageAdvertise from "../../Pages/Dashboard/Admin/ManageAdvertise/ManageAdvertise";
 
 const useAdminTabs = () => {
   const tabsData = [
@@ -50,6 +51,12 @@ const useAdminTabs = () => {
       icon: <BiSolidOffer />,
       tab: 5,
       page: <Promos></Promos>,
+    },
+    {
+      name: "Manage Advertise",
+      icon: <BiSolidOffer />,
+      tab: 6,
+      page: <ManageAdvertise></ManageAdvertise>
     },
   ];
   return [tabsData];
