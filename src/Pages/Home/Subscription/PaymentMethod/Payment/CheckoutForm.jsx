@@ -1,9 +1,9 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import useAxiosSecure from "../../../../../Components/Hooks/useAxiosSecure";
 import useAuth from "../../../../../Components/Hooks/useAuth";
-
+import useAxiosSecure from "../../../../../Components/Hooks/useAxiosSecure";
+import { useNavigate } from "react-router-dom";
 
 const CheckOutForm = () => {
     const [error, setError] = useState('');
@@ -13,6 +13,7 @@ const CheckOutForm = () => {
     const elements = useElements();
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
+    const navigate = useNavigate();
 
     // Prices for Premium and Luxury plans
     const [selectedPlan, setSelectedPlan] = useState(24.90);
@@ -33,12 +34,14 @@ const CheckOutForm = () => {
         event.preventDefault();
 
         if (!stripe || !elements) {
+            console.log("Stripe has not loaded yet.");
             return;
         }
 
         const card = elements.getElement(CardElement);
 
         if (!card) {
+            console.log("CardElement not found.");
             return;
         }
 
@@ -53,6 +56,7 @@ const CheckOutForm = () => {
         });
 
         if (cardError) {
+            console.error("Error creating payment method:", cardError.message);
             setError(cardError.message);
             return;
         }
@@ -69,6 +73,7 @@ const CheckOutForm = () => {
         });
 
         if (confirmError) {
+            console.error("Error confirming payment:", confirmError.message);
             setError(confirmError.message);
             return;
         }
@@ -76,14 +81,17 @@ const CheckOutForm = () => {
         if (paymentIntent.status === 'succeeded') {
             setTransactionId(paymentIntent.id);
 
-            // Payment success message
             Swal.fire({
                 position: 'top-right',
                 icon: 'success',
-                title: 'Payment successful!',
+                title: `Congratulation You Are ${selectedPlan === 49.90 ? 'Luxury' : 'Premium'} Member`,
                 showConfirmButton: false,
                 timer: 1500
             });
+            navigate('/')
+
+        } else {
+            console.error('Payment failed:', paymentIntent.status);
         }
     };
 
