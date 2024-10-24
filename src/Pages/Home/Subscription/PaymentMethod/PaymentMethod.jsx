@@ -2,26 +2,20 @@ import { Link } from "react-router-dom";
 
 const PaymentMethod = () => {
     return (
-        <div className="flex items-center justify-center h-screen bg-gradient-to-r from-primary to-[#F04854] text-white text-center">
-            <div className="max-w-md">
-                <h1 className="text-5xl font-bold mb-4">We Are Currently Under Maintenance</h1>
-                <p className="text-lg mb-8">
-                    We're working hard to improve our website. Please check back later!
-                </p>
+        <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+            <h1 className="text-3xl font-bold text-gray-800 mb-6">Payment</h1>
+            <p className="text-lg text-gray-600 mb-8">
+                Currently, we only accept Stripe payments. Please confirm your payment below.
+            </p>
 
-                <div className="flex justify-center space-x-4">
-                    <Link to={'/contact'}>
-                        <button className="bg-white text-[#F25E68] px-6 py-3 rounded-lg shadow-lg hover:bg-gray-200 transition">
-                            Contact Us
-                        </button>
-                    </Link>
-                    <Link to={'/'}>
-                        <button className="border-2 border-white px-6 py-3 rounded-lg hover:bg-white hover:text-[#F25E68] transition">
-                            Return Home
-                        </button>
-                    </Link>
-                </div>
-            </div>
+            {/* Confirm Payment Button */}
+            <Link to={'/payment'}>
+                <button
+                    className="bg-primary text-white font-semibold py-3 px-8 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out"
+                >
+                    Confirm Payment
+                </button>
+            </Link>
         </div>
     );
 }

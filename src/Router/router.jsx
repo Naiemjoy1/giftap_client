@@ -20,6 +20,7 @@ import AdminRoute from "./AdminRoute/AdminRoute";
 import SellerRoute from "./SellerRoute/SellerRoute";
 import CategoryPage from "../Pages/Home/Category/CategoryPage/CategoryPage";
 import PaymentMethod from "../Pages/Home/Subscription/PaymentMethod/PaymentMethod";
+import Payment from "../Pages/Home/Subscription/PaymentMethod/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -81,6 +82,10 @@ export const router = createBrowserRouter([
       {
         path: "/track",
         element: <TrackOrders></TrackOrders>,
+      },
+      {
+        path: '/payment',
+        element: <Payment></Payment>
       },
       {
         path: "/profile",
