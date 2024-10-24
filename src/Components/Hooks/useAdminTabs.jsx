@@ -52,11 +52,35 @@ const useAdminTabs = () => {
       page: <Users></Users>,
     },
     {
+      name: "Manage Advertise",
+      icon: <PiUsersThree />,
+      tab: 5,
+      page: <ManageAdvertise></ManageAdvertise>
+    },
+    {
       name: "promos",
       icon: <BiSolidOffer />,
-      tab: 5,
+      tab: 6,
       page: <Promos></Promos>,
     },
+    {
+      name: "Add Notice",
+      icon: <BsClipboard></BsClipboard>,
+      tab: 7,
+      page: <AddNotice></AddNotice>
+    },
+    {
+      name: "All Complain",
+      icon: <BiCommentError></BiCommentError>,
+      tab: 8,
+      page: <AllComplain></AllComplain>
+    },
+    {
+      name: "Payment",
+      icon: <MdOutlinePayments></MdOutlinePayments>,
+      tab: 9,
+      page: <Payments></Payments>
+    }
   ];
   return [tabsData];
 };
