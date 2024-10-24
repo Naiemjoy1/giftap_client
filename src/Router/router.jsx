@@ -19,6 +19,7 @@ import PrivetRoute from "./PrivetRoute/PrivetRoute";
 import AdminRoute from "./AdminRoute/AdminRoute";
 import SellerRoute from "./SellerRoute/SellerRoute";
 import Privacy from "../Shared/Footer/Privacy";
+import TernsCondition from "../Shared/Footer/TernsCondition";
 
 export const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ export const router = createBrowserRouter([
       {
         path: "/privacy",
         element: <Privacy></Privacy>,
+      },
+      {
+        path: "/terms",
+        element: <TernsCondition></TernsCondition>,
       },
       {
         path: "/BlogDetails/:id",

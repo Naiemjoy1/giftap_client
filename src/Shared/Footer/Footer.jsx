@@ -44,11 +44,13 @@ const Footer = () => {
                   </a>
                 </li>
               </Link>
-              <li>
-                <a href="#" className="hover:text-gray-400">
-                  Design
-                </a>
-              </li>
+              <Link to={"/contact"}>
+                <li>
+                  <a href="#" className="hover:text-gray-400">
+                    Contact Us
+                  </a>
+                </li>
+              </Link>
               <Link to={"/about"}>
                 <li>
                   <a href="#" className="hover:text-gray-400">
@@ -56,11 +58,6 @@ const Footer = () => {
                   </a>
                 </li>
               </Link>
-              <li>
-                <a href="#" className="hover:text-gray-400">
-                  Advertisement
-                </a>
-              </li>
             </ul>
           </div>
 
@@ -68,11 +65,13 @@ const Footer = () => {
           <div className="w-full sm:w-1/2 md:w-1/4 mb-6 md:mb-0">
             <h6 className="text-lg font-semibold mb-4">Legal</h6>
             <ul>
-              <li>
-                <a href="#" className="hover:text-gray-400">
-                  Terms of Use
-                </a>
-              </li>
+              <Link to={"/terms"}>
+                <li>
+                  <a href="#" className="hover:text-gray-400">
+                    Terms & Condition
+                  </a>
+                </li>
+              </Link>
               <Link to={"/privacy"}>
                 <li>
                   <a href="#" className="hover:text-gray-400">
