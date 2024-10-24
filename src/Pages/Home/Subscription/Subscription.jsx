@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import HomeSectionHeading from "../../../ReUseComponents/HomeSectionHeading/HomeSectionHeading";
 
 const Subscription = () => {
@@ -9,7 +10,7 @@ const Subscription = () => {
                         title={"Choose Your Subscription"}
                         subTitle={"Pick a plan that suits your gifting needs and enjoy exclusive perks!"}
                     ></HomeSectionHeading>
-                   
+
                 </div>
                 <div className="flex flex-col items-center justify-center space-y-8 lg:-mx-4 lg:flex-row lg:items-stretch lg:space-y-0">
                     {/* Free Plan */}
@@ -53,9 +54,11 @@ const Subscription = () => {
                             </ul>
                         </div>
                         <div className="mt-4">
-                            <button className="w-full px-4 py-2 font-semibold text-white bg-primary rounded-lg hover:bg-[#d93b48] transition-colors duration-300">
-                                Start Premium
-                            </button>
+                            <Link to={'/choose-payment-method'}>
+                                <button className="w-full px-4 py-2 font-semibold text-white bg-primary rounded-lg hover:bg-[#d93b48] transition-colors duration-300">
+                                    Start Premium
+                                </button>
+                            </Link>
                         </div>
                     </div>
 
@@ -77,9 +80,11 @@ const Subscription = () => {
                             </ul>
                         </div>
                         <div className="mt-4">
-                            <button className="w-full px-4 py-2 font-semibold text-white bg-primary rounded-lg hover:bg-[#d93b48] transition-colors duration-300">
-                                Start Luxury
-                            </button>
+                            <Link to={'/choose-payment-method'}>
+                                <button className="w-full px-4 py-2 font-semibold text-white bg-primary rounded-lg hover:bg-[#d93b48] transition-colors duration-300">
+                                    Start Luxury
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
