@@ -10,7 +10,10 @@ import Promotions from "../../Pages/Dashboard/Seller/Promotions/Promotions";
 import AllProducts from "../../Pages/Dashboard/Seller/AllProducts/AllProducts";
 import AddPro from "../../Pages/Dashboard/Seller/AddPro/AddPro";
 import { RiAdvertisementFill } from "react-icons/ri";
+
 import RequestBanner from "../../Pages/Dashboard/Seller/RequestBanner/RequestBanner";
+import NoticeBoard from "../../Pages/Dashboard/Seller/NoticeBoard/NoticeBoard";
+import { BsClipboard } from "react-icons/bs";
 
 const useSellerTabs = () => {
   const tabsData = [
@@ -23,27 +26,28 @@ const useSellerTabs = () => {
     {
       name: "products",
       icon: <MdProductionQuantityLimits />,
-      tab: 2,
+      tab: 1,
       page: <AllProducts></AllProducts>,
     },
     {
       name: "add product",
       icon: <MdAddShoppingCart />,
-      tab: 3,
+      tab: 2,
       page: <AddPro></AddPro>,
     },
-    {
-      name: "promos",
-      icon: <BiSolidOffer />,
-      tab: 5,
-      page: <Promotions></Promotions>,
-    },
+
     {
       name: "REquest Banner",
       icon: <RiAdvertisementFill />,
-      tab: 7,
-      page: <RequestBanner />
-    }
+      tab: 3,
+      page: <RequestBanner />,
+    },
+    {
+      name: "Notice Board",
+      icon: <BsClipboard />,
+      tab: 4,
+      page: <NoticeBoard></NoticeBoard>,
+    },
   ];
   return [tabsData];
 };

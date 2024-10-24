@@ -63,7 +63,8 @@ const Blog = () => {
     refetch();
   };
 
- 
+  document.title = "GifTap || Blogs";
+
   return (
     <div className="container mx-auto my-5 flex flex-col md:flex-row">
       <div className="">

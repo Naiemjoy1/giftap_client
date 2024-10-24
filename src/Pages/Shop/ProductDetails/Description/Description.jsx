@@ -1,6 +1,6 @@
 const Description = () => {
   return (
-    <div>
+    <div className="font-opensans">
       <p>
         Quisque varius diam vel metus mattis, id aliquam diam rhoncus. Proin
         vitae magna in dui finibus malesuada et at nulla. Morbi elit ex, viverra

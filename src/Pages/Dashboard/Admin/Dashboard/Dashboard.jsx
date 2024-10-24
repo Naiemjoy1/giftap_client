@@ -1,4 +1,3 @@
-import React from "react";
 import useAdminstats from "../../../../Components/Hooks/useAdminstats";
 import { RiFilePaper2Line, RiShoppingBasket2Line } from "react-icons/ri";
 import { HiOutlineCurrencyDollar } from "react-icons/hi";
@@ -12,8 +11,8 @@ const Dashboard = () => {
 
   return (
     <div className="space-y-4">
-      <section className="flex justify-between gap-4">
-        <div className="w-1/2 rounded-lg bg-white p-4 space-y-4">
+      <section className="lg:flex justify-between gap-4">
+        <div className="lg:w-1/2 rounded-lg bg-white p-4 space-y-4">
           <div>
             <p className="text-sm text-primary">Revenue of this month</p>
             <p className=" space-x-1">
@@ -25,9 +24,11 @@ const Dashboard = () => {
               </span>
             </p>
           </div>
-          <LineCharts />
+          <div>
+            <LineCharts />
+          </div>
         </div>
-        <div className="w-1/2 grid grid-cols-2 gap-4 justify-between items-center">
+        <div className="lg:w-1/2 grid grid-cols-2 gap-4 justify-between">
           <div className="p-4 rounded-lg bg-white space-y-2">
             <div className="flex justify-between">
               <p className="text-sm">Sales Today</p>
@@ -41,7 +42,7 @@ const Dashboard = () => {
           <div className="p-4 rounded-lg bg-white space-y-2">
             <div className="flex justify-between">
               <p className="text-sm">Total Earning</p>
-              <p className="p-2 bg-[#effef3] text-green-600 rounded-md text-xl">
+              <p className="p-2 bg-green-600 bg-opacity-10 text-green-600 rounded-md text-xl">
                 <HiOutlineCurrencyDollar />
               </p>
             </div>
@@ -67,7 +68,7 @@ const Dashboard = () => {
           <div className="p-4 rounded-lg bg-white space-y-2">
             <div className="flex justify-between">
               <p className="text-sm">Total Orders</p>
-              <p className="p-2 bg-[#f8f8f8] rounded-md text-xl">
+              <p className="p-2 bg-green-600 bg-opacity-10 text-green-600 rounded-md text-xl">
                 <RiFilePaper2Line />
               </p>
             </div>
@@ -93,7 +94,7 @@ const Dashboard = () => {
           <div className="p-4 rounded-lg bg-white space-y-2">
             <div className="flex justify-between">
               <p className="text-sm">Total Products</p>
-              <p className="p-2 bg-primary bg-opacity-5 text-primary rounded-md text-xl">
+              <p className="p-2 bg-primary bg-opacity-10 text-primary rounded-md text-xl">
                 <MdOutlinePeopleAlt />
               </p>
             </div>
@@ -104,11 +105,11 @@ const Dashboard = () => {
           </div>
         </div>
       </section>
-      <section className=" flex justify-center gap-4">
-        <div className="w-1/2 rounded-lg bg-white p-4">
+      <section className=" lg:flex md:flex justify-center gap-4">
+        <div className="lg:w-1/3 md:w-1/2 rounded-lg bg-white p-4 flex justify-center items-center">
           <ShowPie admin={admin}></ShowPie>
         </div>
-        <div className="w-1/2 rounded-lg bg-white p-4">
+        <div className="lg:w-2/3 md:w-1/2 rounded-lg bg-white p-4">
           <StockOut></StockOut>
         </div>
       </section>

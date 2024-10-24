@@ -296,13 +296,19 @@ const Shipping = ({ onClose }) => {
         </label>
         <input
           type="email"
-          {...register("email", { required: true })}
+          {...register("email", {
+            required: "Email is required",
+            pattern: {
+              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+              message: "Please enter a valid email address",
+            },
+          })}
           placeholder="Email"
           className="input input-bordered w-full"
-          // value={user?.email}
+          disabled={!!shippingInfo?.email} // Disable if shippingInfo.email exists
         />
         {errors.email && (
-          <span className="text-red-500">Email is required</span>
+          <span className="text-red-500">{errors.email.message}</span>
         )}
       </div>
 
