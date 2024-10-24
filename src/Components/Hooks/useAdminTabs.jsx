@@ -13,6 +13,7 @@ import AddProducts from "../../Pages/Dashboard/Admin/AddProducts/AddProducts";
 import Users from "../../Pages/Dashboard/Admin/Users/Users";
 import Promos from "../../Pages/Dashboard/Admin/Promos/Promos";
 import { BiCommentError, BiSolidOffer } from "react-icons/bi";
+import ManageAdvertise from "../../Pages/Dashboard/Admin/ManageAdvertise/ManageAdvertise";
 import AddNotice from "../../Pages/Dashboard/Admin/AddNotice/AddNotice";
 import { BsClipboard } from "react-icons/bs";
 import Payments from "../../Pages/Dashboard/Admin/Payments/Payments";
@@ -51,16 +52,34 @@ const useAdminTabs = () => {
       page: <Users></Users>,
     },
     {
+      name: "Manage Advertise",
+      icon: <PiUsersThree />,
+      tab: 5,
+      page: <ManageAdvertise></ManageAdvertise>
+    },
+    {
       name: "promos",
       icon: <BiSolidOffer />,
-      tab: 5,
+      tab: 6,
       page: <Promos></Promos>,
     },
     {
-      name: "complain",
-      icon: <BiCommentError />,
-      tab: 6,
-      page: <AllComplain></AllComplain>,
+      name: "Add Notice",
+      icon: <BsClipboard></BsClipboard>,
+      tab: 7,
+      page: <AddNotice></AddNotice>
+    },
+    {
+      name: "All Complain",
+      icon: <BiCommentError></BiCommentError>,
+      tab: 8,
+      page: <AllComplain></AllComplain>
+    },
+    {
+      name: "Payment",
+      icon: <MdOutlinePayments></MdOutlinePayments>,
+      tab: 9,
+      page: <Payments></Payments>
     }
   ];
   return [tabsData];
