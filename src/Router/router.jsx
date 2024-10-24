@@ -18,6 +18,7 @@ import Seller from "../Pages/Dashboard/Seller/Seller";
 import PrivetRoute from "./PrivetRoute/PrivetRoute";
 import AdminRoute from "./AdminRoute/AdminRoute";
 import SellerRoute from "./SellerRoute/SellerRoute";
+import Privacy from "../Shared/Footer/Privacy";
 
 export const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ export const router = createBrowserRouter([
       {
         path: "/blog",
         element: <Blog></Blog>,
+      },
+      {
+        path: "/privacy",
+        element: <Privacy></Privacy>,
       },
       {
         path: "/BlogDetails/:id",

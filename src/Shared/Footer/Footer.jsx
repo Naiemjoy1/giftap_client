@@ -73,11 +73,13 @@ const Footer = () => {
                   Terms of Use
                 </a>
               </li>
-              <li>
-                <a href="#" className="hover:text-gray-400">
-                  Privacy Policy
-                </a>
-              </li>
+              <Link to={"/privacy"}>
+                <li>
+                  <a href="#" className="hover:text-gray-400">
+                    Privacy Policy
+                  </a>
+                </li>
+              </Link>
               <li>
                 <a href="#" className="hover:text-gray-400">
                   Cookie Policy
@@ -114,10 +116,11 @@ const Footer = () => {
           src="https://securepay.sslcommerz.com/public/image/SSLCommerz-Pay-With-logo-All-Size-03.png"
           alt=""
         />
-        <divs>
-          <h1> All Rights Reserved © {new Date().getFullYear()} GifTap Ltd.</h1>
-        </divs>
       </div>
+      <h1 className="text-lg font-semibold mt-4 text-center">
+        {" "}
+        All Rights Reserved © {new Date().getFullYear()} GifTap Ltd.
+      </h1>
     </footer>
   );
 };
