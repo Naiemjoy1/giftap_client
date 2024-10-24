@@ -5,6 +5,7 @@ import useWishs from "../../../Components/Hooks/useWishs";
 import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const ListUser = ({ item }) => {
   const { user } = useAuth();
@@ -133,6 +134,10 @@ const ListUser = ({ item }) => {
     }
   };
 
+  const handleToast = () => {
+    toast.error("Login Please");
+  };
+
   return (
     <div className="flex border border-gray-200 rounded-lg p-4 bg-white shadow-md hover:shadow-lg transition duration-300">
       <img
@@ -206,7 +211,10 @@ const ListUser = ({ item }) => {
                 </Link>
               ) : (
                 <Link className="flex-grow">
-                  <button className="block w-full rounded bg-gray-200 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105 font-opensans">
+                  <button
+                    onClick={handleToast}
+                    className="block w-full rounded bg-gray-200 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105 font-opensans"
+                  >
                     See More
                   </button>
                 </Link>
@@ -225,7 +233,10 @@ const ListUser = ({ item }) => {
                 </Link>
               ) : (
                 <Link className="flex-grow">
-                  <button className="block w-full rounded bg-gray-200 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105 font-opensans">
+                  <button
+                    onClick={handleToast}
+                    className="block w-full rounded bg-gray-200 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105 font-opensans"
+                  >
                     See More
                   </button>
                 </Link>
@@ -241,6 +252,7 @@ const ListUser = ({ item }) => {
                 </button>
               ) : (
                 <button
+                  onClick={handleToast}
                   type="button"
                   className="flex-grow block rounded bg-primary px-4 py-3 text-sm font-medium text-white transition hover:scale-105 font-opensans"
                 >

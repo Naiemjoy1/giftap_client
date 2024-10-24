@@ -26,33 +26,28 @@ const useSellerTabs = () => {
     {
       name: "products",
       icon: <MdProductionQuantityLimits />,
-      tab: 2,
+      tab: 1,
       page: <AllProducts></AllProducts>,
     },
     {
       name: "add product",
       icon: <MdAddShoppingCart />,
-      tab: 3,
+      tab: 2,
       page: <AddPro></AddPro>,
     },
-    {
-      name: "promos",
-      icon: <BiSolidOffer />,
-      tab: 5,
-      page: <Promotions></Promotions>,
-    },
+
     {
       name: "REquest Banner",
       icon: <RiAdvertisementFill />,
-      tab: 7,
-      page: <RequestBanner />
+      tab: 3,
+      page: <RequestBanner />,
     },
     {
       name: "Notice Board",
       icon: <BsClipboard />,
-      tab: 8,
-      page: <NoticeBoard></NoticeBoard>
-    }
+      tab: 4,
+      page: <NoticeBoard></NoticeBoard>,
+    },
   ];
   return [tabsData];
 };

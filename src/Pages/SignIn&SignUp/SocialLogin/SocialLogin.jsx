@@ -21,6 +21,7 @@ const SocialLogin = () => {
         createdDate: new Date().toISOString(),
         status: "active",
         type: "user",
+        provider: "social", // Add provider field to user data
       };
 
       const res = await axiosPublic.post("/users", userInfo);
@@ -49,7 +50,9 @@ const SocialLogin = () => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: `Something went wrong: ${error.message}. Please try again.`,
+        text: `Something went wrong: ${
+          error.response?.data?.message || error.message
+        }. Please try again.`,
       });
     }
   };
