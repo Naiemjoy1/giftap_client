@@ -1,6 +1,7 @@
 import React from "react";
 import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaSquareInstagram } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -36,21 +37,25 @@ const Footer = () => {
           <div className="w-full sm:w-1/2 md:w-1/4 mb-6 md:mb-0">
             <h6 className="text-lg font-semibold mb-4">Services</h6>
             <ul>
-              <li>
-                <a href="#" className="hover:text-gray-400">
-                  Branding
-                </a>
-              </li>
+              <Link to={"/blog"}>
+                <li>
+                  <a href="#" className="hover:text-gray-400">
+                    Blog
+                  </a>
+                </li>
+              </Link>
               <li>
                 <a href="#" className="hover:text-gray-400">
                   Design
                 </a>
               </li>
-              <li>
-                <a href="#" className="hover:text-gray-400">
-                  Marketing
-                </a>
-              </li>
+              <Link to={"/about"}>
+                <li>
+                  <a href="#" className="hover:text-gray-400">
+                    About us
+                  </a>
+                </li>
+              </Link>
               <li>
                 <a href="#" className="hover:text-gray-400">
                   Advertisement
