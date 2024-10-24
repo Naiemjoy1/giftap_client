@@ -79,11 +79,6 @@ const Footer = () => {
                   </a>
                 </li>
               </Link>
-              <li>
-                <a href="#" className="hover:text-gray-400">
-                  Cookie Policy
-                </a>
-              </li>
             </ul>
           </div>
 
@@ -95,9 +90,9 @@ const Footer = () => {
                 <input
                   type="email"
                   placeholder="username@site.com"
-                  className="input input-bordered lg:w-full md:w-20 w-full flex-grow rounded-l-md border-gray-300 bg-white text-base-content"
+                  className="border p-1 lg:w-full rounded-l-md md:w-20 w-full flex-grow  border-gray-300 bg-white text-base-content"
                 />
-                <button className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-r-md border border-blue-600 transition lg:w-full md:w-20 w-auto">
+                <button className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-r-md border border-blue-600 transition lg:w-full md:w-20 w-auto ">
                   Subscribe
                 </button>
               </div>
