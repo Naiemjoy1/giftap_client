@@ -5,6 +5,7 @@ import useWishs from "../../../Components/Hooks/useWishs";
 import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const ItemUser = ({ item }) => {
   const { user } = useAuth();
@@ -134,6 +135,11 @@ const ItemUser = ({ item }) => {
       toast.error("Error removing product from wishlist");
     }
   };
+
+  const handleToast = () => {
+    toast.error("Login Please");
+  };
+
   return (
     <div>
       <div className="group relative block overflow-hidden">
@@ -209,7 +215,10 @@ const ItemUser = ({ item }) => {
                   </Link>
                 ) : (
                   <Link className="flex-grow">
-                    <button className="block w-full rounded bg-gray-200 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105 font-opensans">
+                    <button
+                      onClick={handleToast}
+                      className="block w-full rounded bg-gray-200 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105 font-opensans"
+                    >
                       See More
                     </button>
                   </Link>
@@ -228,7 +237,10 @@ const ItemUser = ({ item }) => {
                   </Link>
                 ) : (
                   <Link className="flex-grow">
-                    <button className="block w-full rounded bg-gray-200 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105 font-opensans">
+                    <button
+                      onClick={handleToast}
+                      className="block w-full rounded bg-gray-200 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105 font-opensans"
+                    >
                       See More
                     </button>
                   </Link>
@@ -244,6 +256,7 @@ const ItemUser = ({ item }) => {
                   </button>
                 ) : (
                   <button
+                    onClick={handleToast}
                     type="button"
                     className="flex-grow block rounded bg-primary px-4 py-3 text-sm font-medium text-white transition hover:scale-105 font-opensans"
                   >

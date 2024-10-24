@@ -225,9 +225,6 @@ const RelatedProducts = ({ id }) => {
               </div>
             )}
             <div className="grid grid-cols-1 gap-2 absolute top-4 right-4 transform translate-x-full opacity-0 invisible transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-hover:visible">
-              <button className="bg-white shadow-xl p-2 rounded-full text-lg">
-                <BsArrowsFullscreen />
-              </button>
               {wishProduct ? (
                 <button
                   onClick={() => handleRemove(wishProduct._id)}
