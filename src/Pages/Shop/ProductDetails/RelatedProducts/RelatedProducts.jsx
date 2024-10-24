@@ -146,21 +146,27 @@ const RelatedProducts = ({ id }) => {
               <img src={item.image.cardImg1} alt={item.name} />
             </figure>
             <div className="mt-4 space-y-2">
-              <p className="text-lg font-medium">
+              <p className="text-lg font-medium font-poppins">
                 {item.name.length > 20
                   ? `${item.name.slice(0, 20)}...`
                   : item.name}
               </p>
 
               {item.category === "digital gift" ? (
-                <p className="text-green-600 uppercase text-xs">in stock</p>
+                <p className="text-green-600 uppercase text-xs font-opensans">
+                  in stock
+                </p>
               ) : item.quantity > 0 ? (
-                <p className="text-green-600 uppercase text-xs">in stock</p>
+                <p className="text-green-600 uppercase text-xs font-opensans">
+                  in stock
+                </p>
               ) : (
-                <p className="uppercase text-sm text-red-700">Out of Stock</p>
+                <p className="uppercase text-sm text-red-700 font-opensans">
+                  Out of Stock
+                </p>
               )}
 
-              <p className="flex gap-2 items-center">
+              <p className="flex gap-2 items-center font-opensans">
                 <Rating
                   style={{ maxWidth: 80 }}
                   value={averageRating}
@@ -174,14 +180,14 @@ const RelatedProducts = ({ id }) => {
                   {item.priceGroup.map((pkg, index) => (
                     <p
                       key={index}
-                      className="bg-primary text-white px-2 rounded-full font-medium"
+                      className="bg-primary text-white px-2 rounded-full font-medium font-opensans"
                     >
                       {pkg.tier}
                     </p>
                   ))}
                 </div>
               ) : (
-                <p className="text-gray-700">
+                <p className="text-gray-700 font-opensans">
                   $
                   {calculateDiscountedPrice(item.price, item.discount).toFixed(
                     2
@@ -197,14 +203,14 @@ const RelatedProducts = ({ id }) => {
               {item.category === "digital gift" ? (
                 <Link
                   to={`/shop/${item._id}`}
-                  className="btn btn-outline btn-primary w-full rounded-full"
+                  className="btn btn-outline btn-primary w-full rounded-full font-opensans"
                 >
                   See More
                 </Link>
               ) : (
                 <button
                   onClick={() => handleAddToCart(item)}
-                  className="btn btn-outline btn-primary w-full rounded-full"
+                  className="btn btn-outline btn-primary w-full rounded-full font-opensans"
                 >
                   Add to cart
                 </button>
@@ -213,16 +219,12 @@ const RelatedProducts = ({ id }) => {
 
             {item.discount && (
               <div className="absolute left-2 top-2">
-                <p className="px-2 text-white bg-primary rounded-lg">
+                <p className="px-2 text-white bg-primary rounded-lg font-opensans">
                   {item.discount}%
                 </p>
               </div>
             )}
-
             <div className="grid grid-cols-1 gap-2 absolute top-4 right-4 transform translate-x-full opacity-0 invisible transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-hover:visible">
-              <button className="bg-white shadow-xl p-2 rounded-full text-lg">
-                <BsArrowsFullscreen />
-              </button>
               {wishProduct ? (
                 <button
                   onClick={() => handleRemove(wishProduct._id)}

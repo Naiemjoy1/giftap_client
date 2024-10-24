@@ -197,7 +197,7 @@ const Cart = () => {
   }
 
   return (
-    <div className="container mx-auto my-10 px-4 lg:px-0">
+    <div className="container mx-auto my-10 px-4 lg:px-0 font-opensans">
       {userCarts.length === 0 ? (
         <div className="h-screen flex justify-center items-center">
           <div className="flex flex-col items-center gap-4">

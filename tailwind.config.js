@@ -14,9 +14,9 @@ export default {
       keyframes: {
         poke: {
           "0%": { transform: "translateX(0)" },
-          "30%": { transform: "translateX(10px)" }, // Move right
-          "60%": { transform: "translateX(0)" }, // Back to original
-          "100%": { transform: "translateX(0)" }, // Ensure it ends at original
+          "30%": { transform: "translateX(10px)" },
+          "60%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(0)" },
         },
       },
     },

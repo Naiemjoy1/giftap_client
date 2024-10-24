@@ -5,6 +5,7 @@ import { FaArrowRight, FaCommentDots } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 import { IoSearch } from 'react-icons/io5';
 import { GrNext, GrPrevious } from 'react-icons/gr';
+import { CgCalendarDates } from "react-icons/cg";
 
 const Blog = () => {
   const [search, setSearch] = useState('');
@@ -69,18 +70,19 @@ const Blog = () => {
     <div className="container mx-auto my-5 flex flex-col md:flex-row">
       <div className="">
         {/*----------- Search Bar Start ------------*/}
-        <div className="">
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="flex relative justify-center lg:ml-96 rounded-md w-full px-4 max-w-xl lg:mt-0">
+        <div className="flex justify-center w-full px-4">
+          <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-xl">
+            <div className="flex relative w-full">
               <input
                 type="text"
                 placeholder="Search Blog Title ..."
-                className="w-full p-3 rounded-md mt-24 md:mt-4 md:ml-28 lg:mt-4 border-blue-300 input-bordered border"
+                className="w-full p-3 rounded-md border border-blue-300 input-bordered focus:outline-none focus:ring-2 focus:ring-blue-500"
                 {...register('search')}
               />
-              {errors.search}
+              {errors.search && <span className="text-red-500">{errors.search.message}</span>}
               <button
-                className="inline-flex items-center mt-24 md:mt-4 lg:mt-4 gap-2 bg-primary hover:bg-primary text-white text-lg font-semibold px-3 rounded-r-md"
+                type="submit"
+                className="inline-flex items-center bg-primary hover:bg-primary-dark text-white text-lg font-semibold px-3 rounded-r-md"
               >
                 <span>Search</span>
                 <span className="hidden md:block">
@@ -91,6 +93,7 @@ const Blog = () => {
           </form>
         </div>
         {/*------------ Search Bar End ------------*/}
+
 
         {/*------------ Blogs Start ------------*/}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-4">
@@ -113,16 +116,21 @@ const Blog = () => {
                 </Link>
               </div>
               <Link to={`/BlogDetails/${blog._id}`}>
-                <h2 className="font-bold text-2xl mt-4 hover:text-primary">{blog.blogTitle}</h2>
+
+                <h2 className="font-poppins text-2xl mt-3 hover:text-primary">{blog.blogTitle}</h2>
               </Link>
               <div className="flex justify-between text-sm mb-2">
-                <span className="mt-2 text-xl font-semibold text-gray-500">{blog.blogPublishDate}</span>
+                <span className="mt-2 flex text-xl font-semibold text-gray-500">
+                  <CgCalendarDates className="text-[17px] mt-2 mr-1" />
+                  <p className="  text-[17px] font-semibold"> {blog.blogPublishDate} </p>
+
+                </span>
                 <span className="flex items-center text-gray-500">
                   <FaCommentDots className="text-[17px] mt-2 mr-2" />
                   <p className="mt-2 text-[17px] font-semibold">{blog.blogComments.length} Comments</p>
                 </span>
               </div>
-              <p className="text-gray-400 font-medium text-[16px] text-start">
+              <p className="text-gray-700 dark:text-gray-700 font-opensans">
                 {blog.blogDescription.slice(0, 110)}...
                 <Link to={`/BlogDetails/${blog._id}`} className="text-primary">
                   Read More

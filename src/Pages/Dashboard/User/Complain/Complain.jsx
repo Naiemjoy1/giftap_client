@@ -71,74 +71,66 @@ const Complain = () => {
     return (
         <div>
 
-            <div className="overflow-x-auto  lg:flex justify-between space-y-4 gap-4  ">
+            <div className="overflow-x-auto lg:flex lg:justify-between lg:space-y-0 space-y-6 lg:gap-6 p-4">
 
                 {/* Complaint Form */}
+                <div className="lg:w-[60%] w-full">
+                    <h1 className="text-center text-3xl font-bold">Complain Form</h1>
+                    <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
 
-                <div className=" lg:w-[60%] p-4">
-                    <h1 className="text-center text-3xl font-bold">Complaint Form</h1>
-                    <form onSubmit={handleSubmit(onSubmit)} >
-
-                        <div className="lg:flex justify-around mt-6">
-
-                            <div className="form-control">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                            {/* Customer Name */}
+                            <div className="form-control w-full">
                                 <label className="label">
                                     <span className="label-text">Customer Name</span>
                                 </label>
                                 <input
                                     type="text"
                                     defaultValue={user.displayName}
-                                    className="input input-bordered w-80 lg:w-96 "
+                                    className="input input-bordered w-full"
                                     disabled
                                 />
-
                             </div>
 
-                            <div className="form-control">
+                            {/* Customer Email */}
+                            <div className="form-control w-full">
                                 <label className="label">
                                     <span className="label-text">Customer Email</span>
                                 </label>
-
                                 <input
                                     type="text"
                                     defaultValue={user.email}
-                                    className="input input-bordered w-80 lg:w-96"
+                                    className="input input-bordered w-full"
                                     disabled
                                 />
-
-
                             </div>
                         </div>
 
                         {/* Complaint Form Section */}
-                        <div className="lg:flex justify-around mt-2">
-
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                             {/* Subject */}
-                            <div className="form-control">
+                            <div className="form-control w-full">
                                 <label className="label">
                                     <span className="label-text">Subject</span>
                                 </label>
                                 <input
                                     type="text"
                                     placeholder="Product Related Problem..."
-                                    className="input input-bordered w-80 lg:w-96"
+                                    className="input input-bordered w-full"
                                     {...register("subject", { required: true })}
-
                                 />
-
                                 {errors.subject && (
                                     <span className="text-red-500">This field is required</span>
                                 )}
                             </div>
 
-
-                            {/* Shop Category Section */}
-                            <div className="form-control ">
+                            {/* Store Name */}
+                            <div className="form-control w-full">
                                 <label className="label">
                                     <span className="label-text">Store Name</span>
                                 </label>
                                 <select
-                                    className="input input-bordered w-80 lg:w-96 "
+                                    className="input input-bordered w-full"
                                     {...register("storeName", { required: true })}
                                 >
                                     <option value="">Select Category</option>
@@ -148,7 +140,7 @@ const Complain = () => {
                                                 .toLowerCase()
                                                 .split(" ")
                                                 .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                                                .join(" ")}{" "}
+                                                .join(" ")}
                                         </option>
                                     ))}
                                     <option value={"others"}>others</option>
@@ -157,23 +149,26 @@ const Complain = () => {
                                     <span className="text-red-500">This field is required</span>
                                 )}
                             </div>
-
                         </div>
 
-                        {/* Shop Category Section */}
-                        <div className="form-control lg:ml-6 mt-2">
+                        {/* Complaint Description */}
+                        <div className="form-control w-full mt-2">
                             <label className="label">
                                 <span className="label-text">Description</span>
                             </label>
-                            <textarea className="textarea textarea-bordered lg:w-[820px] " placeholder="Description of Quality Issue..."
+                            <textarea
+                                className="textarea textarea-bordered w-full"
+                                placeholder="Description of Quality Issue..."
                                 {...register("complainDescription", { required: true })}
                             ></textarea>
                             {errors.complainDescription && (
                                 <span className="text-red-500">This field is required</span>
                             )}
                         </div>
+
+                        {/* Submit Button */}
                         <div className="form-control mt-6">
-                            <button className="btn btn-primary text-white">
+                            <button className="btn btn-primary text-white w-full">
                                 {loading ? (
                                     <span className="loading loading-ring loading-sm"></span>
                                 ) : (
@@ -182,24 +177,17 @@ const Complain = () => {
                             </button>
                         </div>
                     </form>
-
                 </div>
 
-
                 {/* Terms of Use for Giftap */}
-                <div className=" items-center p-4 border m-2 rounded-md border-primary h-60 lg:w-[40%] ">
-                    <h2 className="flex justify-center items-center text-xl font-semibold mr-4">
-                        Terms of Use for Giftap
-                    </h2>
-                    <p className="items-center my-4">
-                        Welcome to <span className="text-primary">GiftTap</span>! If you would like to submit a complaint as a user, seller, or admin of GiftTap, please do not hesitate to reach out to us. Your experience is extremely important to us, and we take your complaints seriously.
-
-                        Our customer service team will promptly review your complaint and take necessary actions. Your feedback is valuable in helping us improve our services, so we appreciate your input.
-
-                        Thank you for being a part of the GiftTap family!
+                <div className="lg:w-[40%] w-full p-4 border border-primary rounded-md">
+                    <h2 className="text-xl font-semibold text-center">Terms of Use for Giftap</h2>
+                    <p className="my-4 font-opensans  leading-loose">
+                        Welcome to <span className="text-primary">GiftTap</span>! If you have any concerns or issues while using GiftTap as a user, seller, or admin, please feel free to contact us. We value your experience on our platform and take every complaint with the utmost seriousness. Our dedicated customer support team will promptly review your concern and take the necessary steps to resolve the issue as quickly as possible. Your feedback plays a crucial role in helping us enhance the quality of our services, and we are truly grateful for your input. Thank you for being a valued member of the GiftTap community, and we look forward to continuing to serve you!
                     </p>
                 </div>
             </div>
+
 
         </div>
     );
