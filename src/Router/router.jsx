@@ -18,6 +18,7 @@ import Seller from "../Pages/Dashboard/Seller/Seller";
 import PrivetRoute from "./PrivetRoute/PrivetRoute";
 import AdminRoute from "./AdminRoute/AdminRoute";
 import SellerRoute from "./SellerRoute/SellerRoute";
+import CategoryPage from "../Pages/Home/Category/CategoryPage/CategoryPage";
 
 export const router = createBrowserRouter([
   {
@@ -53,6 +54,11 @@ export const router = createBrowserRouter([
         path: "/about",
         element: <About></About>,
       },
+      {
+        path: "/category/:category",
+        element: <CategoryPage></CategoryPage>,
+        loader: ({ params }) => fetch(`http://localhost:3000/products/category/${params.category}`)
+      },      
       {
         path: "/blog",
         element: <Blog></Blog>,
