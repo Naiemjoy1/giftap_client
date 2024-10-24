@@ -30,9 +30,13 @@ const Subscription = () => {
                             </ul>
                         </div>
                         <div className="mt-4">
-                            <button className="w-full px-4 py-2 font-semibold text-white bg-primary rounded-lg hover:bg-[#d93b48] transition-colors duration-300">
-                                Start Free
-                            </button>
+
+                            <Link to={'/choose-payment-method'}>
+
+                                <button className="w-full px-4 py-2 font-semibold text-white bg-primary rounded-lg hover:bg-[#d93b48] transition-colors duration-300">
+                                    Start Free
+                                </button>
+                            </Link>
                         </div>
                     </div>
 
