@@ -13,17 +13,26 @@ const SignUp = ({ toggleForm, setReset }) => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [passwordMatch, setPasswordMatch] = useState(true);
 
   const {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm();
 
   useEffect(() => {
     setReset(() => reset);
   }, [setReset, reset]);
+
+  const password = watch("password");
+  const confirmPassword = watch("confirmPassword");
+
+  useEffect(() => {
+    setPasswordMatch(password === confirmPassword);
+  }, [password, confirmPassword]);
 
   const onSubmit = async (data) => {
     setLoading(true);
@@ -53,13 +62,13 @@ const SignUp = ({ toggleForm, setReset }) => {
       if (res.data.insertedId) {
         reset();
         toast.success("User Created Successfully");
-        navigate("/"); // Navigate to home
+        navigate("/");
       }
     } catch (error) {
       console.error("Error in onSubmit:", error);
       toast.error("Error in onSubmit");
     } finally {
-      setLoading(false); // Ensure loading is set to false here
+      setLoading(false);
     }
   };
 
@@ -149,8 +158,35 @@ const SignUp = ({ toggleForm, setReset }) => {
               <span className="text-red-500">Password is required</span>
             )}
           </div>
+
+          <div className="form-control relative">
+            <input
+              {...register("confirmPassword", { required: true })}
+              type={showPassword ? "text" : "password"}
+              placeholder="Confirm Password"
+              className="input input-bordered"
+            />
+            <span
+              className="absolute top-4 right-4 cursor-pointer"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <IoMdEye /> : <IoIosEyeOff />}
+            </span>
+            {errors.confirmPassword && (
+              <span className="text-red-500">Confirm Password is required</span>
+            )}
+            {!passwordMatch && (
+              <span className="text-red-500">Passwords do not match</span>
+            )}
+          </div>
+
           <div className="form-control mt-6">
-            <button className="btn btn-primary text-white">Sign Up</button>
+            <button
+              className="btn btn-primary text-white"
+              disabled={!passwordMatch}
+            >
+              Sign Up
+            </button>
           </div>
         </form>
       </section>

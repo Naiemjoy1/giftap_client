@@ -59,7 +59,7 @@ const ProductReview = ({ product }) => {
 
   return (
     <div className="space-y-6">
-      <p className="uppercase text-base font-medium">
+      <p className="uppercase text-base font-medium font-opensans">
         {productReviews.length} review{productReviews.length !== 1 ? "s" : ""}{" "}
         for {name}
       </p>
@@ -89,26 +89,26 @@ const ProductReview = ({ product }) => {
                 value={review.rating}
                 readOnly
               />
-              <p>
+              <p className="font-poppins font-semibold">
                 {userDetail ? userDetail.name : "Anonymous"}
-                <span className="text-gray-400">
+                <span className="text-gray-400 font-light text-xs">
                   {" "}
                   - {new Date(review.date).toLocaleDateString()}
                 </span>
               </p>
-              <p>{review.review}</p>
+              <p className="font-opensans">{review.review}</p>
             </div>
           </section>
         );
       })}
 
       <section>
-        <p className="text-lg">Add a review</p>
+        <p className="text-lg font-poppins">Add a review</p>
         <div className="divider divider-primary"></div>
         <form className="card-body" onSubmit={handleSubmit}>
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Your Rating *</span>
+              <span className="label-text font-opensans">Your Rating *</span>
             </label>
             <Rating
               style={{ maxWidth: 180 }}
@@ -120,7 +120,7 @@ const ProductReview = ({ product }) => {
           </div>
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Your Review *</span>
+              <span className="label-text font-opensans">Your Review *</span>
             </label>
             <textarea
               type="text"
@@ -134,7 +134,7 @@ const ProductReview = ({ product }) => {
           <div className="mt-6 flex justify-start">
             <button
               type="submit"
-              className="btn btn-primary text-white"
+              className="btn btn-primary text-white font-opensans"
               disabled={userHasReviewed}
             >
               {userHasReviewed ? "Submitted" : "Submit"}

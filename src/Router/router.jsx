@@ -18,6 +18,9 @@ import Seller from "../Pages/Dashboard/Seller/Seller";
 import PrivetRoute from "./PrivetRoute/PrivetRoute";
 import AdminRoute from "./AdminRoute/AdminRoute";
 import SellerRoute from "./SellerRoute/SellerRoute";
+import CategoryPage from "../Pages/Home/Category/CategoryPage/CategoryPage";
+import PaymentMethod from "../Pages/Home/Subscription/PaymentMethod/PaymentMethod";
+import Payment from "../Pages/Home/Subscription/PaymentMethod/Payment/Payment";
 import Privacy from "../Shared/Footer/Privacy";
 import TernsCondition from "../Shared/Footer/TernsCondition";
 
@@ -56,6 +59,12 @@ export const router = createBrowserRouter([
         element: <About></About>,
       },
       {
+        path: "/category/:category",
+        element: <CategoryPage></CategoryPage>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/products/category/${params.category}`),
+      },
+      {
         path: "/blog",
         element: <Blog></Blog>,
       },
@@ -86,12 +95,20 @@ export const router = createBrowserRouter([
         element: <TrackOrders></TrackOrders>,
       },
       {
+        path: "/payment",
+        element: <Payment></Payment>,
+      },
+      {
         path: "/profile",
         element: (
           <PrivetRoute>
             <ProfileDetails></ProfileDetails>
           </PrivetRoute>
         ),
+      },
+      {
+        path: "/choose-payment-method",
+        element: <PaymentMethod></PaymentMethod>,
       },
 
       {

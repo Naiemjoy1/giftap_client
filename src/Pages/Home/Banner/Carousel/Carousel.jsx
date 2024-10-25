@@ -2,8 +2,22 @@ import { Pagination, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
+import useAxiosPublic from "../../../../Components/Hooks/useAxiosPublic";
+import { useEffect, useState } from "react";
 
 const Carousel = () => {
+  const [banner, setBanner] = useState([]);
+  const axiosPublic = useAxiosPublic();
+  useEffect(() => {
+    axiosPublic.get('/banner')
+      .then(response => {
+        setBanner(response.data)
+      })
+      .catch(error => {
+        console.error('Error fetching banners:', error);
+      });
+  }, [axiosPublic]);
+  console.log(banner)
   return (
     <div>
       <Swiper
@@ -19,40 +33,19 @@ const Carousel = () => {
         modules={[Pagination, Autoplay]}
         className="mySwiper"
       >
-        <SwiperSlide>
-          <div className="h-[70vh] flex items-center justify-center bg-gray-100">
-            <div>
-              <img
-                className="max-h-full object-contain"
-                src="https://i.ibb.co/Tt4z6zZ/Green-and-Yellow-Simple-Clean-Shoes-Sale-Banner-1.png"
-                alt="Banner"
-              />
+        {
+          banner.map(ban => ban.type ==='running' && <SwiperSlide key={ban._id}>
+            <div className="h-[70vh] flex items-center justify-center bg-gray-100">
+              <div>
+                <img
+                  className="max-h-full object-contain"
+                  src={ban.bannerUrl}
+                  alt="Banner"
+                />
+              </div>
             </div>
-          </div>
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <div className="h-[70vh] flex items-center justify-center bg-gray-100">
-            <div>
-              <img
-                className="max-h-full object-contain"
-                src="https://i.ibb.co.com/6tR71tb/Simple-Modern-Photo-Collage-Autumn-Fashion-Sale-Banner-1.png"
-                alt="Fashion"
-              />
-            </div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="h-[70vh] flex items-center justify-center bg-gray-100">
-            <div>
-              <img
-                className="max-h-full object-contain"
-                src="https://i.ibb.co.com/zbHkDSF/Grey-Minimalist-Special-Offer-Banner-Landscape-1.png"
-                alt="Fashion"
-              />
-            </div>
-          </div>
-        </SwiperSlide>
+          </SwiperSlide>)
+        }
 
       </Swiper>
     </div>

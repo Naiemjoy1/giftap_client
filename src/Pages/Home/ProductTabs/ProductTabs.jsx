@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Tabs,
   TabsHeader,
@@ -7,7 +7,6 @@ import {
   TabPanel,
 } from "@material-tailwind/react";
 import NewProduct from "./BestProduct/NewProduct/NewProduct";
-import TopSeller from "./TopSeller/TopSeller";
 import BestProduct from "./BestProduct/BestProduct";
 
 const ProductTabs = () => {
@@ -43,13 +42,6 @@ const ProductTabs = () => {
             >
               <h1 className="md:text-2xl relative z-50">Top Product</h1>
             </Tab>
-            <Tab
-              value="topSeller"
-              onClick={() => setActiveTab("topSeller")}
-              className={activeTab === "topSeller" ? "text-white" : "text-gray-500"}
-            >
-              <h1 className="md:text-2xl relative z-50">Top Seller</h1>
-            </Tab>
           </TabsHeader>
 
           
@@ -65,11 +57,7 @@ const ProductTabs = () => {
                   <BestProduct />
                 </div>
               </TabPanel>
-              <TabPanel value="topSeller">
-                <div className="w-full h-full overflow-y-auto">
-                  <TopSeller />
-                </div>
-              </TabPanel>
+              
             </TabsBody>
           </div>
         </Tabs>

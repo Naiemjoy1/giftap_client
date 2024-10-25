@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../../Components/Hooks/useAuth";
 import useUsers from "../../../../Components/Hooks/useUsers";
-import useAxiosPublic from "../../../../Components/Hooks/useAxiosPublic";
 import { IoCheckmarkCircle } from "react-icons/io5";
 import { FaCircleXmark } from "react-icons/fa6";
 import toast from "react-hot-toast";
@@ -121,8 +120,11 @@ const AccountDetails = () => {
   };
 
   return (
-    <div className="flex justify-between gap-4">
-      <form onSubmit={handleSubmit(onSubmit)} className="card-body w-1/2">
+    <div className="lg:flex md:flex justify-between gap-4">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="card-body md:w-1/2 lg:w-1/2"
+      >
         <div className="form-control">
           <label className="label">
             <span className="label-text">Name</span>
@@ -205,7 +207,7 @@ const AccountDetails = () => {
         </div>
       </form>
 
-      <section className="w-1/2 flex items-center justify-center">
+      <section className="md:w-1/2 lg:w-1/2 flex items-center justify-center">
         {image ? (
           <img
             src={image}

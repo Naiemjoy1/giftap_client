@@ -16,12 +16,12 @@ const Addresses = () => {
   const shippingInfo = usersDetails?.address?.shipping[0];
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 px-4 lg:p-0">
       <p>
         The Following addresses will be used on the checkout page by default
       </p>
-      <div className="flex justify-between gap-10">
-        <section className="w-1/2">
+      <div className="lg:flex md:flex justify-between gap-10">
+        <section className="lg:w-1/2 md:w-1/2">
           <p className="font-bold">Billing Address</p>
 
           {billingInfo ? (
@@ -84,7 +84,7 @@ const Addresses = () => {
             </div>
           </dialog>
         </section>
-        <section className="w-1/2">
+        <section className="lg:w-1/2 md:w-1/2">
           <p className="font-bold">Shipping Address</p>
           {shippingInfo ? (
             <div className="border p-4 rounded-xl border-primary relative mt-2">

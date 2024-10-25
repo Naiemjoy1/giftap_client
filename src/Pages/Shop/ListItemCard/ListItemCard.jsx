@@ -137,7 +137,7 @@ const ListItemCard = ({ item }) => {
       />
 
       <div className="flex-grow pl-4">
-        <div className="flex justify-between items-start">
+        <div className="flex justify-between items-start font-opensans">
           {category === "digital gift" ? (
             <p className="text-gray-700 font-semibold">
               {priceGroup.length}
@@ -151,63 +151,97 @@ const ListItemCard = ({ item }) => {
               </span>
             </p>
           )}
-
-          {wishProduct ? (
-            <button
-              onClick={() => handleRemove(wishProduct._id)}
-              className="rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75"
-            >
-              <FaHeart className="text-primary" />
-            </button>
+          {user ? (
+            <>
+              {wishProduct ? (
+                <button
+                  onClick={() => handleRemove(wishProduct._id)}
+                  className="rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75"
+                >
+                  <FaHeart className="text-primary" />
+                </button>
+              ) : (
+                <button
+                  onClick={handleAddTowish}
+                  className="rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75"
+                >
+                  <FaRegHeart className="text-primary" />
+                </button>
+              )}
+            </>
           ) : (
-            <button
-              onClick={handleAddTowish}
-              className="rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75"
-            >
+            <button className="rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
               <FaRegHeart className="text-primary" />
             </button>
           )}
         </div>
-        <p className="text-sm text-gray-400">
+        <p className="text-sm text-gray-400 font-opensans">
           Store : <span className="text-black">{store_name}</span>
         </p>
 
-        <h3 className="mt-2 text-lg font-medium text-gray-900">
+        <h3 className="mt-2 text-lg font-medium text-gray-900 font-poppins">
           {truncatedName}
         </h3>
 
-        <p className="mt-1 text-gray-700 line-clamp-3">
+        <p className="mt-1 text-gray-700 line-clamp-3 font-opensans">
           {truncatedDescription}
         </p>
 
         <div className="mt-4 flex gap-4">
           {category === "digital gift" ? (
-            <Link to={`/shop/${_id}`} className="flex-grow">
-              <button
-                onClick={handleRecent}
-                className="block w-full rounded bg-gray-200 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105"
-              >
-                See More
-              </button>
-            </Link>
+            <>
+              {user ? (
+                <Link to={`/shop/${_id}`} className="flex-grow">
+                  <button
+                    onClick={handleRecent}
+                    className="block w-full rounded bg-gray-200 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105 font-opensans"
+                  >
+                    See More
+                  </button>
+                </Link>
+              ) : (
+                <Link to={`/shop/${_id}`} className="flex-grow">
+                  <button className="block w-full rounded bg-gray-200 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105 font-opensans">
+                    See More
+                  </button>
+                </Link>
+              )}
+            </>
           ) : (
             <>
-              <Link to={`/shop/${_id}`} className="flex-grow">
-                <button
-                  onClick={handleRecent}
-                  className="block w-full rounded bg-gray-200 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105"
-                >
-                  See More
-                </button>
-              </Link>
+              {user ? (
+                <Link to={`/shop/${_id}`} className="flex-grow">
+                  <button
+                    onClick={handleRecent}
+                    className="block w-full rounded bg-gray-200 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105 font-opensans"
+                  >
+                    See More
+                  </button>
+                </Link>
+              ) : (
+                <Link to={`/shop/${_id}`} className="flex-grow">
+                  <button className="block w-full rounded bg-gray-200 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105 font-opensans">
+                    See More
+                  </button>
+                </Link>
+              )}
 
-              <button
-                type="button"
-                onClick={handleAddToCart}
-                className="flex-grow block rounded bg-primary px-4 py-3 text-sm font-medium text-white transition hover:scale-105"
-              >
-                Add to Cart
-              </button>
+              {user ? (
+                <button
+                  type="button"
+                  onClick={handleAddToCart}
+                  className="flex-grow block rounded bg-primary px-4 py-3 text-sm font-medium text-white transition hover:scale-105 font-opensans"
+                >
+                  Add to Cart
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="flex-grow block rounded bg-primary px-4 py-3 text-sm font-medium text-white transition hover:scale-105 font-opensans"
+                >
+                  Add to Cart
+                </button>
+              )}
             </>
           )}
         </div>
