@@ -6,20 +6,22 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import useMonthlyStats from "../../../../../Components/Hooks/useMonthlyStats";
 
-const LineCharts = () => {
-  const [adminDate] = useMonthlyStats();
+const LineCharts = ({ currentSellerStat }) => {
+  if (!currentSellerStat || !currentSellerStat.dailyData) {
+    return <div>No data available</div>;
+  }
 
-  const chartData = adminDate.map((item) => ({
-    date: new Date(item.date).toLocaleDateString("en-US", {
-      day: "numeric",
-      month: "short",
-    }),
-    amount: item.totalAmount,
-    orders: item.count,
-    amt: item.count * 100,
-  }));
+  const chartData = Object.entries(currentSellerStat.dailyData).map(
+    ([date, { totalPrice, count }]) => ({
+      date: new Date(date).toLocaleDateString("en-US", {
+        day: "numeric",
+        month: "short",
+      }),
+      amount: totalPrice,
+      orders: count,
+    })
+  );
 
   return (
     <div className="w-full h-96 sm:h-72 md:h-60 lg:h-44">

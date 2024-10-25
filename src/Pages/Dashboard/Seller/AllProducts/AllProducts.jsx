@@ -14,13 +14,12 @@ const AllProducts = () => {
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
 
-  const [users] = useUsers();
+  const [users] = useUsers() || []; // Fallback to empty array
+  const useDetails = users.find((userItem) => userItem.email === user?.email);
 
-  const useDetails = users.find((userId) => userId.email === user.email);
-
-  const userProducts = products.filter(
-    (product) => product.userId === useDetails._id
-  );
+  const userProducts = useDetails
+    ? products.filter((product) => product.userId === useDetails._id)
+    : []; // Fallback to empty array
 
   const [editProductId, setEditProductId] = useState(null);
 
@@ -76,7 +75,7 @@ const AllProducts = () => {
           <EditProduct
             productId={editProductId}
             handleBackClick={handleBackClick}
-          />{" "}
+          />
         </div>
       ) : (
         <div className="overflow-x-auto">
@@ -92,7 +91,7 @@ const AllProducts = () => {
                 </tr>
               </thead>
               <tbody>
-                {userProducts?.map((product) => (
+                {userProducts.map((product) => (
                   <tr key={product._id}>
                     <th>
                       <button

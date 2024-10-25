@@ -3,7 +3,8 @@ import HomeSectionHeading from "../../../ReUseComponents/HomeSectionHeading/Home
 
 const shop = [
   {
-    image: "https://st3.depositphotos.com/1001860/16375/i/380/depositphotos_163757632-stock-photo-amazon-logo-on-a-white.jpg",
+    image:
+      "https://st3.depositphotos.com/1001860/16375/i/380/depositphotos_163757632-stock-photo-amazon-logo-on-a-white.jpg",
     title: "Amaazon",
     description: "Delivery within 24 hours",
   },
@@ -19,12 +20,14 @@ const shop = [
     description: "Delivery within 24 hours",
   },
   {
-    image: "https://t4.ftcdn.net/jpg/03/30/78/95/360_F_330789521_9C5UDxs7qYNn0YYSo4mDO1VWij5ovX4v.jpg",
+    image:
+      "https://t4.ftcdn.net/jpg/03/30/78/95/360_F_330789521_9C5UDxs7qYNn0YYSo4mDO1VWij5ovX4v.jpg",
     title: "Savage",
     description: "Delivery within 24 hours",
   },
   {
-    image: "https://shelteredalliance.org/wp-content/uploads/2023/04/Onehope-Refuge-08.png",
+    image:
+      "https://shelteredalliance.org/wp-content/uploads/2023/04/Onehope-Refuge-08.png",
     title: "OneHope",
     description: "Delivery within 24 hours",
   },
@@ -50,12 +53,12 @@ const shop = [
 
 const TrustedShop = () => {
   return (
-    <div className="max-w-screen-xl mx-auto p-4">
-      <HomeSectionHeading 
-        subTitle={'Shop with giftap'}
-        title={'Our trusted shop'}
+    <div className="max-w-screen-xl mx-auto">
+      <HomeSectionHeading
+        subTitle={"Shop with giftap"}
+        title={"Our trusted shop"}
       ></HomeSectionHeading>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4">
         {shop.map((item, index) => (
           <div
             key={index}

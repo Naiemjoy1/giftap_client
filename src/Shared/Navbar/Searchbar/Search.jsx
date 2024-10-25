@@ -56,7 +56,7 @@ const Search = () => {
 
                 return (
                   <Link
-                    to={`/productDetails/${result._id}`}
+                    to={`/shop/${result._id}`}
                     key={result._id}
                     className="flex justify-start items-center gap-4 ml-2 p-2 shadow-lg rounded-lg border bg-gray-50 hover:bg-gray-100 transition-colors duration-200"
                     onClick={handleClick}

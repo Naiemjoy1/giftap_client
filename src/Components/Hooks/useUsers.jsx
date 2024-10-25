@@ -17,8 +17,8 @@ const useUsers = () => {
         const res = await axiosSecure.get("/users");
         return res.data;
       } catch (error) {
-        console.error("Error fetching users:", error); // Log error
-        throw error; // Re-throw error for React Query to handle
+        console.error("Error fetching users:", error);
+        throw error;
       }
     },
   });

@@ -41,9 +41,7 @@ const Dashboard = () => {
 
   return (
     <div className="p-6 space-y-6">
-      {/* Stats Section */}
       <div className="grid lg:grid-cols-2 gap-6">
-        {/* Total Orders Card */}
         <div className="bg-primary text-white p-6 rounded-lg shadow-lg flex items-center space-x-4">
           <AiOutlineShoppingCart className="text-5xl" />
           <div>
@@ -55,7 +53,6 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Total Order Amount Card */}
         <div className="bg-secondary text-white p-6 rounded-lg shadow-lg flex items-center space-x-4">
           <AiOutlineDollar className="text-5xl" />
           <div>
@@ -70,7 +67,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Pie Chart for Delivery Status */}
       <div className="bg-white p-6 rounded-lg shadow-lg">
         <h3 className="text-xl font-semibold mb-4">Order Delivery Status</h3>
         {myOrders.length === 0 ? (
@@ -101,11 +97,6 @@ const Dashboard = () => {
             </PieChart>
           </ResponsiveContainer>
         )}
-      </div>
-
-      {/* Subscriptions Section */}
-      <div>
-        <Subscriptions></Subscriptions>
       </div>
     </div>
   );

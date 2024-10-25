@@ -1,17 +1,25 @@
-import useAdminstats from "../../../../Components/Hooks/useAdminstats";
 import { RiFilePaper2Line, RiShoppingBasket2Line } from "react-icons/ri";
 import { HiOutlineCurrencyDollar } from "react-icons/hi";
 import { MdOutlinePeopleAlt } from "react-icons/md";
 import LineCharts from "./LineCharts/LineCharts";
 import ShowPie from "./showPie/showPie";
 import StockOut from "./StockOut/StockOut";
-import useSellerOrders from "../../../../Components/Hooks/useSellerStat";
 import useSellerStat from "../../../../Components/Hooks/useSellerStat";
+import useAuth from "../../../../Components/Hooks/useAuth";
+import useSellers from "../../../../Components/Hooks/useSellers";
 
 const Dashboard = () => {
-  const [admin] = useAdminstats();
-  const [sellerData] = useSellerStat();
-  console.log("sellerData", sellerData);
+  const { user } = useAuth();
+  const [sellers] = useSellers();
+
+  const currentSeller = sellers.find((seller) => seller.email === user.email);
+
+  const [sellerStat] = useSellerStat();
+
+  const currentSellerStat =
+    currentSeller && sellerStat[currentSeller.shopName]
+      ? sellerStat[currentSeller.shopName]
+      : null;
 
   return (
     <div className="space-y-4">
@@ -21,15 +29,22 @@ const Dashboard = () => {
             <p className="text-sm text-primary">Revenue of this month</p>
             <p className=" space-x-1">
               <span className="font-bold text-2xl">
-                ${admin.currentMonthRevenue?.toFixed(2)}
+                $
+                {currentSellerStat?.currentMonthTotal
+                  ? currentSellerStat.currentMonthTotal.toFixed(2)
+                  : 0}
               </span>
               <span className="text-green-600 text-sm">
-                (+{admin.revenueIncreasePercentage}%)
+                (+
+                {currentSellerStat?.monthlyIncreasePercentage
+                  ? currentSellerStat.monthlyIncreasePercentage
+                  : 0}
+                %)
               </span>
             </p>
           </div>
           <div>
-            <LineCharts />
+            <LineCharts currentSellerStat={currentSellerStat} />
           </div>
         </div>
         <div className="lg:w-1/2 grid grid-cols-2 gap-4 justify-between">
@@ -40,7 +55,12 @@ const Dashboard = () => {
                 <RiShoppingBasket2Line />
               </p>
             </div>
-            <p className="text-2xl">${admin.todayRevenue?.toFixed(2) || 0}</p>
+            <p className="text-2xl">
+              $
+              {currentSellerStat?.todayTotal
+                ? currentSellerStat.todayTotal.toFixed(2)
+                : 0}
+            </p>
             <p className="text-xs">*Update every order success</p>
           </div>
           <div className="p-4 rounded-lg bg-white space-y-2">
@@ -50,19 +70,24 @@ const Dashboard = () => {
                 <HiOutlineCurrencyDollar />
               </p>
             </div>
-            <p className="text-2xl">${admin.totalRevenue?.toFixed(2) || 0}</p>
+            <p className="text-2xl">
+              $
+              {currentSellerStat?.grandTotal
+                ? currentSellerStat.grandTotal.toFixed(2)
+                : 0}
+            </p>
             <p className="text-xs">
-              {admin.revenueIncreasePercentage > 0 ? (
+              {currentSellerStat?.grandTotal > 0 ? (
                 <>
                   <span className="text-green-600">
-                    +{admin.revenueIncreasePercentage}%
+                    +{currentSellerStat?.yearlyIncreasePercentage}%
                   </span>{" "}
                   sales increase
                 </>
               ) : (
                 <>
                   <span className="text-red-600">
-                    -{Math.abs(admin.revenueIncreasePercentage)}%
+                    -{Math.abs(currentSellerStat?.yearlyIncreasePercentage)}%
                   </span>{" "}
                   sales decrease
                 </>
@@ -76,19 +101,23 @@ const Dashboard = () => {
                 <RiFilePaper2Line />
               </p>
             </div>
-            <p className="text-2xl">{admin.totalSuccessfulPayments}</p>
+            <p className="text-2xl">
+              {currentSellerStat?.grandCount ? currentSellerStat.grandCount : 0}
+            </p>
             <p className="text-xs">
-              {admin.successfulPaymentsIncreasePercentage > 0 ? (
+              {currentSellerStat?.yearlyCountIncreasePercentage > 0 ? (
                 <>
                   <span className="text-green-600">
-                    +{admin.successfulPaymentsIncreasePercentage}%
+                    +{currentSellerStat?.yearlyCountIncreasePercentage}%
                   </span>{" "}
                   sales increase
                 </>
               ) : (
                 <>
                   <span className="text-red-600">
-                    -{Math.abs(admin.successfulPaymentsIncreasePercentage)}%
+                    -
+                    {Math.abs(currentSellerStat?.yearlyCountIncreasePercentage)}
+                    %
                   </span>{" "}
                   sales decrease
                 </>
@@ -102,16 +131,16 @@ const Dashboard = () => {
                 <MdOutlinePeopleAlt />
               </p>
             </div>
-            <p className="text-2xl">{admin.totalProducts}</p>
+            <p className="text-2xl">{currentSellerStat?.totalProducts}</p>
             <p className="text-xs">
-              Newly added {admin.totalNewlyAddedProducts} product
+              Newly added {currentSellerStat?.newProductsCount} product
             </p>
           </div>
         </div>
       </section>
       <section className=" lg:flex md:flex justify-center gap-4">
         <div className="lg:w-1/3 md:w-1/2 rounded-lg bg-white p-4 flex justify-center items-center">
-          <ShowPie admin={admin}></ShowPie>
+          <ShowPie currentSellerStat={currentSellerStat}></ShowPie>
         </div>
         <div className="lg:w-2/3 md:w-1/2 rounded-lg bg-white p-4">
           <StockOut></StockOut>
