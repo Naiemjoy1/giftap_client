@@ -1,8 +1,20 @@
+import useAuth from "../../../../../Components/Hooks/useAuth";
 import useProducts from "../../../../../Components/Hooks/useProducts";
+import useSellers from "../../../../../Components/Hooks/useSellers";
 
 const StockOut = () => {
+  const { user } = useAuth();
+  const [sellers] = useSellers();
+
+  const currentSeller = sellers.find((seller) => seller.email === user.email);
+
   const [products] = useProducts();
-  const stockOut = products.filter((product) => {
+
+  const currentProducts = products.filter(
+    (product) => product.store_name === currentSeller.shopName
+  );
+
+  const stockOut = currentProducts.filter((product) => {
     if (product.category === "digital gift") {
       return product.priceGroup.some((tier) => tier.quantity < 10);
     }

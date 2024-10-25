@@ -1,26 +1,32 @@
-import React from "react";
-import useAxiosSecure from "./useAxiosSecure";
 import useAuth from "./useAuth";
 import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "./useAxiosPublic";
 
 const useSellerStat = () => {
-  const axiosSecure = useAxiosSecure();
-
+  const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
 
   const {
     refetch,
-    data: sellerData = [],
+    data: sellerStat = [],
     isLoading,
+    isError,
+    error,
   } = useQuery({
-    queryKey: ["sellerData", user?.email],
+    queryKey: ["sellerStat", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get("/admin/orders");
+      if (!user?.email) return []; // Check for user email
+      const res = await axiosPublic.get("/seller/seller-statistics"); // Ensure the correct endpoint
       return res.data;
     },
+    enabled: !!user?.email, // Only fetch when the user is logged in
   });
 
-  return [sellerData, refetch, isLoading];
+  if (isError) {
+    console.error("Error fetching seller statistics:", error);
+  }
+
+  return [sellerStat, refetch, isLoading, isError];
 };
 
 export default useSellerStat;

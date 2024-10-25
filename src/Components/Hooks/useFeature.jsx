@@ -1,23 +1,23 @@
 import React from "react";
-import useAxiosSecure from "./useAxiosSecure";
 import useAuth from "./useAuth";
+import useAxiosSecure from "./useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 
-const useMonthlyStats = () => {
+const useFeature = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
   const {
     refetch,
-    data: adminDate = [],
+    data: featureData = [],
     isLoading,
     isError,
     error,
   } = useQuery({
-    queryKey: ["adminDate", user?.email],
+    queryKey: ["featureData", user?.email],
     queryFn: async () => {
       if (!user?.email) return [];
-      const res = await axiosSecure.get("/admin/day-wise-payments");
+      const res = await axiosSecure.get("/admin/featured-products");
       return res.data;
     },
     enabled: !!user?.email,
@@ -27,7 +27,7 @@ const useMonthlyStats = () => {
     console.error("Error fetching data:", error);
   }
 
-  return [adminDate, refetch, isLoading, isError];
+  return [featureData, refetch, isLoading, isError];
 };
 
-export default useMonthlyStats;
+export default useFeature;

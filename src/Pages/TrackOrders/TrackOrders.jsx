@@ -8,8 +8,10 @@ import { MdCancel } from "react-icons/md";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import useType from "../../Components/Hooks/useType";
+import useAuth from "../../Components/Hooks/useAuth";
 
 const TrackOrders = () => {
+  const { user } = useAuth();
   const [track, setTrack] = useState("");
   const [paymentData, setPaymentData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -31,6 +33,15 @@ const TrackOrders = () => {
   };
 
   const handleCancel = async (productId) => {
+    if (user.email !== paymentData.cus_email) {
+      Swal.fire({
+        icon: "warning",
+        title: "Unauthorized",
+        text: "You are not authorized to cancel this order.",
+      });
+      return;
+    }
+
     const productIndex = paymentData.productId.findIndex(
       (id) => id === productId
     );

@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { PieChart } from "@mui/x-charts/PieChart";
 
-const ShowPie = ({ admin }) => {
+const ShowPie = ({ currentSellerStat }) => {
   const [chartWidth, setChartWidth] = useState(400);
   const chartRef = useRef(null);
 
@@ -20,13 +20,13 @@ const ShowPie = ({ admin }) => {
     };
   }, []);
 
-  if (!admin || !admin?.deliverySummary) {
+  if (!currentSellerStat || !currentSellerStat.deliverySummary) {
     return <div>No delivery data available.</div>;
   }
 
-  const pieData = Object.entries(admin?.deliverySummary).map(
-    ([key, value], index) => ({
-      id: index,
+  const pieData = Object.entries(currentSellerStat.deliverySummary).map(
+    ([key, value]) => ({
+      id: key,
       value: value,
       label: key.charAt(0).toUpperCase() + key.slice(1),
     })

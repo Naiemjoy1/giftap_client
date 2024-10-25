@@ -1,5 +1,10 @@
 import React from "react";
-import { FaShippingFast, FaDollarSign, FaTools, FaRocket } from "react-icons/fa";
+import {
+  FaShippingFast,
+  FaDollarSign,
+  FaTools,
+  FaRocket,
+} from "react-icons/fa";
 import { PiRocketLaunch } from "react-icons/pi";
 import HomeSectionHeading from "../../../ReUseComponents/HomeSectionHeading/HomeSectionHeading";
 
@@ -48,10 +53,10 @@ const FeatureSection = () => {
         }
       ></HomeSectionHeading>
 
-      <div className="bg-white px-6 py-8 md:px-10 md:py-12 lg:px-20 lg:py-16">
+      <div className="bg-white px-6 py-4 md:px-10 md:py-12 lg:px-20 lg:py-4">
         {/* Center the container on large screens */}
         <div className="max-w-screen-xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {features.map((feature, index) => (
               <div
                 key={index}
