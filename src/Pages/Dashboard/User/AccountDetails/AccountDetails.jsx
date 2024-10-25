@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../../Components/Hooks/useAuth";
 import useUsers from "../../../../Components/Hooks/useUsers";
-import useAxiosPublic from "../../../../Components/Hooks/useAxiosPublic";
 import { IoCheckmarkCircle } from "react-icons/io5";
 import { FaCircleXmark } from "react-icons/fa6";
 import toast from "react-hot-toast";

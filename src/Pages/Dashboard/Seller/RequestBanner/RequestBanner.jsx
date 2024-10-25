@@ -1,11 +1,20 @@
 import { useState } from "react";
+import axios from "axios";
+import useAxiosSecure from "../../../../Components/Hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+import useAuth from "../../../../Components/Hooks/useAuth";
+import { AuthContext } from "../../../../Components/Provider/AuthProvider";
 
 const RequestBanner = () => {
   const [banner, setBanner] = useState(null); 
   const [preview, setPreview] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
-
+  const [loading, setLoading] = useState(false); // Loading state for image upload
   
+  // Call useAxiosSecure at the top level of the component
+  const axiosSecure = useAxiosSecure();
+  const userName = useAuth(AuthContext);
+
   const handleFileChange = (file) => {
     if (file) {
       setBanner(file);
@@ -13,24 +22,20 @@ const RequestBanner = () => {
     }
   };
 
-  
   const handleInputChange = (e) => {
     const file = e.target.files[0];
     handleFileChange(file);
   };
 
- 
   const handleDragOver = (e) => {
     e.preventDefault();
     setIsDragging(true);
   };
 
-  
   const handleDragLeave = () => {
-    setIsDragging(false); 
+    setIsDragging(false);
   };
 
-  // Handle drop event
   const handleDrop = (e) => {
     e.preventDefault();
     setIsDragging(false);
@@ -38,18 +43,35 @@ const RequestBanner = () => {
     handleFileChange(file); 
   };
 
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (banner) {
+      setLoading(true);
+
+      // Create FormData to send the image to Imgbb
       const formData = new FormData();
-      formData.append("banner", banner);
+      formData.append("image", banner);
 
-      console.log("Banner uploaded:", banner);
+      try {
+        // Upload to Imgbb using your API key
+        const image_hosting_key = import.meta.env.VITE_IMGBB_API;
+        const imgbbResponse = await axios.post(`https://api.imgbb.com/1/upload?key=${image_hosting_key}`, formData);
+        const imgbbUrl = imgbbResponse.data.data.url;
+        
 
-     
-      setBanner(null);
-      setPreview(null);
+        // Send the image URL to your backend to store in MongoDB
+        await axiosSecure.post("/banner", { bannerUrl: imgbbUrl, sellerName: userName.user.displayName, type: "pending" });
+        toast.success('Request success wait for admin confirmation')
+
+        // Reset state after successful upload
+        setBanner(null);
+        setPreview(null);
+      } catch (error) {
+        console.error("Error uploading banner:", error);
+        alert("There was an error uploading your banner. Please try again.");
+      } finally {
+        setLoading(false);
+      }
     } else {
       alert("Please select a banner to upload");
     }
@@ -61,9 +83,7 @@ const RequestBanner = () => {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div
-          className={`flex justify-center items-center w-full ${
-            isDragging ? "border-pink-500 bg-gray-200" : "border-gray-300 bg-white"
-          } h-60 border-2 border-dashed rounded-lg cursor-pointer hover:bg-gray-50`}
+          className={`flex justify-center items-center w-full ${isDragging ? "border-pink-500 bg-gray-200" : "border-gray-300 bg-white"} h-60 border-2 border-dashed rounded-lg cursor-pointer hover:bg-gray-50`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave} 
           onDrop={handleDrop} 
@@ -112,9 +132,10 @@ const RequestBanner = () => {
 
         <button
           type="submit"
-          className="w-full bg-gradient-to-r from-pink-500 to-red-500 text-white py-3 px-6 rounded-lg font-semibold hover:from-pink-600 hover:to-red-600 transition-colors shadow-lg"
+          className="w-full bg-primary text-white py-3 px-6 rounded-lg font-semibold hover:from-pink-600 hover:to-red-600 transition-colors shadow-lg"
+          disabled={loading}
         >
-          Request Advertise
+          {loading ? "Uploading..." : "Request Advertise"}
         </button>
       </form>
     </div>
