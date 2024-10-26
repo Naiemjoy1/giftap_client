@@ -2,10 +2,11 @@ import { Link, useLoaderData } from "react-router-dom";
 import useBlogs from "../../Components/Hooks/useBlogs";
 import useAuth from "../../Components/Hooks/useAuth";
 import toast from "react-hot-toast";
-import { FaCopy } from "react-icons/fa";
+import { FaCalendarAlt, FaCommentDots, FaCopy, FaFacebookF, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import { useState } from "react";
 import useAxiosPublic from "../../Components/Hooks/useAxiosPublic";
 import { useForm } from "react-hook-form";
+
 
 const BlogDetails = () => {
   const { user } = useAuth();
@@ -77,14 +78,14 @@ const BlogDetails = () => {
         {/* BlogDetails Left Side */}
         <div className="w-full lg:w-3/4 lg:p-4">
           <div>
-            <h1 className="text-3xl lg:text-5xl font-bold text-black my-4 mb-8">
+            <h1 className="text-3xl lg:text-4xl font-bold text-black my-4 mb-8">
               {blogTitle}
             </h1>
 
             <img src={blogImage} alt="GifTap has No Photo" className="w-full h-[700px] object-cover rounded-lg" />
-            <p className="text-lg lg:text-xl font-semibold text-gray-500 mt-8">{blogDescription}</p>
+            <p className="text-gray-700 dark:text-gray-700 font-opensans mt-8">{blogDescription}</p>
 
-            <h1 className="text-2xl lg:text-3xl font-bold text-black my-4 mb-4">
+            <h1 className="text-2xl lg:text-xl font-bold text-black my-4 mb-4">
               Comments
             </h1>
 
@@ -141,8 +142,8 @@ const BlogDetails = () => {
                     />
                     <div>
                       <div className=" bg-blue-100 rounded-2xl p-2">
-                        <h1 className="text-[16px] lg:text-[18px] font-bold text-black">{comment.commentName}</h1>
-                        <p className="ml-4 font-medium text-gray-700">{comment.comment}</p>
+                        <h1 className="text-[16px] lg:text-[16px] font-bold text-black">{comment.commentName}</h1>
+                        <p className="ml-4 font-opensans text-gray-700">{comment.comment}</p>
                       </div>
                       <div className="flex text-blue-600 ml-4 lg:ml-10 font-medium cursor-pointer">
                         <p className="ml-2">Like</p>
@@ -188,28 +189,20 @@ const BlogDetails = () => {
         {/* BlogDetails Right Side */}
         <div className="w-full lg:w-1/4 mt-8 lg:mt-0 lg:p-4">
           <div className="flex flex-col gap-6">
-            {/* Search functionality */}
-            <label className="input input-bordered flex items-center gap-2 lg:mt-8">
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Search Recent Blogs"
-                className="grow"
-              />
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                className="h-4 w-4 opacity-70"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </label>
+            {/* Social */}
+            <h1 className="text-gray-500 font-bold text-2xl mt-2">Social Media</h1>
+            {/* <hr className="text-gray-500 " /> */}
+            <section className="space-x-2">
+              <button className="bg-blue-600 p-2 text-white rounded-full">
+                <FaFacebookF />
+              </button>
+              <button className="bg-green-500 p-2 text-white rounded-full">
+                <FaWhatsapp />
+              </button>
+              <button className="bg-blue-700 p-2 text-white rounded-full">
+                <FaLinkedin />
+              </button>
+            </section>
 
             {/* Recent Blogs */}
             <div>
@@ -217,7 +210,7 @@ const BlogDetails = () => {
               <hr className="text-gray-500 mt-2" />
               <div className="space-y-4 mt-6">
                 {recentBlogs.slice(0, 4).map((blog) => (
-                  <div key={blog._id} className="flex items-start">
+                  <div key={blog._id} className="flex gap-4 items-start">
                     <Link to={`/BlogDetails/${blog._id}`}>
                       <img
                         src={blog.blogImage}
@@ -227,11 +220,23 @@ const BlogDetails = () => {
                     </Link>
                     <div>
                       <Link to={`/BlogDetails/${blog._id}`}>
-                        <h1 className="font-bold text-sm lg:text-[17px] text-gray-600 hover:text-primary">
+                        <h1 className="font-medium text-xl lg:text-[17px] text-gray-600 hover:text-primary">
                           {blog.blogTitle}
                         </h1>
                       </Link>
-                      <p className="text-gray-500 text-xs lg:text-sm font-bold mt-2">{blog.blogPublishDate}</p>
+
+                      <div className="flex">
+                        <div className="mt-2 flex  text-xl font-semibold text-gray-500">
+                          <FaCalendarAlt className="text-[14px] mt-2 mr-1" />
+                          <p className="  text-[14px] font-semibold"> {blog.blogPublishDate} </p>
+                        </div>
+                        <div className="flex items-center text-gray-500  ">
+                          <FaCommentDots className="text-[14px] mt-2 mr-1 ml-5" />
+                          <p className="mt-2 text-[14px] font-semibold">{blog.blogComments.length} Comments</p>
+                        </div>
+                      </div>
+
+
                     </div>
                   </div>
                 ))}
