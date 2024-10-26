@@ -51,7 +51,7 @@ const EventCalendar = () => {
     );
 
     return (
-        <div className="flex justify-center items-center min-h-screen p-4">
+        <div className="flex flex-col lg:flex-row justify-center items-center min-h-screen p-4 space-y-4 lg:space-y-0 lg:space-x-4">
             {/* Calendar Section */}
             <div className="lg:w-2/3 bg-white p-6 rounded-lg shadow-md">
                 <p className="font-bold text-center mb-7">Event Calendar</p>
@@ -90,7 +90,7 @@ const EventCalendar = () => {
             </div>
 
             {/* Special Occasion Section */}
-            <div className="lg:w-1/3 bg-white p-6 rounded-lg shadow-md ml-4">
+            <div className="lg:w-1/3 bg-white p-6 rounded-lg shadow-md">
                 <p className="font-bold text-center mb-7">Special Occasion</p>
                 <div className="mt-6">
                     {selectedDayEvents.length > 0 ? (
