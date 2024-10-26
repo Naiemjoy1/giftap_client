@@ -1,4 +1,3 @@
-import { Menu, Transition, Dialog } from '@headlessui/react';
 import { FaAnglesLeft, FaAnglesRight } from "react-icons/fa6";
 import add from 'date-fns/add';
 import isSameDay from 'date-fns/isSameDay';
@@ -7,10 +6,9 @@ import endOfMonth from 'date-fns/endOfMonth';
 import format from 'date-fns/format';
 import parseISO from 'date-fns/parseISO';
 import startOfToday from 'date-fns/startOfToday';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-import useAxiosPublic from '../../../../../Components/Hooks/useAxiosPublic';
-
+// Expanded events array
 const events = [
     { id: 1, name: "New Year's Day", startDatetime: '2024-01-01T00:00' },
     { id: 2, name: "National Hugging Day", startDatetime: '2024-01-21T00:00' },
@@ -28,51 +26,32 @@ const events = [
     { id: 14, name: "Easter Sunday", startDatetime: '2024-04-07T00:00' },
     { id: 15, name: "Independence Day", startDatetime: '2024-07-04T00:00' },
     { id: 16, name: "Global Handwashing Day", startDatetime: '2024-10-25T00:00' },
-    { id: 17, name: "World Kindness Day", startDatetime: '2024-10-26T00:00' },
-    { id: 18, name: "World Mental Day", startDatetime: '2024-10-27T00:00' },
-    { id: 19, name: "World Mental Day", startDatetime: '2024-10-29T00:00' }
+    { id: 17, name: "World Kindness Day", startDatetime: '2024-11-13T00:00' },
+    { id: 18, name: "Thanksgiving", startDatetime: '2024-11-28T00:00' },
+    { id: 19, name: "New Year's Eve", startDatetime: '2024-12-31T00:00' },
 ];
 
 function classNames(...classes) {
-    return classes.filter(Boolean).join(' ');
+    return classes.filter(Boolean).join(' ')
 }
 
 const EventCalendar = () => {
     const today = startOfToday();
-    const axiosPublic = useAxiosPublic(); 
     const [selectedDay, setSelectedDay] = useState(today);
     const [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'));
     const firstDayCurrentMonth = new Date(currentMonth);
-    const [offers, setOffers] = useState([]);
     
     const days = eachDayOfInterval({
         start: firstDayCurrentMonth,
         end: endOfMonth(firstDayCurrentMonth),
     });
 
-    const fetchOffers = async () => {
-        try {
-            const response = await axiosPublic.get("/offers");
-            setOffers(response.data); 
-        } catch (error) {
-            console.error("Error fetching offers:", error);
-        }
-    };
-
-    useEffect(() => {
-        fetchOffers();
-    }, []);
-
     const selectedDayEvents = events.filter((event) =>
         isSameDay(parseISO(event.startDatetime), selectedDay)
     );
 
-    const offersForSelectedDay = offers.filter((offer) =>
-        selectedDayEvents.some(event => isSameDay(parseISO(event.startDatetime), selectedDay))
-    );
-
     return (
-        <div className="lg:flex lg:space-x-6 p-4">
+        <div className="flex justify-center items-center min-h-screen p-4">
             {/* Calendar Section */}
             <div className="lg:w-2/3 bg-white p-6 rounded-lg shadow-md">
                 <p className="font-bold text-center mb-7">Event Calendar</p>
@@ -108,34 +87,21 @@ const EventCalendar = () => {
                         );
                     })}
                 </div>
+            </div>
 
-                {/* Special Offer Section */}
+            {/* Special Occasion Section */}
+            <div className="lg:w-1/3 bg-white p-6 rounded-lg shadow-md ml-4">
+                <p className="font-bold text-center mb-7">Special Occasion</p>
                 <div className="mt-6">
                     {selectedDayEvents.length > 0 ? (
                         <div className="p-4 bg-green-100 text-green-800 rounded-md">
-                            <p className="font-semibold">Special Day:</p>
-                            <p>Congratulations! It's <span className="font-bold">{selectedDayEvents[0].name}</span>. Enjoy this day with your special people!</p>
+                            <p className="font-semibold">Today is a special day!</p>
+                            <p>Congratulations! It's <span className="font-bold">{selectedDayEvents[0].name}</span>. Enjoy your day!</p>
                         </div>
                     ) : (
                         <div className="p-4 bg-red-100 text-red-800 rounded-md">
-                            <p>Today doesn't have any special occasion. Regular prices apply.</p>
+                            <p>Today doesn't have any special occasion.</p>
                         </div>
-                    )}
-                </div>
-            </div>
-
-            {/* Offers Section */}
-            <div className="lg:w-1/3 bg-white p-6 rounded-lg shadow-md">
-                <p className="font-bold text-center mb-7">Available Offers</p>
-                <div>
-                    {offersForSelectedDay.length > 0 ? (
-                        offersForSelectedDay.map((offer, index) => (
-                            <div key={index} className="p-4 mb-4 bg-blue-100 text-blue-800 rounded-md">
-                                <p>{offer.message}</p>
-                            </div>
-                        ))
-                    ) : (
-                        <p>No offers available for today.</p>
                     )}
                 </div>
             </div>

@@ -13,7 +13,7 @@ import { RiAdvertisementFill } from "react-icons/ri";
 
 import RequestBanner from "../../Pages/Dashboard/Seller/RequestBanner/RequestBanner";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import Notification from "../../Pages/Dashboard/Seller/Notification/Notification";
+
 
 const useSellerTabs = () => {
   const tabsData = [
@@ -41,13 +41,7 @@ const useSellerTabs = () => {
       icon: <RiAdvertisementFill />,
       tab: 7,
       page: <RequestBanner />
-    },{
-      name:"Notifications",
-      icon:<IoMdNotificationsOutline />,
-      tab:'8',
-      page:<Notification></Notification>
-
-    }
+    },
   ];
   return [tabsData];
 };
