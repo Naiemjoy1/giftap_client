@@ -1,4 +1,3 @@
-import React from "react";
 import { AiOutlineShoppingCart, AiOutlineDollar } from "react-icons/ai";
 import {
   PieChart,
@@ -8,7 +7,6 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import Subscriptions from "../../../Subscriptions/Subscriptions";
 import usePayment from "../../../../Components/Hooks/usePayment";
 import useAuth from "../../../../Components/Hooks/useAuth";
 
