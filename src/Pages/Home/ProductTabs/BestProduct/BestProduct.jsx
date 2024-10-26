@@ -1,4 +1,3 @@
-import React from "react";
 import ReUseCard from "../../../../ReUseComponents/ReUseCard/ReUseCard";
 import useFeature from "../../../../Components/Hooks/useFeature";
 
@@ -11,9 +10,9 @@ const BestProduct = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 p-4">
         {featureData.map((feature) => (
           <ReUseCard
-            productId={"1"}
+            productId={feature._id}
             productImage={feature.image.cardImg1}
-            productPrice={"25"}
+            productPrice={feature.price}
             productTitle={feature.name}
             productReview={"1"}
           />

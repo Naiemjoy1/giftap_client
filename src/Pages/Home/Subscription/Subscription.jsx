@@ -13,7 +13,7 @@ const Subscription = () => {
             }
           ></HomeSectionHeading>
         </div>
-        <div className="flex flex-col items-center justify-center space-y-4 lg:-mx-4 lg:flex-row lg:items-stretch lg:space-y-0">
+        <div className="flex flex-wrap items-center justify-center space-y-4 lg:-mx-4 lg:items-stretch lg:space-y-0">
           {/* Free Plan */}
           <div className="flex flex-col w-full max-w-sm p-8 bg-white border-2 border-gray-200 rounded-lg lg:mx-4 dark:bg-gray-800 dark:border-gray-700 shadow-lg hover:shadow-2xl transition-shadow duration-300">
             <div className="flex-grow">

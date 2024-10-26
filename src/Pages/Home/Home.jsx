@@ -18,7 +18,9 @@ const Home = () => {
   return (
     <div className=" mb-10 space-y-5">
       <Banner></Banner>
-      <BannerFeature></BannerFeature>
+      <div className="hidden md:block">
+        <BannerFeature></BannerFeature>
+      </div>
       <Category></Category>
       <ProductTabs></ProductTabs>
       <Subscription></Subscription>
