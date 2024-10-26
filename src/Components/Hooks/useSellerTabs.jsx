@@ -12,8 +12,8 @@ import AddPro from "../../Pages/Dashboard/Seller/AddPro/AddPro";
 import { RiAdvertisementFill } from "react-icons/ri";
 
 import RequestBanner from "../../Pages/Dashboard/Seller/RequestBanner/RequestBanner";
-import NoticeBoard from "../../Pages/Dashboard/Seller/NoticeBoard/NoticeBoard";
-import { BsClipboard } from "react-icons/bs";
+import { IoMdNotificationsOutline } from "react-icons/io";
+
 
 const useSellerTabs = () => {
   const tabsData = [
@@ -39,14 +39,8 @@ const useSellerTabs = () => {
     {
       name: "REquest Banner",
       icon: <RiAdvertisementFill />,
-      tab: 3,
-      page: <RequestBanner />,
-    },
-    {
-      name: "Notice Board",
-      icon: <BsClipboard />,
-      tab: 4,
-      page: <NoticeBoard></NoticeBoard>,
+      tab: 7,
+      page: <RequestBanner />
     },
   ];
   return [tabsData];
