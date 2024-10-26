@@ -28,7 +28,7 @@ const Admin = () => {
   };
 
   return (
-    <div>
+    <div className=" font-opensans">
       <div className="lg:hidden">
         <div className=" mx-auto text-xs grid md:grid-cols-5 grid-cols-3 justify-items-center items-center gap-2">
           {tabsData.map((aTabs) => (
@@ -105,29 +105,35 @@ const Admin = () => {
           <div className="w-[20%] pl-10 pr-4 py-4 bg-black space-y-4 h-screen ">
             <p className="text-white text-xl font-bold uppercase">Giftap</p>
             <div className="border-t border-gray-400"></div>
-            <div className="space-y-4 uppercase text-sm">
-              {tabsData.map((aTabs) => (
-                <p
-                  key={aTabs.tab}
-                  className={
-                    tab === aTabs.tab
-                      ? "text-white bg-[#222222] px-2 rounded-md py-2"
-                      : "text-gray-400 px-2 rounded-md py-2"
-                  }
-                  onClick={() => handleTabs(aTabs.tab)}
+            <div>
+              <div className="space-y-4 uppercase text-sm">
+                {tabsData.map((aTabs) => (
+                  <p
+                    key={aTabs.tab}
+                    className={
+                      tab === aTabs.tab
+                        ? "text-white bg-[#222222] px-2 rounded-md py-2"
+                        : "text-gray-400 px-2 rounded-md py-2"
+                    }
+                    onClick={() => handleTabs(aTabs.tab)}
+                  >
+                    <span className="flex items-center gap-2">
+                      {aTabs.icon}
+                      {aTabs.name}
+                    </span>
+                  </p>
+                ))}
+              </div>
+
+              <div className="mt-10">
+                <div className="border-t border-gray-400"></div>
+                <Link
+                  to="/"
+                  className="flex gap-2 items-center text-gray-400 px-2 rounded-md py-2"
                 >
-                  <span className="flex items-center gap-2">
-                    {aTabs.icon}
-                    {aTabs.name}
-                  </span>
-                </p>
-              ))}
-              <Link
-                to="/"
-                className="flex gap-2 items-center text-gray-400 px-2 rounded-md py-2"
-              >
-                <FaStore /> Home
-              </Link>
+                  <FaStore /> Home
+                </Link>
+              </div>
             </div>
           </div>
 

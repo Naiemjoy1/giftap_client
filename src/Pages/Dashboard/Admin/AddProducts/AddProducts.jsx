@@ -271,7 +271,9 @@ const AddProducts = () => {
 
         <div
           className={`grid ${
-            isDigitalGift ? "grid-cols-2 md:grid-cols-4" : "grid-cols-3"
+            isDigitalGift
+              ? "grid-cols-2 md:grid-cols-4"
+              : "grid-cols-2 lg:grid-cols-3"
           } gap-4`}
         >
           {/* Category */}

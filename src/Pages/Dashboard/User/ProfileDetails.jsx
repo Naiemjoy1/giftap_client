@@ -1,7 +1,5 @@
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import useAuth from "../../../Components/Hooks/useAuth";
-import useUsers from "../../../Components/Hooks/useUsers";
 import useTabs from "../../../Components/Hooks/useTabs";
 import { FaHandPointRight } from "react-icons/fa";
 import ApplySeller from "./ApplySeller/ApplySeller";
@@ -9,18 +7,13 @@ import { useState } from "react";
 import useType from "../../../Components/Hooks/useType";
 
 const ProfileDetails = () => {
-  const { user } = useAuth();
-  const [users] = useUsers();
   const [userType] = useType();
-  const usersDetails = users.filter((u) => u?.email === user?.email);
-  const isAdmin = usersDetails.length > 0 && usersDetails[0]?.type === "admin";
-  const isUser = usersDetails.length > 0 && usersDetails[0]?.type === "user";
   const [tabsData] = useTabs();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="container mx-auto my-10 space-y-4">
+    <div className="container mx-auto my-10 space-y-4 font-opensans">
       {userType === "user" && (
         <section className="flex items-center justify-end gap-4">
           <p className="flex items-center justify-center gap-4">
@@ -36,7 +29,6 @@ const ProfileDetails = () => {
             Apply
           </button>
 
-          {/* Modal */}
           {isModalOpen && (
             <dialog open className="modal">
               <div className="modal-box">

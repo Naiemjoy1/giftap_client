@@ -70,14 +70,14 @@ const AddPro = () => {
 
     let sku;
     let attempts = 0;
-    const maxAttempts = 1000; // To prevent potential infinite loops
+    const maxAttempts = 1000;
 
     do {
       const randomString = Math.random()
         .toString(36)
         .substring(2, 6)
         .toUpperCase();
-      const randomNumber = Math.floor(1000 + Math.random() * 9000); // 4-digit random number
+      const randomNumber = Math.floor(1000 + Math.random() * 9000);
       const namePart = productName
         .split(" ")
         .slice(0, 2)
@@ -220,9 +220,6 @@ const AddPro = () => {
               {...register("seller_name", { required: true })}
               readOnly
             />
-            {/* {errors.seller_name && (
-              <p className="text-red-600">Seller name is required.</p>
-            )} */}
           </div>
 
           {/* Store Name */}
@@ -235,9 +232,6 @@ const AddPro = () => {
               {...register("store_name", { required: true })}
               readOnly
             />
-            {/* {errors.store_name && (
-              <p className="text-red-600">Store name is required.</p>
-            )} */}
           </div>
         </div>
 
@@ -290,7 +284,9 @@ const AddPro = () => {
 
         <div
           className={`grid ${
-            isDigitalGift ? "grid-cols-4" : "grid-cols-6"
+            isDigitalGift
+              ? "grid-cols-2 md:grid-cols-4"
+              : "grid-cols-2 lg:grid-cols-3"
           } gap-4`}
         >
           {/* Category */}
