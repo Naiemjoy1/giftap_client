@@ -11,7 +11,7 @@ const PaymentMethod = () => {
             {/* Confirm Payment Button */}
             <Link to={'/payment'}>
                 <button
-                    className="bg-primary text-white font-semibold py-3 px-8 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out"
+                    className="bg-primary text-white font-semibold py-3 px-8 rounded-md transition duration-300 ease-in-out"
                 >
                     Confirm Payment
                 </button>
