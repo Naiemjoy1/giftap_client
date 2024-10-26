@@ -1,6 +1,7 @@
 import React from "react";
 import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaSquareInstagram } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -36,26 +37,27 @@ const Footer = () => {
           <div className="w-full sm:w-1/2 md:w-1/4 mb-6 md:mb-0">
             <h6 className="text-lg font-semibold mb-4">Services</h6>
             <ul>
-              <li>
-                <a href="#" className="hover:text-gray-400">
-                  Branding
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-gray-400">
-                  Design
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-gray-400">
-                  Marketing
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-gray-400">
-                  Advertisement
-                </a>
-              </li>
+              <Link to={"/blog"}>
+                <li>
+                  <a href="#" className="hover:text-gray-400">
+                    Blog
+                  </a>
+                </li>
+              </Link>
+              <Link to={"/contact"}>
+                <li>
+                  <a href="#" className="hover:text-gray-400">
+                    Contact Us
+                  </a>
+                </li>
+              </Link>
+              <Link to={"/about"}>
+                <li>
+                  <a href="#" className="hover:text-gray-400">
+                    About us
+                  </a>
+                </li>
+              </Link>
             </ul>
           </div>
 
@@ -63,21 +65,20 @@ const Footer = () => {
           <div className="w-full sm:w-1/2 md:w-1/4 mb-6 md:mb-0">
             <h6 className="text-lg font-semibold mb-4">Legal</h6>
             <ul>
-              <li>
-                <a href="#" className="hover:text-gray-400">
-                  Terms of Use
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-gray-400">
-                  Privacy Policy
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-gray-400">
-                  Cookie Policy
-                </a>
-              </li>
+              <Link to={"/terms"}>
+                <li>
+                  <a href="#" className="hover:text-gray-400">
+                    Terms & Condition
+                  </a>
+                </li>
+              </Link>
+              <Link to={"/privacy"}>
+                <li>
+                  <a href="#" className="hover:text-gray-400">
+                    Privacy Policy
+                  </a>
+                </li>
+              </Link>
             </ul>
           </div>
 
@@ -89,9 +90,9 @@ const Footer = () => {
                 <input
                   type="email"
                   placeholder="username@site.com"
-                  className="input input-bordered lg:w-full md:w-20 w-full flex-grow rounded-l-md border-gray-300 bg-white text-base-content"
+                  className="border p-1 lg:w-full rounded-l-md md:w-20 w-full flex-grow  border-gray-300 bg-white text-base-content"
                 />
-                <button className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-r-md border border-blue-600 transition lg:w-full md:w-20 w-auto">
+                <button className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-r-md border border-blue-600 transition lg:w-full md:w-20 w-auto ">
                   Subscribe
                 </button>
               </div>
@@ -109,10 +110,11 @@ const Footer = () => {
           src="https://securepay.sslcommerz.com/public/image/SSLCommerz-Pay-With-logo-All-Size-03.png"
           alt=""
         />
-        <divs>
-          <h1> All Rights Reserved © {new Date().getFullYear()} GifTap Ltd.</h1>
-        </divs>
       </div>
+      <h1 className="text-lg font-semibold mt-4 text-center">
+        {" "}
+        All Rights Reserved © {new Date().getFullYear()} GifTap Ltd.
+      </h1>
     </footer>
   );
 };

@@ -21,6 +21,8 @@ import SellerRoute from "./SellerRoute/SellerRoute";
 import CategoryPage from "../Pages/Home/Category/CategoryPage/CategoryPage";
 import PaymentMethod from "../Pages/Home/Subscription/PaymentMethod/PaymentMethod";
 import Payment from "../Pages/Home/Subscription/PaymentMethod/Payment/Payment";
+import Privacy from "../Shared/Footer/Privacy";
+import TernsCondition from "../Shared/Footer/TernsCondition";
 
 export const router = createBrowserRouter([
   {
@@ -59,11 +61,20 @@ export const router = createBrowserRouter([
       {
         path: "/category/:category",
         element: <CategoryPage></CategoryPage>,
-        loader: ({ params }) => fetch(`http://localhost:3000/products/category/${params.category}`)
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/products/category/${params.category}`),
       },
       {
         path: "/blog",
         element: <Blog></Blog>,
+      },
+      {
+        path: "/privacy",
+        element: <Privacy></Privacy>,
+      },
+      {
+        path: "/terms",
+        element: <TernsCondition></TernsCondition>,
       },
       {
         path: "/BlogDetails/:id",
@@ -84,8 +95,8 @@ export const router = createBrowserRouter([
         element: <TrackOrders></TrackOrders>,
       },
       {
-        path: '/payment',
-        element: <Payment></Payment>
+        path: "/payment",
+        element: <Payment></Payment>,
       },
       {
         path: "/profile",
@@ -97,7 +108,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/choose-payment-method",
-        element: <PaymentMethod></PaymentMethod>
+        element: <PaymentMethod></PaymentMethod>,
       },
 
       {
