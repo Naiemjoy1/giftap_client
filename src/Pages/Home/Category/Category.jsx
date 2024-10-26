@@ -3,6 +3,7 @@ import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import HomeSectionHeading from "../../../ReUseComponents/HomeSectionHeading/HomeSectionHeading";
+import { Link } from "react-router-dom";
 
 const Category = () => {
   const [product, setProduct] = useState([]);
@@ -20,9 +21,10 @@ const Category = () => {
     fetchProducts();
   }, [axiosPublic]);
 
- 
-  const category = product.reduce((acc, current) => { 
-    const categoryExists = acc.find(item => item.category === current.category);
+  const category = product.reduce((acc, current) => {
+    const categoryExists = acc.find(
+      (item) => item.category === current.category
+    );
     if (!categoryExists) {
       acc.push(current);
     }
@@ -93,28 +95,22 @@ const Category = () => {
           {category.map((item) => (
             <div
               key={item._id}
-              className="flex flex-col justify-center items-center p-4"
+              className="flex flex-col justify-center items-center px-4"
             >
-              <div className="w-32 h-32 rounded-full overflow-hidden shadow-lg">
-                <img
-                  src={item.image.cardImg1}
-                  alt={item.name}
-                  className="object-cover w-full h-full"
-                />
-              </div>
+              <Link to={`/category/${item.category}`}>
+                <div className="w-32 h-32 rounded-full overflow-hidden shadow-lg">
+                  <img
+                    src={item.image.cardImg1}
+                    alt={item.name}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+              </Link>
+
               <p className="text-lg font-medium mt-4">{item.category}</p>
             </div>
           ))}
         </Carousel>
-
-        <div className="flex justify-center">
-          <button
-            className="btn text-white py-3 px-6 mt-10 md:py-[16px] md:px-[40px] rounded-xl flex items-center justify-center gap-2 border-2 border-transparent hover:border-black hover:bg-red-700 transition-all duration-500 ease-in-out"
-            style={{ backgroundColor: "rgb(240, 72, 84)" }}
-          >
-            See All
-          </button>
-        </div>
       </div>
     </div>
   );

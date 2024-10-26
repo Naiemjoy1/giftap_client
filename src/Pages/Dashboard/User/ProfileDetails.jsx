@@ -11,8 +11,7 @@ import useType from "../../../Components/Hooks/useType";
 const ProfileDetails = () => {
   const { user } = useAuth();
   const [users] = useUsers();
-  const [userType] = useType()
-  // console.log(useType)
+  const [userType] = useType();
   const usersDetails = users.filter((u) => u?.email === user?.email);
   const isAdmin = usersDetails.length > 0 && usersDetails[0]?.type === "admin";
   const isUser = usersDetails.length > 0 && usersDetails[0]?.type === "user";
@@ -22,9 +21,8 @@ const ProfileDetails = () => {
 
   return (
     <div className="container mx-auto my-10 space-y-4">
-
-      {
-        userType === "user" && <section className="flex items-center justify-end gap-4">
+      {userType === "user" && (
+        <section className="flex items-center justify-end gap-4">
           <p className="flex items-center justify-center gap-4">
             For Seller Apply Here{" "}
             <span>
@@ -55,9 +53,7 @@ const ProfileDetails = () => {
             </dialog>
           )}
         </section>
-
-      }
-
+      )}
 
       <Tabs>
         <TabList className="uppercase">

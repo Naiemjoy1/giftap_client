@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Tabs,
   TabsHeader,
@@ -7,17 +7,14 @@ import {
   TabPanel,
 } from "@material-tailwind/react";
 import NewProduct from "./BestProduct/NewProduct/NewProduct";
-import TopSeller from "./TopSeller/TopSeller";
 import BestProduct from "./BestProduct/BestProduct";
 
 const ProductTabs = () => {
   const [activeTab, setActiveTab] = useState("newProduct");
 
   return (
-    <div className="pt-[50px] max-w-6xl mx-auto"> 
-      
-      <div className="mt-10 w-full mx-auto">
-       
+    <div className=" max-w-6xl mx-auto">
+      <div className=" w-full mx-auto">
         <Tabs
           value={activeTab}
           className="w-full"
@@ -26,34 +23,31 @@ const ProductTabs = () => {
           <TabsHeader
             className="lg:w-[50%] mx-auto"
             indicatorProps={{
-              className: "bg-primary absolute shadow-none w-[150px] md:w-[170px] mx-auto ",
+              className:
+                "bg-primary absolute shadow-none w-[150px] md:w-[170px] mx-auto ",
             }}
           >
             <Tab
               value="newProduct"
               onClick={() => setActiveTab("newProduct")}
-              className={activeTab === "newProduct" ? "text-white" : "text-gray-500"}
+              className={
+                activeTab === "newProduct" ? "text-white" : "text-gray-500"
+              }
             >
               <h1 className="md:text-2xl relative z-50">New Product</h1>
             </Tab>
             <Tab
               value="topProduct"
               onClick={() => setActiveTab("topProduct")}
-              className={activeTab === "topProduct" ? "text-white" : "text-gray-500"}
+              className={
+                activeTab === "topProduct" ? "text-white" : "text-gray-500"
+              }
             >
               <h1 className="md:text-2xl relative z-50">Top Product</h1>
             </Tab>
-            <Tab
-              value="topSeller"
-              onClick={() => setActiveTab("topSeller")}
-              className={activeTab === "topSeller" ? "text-white" : "text-gray-500"}
-            >
-              <h1 className="md:text-2xl relative z-50">Top Seller</h1>
-            </Tab>
           </TabsHeader>
 
-          
-          <div className="w-full flex justify-center mt-5">
+          <div className="w-full flex justify-center ">
             <TabsBody>
               <TabPanel value="newProduct">
                 <div className="w-full h-full overflow-y-auto">
@@ -63,11 +57,6 @@ const ProductTabs = () => {
               <TabPanel value="topProduct">
                 <div className="w-full h-full overflow-y-auto">
                   <BestProduct />
-                </div>
-              </TabPanel>
-              <TabPanel value="topSeller">
-                <div className="w-full h-full overflow-y-auto">
-                  <TopSeller />
                 </div>
               </TabPanel>
             </TabsBody>

@@ -6,6 +6,7 @@ import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const ItemUser = ({ item }) => {
   const { user } = useAuth();
@@ -137,7 +138,13 @@ const ItemUser = ({ item }) => {
   };
 
   const handleToast = () => {
-    toast.error("Login Please");
+    Swal.fire({
+      position: "top-end",
+      icon: "warning",
+      title: "Login First",
+      showConfirmButton: false,
+      timer: 1500,
+    });
   };
 
   return (
