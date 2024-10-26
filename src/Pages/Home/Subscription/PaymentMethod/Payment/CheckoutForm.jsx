@@ -96,18 +96,18 @@ const CheckOutForm = () => {
     };
 
     return (
-        <>
+        <div className="container max-w-screen-xl p-6 mx-auto space-y-10 sm:space-y-16">
             <div className="mb-5">
                 <h2 className="text-2xl font-semibold">Select a Plan</h2>
                 <div className="flex space-x-4 mt-4">
                     <button
-                        className={`px-4 py-2 rounded ${selectedPlan === 24.90 ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
+                        className={`px-4 py-2 rounded ${selectedPlan === 24.90 ? 'bg-primary text-white' : 'bg-gray-200'}`}
                         onClick={() => setSelectedPlan(24.90)}
                     >
                         Premium - $24.90
                     </button>
                     <button
-                        className={`px-4 py-2 rounded ${selectedPlan === 49.90 ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
+                        className={`px-4 py-2 rounded ${selectedPlan === 49.90 ? 'bg-primary text-white' : 'bg-gray-200'}`}
                         onClick={() => setSelectedPlan(49.90)}
                     >
                         Luxury - $49.90
@@ -116,23 +116,27 @@ const CheckOutForm = () => {
             </div>
 
             <form onSubmit={handleSubmit}>
-                <CardElement
-                    options={{
-                        style: {
-                            base: {
-                                fontSize: '16px',
-                                color: '#424770',
-                                '::placeholder': {
-                                    color: '#aab7c4',
+                <div>
+                    <div className="w-full lg:w-[50%]">
+                        <CardElement
+                            options={{
+                                style: {
+                                    base: {
+                                        fontSize: '16px',
+                                        color: '#424770',
+                                        '::placeholder': {
+                                            color: '#aab7c4',
+                                        },
+                                    },
+                                    invalid: {
+                                        color: '#9e2146',
+                                    },
                                 },
-                            },
-                            invalid: {
-                                color: '#9e2146',
-                            },
-                        },
-                    }}
-                    className="border-2 border-blue-400 p-5"
-                />
+                            }}
+                            className="border-2 border-blue-300 p-5"
+                        />
+                    </div>
+                </div>
                 {error && <p className="text-red-600 font-bold text-lg mt-3">{error}</p>}
                 {transactionId && (
                     <p className="text-green-500 font-bold text-lg mt-3">
@@ -140,14 +144,14 @@ const CheckOutForm = () => {
                     </p>
                 )}
                 <button
-                    className="mt-5 bg-blue-600 text-white px-4 py-2 rounded"
+                    className="mt-5 bg-primary text-white px-4 py-2 rounded"
                     type="submit"
                     disabled={!stripe || !clientSecret}
                 >
                     Pay Now
                 </button>
             </form>
-        </>
+        </div>
     );
 };
 
