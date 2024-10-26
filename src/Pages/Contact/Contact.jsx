@@ -28,6 +28,11 @@ const Contact = () => {
       );
   };
 
+
+
+  // Title
+  document.title = "GifTap || Contact";
+
   return (
     <div className="max-w-7xl mx-auto p-8 flex flex-wrap justify-between">
       {/* Form Section */}

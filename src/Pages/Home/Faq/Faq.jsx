@@ -31,27 +31,7 @@ const faqData = [
     question: "Can I track my order?",
     answer:
       "Absolutely! Once your order is processed, you will receive a tracking number via email, which you can use to track your order’s delivery status in real time.",
-  },
-  {
-    question: "What is your return policy?",
-    answer:
-      "We offer a hassle-free return policy within 30 days of purchase, provided the item is unused and in its original condition. Please refer to our return policy page for more details.",
-  },
-  {
-    question: "How long will it take to receive my order?",
-    answer:
-      "Delivery times vary based on location and the type of gift you order. Standard delivery typically takes 3-7 business days within the country, while international deliveries may take 7-14 business days.",
-  },
-  {
-    question: "What if I need to change my order after placing it?",
-    answer:
-      "If you need to make changes to your order, please contact our customer support team as soon as possible. We’ll do our best to accommodate changes, but this may depend on the order’s status.",
-  },
-  {
-    question: "How can I contact customer support?",
-    answer:
-      "You can reach our customer support team through the contact form on our website, or by emailing us at webwizards901@gmail.com. Our team is available Monday to Friday, 9 AM to 6 PM (local time).",
-  },
+  }
 ];
 
 const Faq = () => {

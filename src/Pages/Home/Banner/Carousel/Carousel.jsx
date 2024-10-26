@@ -35,7 +35,7 @@ const Carousel = () => {
       >
         {
           banner.map(ban => ban.type ==='running' && <SwiperSlide key={ban._id}>
-            <div className="h-[70vh] flex items-center justify-center bg-gray-100">
+            <div className="max-h-[70vh] flex items-center justify-center bg-gray-100">
               <div>
                 <img
                   className="max-h-full object-contain"
