@@ -117,8 +117,9 @@ const Blog = () => {
               </div>
               <Link to={`/BlogDetails/${blog._id}`}>
 
-                <h2 className="font-poppins text-2xl mt-3 hover:text-primary">{blog.blogTitle}</h2>
+                <h2 className="font-poppins text-lg font-semibold mt-3 hover:text-primary">{blog.blogTitle}</h2>
               </Link>
+
               <div className="flex justify-between text-sm mb-2">
                 <span className="mt-2 flex text-xl font-semibold text-gray-500">
                   <CgCalendarDates className="text-[17px] mt-2 mr-1" />
@@ -130,6 +131,7 @@ const Blog = () => {
                   <p className="mt-2 text-[17px] font-semibold">{blog.blogComments.length} Comments</p>
                 </span>
               </div>
+              
               <p className="text-gray-700 dark:text-gray-700 font-opensans">
                 {blog.blogDescription.slice(0, 110)}...
                 <Link to={`/BlogDetails/${blog._id}`} className="text-primary">
