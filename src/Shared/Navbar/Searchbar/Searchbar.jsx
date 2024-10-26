@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import useAuth from "../../../Components/Hooks/useAuth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { FaBars, FaRegEnvelope, FaRegHeart } from "react-icons/fa";
 import { BiUser } from "react-icons/bi";
@@ -14,9 +14,14 @@ import AdminChat from "../../../Pages/Support/AdminChat/AdminChat";
 
 const Searchbar = () => {
   const { user, logOut } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogOut = () => {
-    logOut().catch((error) => console.log(error));
+    logOut()
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => console.log(error));
   };
 
   const [isOpen, setIsOpen] = React.useState(false);
@@ -26,7 +31,7 @@ const Searchbar = () => {
   };
 
   const [carts] = useCart();
-  const [wishlists, refetchWish] = useWishs();
+  const [wishlists] = useWishs();
 
   const userCarts = carts.filter((cart) => cart?.email === user?.email);
   const usersWishs = wishlists.filter((wish) => wish.email === user?.email);
@@ -59,7 +64,7 @@ const Searchbar = () => {
                   <HiOutlineShoppingBag />
                 </p>
                 <div className="bg-primary absolute top-0 -right-1 transform translate-x-1 -translate-y-1 rounded-full w-4 h-4 flex items-center justify-center text-white text-xs">
-                  {userCarts.length}
+                  {userCarts?.length}
                 </div>
               </Link>
               {user && <AdminChat></AdminChat>}
@@ -142,7 +147,7 @@ const Searchbar = () => {
                   <FaRegHeart />
                 </p>
                 <div className="bg-primary absolute -top-2 -right-3 transform translate-x-1 -translate-y-1 rounded-full w-6 h-6 flex items-center justify-center text-white text-xs">
-                  {usersWishs.length}
+                  {usersWishs?.length}
                 </div>
               </div>
             </section>
@@ -152,7 +157,7 @@ const Searchbar = () => {
                   <HiOutlineShoppingBag />
                 </p>
                 <div className="bg-primary absolute -top-2 -right-2 transform translate-x-1 -translate-y-1 rounded-full w-6 h-6 flex items-center justify-center text-white text-xs">
-                  {userCarts.length}
+                  {userCarts?.length}
                 </div>
               </Link>
             </section>
@@ -168,7 +173,6 @@ const Searchbar = () => {
       >
         <NavDrawer
           toggleDrawer={toggleDrawer}
-          user={user}
           handleLogOut={handleLogOut}
         ></NavDrawer>
       </Drawer>

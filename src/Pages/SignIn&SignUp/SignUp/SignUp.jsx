@@ -5,6 +5,7 @@ import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 import { useNavigate } from "react-router-dom";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import { IoIosEyeOff, IoMdEye } from "react-icons/io";
+import toast from "react-hot-toast";
 
 const SignUp = ({ toggleForm, setReset }) => {
   const { createUser, updateUserProfile } = useAuth();
@@ -12,17 +13,26 @@ const SignUp = ({ toggleForm, setReset }) => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [passwordMatch, setPasswordMatch] = useState(true);
 
   const {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm();
 
   useEffect(() => {
     setReset(() => reset);
   }, [setReset, reset]);
+
+  const password = watch("password");
+  const confirmPassword = watch("confirmPassword");
+
+  useEffect(() => {
+    setPasswordMatch(password === confirmPassword);
+  }, [password, confirmPassword]);
 
   const onSubmit = async (data) => {
     setLoading(true);
@@ -32,8 +42,12 @@ const SignUp = ({ toggleForm, setReset }) => {
       const userResult = await createUser(email, password);
       console.log("User created:", userResult);
 
+      const token = userResult.user.accessToken;
+      if (token) {
+        localStorage.setItem("access-token", token);
+      }
+
       await updateUserProfile(name);
-      // console.log("User profile updated");
 
       const userInfo = {
         name,
@@ -51,23 +65,26 @@ const SignUp = ({ toggleForm, setReset }) => {
         navigate("/");
       }
     } catch (error) {
+      console.error("Error in onSubmit:", error);
       toast.error("Error in onSubmit");
-
-      if (error.code === "auth/email-already-in-use") {
-        toast.warning("Email already in use");
-      } else {
-        toast.error("Oops...");
-      }
     } finally {
       setLoading(false);
     }
   };
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <span className="loading loading-spinner loading-lg text-primary"></span>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col md:flex-row min-h-[calc(100vh-100px)]">
-      {/* mobile  */}
+      {/* Mobile view */}
       <section className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 flex-1 flex flex-col justify-center items-center space-y-4 p-4 md:p-10 text-white lg:hidden md:hidden">
-        <p className="text-4xl font-black text-center">Hello, Frien</p>
+        <p className="text-4xl font-black text-center">Hello, Friend</p>
         <p className="text-lg text-center">
           Register with your personal details to use all site features
         </p>
@@ -78,7 +95,7 @@ const SignUp = ({ toggleForm, setReset }) => {
           Sign In
         </button>
       </section>
-      {/* large medium  */}
+      {/* Large and medium view */}
       <section className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-l-3xl rounded-r-[170px] flex-1 flex-col justify-center items-center space-y-4 p-4 md:p-10 text-white hidden lg:flex md:flex">
         <p className="text-4xl font-black">Hello, Friend</p>
         <p className="text-lg text-center">
@@ -141,8 +158,35 @@ const SignUp = ({ toggleForm, setReset }) => {
               <span className="text-red-500">Password is required</span>
             )}
           </div>
+
+          <div className="form-control relative">
+            <input
+              {...register("confirmPassword", { required: true })}
+              type={showPassword ? "text" : "password"}
+              placeholder="Confirm Password"
+              className="input input-bordered"
+            />
+            <span
+              className="absolute top-4 right-4 cursor-pointer"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <IoMdEye /> : <IoIosEyeOff />}
+            </span>
+            {errors.confirmPassword && (
+              <span className="text-red-500">Confirm Password is required</span>
+            )}
+            {!passwordMatch && (
+              <span className="text-red-500">Passwords do not match</span>
+            )}
+          </div>
+
           <div className="form-control mt-6">
-            <button className="btn btn-primary text-white">Sign Up</button>
+            <button
+              className="btn btn-primary text-white"
+              disabled={!passwordMatch}
+            >
+              Sign Up
+            </button>
           </div>
         </form>
       </section>

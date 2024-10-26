@@ -10,6 +10,7 @@ import Promotions from "../../Pages/Dashboard/Seller/Promotions/Promotions";
 import AllProducts from "../../Pages/Dashboard/Seller/AllProducts/AllProducts";
 import AddPro from "../../Pages/Dashboard/Seller/AddPro/AddPro";
 import { RiAdvertisementFill } from "react-icons/ri";
+
 import RequestBanner from "../../Pages/Dashboard/Seller/RequestBanner/RequestBanner";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import Notification from "../../Pages/Dashboard/Seller/Notification/Notification";
@@ -25,21 +26,16 @@ const useSellerTabs = () => {
     {
       name: "products",
       icon: <MdProductionQuantityLimits />,
-      tab: 2,
+      tab: 1,
       page: <AllProducts></AllProducts>,
     },
     {
       name: "add product",
       icon: <MdAddShoppingCart />,
-      tab: 3,
+      tab: 2,
       page: <AddPro></AddPro>,
     },
-    {
-      name: "promos",
-      icon: <BiSolidOffer />,
-      tab: 5,
-      page: <Promotions></Promotions>,
-    },
+
     {
       name: "REquest Banner",
       icon: <RiAdvertisementFill />,

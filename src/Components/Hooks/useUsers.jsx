@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "./useAuth";
-import useAxiosPublic from "./useAxiosPublic";
 import useAxiosSecure from "./useAxiosSecure";
 
 const useUsers = () => {
@@ -14,8 +13,13 @@ const useUsers = () => {
   } = useQuery({
     queryKey: ["users", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get("/users");
-      return res.data;
+      try {
+        const res = await axiosSecure.get("/users");
+        return res.data;
+      } catch (error) {
+        console.error("Error fetching users:", error); // Log error
+        throw error; // Re-throw error for React Query to handle
+      }
     },
   });
 

@@ -1,26 +1,30 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaBell } from "react-icons/fa";
 import { io } from "socket.io-client"; // Import socket.io-client
 import useAuth from "../../../Components/Hooks/useAuth";
 import useChat from "../../../Components/Hooks/useChat";
-import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 import useType from "../../../Components/Hooks/useType";
 import useUsers from "../../../Components/Hooks/useUsers";
 import useProducts from "../../../Components/Hooks/useProducts";
 import { IoIosArrowForward } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
+import useAxiosSecure from "../../../Components/Hooks/useAxiosSecure";
 
 const AdminChat = () => {
   const { user } = useAuth();
   const [users] = useUsers();
   const currentUser = users?.find((u) => u.email === user.email);
+
   const [userType] = useType();
+
   const [chats, refetch, isLoadingChats] = useChat();
   const currentSellerChat = chats?.filter(
     (chat) => chat?.sellerId === currentUser?._id
   );
+
   const [products] = useProducts();
-  const axiosPublic = useAxiosPublic();
+
+  const axiosSecure = useAxiosSecure();
 
   const [selectedChat, setSelectedChat] = useState(null);
   const [newText, setNewText] = useState("");
@@ -72,7 +76,7 @@ const AdminChat = () => {
   const fetchChatDetails = async (chatId) => {
     setLoading(true);
     try {
-      const response = await axiosPublic.get(`/chats/${chatId}`);
+      const response = await axiosSecure.get(`/chats/${chatId}`);
       setSelectedChat(response.data);
     } catch (error) {
       console.error("Error fetching chat details:", error.message);
@@ -85,7 +89,7 @@ const AdminChat = () => {
     if (selectedChat) {
       const interval = setInterval(async () => {
         try {
-          const response = await axiosPublic.get(`/chats/${selectedChat._id}`);
+          const response = await axiosSecure.get(`/chats/${selectedChat._id}`);
           setSelectedChat(response.data);
         } catch (error) {
           console.error("Error refetching chat details:", error.message);
@@ -94,7 +98,7 @@ const AdminChat = () => {
 
       return () => clearInterval(interval);
     }
-  }, [selectedChat, axiosPublic]);
+  }, [selectedChat, axiosSecure]);
 
   useEffect(() => {
     if (!selectedChat) {
@@ -117,7 +121,7 @@ const AdminChat = () => {
 
     try {
       const chatId = selectedChat._id;
-      await axiosPublic.patch(`/chats/${chatId}`, {
+      await axiosSecure.patch(`/chats/${chatId}`, {
         $push: { messages: newMessage },
       });
       refetch();
@@ -147,7 +151,7 @@ const AdminChat = () => {
     if (selectedChat) {
       const chatId = selectedChat._id;
       try {
-        await axiosPublic.delete(`/chats/${chatId}`);
+        await axiosSecure.delete(`/chats/${chatId}`);
         socket.emit("chatEnded", { chatId });
         refetch();
         setSelectedChat(null);
@@ -170,7 +174,7 @@ const AdminChat = () => {
 
   return (
     <div>
-      {userType === "seller" && (
+      {userType === "admin" && (
         <button onClick={toggleChatbox} className="relative">
           <p className="text-xl">
             <FaBell />

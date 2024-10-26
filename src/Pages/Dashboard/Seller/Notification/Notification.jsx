@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import useAuth from "../../../../Components/Hooks/useAuth";
-import useAxiosPublic from "../../../../Components/Hooks/useAxiosPublic";
 import { isTomorrow, parseISO } from 'date-fns';
+import EventCalendar from '../../User/Dashboard/EventCalendar/Eventcalendar';
+import { useQuery } from 'react-query';
+import useAxiosPublic from '../../../../Components/Hooks/useAxiosPublic';
+
 
 const events = [
     { id: 1, name: "New Year's Day", startDatetime: '2024-01-01T00:00' },
@@ -19,46 +22,50 @@ const events = [
     { id: 13, name: "Christmas Day", startDatetime: '2024-12-25T00:00' },
     { id: 14, name: "Easter Sunday", startDatetime: '2024-04-07T00:00' },
     { id: 15, name: "Independence Day", startDatetime: '2024-07-04T00:00' },
-    { id: 16, name: "Global Handwashing Day", startDatetime: '2024-10-25T00:00' } // Set to tomorrow
-];
+    { id: 16, name: "Global Handwashing Day", startDatetime: '2024-10-25T00:00' },
+    { id: 17, name: "World Kindness Day", startDatetime: '2024-10-26T00:00' },
+    { id: 18, name: "World Mental Day", startDatetime: '2024-10-27T00:00' },
+    { id: 19, name: "World Mental Day", startDatetime: '2024-10-29T00:00' },
+  ];
 
-// Function to get upcoming events notifications just one day before
 const getUpcomingEventNotifications = () => {
     return events.filter(event => isTomorrow(parseISO(event.startDatetime)));
 };
 
 const Notification = () => {
     const { user } = useAuth();
-    const axiosPublic = useAxiosPublic();
-
+    const axiopsPublic = useAxiosPublic();
     const [currentOffer, setCurrentOffer] = useState('');
-    const [notifications, setNotifications] = useState(getUpcomingEventNotifications());
+    const [offers, setOffers] = useState([]);
+    const notifications = getUpcomingEventNotifications();
+
 
     const handleInputChange = (e) => {
         setCurrentOffer(e.target.value); 
     };
 
     const handleSubmit = async () => {
-        if (currentOffer.trim() !== '') {
+        if (currentOffer.trim() !== '' && notifications.length > 0) {
+            const event = notifications[0];
+            const newOffer = {
+                username: user.displayName,
+                message: currentOffer,
+                eventId: event.id,
+                event: event.name,
+            };
+
             try {
-                const response = await postOffer(currentOffer);
-                console.log('Offer saved:', response.data);
-                setCurrentOffer('');
+               const result= await axiopsPublic.post("/offers", newOffer); 
+                setOffers(prevOffers => [...prevOffers, newOffer]);
+                setCurrentOffer(''); 
             } catch (error) {
-                console.error('Error saving offer:', error);
+                console.error("Error submitting offer:", error);
             }
         }
     };
 
-    const postOffer = (offer) => {
-        return axiosPublic.post('/api/offers', {
-            userId: user.id, 
-            offer,
-        });
-    };
-
     return (
-        <div className="flex flex-col items-center justify-center h-screen text-center">
+        <div className="flex flex-col items-center justify-center text-center container mx-auto">
             <h2 className="text-2xl font-bold mb-4">Upcoming Event Notifications</h2>
             {notifications.length > 0 ? (
                 <div className="max-w-md w-full">
@@ -81,6 +88,8 @@ const Notification = () => {
             ) : (
                 <p>No upcoming events tomorrow.</p>
             )}
+           
+            {offers.length > 0 && <EventCalendar offers={offers} />}
         </div>
     );
 };

@@ -18,12 +18,11 @@ export const AuthContext = createContext(auth);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const axiosPublic = useAxiosPublic();
 
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
   const twitterProvider = new TwitterAuthProvider();
-
-  const axiosPublic = useAxiosPublic();
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -56,24 +55,16 @@ const AuthProvider = ({ children }) => {
     );
   };
 
-  const logOut = () => {
-    setLoading(true);
-    return signOut(auth).finally(() => setLoading(false));
-  };
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      setLoading(false);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  const updateUserProfile = (name, image) => {
+  const updateUserProfile = (name, image, email) => {
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: image,
     });
+  };
+
+  const logOut = () => {
+    setLoading(true);
+    return signOut(auth).finally(() => setLoading(false));
   };
 
   useEffect(() => {

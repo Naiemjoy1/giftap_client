@@ -5,12 +5,12 @@ import isSameDay from 'date-fns/isSameDay';
 import eachDayOfInterval from 'date-fns/eachDayOfInterval';
 import endOfMonth from 'date-fns/endOfMonth';
 import format from 'date-fns/format';
-import parse from 'date-fns/parse';
 import parseISO from 'date-fns/parseISO';
 import startOfToday from 'date-fns/startOfToday';
-import { Fragment, useState } from 'react';
+import { useState, useEffect } from 'react';
 
-// Updated events array with Global Handwashing Day
+import useAxiosPublic from '../../../../../Components/Hooks/useAxiosPublic';
+
 const events = [
     { id: 1, name: "New Year's Day", startDatetime: '2024-01-01T00:00' },
     { id: 2, name: "National Hugging Day", startDatetime: '2024-01-21T00:00' },
@@ -27,26 +27,48 @@ const events = [
     { id: 13, name: "Christmas Day", startDatetime: '2024-12-25T00:00' },
     { id: 14, name: "Easter Sunday", startDatetime: '2024-04-07T00:00' },
     { id: 15, name: "Independence Day", startDatetime: '2024-07-04T00:00' },
-    { id: 16, name: "Global Handwashing Day", startDatetime: '2024-10-25T00:00' } // Tomorrow's event
+    { id: 16, name: "Global Handwashing Day", startDatetime: '2024-10-25T00:00' },
+    { id: 17, name: "World Kindness Day", startDatetime: '2024-10-26T00:00' },
+    { id: 18, name: "World Mental Day", startDatetime: '2024-10-27T00:00' },
+    { id: 19, name: "World Mental Day", startDatetime: '2024-10-29T00:00' }
 ];
 
 function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
+    return classes.filter(Boolean).join(' ');
 }
 
 const EventCalendar = () => {
     const today = startOfToday();
-    const tomorrow = add(today, { days: 1 }); // Get tomorrow's date
+    const axiosPublic = useAxiosPublic(); 
     const [selectedDay, setSelectedDay] = useState(today);
     const [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'));
-    const firstDayCurrentMonth = parse(currentMonth, 'MMM-yyyy', new Date());
-
+    const firstDayCurrentMonth = new Date(currentMonth);
+    const [offers, setOffers] = useState([]);
+    
     const days = eachDayOfInterval({
         start: firstDayCurrentMonth,
         end: endOfMonth(firstDayCurrentMonth),
     });
+
+    const fetchOffers = async () => {
+        try {
+            const response = await axiosPublic.get("/offers");
+            setOffers(response.data); 
+        } catch (error) {
+            console.error("Error fetching offers:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchOffers();
+    }, []);
+
     const selectedDayEvents = events.filter((event) =>
         isSameDay(parseISO(event.startDatetime), selectedDay)
+    );
+
+    const offersForSelectedDay = offers.filter((offer) =>
+        selectedDayEvents.some(event => isSameDay(parseISO(event.startDatetime), selectedDay))
     );
 
     return (
@@ -91,13 +113,29 @@ const EventCalendar = () => {
                 <div className="mt-6">
                     {selectedDayEvents.length > 0 ? (
                         <div className="p-4 bg-green-100 text-green-800 rounded-md">
-                            <p className="font-semibold">Special Offer:</p>
-                            <p>Congratulations! It's <span className="font-bold">{selectedDayEvents[0].name}</span>. Enjoy a 25% discount on all purchases today!</p>
+                            <p className="font-semibold">Special Day:</p>
+                            <p>Congratulations! It's <span className="font-bold">{selectedDayEvents[0].name}</span>. Enjoy this day with your special people!</p>
                         </div>
                     ) : (
                         <div className="p-4 bg-red-100 text-red-800 rounded-md">
-                            <p>No special occasion today. Regular prices apply.</p>
+                            <p>Today doesn't have any special occasion. Regular prices apply.</p>
                         </div>
+                    )}
+                </div>
+            </div>
+
+            {/* Offers Section */}
+            <div className="lg:w-1/3 bg-white p-6 rounded-lg shadow-md">
+                <p className="font-bold text-center mb-7">Available Offers</p>
+                <div>
+                    {offersForSelectedDay.length > 0 ? (
+                        offersForSelectedDay.map((offer, index) => (
+                            <div key={index} className="p-4 mb-4 bg-blue-100 text-blue-800 rounded-md">
+                                <p>{offer.message}</p>
+                            </div>
+                        ))
+                    ) : (
+                        <p>No offers available for today.</p>
                     )}
                 </div>
             </div>

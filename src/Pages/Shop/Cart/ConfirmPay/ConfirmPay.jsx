@@ -10,9 +10,10 @@ const ConfirmPay = ({ setIsModalVisible, payment }) => {
   const { user } = useAuth();
   const [users, refetch] = useUsers();
 
-  const usersDetails = users.find((u) => u?.email === user?.email);
-  const billingInfo = usersDetails?.address?.billing[0];
-  const shippingInfo = usersDetails?.address?.shipping[0];
+  const usersDetails = users?.find((u) => u?.email === user?.email);
+  const billingInfo = usersDetails?.address?.billing?.[0];
+  const shippingInfo = usersDetails?.address?.shipping?.[0];
+  console.log("shippingInfo", shippingInfo);
 
   const handleConfirm = () => {
     if (!shippingInfo?.email) {
@@ -38,7 +39,7 @@ const ConfirmPay = ({ setIsModalVisible, payment }) => {
   };
 
   return (
-    <div>
+    <div className="font-opensans">
       <div className="mt-2">
         <div className="space-y-4">
           <section className="">
@@ -173,13 +174,21 @@ const ConfirmPay = ({ setIsModalVisible, payment }) => {
         </div>
       </div>
       <div className="modal-action">
-        <button
+        {shippingInfo?.email && (
+          <button
+            onClick={handleConfirm}
+            className="btn btn-primary text-white"
+          >
+            Confirm
+          </button>
+        )}
+        {/* <button
           onClick={handleConfirm}
           className="btn btn-primary text-white"
-          disabled={!billingInfo.email || !shippingInfo.email}
+          disabled={!billingInfo?.email || !shippingInfo?.email}
         >
           Confirm
-        </button>
+        </button> */}
 
         <button
           onClick={() => setIsModalVisible(false)}
