@@ -9,12 +9,14 @@ const Navbar = () => {
       <div className="hidden lg:block">
         <Offerbar></Offerbar>
       </div>
-      <div className="hidden lg:block">
-        <Topbar></Topbar>
-      </div>
-      <Searchbar></Searchbar>
-      <div className="hidden lg:block">
-        <Navigation></Navigation>
+      <div className="container max-w-screen-xl p-6 mx-auto">
+        <div className="hidden lg:block">
+          <Topbar></Topbar>
+        </div>
+        <Searchbar></Searchbar>
+        <div className="hidden lg:block">
+          <Navigation></Navigation>
+        </div>
       </div>
     </div>
   );
