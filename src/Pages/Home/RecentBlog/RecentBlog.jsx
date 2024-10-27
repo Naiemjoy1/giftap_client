@@ -5,20 +5,19 @@ import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 
 const RecentBlog = () => {
   const [blog, setBlog] = useState([]);
-  console.log(blog)
   const axiosPublic = useAxiosPublic();
   useEffect(() => {
     const blogFetching = async () => {
       try {
-        const response = await axiosPublic.get('/blogs')
-        setBlog(response.data)
+        const response = await axiosPublic.get("/blogs");
+        setBlog(response.data);
+      } catch (error) {
+        console.log("Internal Server Error", error);
       }
-      catch (error) {
-        console.log('Internal Server Error', error)
-      }
-    }
-    blogFetching()
-  }, [axiosPublic])
+    };
+    blogFetching();
+  }, [axiosPublic]);
+
   return (
     <>
       <HomeSectionHeading
@@ -51,49 +50,40 @@ const RecentBlog = () => {
             </div>
           </Link>
 
-
-
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {
-              blog.slice(19, 22).map(item => (
-                <Link
-                  to={`/BlogDetails/${item._id}`}
-                  key={item._id}
-                  className="max-w-sm mx-auto group hover:no-underline focus:no-underline bg-white dark:bg-gray-50 shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105 duration-300"
-                >
-                  <img
-                    role="presentation"
-                    className="object-cover w-full h-44 dark:bg-gray-500"
-                    src={item.blogImage}
-                    alt={item.blogTitle}
-                  />
-                  <div className="p-6 space-y-3">
-                    <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-900 group-hover:underline group-focus:underline">
-                      {item.blogTitle}
-                    </h3>
-                    <span className="text-sm dark:text-gray-600">
-                      {item.blogPublishDate}
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {blog.slice(19, 22).map((item) => (
+              <Link
+                to={`/BlogDetails/${item._id}`}
+                key={item._id}
+                className="max-w-sm mx-auto group hover:no-underline focus:no-underline bg-white dark:bg-gray-50 shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105 duration-300"
+              >
+                <img
+                  role="presentation"
+                  className="object-cover w-full h-44 dark:bg-gray-500"
+                  src={item.blogImage}
+                  alt={item.blogTitle}
+                />
+                <div className="p-6 space-y-3">
+                  <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-900 group-hover:underline group-focus:underline">
+                    {item.blogTitle}
+                  </h3>
+                  <span className="text-sm dark:text-gray-600">
+                    {item.blogPublishDate}
+                  </span>
+                  <p className="text-gray-700 dark:text-gray-700">
+                    {item.blogDescription.slice(0, 99) + "..."}
+                    <span className="block mt-3 text-primary hover:underline">
+                      See More
                     </span>
-                    <p className="text-gray-700 dark:text-gray-700">
-                      {item.blogDescription.slice(0, 99) + '...'}
-                      <span className="block mt-3 text-primary hover:underline">See More</span>
-                    </p>
-                  </div>
-                </Link>
-
-              ))
-            }
+                  </p>
+                </div>
+              </Link>
+            ))}
           </div>
 
-
-
-
           <div className="flex justify-center">
-            <Link to='/blog'>
-              <button
-                className="btn text-white py-3 px-6 md:py-[16px] md:px-[40px] rounded-3xl flex items-center justify-center gap-2 border-2 border-transparent hover:border-black hover:bg-red-700 transition-all duration-500 ease-in-out"
-                style={{ backgroundColor: "rgb(240, 72, 84)" }}
-              >
+            <Link to="/blog">
+              <button className="btn text-white py-3 px-6 md:py-[16px] md:px-[40px] rounded-3xl flex items-center justify-center gap-2 border-2 border-transparent hover:border-hidden hover:bg-primary transition-all duration-500 ease-in-out bg-primary">
                 See All Blogs
               </button>
             </Link>

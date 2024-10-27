@@ -13,14 +13,14 @@ const Subscription = () => {
             }
           ></HomeSectionHeading>
         </div>
-        <div className="flex flex-wrap items-center justify-center space-y-4 lg:-mx-4 lg:items-stretch lg:space-y-0">
+        <div className="flex gap-4 flex-wrap items-center justify-center space-y-4 lg:-mx-4 lg:items-stretch lg:space-y-0">
           {/* Free Plan */}
-          <div className="flex flex-col w-full max-w-sm p-8 bg-white border-2 border-gray-200 rounded-lg lg:mx-4 dark:bg-gray-800 dark:border-gray-700 shadow-lg hover:shadow-2xl transition-shadow duration-300">
+          <div className="flex flex-col w-full max-w-sm p-8 bg-white border-2 border-gray-200 rounded-lg  dark:bg-gray-800 dark:border-gray-700 shadow-lg hover:shadow-2xl transition-shadow duration-300">
             <div className="flex-grow">
-              <h2 className="text-2xl font-semibold text-[#F04854] uppercase">
+              <h2 className="text-2xl font-semibold text-primary uppercase">
                 Casual
               </h2>
-              <span className="pt-2 text-4xl font-bold text-gray-800 uppercase dark:text-gray-100">
+              <span className="pt-2 text-xl font-bold text-gray-800 uppercase dark:text-gray-100">
                 Free
               </span>
               <ul className="mt-4 space-y-2 text-gray-500 dark:text-gray-400">
@@ -40,12 +40,12 @@ const Subscription = () => {
           </div>
 
           {/* Premium Plan */}
-          <div className="flex flex-col w-full max-w-sm p-8 bg-white border-2 border-gray-200 rounded-lg lg:mx-4 dark:bg-gray-800 dark:border-gray-700 shadow-lg hover:shadow-2xl transition-shadow duration-300">
+          <div className="flex flex-col w-full max-w-sm p-8 bg-white border-2 border-gray-200 rounded-lg  dark:bg-gray-800 dark:border-gray-700 shadow-lg hover:shadow-2xl transition-shadow duration-300">
             <div className="flex-grow">
-              <h2 className="text-2xl font-semibold text-[#F04854] uppercase">
+              <h2 className="text-2xl font-semibold text-primary uppercase">
                 Premium
               </h2>
-              <span className="pt-2 text-4xl font-bold text-gray-800 uppercase dark:text-gray-100">
+              <span className="pt-2 text-xl font-bold text-gray-800 uppercase dark:text-gray-100">
                 $24.90
               </span>
               <span className="text-gray-500 dark:text-gray-400">/month</span>
@@ -66,12 +66,12 @@ const Subscription = () => {
           </div>
 
           {/* Luxury Plan */}
-          <div className="flex flex-col w-full max-w-sm p-8 bg-white border-2 border-gray-200 rounded-lg lg:mx-4 dark:bg-gray-800 dark:border-gray-700 shadow-lg hover:shadow-2xl transition-shadow duration-300">
+          <div className="flex flex-col w-full max-w-sm p-8 bg-white border-2 border-gray-200 rounded-lg  dark:bg-gray-800 dark:border-gray-700 shadow-lg hover:shadow-2xl transition-shadow duration-300">
             <div className="flex-grow">
-              <h2 className="text-2xl font-semibold text-[#F04854] uppercase">
+              <h2 className="text-2xl font-semibold text-primary  uppercase">
                 Luxury
               </h2>
-              <span className="pt-2 text-4xl font-bold text-gray-800 uppercase dark:text-gray-100">
+              <span className="pt-2 text-xl font-bold text-gray-800 uppercase dark:text-gray-100">
                 $49.90
               </span>
               <span className="text-gray-500 dark:text-gray-400">/month</span>

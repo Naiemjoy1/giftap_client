@@ -34,7 +34,7 @@ const ProductTabs = () => {
                 activeTab === "newProduct" ? "text-white" : "text-gray-500"
               }
             >
-              <h1 className="md:text-2xl relative z-50">New Product</h1>
+              <h1 className="md:text-xl relative z-50">New Product</h1>
             </Tab>
             <Tab
               value="topProduct"
@@ -43,7 +43,7 @@ const ProductTabs = () => {
                 activeTab === "topProduct" ? "text-white" : "text-gray-500"
               }
             >
-              <h1 className="md:text-2xl relative z-50">Top Product</h1>
+              <h1 className="md:text-xl relative z-50">Top Product</h1>
             </Tab>
           </TabsHeader>
 
