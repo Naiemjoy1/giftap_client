@@ -14,7 +14,7 @@ const AllProducts = () => {
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
 
-  const [users] = useUsers() || []; // Fallback to empty array
+  const [users] = useUsers() || [];
   const useDetails = users.find((userItem) => userItem.email === user?.email);
 
   const userProducts = useDetails

@@ -95,29 +95,31 @@ const Seller = () => {
       {/* Desktop View */}
       <div className="lg:block hidden">
         <div className="flex justify-between bg-[#f8f8f8]">
-          <div className="w-[20%] pl-10 pr-4 py-4 bg-black space-y-4 h-screen">
-            <p className="text-white text-xl font-bold uppercase">Giftap</p>
-            <div className="border-t border-gray-400"></div>
-            <div className="space-y-4 uppercase text-sm">
-              {tabsData.map((aTabs) => (
-                <p
-                  key={aTabs.tab}
-                  className={
-                    tab === aTabs.tab
-                      ? "text-white bg-[#222222] px-2 rounded-md py-2"
-                      : "text-gray-400 px-2 rounded-md py-2"
-                  }
-                  onClick={() => handleTabs(aTabs.tab)}
-                >
-                  <span className="flex items-center gap-2 cursor-pointer">
-                    {aTabs.icon}
-                    {aTabs.name}
-                  </span>
-                </p>
-              ))}
+          <div className="w-[20%] pl-10 pr-4 py-4 bg-black space-y-4 h-screen flex flex-col justify-between">
+            <div>
+              <p className="text-white text-xl font-bold uppercase">Giftap</p>
+              <div className="border-t border-gray-400 mt-2"></div>
+              <div className="space-y-4 uppercase text-sm mt-10">
+                {tabsData.map((aTabs) => (
+                  <p
+                    key={aTabs.tab}
+                    className={
+                      tab === aTabs.tab
+                        ? "text-white bg-[#222222] px-2 rounded-md py-2"
+                        : "text-gray-400 px-2 rounded-md py-2"
+                    }
+                    onClick={() => handleTabs(aTabs.tab)}
+                  >
+                    <span className="flex items-center gap-2 cursor-pointer">
+                      {aTabs.icon}
+                      {aTabs.name}
+                    </span>
+                  </p>
+                ))}
+              </div>
             </div>
 
-            <div className="mt-10">
+            <div>
               <div className="border-t border-gray-400"></div>
               <Link
                 to="/"

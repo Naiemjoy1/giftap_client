@@ -517,7 +517,7 @@ const EditProduct = ({ handleBackClick, productId }) => {
           {loading ? (
             <span className="loading loading-ring loading-sm"></span>
           ) : (
-            "Add Product"
+            "Update Product"
           )}
         </button>
       </form>
