@@ -163,175 +163,183 @@ const AddPro = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-        {/* Product Name */}
-        <div className="flex justify-between items-center gap-4">
-          <div className="form-control w-1/3">
-            <input
-              type="text"
-              placeholder="Product Name"
-              className="input input-bordered"
-              {...register("name", { required: true })}
-            />
-            {errors.name && (
-              <p className="text-red-600">Product name is required.</p>
-            )}
-          </div>
-
-          {/* Seller Name */}
-          <div className="form-control w-1/3">
-            <input
-              type="text"
-              value={useDetails?.name || ""}
-              placeholder="Seller Name"
-              className="input input-bordered"
-              {...register("seller_name", { required: true })}
-              readOnly
-            />
-          </div>
-
-          {/* Store Name */}
-          <div className="form-control w-1/3">
-            <input
-              type="text"
-              value={storeDetails?.shopName || ""}
-              placeholder="Store Name"
-              className="input input-bordered"
-              {...register("store_name", { required: true })}
-              readOnly
-            />
-          </div>
-        </div>
-
-        {/* Description */}
-        <div className="form-control">
-          <textarea
-            placeholder="Product Description"
-            className="textarea textarea-bordered"
-            {...register("description", { required: true })}
-          ></textarea>
-          {errors.description && (
-            <p className="text-red-600">Description is required.</p>
-          )}
-        </div>
-
-        <div className="grid grid-cols-3 gap-4">
-          {[1, 2, 3].map((num) => (
-            <div key={num} className="w-full">
+        <div className="space-y-4">
+          {/* Product Name */}
+          <div className="flex justify-between items-center gap-4">
+            <div className="form-control w-1/3">
               <input
-                type="file"
-                className="file-input file-input-bordered w-full"
-                {...register(`cardImages.${num - 1}`, {
-                  required: num === 1,
-                })}
+                type="text"
+                placeholder="Product Name"
+                className="input input-bordered"
+                {...register("name", { required: true })}
               />
-              {errors.cardImages?.[num - 1] && (
-                <p className="text-red-600">Product Image {num} is required.</p>
+              {errors.name && (
+                <p className="text-red-600">Product name is required.</p>
               )}
             </div>
-          ))}
-        </div>
 
-        <div
-          className={`grid ${
-            isDigitalGift
-              ? "grid-cols-2 md:grid-cols-4"
-              : "grid-cols-2 lg:grid-cols-3"
-          } gap-4`}
-        >
-          {/* Category */}
+            {/* Seller Name */}
+            <div className="form-control w-1/3">
+              <input
+                type="text"
+                value={useDetails?.name || ""}
+                placeholder="Seller Name"
+                className="input input-bordered"
+                {...register("seller_name", { required: true })}
+                readOnly
+              />
+            </div>
+
+            {/* Store Name */}
+            <div className="form-control w-1/3">
+              <input
+                type="text"
+                value={storeDetails?.shopName || ""}
+                placeholder="Store Name"
+                className="input input-bordered"
+                {...register("store_name", { required: true })}
+                readOnly
+              />
+            </div>
+          </div>
+
+          {/* Description */}
           <div className="form-control">
-            <select
-              className="select select-bordered"
-              {...register("category", { required: true })}
-            >
-              <option value="">Select Category</option>
-              {categories.map((category, idx) => (
-                <option key={idx} value={category}>
-                  {category
-                    .toLowerCase()
-                    .split(" ")
-                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(" ")}
-                </option>
-              ))}
-            </select>
-            {errors.category && (
-              <p className="text-red-600">Category is required.</p>
+            <textarea
+              placeholder="Product Description"
+              className="textarea textarea-bordered"
+              {...register("description", { required: true })}
+            ></textarea>
+            {errors.description && (
+              <p className="text-red-600">Description is required.</p>
             )}
           </div>
 
-          {/* SubCategory */}
-          <div className="form-control">
-            <select
-              className="select select-bordered"
-              {...register("subCategory", { required: true })}
-            >
-              <option value="">Select SubCategory</option>
-              {subCategories.map((subCategory, idx) => (
-                <option key={idx} value={subCategory}>
-                  {subCategory
-                    .toLowerCase()
-                    .split(" ")
-                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(" ")}
-                </option>
-              ))}
-            </select>
-            {errors.subCategory && (
-              <p className="text-red-600">SubCategory is required.</p>
-            )}
-          </div>
-
-          {/* Mention */}
-          <div className="form-control">
-            <input
-              type="text"
-              placeholder="Mention (e.g., For Baby, Men, Women)"
-              className="input input-bordered"
-              {...register("mention")}
-            />
-          </div>
-
-          {/* Price for non-digital products */}
-          {!isDigitalGift && (
-            <>
-              <div className="form-control">
+          <div className="grid grid-cols-3 gap-4">
+            {[1, 2, 3].map((num) => (
+              <div key={num} className="w-full">
                 <input
-                  type="number"
-                  step="0.01"
-                  placeholder="Price"
-                  className="input input-bordered"
-                  {...register("price", { required: !isDigitalGift })}
+                  type="file"
+                  className="file-input file-input-bordered w-full"
+                  {...register(`cardImages.${num - 1}`, {
+                    required: num === 1,
+                  })}
                 />
-                {errors.price && (
+                {errors.cardImages?.[num - 1] && (
                   <p className="text-red-600">
-                    Price is required for non-digital products.
+                    Product Image {num} is required.
                   </p>
                 )}
               </div>
-              {/* Quantity */}
-              <div className="form-control">
-                <input
-                  type="number"
-                  placeholder="Quantity"
-                  className="input input-bordered"
-                  {...register("quantity", { required: true })}
-                />
-                {errors.quantity && (
-                  <p className="text-red-600">Quantity is required.</p>
-                )}
-              </div>
-            </>
-          )}
-          {/* Discount */}
-          <div className="form-control">
-            <input
-              type="number"
-              step="0.01"
-              placeholder="Discount Percentage"
-              className="input input-bordered"
-              {...register("discount")}
-            />
+            ))}
+          </div>
+
+          <div
+            className={`grid ${
+              isDigitalGift
+                ? "grid-cols-2 md:grid-cols-4"
+                : "grid-cols-2 lg:grid-cols-3"
+            } gap-4`}
+          >
+            {/* Category */}
+            <div className="form-control">
+              <select
+                className="select select-bordered"
+                {...register("category", { required: true })}
+              >
+                <option value="">Select Category</option>
+                {categories.map((category, idx) => (
+                  <option key={idx} value={category}>
+                    {category
+                      .toLowerCase()
+                      .split(" ")
+                      .map(
+                        (word) => word.charAt(0).toUpperCase() + word.slice(1)
+                      )
+                      .join(" ")}
+                  </option>
+                ))}
+              </select>
+              {errors.category && (
+                <p className="text-red-600">Category is required.</p>
+              )}
+            </div>
+
+            {/* SubCategory */}
+            <div className="form-control">
+              <select
+                className="select select-bordered"
+                {...register("subCategory", { required: true })}
+              >
+                <option value="">Select SubCategory</option>
+                {subCategories.map((subCategory, idx) => (
+                  <option key={idx} value={subCategory}>
+                    {subCategory
+                      .toLowerCase()
+                      .split(" ")
+                      .map(
+                        (word) => word.charAt(0).toUpperCase() + word.slice(1)
+                      )
+                      .join(" ")}
+                  </option>
+                ))}
+              </select>
+              {errors.subCategory && (
+                <p className="text-red-600">SubCategory is required.</p>
+              )}
+            </div>
+
+            {/* Mention */}
+            <div className="form-control">
+              <input
+                type="text"
+                placeholder="Mention (e.g., For Baby, Men, Women)"
+                className="input input-bordered"
+                {...register("mention")}
+              />
+            </div>
+
+            {/* Price for non-digital products */}
+            {!isDigitalGift && (
+              <>
+                <div className="form-control">
+                  <input
+                    type="number"
+                    step="0.01"
+                    placeholder="Price"
+                    className="input input-bordered"
+                    {...register("price", { required: !isDigitalGift })}
+                  />
+                  {errors.price && (
+                    <p className="text-red-600">
+                      Price is required for non-digital products.
+                    </p>
+                  )}
+                </div>
+                {/* Quantity */}
+                <div className="form-control">
+                  <input
+                    type="number"
+                    placeholder="Quantity"
+                    className="input input-bordered"
+                    {...register("quantity", { required: true })}
+                  />
+                  {errors.quantity && (
+                    <p className="text-red-600">Quantity is required.</p>
+                  )}
+                </div>
+              </>
+            )}
+            {/* Discount */}
+            <div className="form-control">
+              <input
+                type="number"
+                step="0.01"
+                placeholder="Discount Percentage"
+                className="input input-bordered"
+                {...register("discount")}
+              />
+            </div>
           </div>
         </div>
 

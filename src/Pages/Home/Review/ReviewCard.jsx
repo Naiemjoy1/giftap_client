@@ -3,13 +3,11 @@ import "@smastrom/react-rating/style.css";
 import useUsers from "../../../Components/Hooks/useUsers";
 
 const ReviewCard = ({ singleReview }) => {
-  console.log(singleReview);
   const [users] = useUsers();
 
   const { email, rating, review } = singleReview;
 
   const currentUser = users.find((user) => user.email === email);
-  console.log("currentUser", currentUser);
 
   return (
     <div className="bg-white w-[350px] border rounded-2xl p-5 ml-4">
