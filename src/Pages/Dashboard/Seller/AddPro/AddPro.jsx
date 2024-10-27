@@ -1,22 +1,21 @@
-import React, { useState } from "react";
+import { useForm, useFieldArray } from "react-hook-form";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import useSellers from "../../../../Components/Hooks/useSellers";
-import useUsers from "../../../../Components/Hooks/useUsers";
 import useAuth from "../../../../Components/Hooks/useAuth";
+import useUsers from "../../../../Components/Hooks/useUsers";
 import useProducts from "../../../../Components/Hooks/useProducts";
 import useAxiosPublic from "../../../../Components/Hooks/useAxiosPublic";
-import { useFieldArray, useForm } from "react-hook-form";
-import { IoCloudUploadSharp } from "react-icons/io5";
-import toast from "react-hot-toast";
 
 const AddPro = () => {
   const [sellers] = useSellers();
   const { user } = useAuth();
+  const [users] = useUsers();
   const [products] = useProducts();
   const categories = [...new Set(products.map((item) => item.category))];
   const subCategories = [...new Set(products.map((item) => item.subCategory))];
-  const axiosPublic = useAxiosPublic();
 
-  const [users] = useUsers();
+  const axiosPublic = useAxiosPublic();
 
   const useDetails = users.find((userId) => userId.email === user.email);
 
@@ -24,10 +23,11 @@ const AddPro = () => {
 
   const {
     register,
-    control,
     handleSubmit,
-    reset,
+    watch,
     formState: { errors },
+    control,
+    reset,
   } = useForm();
 
   const { fields, append, remove } = useFieldArray({
@@ -36,13 +36,13 @@ const AddPro = () => {
   });
 
   const [isDigitalGift, setIsDigitalGift] = useState(false);
-  const [imagePreviews, setImagePreviews] = useState({
-    cardImg1: null,
-    cardImg2: null,
-    cardImg3: null,
-  });
-  const [tierImages, setTierImages] = useState({});
-  const [loadingImages, setLoadingImages] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const selectedCategory = watch("category");
+
+  useEffect(() => {
+    setIsDigitalGift(selectedCategory === "digital gift");
+  }, [selectedCategory]);
 
   const uploadImageToImgBB = async (imageFile) => {
     const image_hosting_key = import.meta.env.VITE_IMGBB_API;
@@ -100,102 +100,69 @@ const AddPro = () => {
   };
 
   const onSubmit = async (data) => {
-    setLoadingImages(true);
+    setLoading(true);
     try {
-      const uploadedImages = await Promise.all([
-        uploadImageToImgBB(data.image.cardImg1[0]),
-        uploadImageToImgBB(data.image.cardImg2[0]),
-        uploadImageToImgBB(data.image.cardImg3[0]),
-      ]);
+      const images = {
+        cardImg1: data.cardImages[0]
+          ? await uploadImageToImgBB(data.cardImages[0][0])
+          : null,
+        cardImg2: data.cardImages[1]
+          ? await uploadImageToImgBB(data.cardImages[1][0])
+          : null,
+        cardImg3: data.cardImages[2]
+          ? await uploadImageToImgBB(data.cardImages[2][0])
+          : null,
+      };
 
-      const uploadedTierImages = isDigitalGift
-        ? await Promise.all(
-            fields.map((_, index) => {
-              const tierImageFile = tierImages[`tierImg${index}`];
-              if (tierImageFile) {
-                return uploadImageToImgBB(tierImageFile);
-              }
-              return Promise.resolve("");
-            })
-          )
-        : [];
+      const formattedPriceGroup = await Promise.all(
+        data.priceGroup.map(async (tier) => ({
+          tier: tier.tier,
+          price: {
+            currency: tier.price.currency,
+            amount: parseFloat(tier.price.amount), // Convert to float
+            duration: tier.price.duration,
+          },
+          image: tier.tierImage
+            ? await uploadImageToImgBB(tier.tierImage[0])
+            : null,
+          quantity: parseFloat(tier.quantity), // Convert to float
+        }))
+      );
 
       const generatedSKU = generateSKU(data.name, data.category);
 
-      const productData = {
-        userId: useDetails?._id,
-        name: data.name,
-        seller_name: useDetails?.name,
-        store_name: storeDetails?.shopName,
-        description: data.description,
+      const formattedData = {
+        ...data,
+        image: images,
+        priceGroup: formattedPriceGroup,
         sku: generatedSKU,
-        image: {
-          cardImg1: uploadedImages[0],
-          cardImg2: uploadedImages[1],
-          cardImg3: uploadedImages[2],
-        },
-        category: data.category,
-        subCategory: data.subCategory,
-        price: isDigitalGift ? undefined : parseFloat(data.price),
-        mention: data.mention,
-        quantity: isDigitalGift ? undefined : parseFloat(data.quantity),
-        discount: parseFloat(data.discount),
+        userId: useDetails?._id,
       };
 
-      if (isDigitalGift) {
-        productData.priceGroup = data.priceGroup.map(
-          (priceGroupItem, index) => ({
-            ...priceGroupItem,
-            price: {
-              ...priceGroupItem.price,
-              amount: parseFloat(priceGroupItem.price.amount),
-            },
-            quantity: parseFloat(priceGroupItem.quantity),
-            image: uploadedTierImages[index],
-          })
-        );
-      }
+      // Remove cardImages from formattedData
+      delete formattedData.cardImages;
 
-      // console.log(productData);
-      const res = await axiosPublic.post("/products", productData);
+      // Convert other fields to float
+      formattedData.price = parseFloat(data.price); // Convert price to float
+      formattedData.quantity = parseFloat(data.quantity); // Convert quantity to float
+      formattedData.discount = parseFloat(data.discount) || 0; // Convert discount to float
+
+      const res = await axiosPublic.post("/products", formattedData);
       if (res.data.insertedId) {
         reset();
         toast.success("New Product Added");
       }
     } catch (error) {
-      console.error("Error uploading images or generating SKU:", error);
-      toast.error("Failed to add product. Please try again.");
+      console.error("Error uploading images:", error);
+      toast.error("Failed to add product.");
     } finally {
-      setLoadingImages(false);
-    }
-  };
-
-  const categoryChangeHandler = (event) => {
-    setIsDigitalGift(event.target.value.toLowerCase() === "digital gift");
-  };
-
-  const handleImageChange = (event, field) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setImagePreviews((prev) => ({
-          ...prev,
-          [field]: reader.result,
-        }));
-      };
-      reader.readAsDataURL(file);
-
-      setTierImages((prev) => ({
-        ...prev,
-        [field]: file,
-      }));
+      setLoading(false);
     }
   };
 
   return (
-    <div className="container mx-auto">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 px-2 py-2">
+    <div>
+      <form onSubmit={handleSubmit(onSubmit)} className="card-body">
         {/* Product Name */}
         <div className="flex justify-between items-center gap-4">
           <div className="form-control w-1/3">
@@ -247,37 +214,19 @@ const AddPro = () => {
           )}
         </div>
 
-        {/* Images */}
-        <div className="flex justify-center items-center gap-4">
-          {[1, 2, 3].map((idx) => (
-            <div key={idx} className="form-control w-1/3">
-              <div>
-                <label
-                  htmlFor={`cardImg${idx}`}
-                  className="border border-dashed p-2 text-2xl flex justify-center items-center text-primary cursor-pointer"
-                >
-                  {imagePreviews[`cardImg${idx}`] ? (
-                    <img
-                      src={imagePreviews[`cardImg${idx}`]}
-                      alt="Preview"
-                      className=" h-8"
-                    />
-                  ) : (
-                    <IoCloudUploadSharp />
-                  )}
-                </label>
-                <input
-                  type="file"
-                  id={`cardImg${idx}`}
-                  className="sr-only"
-                  accept="image/*"
-                  {...register(`image.cardImg${idx}`, { required: true })}
-                  onChange={(e) => handleImageChange(e, `cardImg${idx}`)}
-                />
-                {errors[`image.cardImg${idx}`] && (
-                  <p className="text-red-600">Image is required.</p>
-                )}
-              </div>
+        <div className="grid grid-cols-3 gap-4">
+          {[1, 2, 3].map((num) => (
+            <div key={num} className="w-full">
+              <input
+                type="file"
+                className="file-input file-input-bordered w-full"
+                {...register(`cardImages.${num - 1}`, {
+                  required: num === 1,
+                })}
+              />
+              {errors.cardImages?.[num - 1] && (
+                <p className="text-red-600">Product Image {num} is required.</p>
+              )}
             </div>
           ))}
         </div>
@@ -294,7 +243,6 @@ const AddPro = () => {
             <select
               className="select select-bordered"
               {...register("category", { required: true })}
-              onChange={categoryChangeHandler}
             >
               <option value="">Select Category</option>
               {categories.map((category, idx) => (
@@ -353,7 +301,7 @@ const AddPro = () => {
                   step="0.01"
                   placeholder="Price"
                   className="input input-bordered"
-                  {...register("price", { required: true })}
+                  {...register("price", { required: !isDigitalGift })}
                 />
                 {errors.price && (
                   <p className="text-red-600">
@@ -375,7 +323,6 @@ const AddPro = () => {
               </div>
             </>
           )}
-
           {/* Discount */}
           <div className="form-control">
             <input
@@ -406,31 +353,12 @@ const AddPro = () => {
                         })}
                       />
                       {errors.priceGroup?.[index]?.tier && (
-                        <p className="text-red-600">Tier name is required.</p>
+                        <p className="text-red-600">Tier is required.</p>
                       )}
                     </div>
-                    {/* Currency Dropdown */}
-                    <div className="form-control">
-                      <select
-                        className="select select-bordered"
-                        {...register(`priceGroup.${index}.price.currency`, {
-                          required: true,
-                        })}
-                      >
-                        <option value="">Select Currency</option>
-                        <option value="USD">USD</option>
-                        <option value="BDT">BDT</option>
-                        <option value="EUR">EUR</option>
-                      </select>
-                      {errors.priceGroup?.[index]?.price?.currency && (
-                        <p className="text-red-600">Currency is required.</p>
-                      )}
-                    </div>
-                    {/* Price Input */}
                     <div className="form-control">
                       <input
                         type="number"
-                        step="0.01"
                         placeholder="Price"
                         className="input input-bordered"
                         {...register(`priceGroup.${index}.price.amount`, {
@@ -442,6 +370,21 @@ const AddPro = () => {
                       )}
                     </div>
                     <div className="form-control">
+                      <select
+                        className="select select-bordered"
+                        {...register(`priceGroup.${index}.price.currency`, {
+                          required: true,
+                        })}
+                      >
+                        <option value="">Select Currency</option>
+                        <option value="USD">USD</option>
+                        <option value="BDT">BDT</option>
+                      </select>
+                      {errors.priceGroup?.[index]?.price?.currency && (
+                        <p className="text-red-600">Currency is required.</p>
+                      )}
+                    </div>
+                    <div className="form-control">
                       <input
                         type="text"
                         placeholder="Duration (e.g., 1 month)"
@@ -450,45 +393,7 @@ const AddPro = () => {
                           required: true,
                         })}
                       />
-                      {errors.priceGroup?.[index]?.price?.duration && (
-                        <p className="text-red-600">Duration is required.</p>
-                      )}
                     </div>
-                    {/* Image Upload Section */}
-                    <div className="form-control">
-                      <div className="flex justify-center items-center">
-                        <label
-                          htmlFor={`tierImg${index}`}
-                          className="border border-dashed p-2 text-2xl flex justify-center items-center text-primary cursor-pointer w-full"
-                        >
-                          {imagePreviews[`tierImg${index}`] ? (
-                            <img
-                              src={imagePreviews[`tierImg${index}`]}
-                              alt="Preview"
-                              className="h-8"
-                            />
-                          ) : (
-                            <IoCloudUploadSharp />
-                          )}
-                        </label>
-                        <input
-                          type="file"
-                          id={`tierImg${index}`}
-                          className="sr-only"
-                          accept="image/*"
-                          {...register(`priceGroup.${index}.image`, {
-                            required: true,
-                          })}
-                          onChange={(e) =>
-                            handleImageChange(e, `tierImg${index}`)
-                          }
-                        />
-                      </div>
-                      {errors.priceGroup?.[index]?.image && (
-                        <p className="text-red-600">Image is required.</p>
-                      )}
-                    </div>
-                    {/* Quantity for each price group */}
                     <div className="form-control">
                       <input
                         type="number"
@@ -496,47 +401,46 @@ const AddPro = () => {
                         className="input input-bordered"
                         {...register(`priceGroup.${index}.quantity`, {
                           required: true,
-                          valueAsNumber: true, // This ensures quantity is treated as a number
                         })}
                       />
                       {errors.priceGroup?.[index]?.quantity && (
                         <p className="text-red-600">Quantity is required.</p>
                       )}
                     </div>
+                    <div className="form-control">
+                      <input
+                        type="file"
+                        className="file-input file-input-bordered w-full max-w-xs"
+                        {...register(`priceGroup.${index}.tierImage`)}
+                      />
+                    </div>
                   </div>
-
-                  <button
-                    type="button"
-                    className="btn btn-error btn-sm text-white mt-4"
-                    onClick={() => remove(index)}
-                  >
-                    Remove
-                  </button>
+                  <div className="flex justify-end mt-2">
+                    <button
+                      type="button"
+                      className="btn btn-outline btn-error"
+                      onClick={() => remove(index)}
+                    >
+                      Remove Tier
+                    </button>
+                  </div>
                 </div>
               ))}
-
-              <button
-                type="button"
-                className="btn btn-primary text-white btn-sm"
-                onClick={() =>
-                  append({
-                    tier: "",
-                    price: { amount: 0, duration: "" },
-                    image: "", // Removed as we now handle it with file input
-                    quantity: 1,
-                  })
-                }
-              >
-                Add New Tier
-              </button>
             </div>
+            <button
+              type="button"
+              className="btn btn-primary text-white btn-sm"
+              onClick={() => append({})}
+            >
+              Add Tier
+            </button>
           </div>
         )}
 
         {/* Submit Button */}
         <div className="form-control">
           <button className="btn btn-primary text-white" type="submit">
-            {loadingImages ? (
+            {loading ? (
               <span className="loading loading-ring loading-sm"></span>
             ) : (
               "Add Product"
@@ -549,4 +453,3 @@ const AddPro = () => {
 };
 
 export default AddPro;
-
