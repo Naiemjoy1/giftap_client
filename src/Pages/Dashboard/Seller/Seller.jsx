@@ -97,7 +97,9 @@ const Seller = () => {
         <div className="flex justify-between bg-[#f8f8f8]">
           <div className="w-[20%] pl-10 pr-4 py-4 bg-black space-y-4 h-screen flex flex-col justify-between">
             <div>
-              <p className="text-white text-xl font-bold uppercase">Giftap</p>
+              <a href="/" className="text-white text-xl font-bold uppercase">
+                Giftap
+              </a>
               <div className="border-t border-gray-400 mt-2"></div>
               <div className="space-y-4 uppercase text-sm mt-10">
                 {tabsData.map((aTabs) => (

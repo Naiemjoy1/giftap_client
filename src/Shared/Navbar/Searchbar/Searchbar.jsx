@@ -90,7 +90,7 @@ const Searchbar = () => {
               <FaRegEnvelope />
             </p>
             <section>
-              <p>support@example.com</p>
+              <p>support@giftap.com</p>
               <p className="text-sm text-gray-400">Contact Email</p>
             </section>
           </section>

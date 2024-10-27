@@ -26,7 +26,7 @@ const RecentBlog = () => {
       ></HomeSectionHeading>
 
       <section className="bg-white dark:bg-gray-100 dark:text-gray-800">
-        <div className="container max-w-screen-xl p-6 mx-auto space-y-10 sm:space-y-16">
+        <div className="container max-w-screen-xl p-6 mx-auto space-y-6 sm:space-y-6">
           {/* Featured Blog */}
           <Link
             to={`/BlogDetails/${blog[12]?._id}`}
