@@ -102,11 +102,11 @@ const Admin = () => {
 
       <div className=" lg:block hidden">
         <div className="flex justify-between bg-[#f8f8f8]">
-          <div className="w-[20%] pl-10 pr-4 py-4 bg-black space-y-4 h-screen ">
-            <p className="text-white text-xl font-bold uppercase">Giftap</p>
-            <div className="border-t border-gray-400"></div>
+          <div className="w-[20%] pl-10 pr-4 py-4 bg-black space-y-4 h-screen flex flex-col justify-between ">
             <div>
-              <div className="space-y-4 uppercase text-sm">
+              <p className="text-white text-xl font-bold uppercase">Giftap</p>
+              <div className="border-t border-gray-400 mt-2"></div>
+              <div className="space-y-4 uppercase text-sm mt-10">
                 {tabsData.map((aTabs) => (
                   <p
                     key={aTabs.tab}
@@ -117,23 +117,22 @@ const Admin = () => {
                     }
                     onClick={() => handleTabs(aTabs.tab)}
                   >
-                    <span className="flex items-center gap-2">
+                    <span className="flex items-center gap-2 cursor-pointer">
                       {aTabs.icon}
                       {aTabs.name}
                     </span>
                   </p>
                 ))}
               </div>
-
-              <div className="mt-10">
-                <div className="border-t border-gray-400"></div>
-                <Link
-                  to="/"
-                  className="flex gap-2 items-center text-gray-400 px-2 rounded-md py-2"
-                >
-                  <FaStore /> Home
-                </Link>
-              </div>
+            </div>
+            <div>
+              <div className="border-t border-gray-400"></div>
+              <Link
+                to="/"
+                className="flex gap-2 items-center text-gray-400 px-2 rounded-md py-2"
+              >
+                <FaStore /> Home
+              </Link>
             </div>
           </div>
 

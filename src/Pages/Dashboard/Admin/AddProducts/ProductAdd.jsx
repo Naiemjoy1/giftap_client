@@ -1,10 +1,10 @@
 import { useForm, useFieldArray } from "react-hook-form";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import useProducts from "../../../../Components/Hooks/useProducts";
 import useAxiosPublic from "../../../../Components/Hooks/useAxiosPublic";
+import toast from "react-hot-toast";
 
-const AddProducts = () => {
+const ProductAdd = () => {
   const [products] = useProducts();
   const categories = [...new Set(products.map((item) => item.category))];
   const axiosPublic = useAxiosPublic();
@@ -204,12 +204,12 @@ const AddProducts = () => {
           )}
         </div>
 
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 gap-4 mb-4">
           {[1, 2, 3].map((num) => (
-            <div key={num} className="w-full">
+            <div key={num}>
               <input
                 type="file"
-                className="file-input file-input-bordered w-full"
+                className="file-input file-input-bordered w-full max-w-xs"
                 {...register(`cardImages.${num - 1}`, {
                   required: num === 1, // Require at least one image
                 })}
@@ -433,4 +433,4 @@ const AddProducts = () => {
   );
 };
 
-export default AddProducts;
+export default ProductAdd;
