@@ -16,11 +16,11 @@ const ReviewCard = ({ singleReview }) => {
       <div className="flex items-center space-x-5">
         <img
           className="w-10 h-10 rounded-full"
-          src={currentUser.image}
+          src={currentUser?.image}
           alt=""
         />
         <div>
-          <p className="text-base font-semibold">{currentUser.name}</p>
+          <p className="text-base font-semibold">{currentUser?.name}</p>
           <h1 className="flex  text-sm">
             <Rating style={{ maxWidth: 80 }} value={rating} readOnly />
           </h1>
