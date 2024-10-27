@@ -60,7 +60,7 @@ const FeatureSection = () => {
                 key={index}
                 className="text-center p-3 rounded-lg hover:bg-gray-100 transition-all duration-300"
               >
-                <feature.Icon className="mx-auto text-4xl text-[#F04854] mb-4 transition-transform duration-300 transform hover:scale-110" />
+                <feature.Icon className="mx-auto text-4xl text-primary mb-4 transition-transform duration-300 transform hover:scale-110" />
                 <h3 className="text-xl font-semibold text-gray-800 mb-2">
                   {feature.title}
                 </h3>

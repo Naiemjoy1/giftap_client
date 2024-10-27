@@ -9,15 +9,16 @@ const Carousel = () => {
   const [banner, setBanner] = useState([]);
   const axiosPublic = useAxiosPublic();
   useEffect(() => {
-    axiosPublic.get('/banner')
-      .then(response => {
-        setBanner(response.data)
+    axiosPublic
+      .get("/banner")
+      .then((response) => {
+        setBanner(response.data);
       })
-      .catch(error => {
-        console.error('Error fetching banners:', error);
+      .catch((error) => {
+        console.error("Error fetching banners:", error);
       });
   }, [axiosPublic]);
-  console.log(banner)
+
   return (
     <div>
       <Swiper
@@ -33,20 +34,22 @@ const Carousel = () => {
         modules={[Pagination, Autoplay]}
         className="mySwiper"
       >
-        {
-          banner.map(ban => ban.type ==='running' && <SwiperSlide key={ban._id}>
-            <div className="max-h-[70vh] flex items-center justify-center bg-gray-100">
-              <div>
-                <img
-                  className="max-h-full object-contain"
-                  src={ban.bannerUrl}
-                  alt="Banner"
-                />
-              </div>
-            </div>
-          </SwiperSlide>)
-        }
-
+        {banner.map(
+          (ban) =>
+            ban.type === "running" && (
+              <SwiperSlide key={ban._id}>
+                <div className="max-h-[70vh] flex items-center justify-center bg-gray-100">
+                  <div>
+                    <img
+                      className="max-h-full object-contain"
+                      src={ban.bannerUrl}
+                      alt="Banner"
+                    />
+                  </div>
+                </div>
+              </SwiperSlide>
+            )
+        )}
       </Swiper>
     </div>
   );
