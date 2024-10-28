@@ -300,6 +300,7 @@ const Billing = ({ onClose }) => {
           placeholder="Email"
           className="input input-bordered w-full"
           value={user?.email}
+          readOnly
         />
         {errors.email && (
           <span className="text-red-500">Email is required</span>
