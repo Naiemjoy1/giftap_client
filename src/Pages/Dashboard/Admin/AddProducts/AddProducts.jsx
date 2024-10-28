@@ -150,7 +150,7 @@ const AddProducts = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div className="space-y-4">
           {/* Product Name */}
           <div className="flex justify-between items-center gap-4">
@@ -334,7 +334,7 @@ const AddProducts = () => {
                       <input
                         type="text"
                         placeholder="e.g., Basic, Standard, Premium"
-                        className="input input-bordered"
+                        className="input input-bordered input-sm"
                         {...register(`priceGroup.${index}.tier`, {
                           required: true,
                         })}
@@ -347,7 +347,7 @@ const AddProducts = () => {
                       <input
                         type="number"
                         placeholder="Price"
-                        className="input input-bordered"
+                        className="input input-bordered input-sm"
                         {...register(`priceGroup.${index}.price.amount`, {
                           required: true,
                         })}
@@ -358,7 +358,7 @@ const AddProducts = () => {
                     </div>
                     <div className="form-control">
                       <select
-                        className="select select-bordered"
+                        className="select select-bordered select-sm"
                         {...register(`priceGroup.${index}.price.currency`, {
                           required: true,
                         })}
@@ -385,7 +385,7 @@ const AddProducts = () => {
                       <input
                         type="number"
                         placeholder="Quantity"
-                        className="input input-bordered"
+                        className="input input-bordered input-sm"
                         {...register(`priceGroup.${index}.quantity`, {
                           required: true,
                         })}
@@ -397,7 +397,7 @@ const AddProducts = () => {
                     <div className="form-control">
                       <input
                         type="file"
-                        className="file-input file-input-bordered w-full max-w-xs"
+                        className="file-input file-input-bordered w-full max-w-xs file-input-sm"
                         {...register(`priceGroup.${index}.tierImage`)}
                       />
                     </div>
@@ -405,7 +405,7 @@ const AddProducts = () => {
                   <div className="flex justify-end mt-2">
                     <button
                       type="button"
-                      className="btn btn-outline btn-error"
+                      className="btn btn-outline btn-primary btn-sm"
                       onClick={() => remove(index)}
                     >
                       Remove Tier

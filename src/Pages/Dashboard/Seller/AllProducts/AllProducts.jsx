@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import EditProduct from "../../Admin/EditProduct/EditProduct";
 import useAuth from "../../../../Components/Hooks/useAuth";
 import useUsers from "../../../../Components/Hooks/useUsers";
+import ProductEdit from "../../Admin/EditProduct/ProductEdit";
 
 const AllProducts = () => {
   const [products, loading, refetch] = useProducts();
@@ -72,10 +73,10 @@ const AllProducts = () => {
     <div>
       {editProductId ? (
         <div>
-          <EditProduct
+          <ProductEdit
             productId={editProductId}
             handleBackClick={handleBackClick}
-          />
+          ></ProductEdit>
         </div>
       ) : (
         <div className="overflow-x-auto">
