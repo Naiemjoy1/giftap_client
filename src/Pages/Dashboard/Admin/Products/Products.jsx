@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import useAxiosPublic from "../../../../Components/Hooks/useAxiosPublic";
 import { useState } from "react";
 import EditProduct from "../EditProduct/EditProduct";
+import ProductEdit from "../EditProduct/ProductEdit";
 
 const Products = () => {
   const [products, loading, refetch] = useProducts();
@@ -62,10 +63,10 @@ const Products = () => {
     <div>
       {editProductId ? (
         <div>
-          <EditProduct
+          <ProductEdit
             productId={editProductId}
             handleBackClick={handleBackClick}
-          />{" "}
+          ></ProductEdit>
         </div>
       ) : (
         <div className="overflow-x-auto">
