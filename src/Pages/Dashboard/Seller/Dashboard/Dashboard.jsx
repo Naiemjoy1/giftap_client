@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { RiFilePaper2Line, RiShoppingBasket2Line } from "react-icons/ri";
 import { HiOutlineCurrencyDollar } from "react-icons/hi";
 import { MdOutlinePeopleAlt } from "react-icons/md";
@@ -7,6 +8,7 @@ import StockOut from "./StockOut/StockOut";
 import useSellerStat from "../../../../Components/Hooks/useSellerStat";
 import useAuth from "../../../../Components/Hooks/useAuth";
 import useSellers from "../../../../Components/Hooks/useSellers";
+import useSellerOrders from "../../../../Components/Hooks/useSellerOrders";
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -21,6 +23,47 @@ const Dashboard = () => {
       ? sellerStat[currentSeller.shopName]
       : null;
 
+  const [sellerOrders] = useSellerOrders();
+
+  const currentSellerOrder =
+    currentSeller &&
+    sellerOrders &&
+    sellerOrders.orderData &&
+    sellerOrders.orderData[currentSeller.shopName]
+      ? sellerOrders.orderData[currentSeller.shopName]
+      : null;
+
+  const todayDate = dayjs().format("YYYY-MM-DD");
+  const todayData = currentSellerOrder?.dailyData?.[todayDate] || null;
+
+  const currentMonth = dayjs().format("YYYY-MM");
+  const previousMonth = dayjs().subtract(1, "month").format("YYYY-MM");
+
+  const currentMonthData = currentSellerOrder?.monthlyData?.[currentMonth] || {
+    totalRevenue: 0,
+    totalOrders: 0,
+  };
+
+  const previousMonthData = currentSellerOrder?.monthlyData?.[
+    previousMonth
+  ] || {
+    totalRevenue: 0,
+    totalOrders: 0,
+  };
+
+  const currentYear = dayjs().format("YYYY");
+  const previousYear = dayjs().subtract(1, "year").format("YYYY");
+
+  const currentYearData = currentSellerOrder?.yearlyData?.[currentYear] || {
+    totalRevenue: 0,
+    totalOrders: 0,
+  };
+
+  const previousYearData = currentSellerOrder?.yearlyData?.[previousYear] || {
+    totalRevenue: 0,
+    totalOrders: 0,
+  };
+
   return (
     <div className="space-y-4">
       <section className="lg:flex justify-between gap-4">
@@ -30,8 +73,8 @@ const Dashboard = () => {
             <p className=" space-x-1">
               <span className="font-bold text-2xl">
                 $
-                {currentSellerStat?.currentMonthTotal
-                  ? currentSellerStat.currentMonthTotal.toFixed(2)
+                {currentMonthData?.totalRevenue
+                  ? currentMonthData.totalRevenue.toFixed(2)
                   : 0}
               </span>
               <span className="text-green-600 text-sm">
@@ -56,10 +99,7 @@ const Dashboard = () => {
               </p>
             </div>
             <p className="text-2xl">
-              $
-              {currentSellerStat?.todayTotal
-                ? currentSellerStat.todayTotal.toFixed(2)
-                : 0}
+              ${todayData?.totalRevenue ? todayData.totalRevenue.toFixed(2) : 0}
             </p>
             <p className="text-xs">*Update every order success</p>
           </div>
@@ -72,8 +112,8 @@ const Dashboard = () => {
             </div>
             <p className="text-2xl">
               $
-              {currentSellerStat?.grandTotal
-                ? currentSellerStat.grandTotal.toFixed(2)
+              {currentYearData?.totalRevenue
+                ? currentYearData.totalRevenue.toFixed(2)
                 : 0}
             </p>
             <p className="text-xs">
@@ -102,7 +142,7 @@ const Dashboard = () => {
               </p>
             </div>
             <p className="text-2xl">
-              {currentSellerStat?.grandCount ? currentSellerStat.grandCount : 0}
+              {currentYearData?.totalOrders ? currentYearData.totalOrders : 0}
             </p>
             <p className="text-xs">
               {currentSellerStat?.yearlyCountIncreasePercentage > 0 ? (

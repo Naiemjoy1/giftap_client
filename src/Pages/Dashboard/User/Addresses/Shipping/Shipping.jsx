@@ -100,6 +100,7 @@ const Shipping = ({ onClose }) => {
       if (updateResponse.status === 200) {
         refetch();
         onClose();
+        window.location.reload();
         toast.success("Shipping info added successfully!");
       } else {
         toast.error("Failed to add user shipping info");
@@ -305,7 +306,7 @@ const Shipping = ({ onClose }) => {
           })}
           placeholder="Email"
           className="input input-bordered w-full"
-          disabled={!!shippingInfo?.email} // Disable if shippingInfo.email exists
+          // disabled={!!shippingInfo?.email} // Disable if shippingInfo.email exists
         />
         {errors.email && (
           <span className="text-red-500">{errors.email.message}</span>
