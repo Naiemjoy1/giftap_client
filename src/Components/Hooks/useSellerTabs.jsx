@@ -13,7 +13,8 @@ import { RiAdvertisementFill } from "react-icons/ri";
 
 import RequestBanner from "../../Pages/Dashboard/Seller/RequestBanner/RequestBanner";
 import { IoMdNotificationsOutline } from "react-icons/io";
-
+import { BsCashStack } from "react-icons/bs";
+import Orders from "../../Pages/Dashboard/Seller/Orders/Orders";
 
 const useSellerTabs = () => {
   const tabsData = [
@@ -39,8 +40,14 @@ const useSellerTabs = () => {
     {
       name: "REquest Banner",
       icon: <RiAdvertisementFill />,
-      tab: 7,
-      page: <RequestBanner />
+      tab: 3,
+      page: <RequestBanner />,
+    },
+    {
+      name: "orders",
+      icon: <BsCashStack />,
+      tab: 4,
+      page: <Orders></Orders>,
     },
   ];
   return [tabsData];

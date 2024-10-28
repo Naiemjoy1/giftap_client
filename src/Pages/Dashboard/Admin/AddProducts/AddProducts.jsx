@@ -107,13 +107,13 @@ const AddProducts = () => {
           tier: tier.tier,
           price: {
             currency: tier.price.currency,
-            amount: parseFloat(tier.price.amount), // Convert to float
+            amount: parseFloat(tier.price.amount),
             duration: tier.price.duration,
           },
           image: tier.tierImage
             ? await uploadImageToImgBB(tier.tierImage[0])
             : null,
-          quantity: parseFloat(tier.quantity), // Convert to float
+          quantity: parseFloat(tier.quantity),
         }))
       );
 
@@ -121,19 +121,16 @@ const AddProducts = () => {
 
       const formattedData = {
         ...data,
-        image: images, // Keep the uploaded images
+        image: images,
         priceGroup: formattedPriceGroup,
         sku: generatedSKU,
-        // Exclude cardImages from the data sent to the server
       };
 
-      // Remove cardImages from formattedData
       delete formattedData.cardImages;
 
-      // Convert other fields to float
-      formattedData.price = parseFloat(data.price); // Convert price to float
-      formattedData.quantity = parseFloat(data.quantity); // Convert quantity to float
-      formattedData.discount = parseFloat(data.discount) || 0; // Convert discount to float
+      formattedData.price = parseFloat(data.price);
+      formattedData.quantity = parseFloat(data.quantity);
+      formattedData.discount = parseFloat(data.discount) || 0;
 
       const res = await axiosPublic.post("/products", formattedData);
       if (res.data.insertedId) {

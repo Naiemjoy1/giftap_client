@@ -1,8 +1,9 @@
+import React from "react";
+import useAxiosPublic from "./useAxiosPublic";
 import useAuth from "./useAuth";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "./useAxiosPublic";
 
-const useSellerStat = () => {
+const useSellerOrder = () => {
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
 
@@ -16,7 +17,7 @@ const useSellerStat = () => {
     queryKey: ["sellerStat", user?.email],
     queryFn: async () => {
       if (!user?.email) return [];
-      const res = await axiosPublic.get("/seller/seller-statistics");
+      const res = await axiosPublic.get("/seller/seller-orders");
       return res.data;
     },
     enabled: !!user?.email,
@@ -29,4 +30,4 @@ const useSellerStat = () => {
   return [sellerStat, refetch, isLoading, isError];
 };
 
-export default useSellerStat;
+export default useSellerOrder;
