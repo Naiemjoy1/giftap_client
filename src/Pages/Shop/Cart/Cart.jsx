@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import useAuth from "../../../Components/Hooks/useAuth";
 import useCart from "../../../Components/Hooks/useCart";
@@ -15,6 +15,7 @@ import ConfirmPay from "./ConfirmPay/ConfirmPay";
 import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/material_green.css";
 import useAxiosSecure from "../../../Components/Hooks/useAxiosSecure";
+import ScrollNav from "../../../Shared/Navbar/ScrollNav/ScrollNav";
 
 const Cart = () => {
   const { user } = useAuth();
@@ -33,6 +34,21 @@ const Cart = () => {
   const [coupon, setCoupon] = useState();
   const [promo] = usePromo();
   const [applyPromo, setApplyPromo] = useState("");
+
+  const navbarRef = useRef(null);
+  const [showScrollNav, setShowScrollNav] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (navbarRef.current) {
+        const navbarBottom = navbarRef.current.getBoundingClientRect().bottom;
+        setShowScrollNav(window.scrollY > navbarBottom);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const initialQuantities = carts.reduce((acc, cart) => {
@@ -198,6 +214,12 @@ const Cart = () => {
 
   return (
     <div className="container mx-auto my-10 px-4 lg:px-0 font-opensans">
+      <div ref={navbarRef}></div>
+      {showScrollNav && (
+        <div className="fixed top-0 left-0 w-full z-50">
+          <ScrollNav />
+        </div>
+      )}
       {userCarts.length === 0 ? (
         <div className="h-screen flex justify-center items-center">
           <div className="flex flex-col items-center gap-4">

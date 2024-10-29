@@ -58,6 +58,13 @@ const Footer = () => {
                   </a>
                 </li>
               </Link>
+              <Link to={"/track"}>
+                <li>
+                  <a href="#" className="hover:text-gray-400">
+                    Order Tracking
+                  </a>
+                </li>
+              </Link>
             </ul>
           </div>
 
@@ -111,8 +118,7 @@ const Footer = () => {
           alt=""
         />
       </div>
-      <h1 className="text-lg font-semibold mt-4 text-center">
-        {" "}
+      <h1 className=" text-sm text-center">
         All Rights Reserved © {new Date().getFullYear()} GifTap Ltd.
       </h1>
     </footer>

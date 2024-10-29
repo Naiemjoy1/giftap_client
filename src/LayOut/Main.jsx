@@ -7,9 +7,9 @@ const Main = () => {
   const noHeaderFooter = location.pathname.includes("dashboard");
   return (
     <div>
-      {noHeaderFooter || <Navbar></Navbar>}
-      <Outlet></Outlet>
-      {noHeaderFooter || <Footer></Footer>}
+      {noHeaderFooter || <Navbar />}
+      <Outlet />
+      {noHeaderFooter || <Footer />}
     </div>
   );
 };
