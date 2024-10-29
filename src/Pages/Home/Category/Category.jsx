@@ -38,7 +38,7 @@ const Category = () => {
         title={"Shop by category"}
       />
 
-      <div className="max-w-screen-xl mx-auto">
+      <div className="container 2xl:w-[70%] mx-auto px-4">
         <Carousel
           additionalTransfrom={0}
           arrows
@@ -107,7 +107,7 @@ const Category = () => {
                 </div>
               </Link>
 
-              <p className="text-lg font-medium mt-4">{item.category}</p>
+              <p className="font-medium mt-4">{item.category}</p>
             </div>
           ))}
         </Carousel>

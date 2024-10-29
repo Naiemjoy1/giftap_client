@@ -13,8 +13,8 @@ const ProductTabs = () => {
   const [activeTab, setActiveTab] = useState("newProduct");
 
   return (
-    <div className=" max-w-6xl mx-auto">
-      <div className=" w-full mx-auto">
+    <div className="container 2xl:w-[70%] mx-auto">
+      <div>
         <Tabs
           value={activeTab}
           className="w-full"
@@ -50,12 +50,12 @@ const ProductTabs = () => {
           <div className="w-full flex justify-center ">
             <TabsBody>
               <TabPanel value="newProduct">
-                <div className="w-full h-full overflow-y-auto">
+                <div>
                   <NewProduct />
                 </div>
               </TabPanel>
               <TabPanel value="topProduct">
-                <div className="w-full h-full overflow-y-auto">
+                <div>
                   <BestProduct />
                 </div>
               </TabPanel>

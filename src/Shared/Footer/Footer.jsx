@@ -111,8 +111,7 @@ const Footer = () => {
           alt=""
         />
       </div>
-      <h1 className="text-lg font-semibold mt-4 text-center">
-        {" "}
+      <h1 className=" text-sm text-center">
         All Rights Reserved © {new Date().getFullYear()} GifTap Ltd.
       </h1>
     </footer>
