@@ -29,7 +29,8 @@ const ManageAdvertise = () => {
         {
           label: "Yes",
           onClick: () => {
-            axiosSecure.patch(`/banner/${bannerId}`)
+            axiosSecure
+              .patch(`/banner/${bannerId}`)
               .then((response) => {
                 const data = response.data;
                 if (data.result.modifiedCount > 0) {
@@ -59,7 +60,8 @@ const ManageAdvertise = () => {
         {
           label: "Yes",
           onClick: () => {
-            axiosSecure.delete(`/banner/${bannerId}`)
+            axiosSecure
+              .delete(`/banner/${bannerId}`)
               .then((response) => {
                 if (response.data.success) {
                   toast.success("Banner deleted successfully!");
@@ -81,12 +83,14 @@ const ManageAdvertise = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Manage Banner Advertisements</h1>
+      <h1 className="text-xl font-bold mb-4 font-poppins">
+        Manage Banner Advertisements
+      </h1>
 
       {/* Pending Banners Section */}
-      <h2 className="text-xl font-semibold mb-4">Pending Banners</h2>
+      <h2 className=" font-semibold mb-4">Pending Banners</h2>
       {pendingBanners.length === 0 ? (
-        <p>No pending banners available at the moment.</p>
+        <p className="text-sm">No pending banners available at the moment.</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
           {pendingBanners.map((banner) => (
@@ -97,7 +101,9 @@ const ManageAdvertise = () => {
                 className="w-full h-40 object-cover rounded-lg mb-2"
               />
               <h2 className="text-lg font-semibold mb-2">{banner.title}</h2>
-              <p className="text-gray-600 mb-4">Requested by: {banner.sellerName}</p>
+              <p className="text-gray-600 mb-4">
+                Requested by: {banner.sellerName}
+              </p>
               <div className="flex justify-between">
                 <button
                   onClick={() => confirmAdvertise(banner._id)}
@@ -124,9 +130,9 @@ const ManageAdvertise = () => {
       )}
 
       {/* Running Banners Section */}
-      <h2 className="text-xl font-semibold mb-4">Running Banners</h2>
+      <h2 className=" font-semibold mb-4">Running Banners</h2>
       {runningBanners.length === 0 ? (
-        <p>No running banners available at the moment.</p>
+        <p className="text-sm">No running banners available at the moment.</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {runningBanners.map((banner) => (

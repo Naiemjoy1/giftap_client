@@ -114,7 +114,7 @@ const TrackOrders = () => {
     >
       <div>
         <div className="space-y-4">
-          <p className="text-2xl font-bold text-center">
+          <p className="text-2xl font-bold text-center font-poppins">
             Track Your Orders Here
           </p>
           <div className="flex justify-center items-center gap-2">

@@ -9,15 +9,16 @@ const Carousel = () => {
   const [banner, setBanner] = useState([]);
   const axiosPublic = useAxiosPublic();
   useEffect(() => {
-    axiosPublic.get('/banner')
-      .then(response => {
-        setBanner(response.data)
+    axiosPublic
+      .get("/banner")
+      .then((response) => {
+        setBanner(response.data);
       })
-      .catch(error => {
-        console.error('Error fetching banners:', error);
+      .catch((error) => {
+        console.error("Error fetching banners:", error);
       });
   }, [axiosPublic]);
-  console.log(banner)
+
   return (
     <div>
       <Swiper

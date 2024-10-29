@@ -12,8 +12,9 @@ import AddPro from "../../Pages/Dashboard/Seller/AddPro/AddPro";
 import { RiAdvertisementFill } from "react-icons/ri";
 
 import RequestBanner from "../../Pages/Dashboard/Seller/RequestBanner/RequestBanner";
-import NoticeBoard from "../../Pages/Dashboard/Seller/NoticeBoard/NoticeBoard";
-import { BsClipboard } from "react-icons/bs";
+import { IoMdNotificationsOutline } from "react-icons/io";
+import { BsCashStack } from "react-icons/bs";
+import Orders from "../../Pages/Dashboard/Seller/Orders/Orders";
 
 const useSellerTabs = () => {
   const tabsData = [
@@ -43,10 +44,10 @@ const useSellerTabs = () => {
       page: <RequestBanner />,
     },
     {
-      name: "Notice Board",
-      icon: <BsClipboard />,
+      name: "orders",
+      icon: <BsCashStack />,
       tab: 4,
-      page: <NoticeBoard></NoticeBoard>,
+      page: <Orders></Orders>,
     },
   ];
   return [tabsData];

@@ -1,13 +1,17 @@
-import { useForm, useFieldArray } from "react-hook-form";
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import React, { useEffect, useState } from "react";
+import { useFieldArray, useForm } from "react-hook-form";
+import { IoArrowBack } from "react-icons/io5";
 import useProducts from "../../../../Components/Hooks/useProducts";
 import useAxiosPublic from "../../../../Components/Hooks/useAxiosPublic";
+import toast from "react-hot-toast";
 
-const AddProducts = () => {
-  const [products] = useProducts();
+const ProductEdit = ({ handleBackClick, productId }) => {
+  const [products, isLoading, refetch] = useProducts(); // Destructure to include isLoading
   const categories = [...new Set(products.map((item) => item.category))];
   const axiosPublic = useAxiosPublic();
+  const product = products.find((product) => product?._id === productId);
+  const [loading, setLoading] = useState(false);
+  const [isDigitalGift, setIsDigitalGift] = useState(false);
 
   const {
     register,
@@ -23,123 +27,69 @@ const AddProducts = () => {
     name: "priceGroup",
   });
 
-  const [isDigitalGift, setIsDigitalGift] = useState(false);
-  const [loading, setLoading] = useState(false);
-
   const selectedCategory = watch("category");
 
   useEffect(() => {
     setIsDigitalGift(selectedCategory === "digital gift");
   }, [selectedCategory]);
 
-  const uploadImageToImgBB = async (imageFile) => {
-    const image_hosting_key = import.meta.env.VITE_IMGBB_API;
-    const formData = new FormData();
-    formData.append("image", imageFile);
-
-    const response = await fetch(
-      `https://api.imgbb.com/1/upload?key=${image_hosting_key}`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
-
-    const data = await response.json();
-    if (data.success) {
-      return data.data.url;
-    } else {
-      throw new Error("Image upload failed");
+  useEffect(() => {
+    if (product) {
+      reset({
+        name: product.name,
+        seller_name: product.seller_name,
+        store_name: product.store_name,
+        description: product.description,
+        category: product.category,
+        subCategory: product.subCategory,
+        mention: product.mention,
+        price: product.price,
+        quantity: product.quantity,
+        discount: product.discount,
+        priceGroup: product.priceGroup || [],
+      });
     }
-  };
-
-  const generateSKU = (productName, category) => {
-    const existingSKUs = new Set(products.map((product) => product.sku));
-
-    let sku;
-    let attempts = 0;
-    const maxAttempts = 1000;
-
-    do {
-      const randomString = Math.random()
-        .toString(36)
-        .substring(2, 6)
-        .toUpperCase();
-      const randomNumber = Math.floor(1000 + Math.random() * 9000);
-      const namePart = productName
-        .split(" ")
-        .slice(0, 2)
-        .join("")
-        .substring(0, 4)
-        .toUpperCase();
-      const categoryPart = category.substring(0, 3).toUpperCase();
-
-      sku = `${namePart}-${categoryPart}-${randomString}-${randomNumber}`;
-      attempts += 1;
-
-      if (attempts > maxAttempts) {
-        throw new Error(
-          "Failed to generate a unique SKU after multiple attempts."
-        );
-      }
-    } while (existingSKUs.has(sku));
-
-    return sku;
-  };
+  }, [product, reset]);
 
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      const images = {
-        cardImg1: data.cardImages[0]
-          ? await uploadImageToImgBB(data.cardImages[0][0])
-          : null,
-        cardImg2: data.cardImages[1]
-          ? await uploadImageToImgBB(data.cardImages[1][0])
-          : null,
-        cardImg3: data.cardImages[2]
-          ? await uploadImageToImgBB(data.cardImages[2][0])
-          : null,
-      };
-
-      const formattedPriceGroup = await Promise.all(
-        data.priceGroup.map(async (tier) => ({
-          tier: tier.tier,
-          price: {
-            currency: tier.price.currency,
-            amount: parseFloat(tier.price.amount),
-            duration: tier.price.duration,
-          },
-          image: tier.tierImage
-            ? await uploadImageToImgBB(tier.tierImage[0])
-            : null,
-          quantity: parseFloat(tier.quantity),
-        }))
-      );
-
-      const generatedSKU = generateSKU(data.name, data.category);
+      // Prepare priceGroup data
+      const formattedPriceGroup = data.priceGroup.map((tier) => ({
+        tier: tier.tier,
+        price: {
+          currency: tier.price.currency,
+          amount: parseFloat(tier.price.amount),
+          duration: tier.price.duration,
+        },
+        quantity: parseFloat(tier.quantity),
+      }));
 
       const formattedData = {
         ...data,
-        image: images,
         priceGroup: formattedPriceGroup,
-        sku: generatedSKU,
       };
 
-      delete formattedData.cardImages;
-
+      // Convert other fields to float
       formattedData.price = parseFloat(data.price);
       formattedData.quantity = parseFloat(data.quantity);
       formattedData.discount = parseFloat(data.discount) || 0;
 
-      const res = await axiosPublic.post("/products", formattedData);
-      if (res.data.insertedId) {
-        reset();
-        toast.success("New Product Added");
+      // Use PUT method instead of POST for updating the product
+      const res = await axiosPublic.put(
+        `/products/${productId}`,
+        formattedData
+      );
+
+      // Check for modifiedCount in the response
+      if (res.data.modifiedCount > 0) {
+        await refetch(); // Refetch updated products after a successful update
+        toast.success("Product updated successfully");
       }
+      handleBackClick();
     } catch (error) {
-      console.error("Error uploading images:", error);
-      toast.error("Failed to add product.");
+      console.error("Error updating product:", error);
+      toast.error("Failed to update product.");
     } finally {
       setLoading(false);
     }
@@ -147,7 +97,10 @@ const AddProducts = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <button onClick={handleBackClick} className="">
+        <IoArrowBack />
+      </button>
+      <form onSubmit={handleSubmit(onSubmit)} className="card-body">
         <div className="space-y-4">
           {/* Product Name */}
           <div className="flex justify-between items-center gap-4">
@@ -202,24 +155,25 @@ const AddProducts = () => {
             )}
           </div>
 
-          <div className="grid grid-cols-3 gap-4">
+          {/* <div className="grid grid-cols-3 gap-4">
             {[1, 2, 3].map((num) => (
               <div key={num} className="w-full">
                 <input
                   type="file"
                   className="file-input file-input-bordered w-full"
-                  {...register(`cardImages.${num - 1}`, {
-                    required: num === 1, // Require at least one image
-                  })}
+                  {...register(`cardImages.${num - 1}`)} // Make this optional
+                  onChange={(event) => handleImageChange(num - 1, event)} // No required validation
                 />
-                {errors.cardImages?.[num - 1] && (
-                  <p className="text-red-600">
-                    Product Image {num} is required.
-                  </p>
+                {imagePreviews[`cardImg${num}`] && (
+                  <img
+                    src={imagePreviews[`cardImg${num}`]}
+                    alt={`Preview ${num}`}
+                    className="mt-2 w-10 h-10 rounded"
+                  />
                 )}
               </div>
             ))}
-          </div>
+          </div> */}
 
           <div
             className={`grid ${
@@ -331,7 +285,7 @@ const AddProducts = () => {
                       <input
                         type="text"
                         placeholder="e.g., Basic, Standard, Premium"
-                        className="input input-bordered input-sm"
+                        className="input input-bordered"
                         {...register(`priceGroup.${index}.tier`, {
                           required: true,
                         })}
@@ -344,7 +298,7 @@ const AddProducts = () => {
                       <input
                         type="number"
                         placeholder="Price"
-                        className="input input-bordered input-sm"
+                        className="input input-bordered"
                         {...register(`priceGroup.${index}.price.amount`, {
                           required: true,
                         })}
@@ -355,7 +309,7 @@ const AddProducts = () => {
                     </div>
                     <div className="form-control">
                       <select
-                        className="select select-bordered select-sm"
+                        className="select select-bordered"
                         {...register(`priceGroup.${index}.price.currency`, {
                           required: true,
                         })}
@@ -382,7 +336,7 @@ const AddProducts = () => {
                       <input
                         type="number"
                         placeholder="Quantity"
-                        className="input input-bordered input-sm"
+                        className="input input-bordered"
                         {...register(`priceGroup.${index}.quantity`, {
                           required: true,
                         })}
@@ -391,18 +345,11 @@ const AddProducts = () => {
                         <p className="text-red-600">Quantity is required.</p>
                       )}
                     </div>
-                    <div className="form-control">
-                      <input
-                        type="file"
-                        className="file-input file-input-bordered w-full max-w-xs file-input-sm"
-                        {...register(`priceGroup.${index}.tierImage`)}
-                      />
-                    </div>
                   </div>
                   <div className="flex justify-end mt-2">
                     <button
                       type="button"
-                      className="btn btn-outline btn-primary btn-sm"
+                      className="btn btn-outline btn-error"
                       onClick={() => remove(index)}
                     >
                       Remove Tier
@@ -427,7 +374,7 @@ const AddProducts = () => {
             {loading ? (
               <span className="loading loading-ring loading-sm"></span>
             ) : (
-              "Add Product"
+              "Update Product"
             )}
           </button>
         </div>
@@ -436,4 +383,4 @@ const AddProducts = () => {
   );
 };
 
-export default AddProducts;
+export default ProductEdit;

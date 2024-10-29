@@ -174,7 +174,7 @@ const AdminChat = () => {
 
   return (
     <div>
-      {userType === "admin" && (
+      {userType === "seller" && (
         <button onClick={toggleChatbox} className="relative">
           <p className="text-xl">
             <FaBell />

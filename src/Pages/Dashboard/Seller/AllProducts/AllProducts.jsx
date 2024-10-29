@@ -8,13 +8,14 @@ import toast from "react-hot-toast";
 import EditProduct from "../../Admin/EditProduct/EditProduct";
 import useAuth from "../../../../Components/Hooks/useAuth";
 import useUsers from "../../../../Components/Hooks/useUsers";
+import ProductEdit from "../../Admin/EditProduct/ProductEdit";
 
 const AllProducts = () => {
   const [products, loading, refetch] = useProducts();
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
 
-  const [users] = useUsers() || []; // Fallback to empty array
+  const [users] = useUsers() || [];
   const useDetails = users.find((userItem) => userItem.email === user?.email);
 
   const userProducts = useDetails
@@ -72,10 +73,10 @@ const AllProducts = () => {
     <div>
       {editProductId ? (
         <div>
-          <EditProduct
+          <ProductEdit
             productId={editProductId}
             handleBackClick={handleBackClick}
-          />
+          ></ProductEdit>
         </div>
       ) : (
         <div className="overflow-x-auto">
