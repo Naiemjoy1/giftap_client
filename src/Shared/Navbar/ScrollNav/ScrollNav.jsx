@@ -1,15 +1,26 @@
 import React from "react";
 import useAuth from "../../../Components/Hooks/useAuth";
 import useType from "../../../Components/Hooks/useType";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import AdminChat from "../../../Pages/Support/AdminChat/AdminChat";
 import { FaBars } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import useCart from "../../../Components/Hooks/useCart";
 import useWishs from "../../../Components/Hooks/useWishs";
+import { Drawer } from "@material-tailwind/react";
+import NavDrawer from "../Drawer/NavDrawer";
 
 const ScrollNav = () => {
-  const { user } = useAuth();
+  const { user, logOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => console.log(error));
+  };
 
   const [userType] = user ? useType() : [];
 
@@ -158,6 +169,17 @@ const ScrollNav = () => {
           </section>
         </section>
       </div>
+      <Drawer
+        open={isOpen}
+        onClose={toggleDrawer}
+        direction="left"
+        className="bla bla bla"
+      >
+        <NavDrawer
+          toggleDrawer={toggleDrawer}
+          handleLogOut={handleLogOut}
+        ></NavDrawer>
+      </Drawer>
     </div>
   );
 };
