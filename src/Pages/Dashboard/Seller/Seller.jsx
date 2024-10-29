@@ -4,7 +4,7 @@ import useSellerTabs from "../../../Components/Hooks/useSellerTabs";
 import { BiSolidDownArrow } from "react-icons/bi";
 import { FaRegEnvelope, FaStore } from "react-icons/fa";
 import { IoMdNotifications } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/material_green.css";
 
@@ -12,13 +12,18 @@ const Seller = () => {
   const { user, logOut } = useAuth();
   const [tabsData] = useSellerTabs();
   const [tab, setTab] = useState(0);
+  const navigate = useNavigate();
 
   const handleTabs = (index) => {
     setTab(index);
   };
 
   const handleLogOut = () => {
-    logOut().catch((error) => console.log(error));
+    logOut()
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => console.log(error));
   };
 
   return (

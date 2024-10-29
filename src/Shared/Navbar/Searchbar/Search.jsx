@@ -43,7 +43,7 @@ const Search = () => {
         </svg>
       </label>
       {searchTerm && (
-        <div className="absolute top-full p-2 space-y-2 w-3/4 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto z-10">
+        <div className="absolute top-full p-2 space-y-2 w-3/4 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto z-40">
           {filteredProducts.length > 0 ? (
             <>
               {filteredProducts.map((result) => {

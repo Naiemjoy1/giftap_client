@@ -22,16 +22,6 @@ const faqData = [
     answer:
       "We accept all major credit cards, debit cards, and online payment options such as PayPal, Google Pay, and Apple Pay. Bkash, Nagad",
   },
-  {
-    question: "Do you offer international shipping?",
-    answer:
-      "Yes, we offer worldwide shipping. Shipping fees and delivery times may vary depending on the destination.",
-  },
-  {
-    question: "Can I track my order?",
-    answer:
-      "Absolutely! Once your order is processed, you will receive a tracking number via email, which you can use to track your order’s delivery status in real time.",
-  }
 ];
 
 const Faq = () => {
@@ -43,14 +33,13 @@ const Faq = () => {
 
   return (
     <>
-<HomeSectionHeading 
-    subTitle={'How its work'}
-    title={'Frequently asked questions'}
-></HomeSectionHeading>
+      <HomeSectionHeading
+        subTitle={"How its work"}
+        title={"Frequently asked questions"}
+      ></HomeSectionHeading>
 
-    <section className="bg-white dark:bg-gray-900">
-      <div className="container flex flex-col justify-center p-4 mx-auto md:p-8">
-        <div className="flex flex-col divide-y sm:px-8 lg:px-12 xl:px-32 dark:divide-gray-300">
+      <div className="container 2xl:w-[70%] mx-auto px-4">
+        <div className="flex flex-col divide-y ">
           {faqData.map((faq, index) => (
             <div key={index}>
               <button
@@ -74,8 +63,6 @@ const Faq = () => {
           ))}
         </div>
       </div>
-    </section>
-
     </>
   );
 };

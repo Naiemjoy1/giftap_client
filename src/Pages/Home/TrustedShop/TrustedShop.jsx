@@ -53,12 +53,12 @@ const shop = [
 
 const TrustedShop = () => {
   return (
-    <div className="max-w-screen-xl mx-auto">
+    <div className="container 2xl:w-[70%] mx-auto">
       <HomeSectionHeading
         subTitle={"Shop with giftap"}
         title={"Our trusted shop"}
       ></HomeSectionHeading>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 px-4">
         {shop.map((item, index) => (
           <div
             key={index}
