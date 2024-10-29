@@ -95,7 +95,7 @@ const Category = () => {
           {category.map((item) => (
             <div
               key={item._id}
-              className="flex flex-col justify-center items-center px-4"
+              className="flex container flex-col justify-center items-center px-4"
             >
               <Link to={`/category/${item.category}`}>
                 <div className="w-32 h-32 rounded-full overflow-hidden shadow-lg">
