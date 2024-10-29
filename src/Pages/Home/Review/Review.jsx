@@ -21,7 +21,7 @@ const Review = () => {
       : [...shuffledReviews.slice(0, 5), ...shuffledReviews.slice(0, 5)];
 
   return (
-    <div>
+    <div className=" mt-10">
       <div className="bg-gradient-to-r from-slate-200 to-pink-200 py-4">
         <div className="relative z-10 p-8">
           <h1 className="text-center text-2xl font-medium font-poppins">

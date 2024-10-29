@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import useProducts from "../../Components/Hooks/useProducts";
 import { BsFillGrid3X2GapFill } from "react-icons/bs";
 import { MdViewList } from "react-icons/md";
@@ -12,8 +12,23 @@ import "react-modern-drawer/dist/index.css";
 import useAuth from "../../Components/Hooks/useAuth";
 import ItemUser from "./ItemCard/ItemUser";
 import ListUser from "./ListItemCard/ListUser";
+import ScrollNav from "../../Shared/Navbar/ScrollNav/ScrollNav";
 
 const Shop = () => {
+  const navbarRef = useRef(null);
+  const [showScrollNav, setShowScrollNav] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (navbarRef.current) {
+        const navbarTop = navbarRef.current.getBoundingClientRect().top;
+        setShowScrollNav(navbarTop < 0);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const { user } = useAuth();
   const [products, loading] = useProducts();
 
@@ -181,6 +196,12 @@ const Shop = () => {
 
   return (
     <div className="container mx-auto my-10 flex gap-4">
+      <div ref={navbarRef}></div>
+      {showScrollNav && (
+        <div className="fixed top-0 left-0 w-full z-50">
+          <ScrollNav />
+        </div>
+      )}
       <div className="space-y-10 w-1/4 bg-primary p-4 rounded-lg text-white hidden lg:block">
         <div>
           <p className="text-lg font-medium uppercase font-poppins">
@@ -500,8 +521,9 @@ const Shop = () => {
         <div className="flex justify-center mt-8 gap-2">
           <button
             onClick={handlePreviousPage}
-            className={`px-4 py-2 text-white bg-primary rounded ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
-              }`}
+            className={`px-4 py-2 text-white bg-primary rounded ${
+              currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
+            }`}
             disabled={currentPage === 1}
           >
             <GrPrevious />
@@ -511,10 +533,11 @@ const Shop = () => {
             <button
               key={number}
               onClick={() => handlePageClick(number)}
-              className={`px-4 py-2 rounded-full ${number === currentPage
-                ? "bg-primary text-white"
-                : "bg-gray-200 text-black"
-                }`}
+              className={`px-4 py-2 rounded-full ${
+                number === currentPage
+                  ? "bg-primary text-white"
+                  : "bg-gray-200 text-black"
+              }`}
             >
               {number}
             </button>
@@ -522,8 +545,9 @@ const Shop = () => {
 
           <button
             onClick={handleNextPage}
-            className={`px-4 py-2 text-white bg-primary rounded ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
-              }`}
+            className={`px-4 py-2 text-white bg-primary rounded ${
+              currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
+            }`}
             disabled={currentPage === totalPages}
           >
             <GrNext />
@@ -535,4 +559,3 @@ const Shop = () => {
 };
 
 export default Shop;
-

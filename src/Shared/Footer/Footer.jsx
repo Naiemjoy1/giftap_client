@@ -58,6 +58,13 @@ const Footer = () => {
                   </a>
                 </li>
               </Link>
+              <Link to={"/track"}>
+                <li>
+                  <a href="#" className="hover:text-gray-400">
+                    Order Tracking
+                  </a>
+                </li>
+              </Link>
             </ul>
           </div>
 

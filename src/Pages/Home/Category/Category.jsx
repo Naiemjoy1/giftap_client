@@ -32,12 +32,11 @@ const Category = () => {
   }, []);
 
   return (
-    <div>
+    <div className="mt-5">
       <HomeSectionHeading
         subTitle={"shop with giftap"}
         title={"Shop by category"}
       />
-
       <div className="container 2xl:w-[70%] mx-auto px-4">
         <Carousel
           additionalTransfrom={0}

@@ -1,10 +1,26 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { FaUser, FaEnvelope, FaEnvelopeOpenText } from "react-icons/fa";
 import emailjs from "emailjs-com";
+import ScrollNav from "../../Shared/Navbar/ScrollNav/ScrollNav";
 
 const Contact = () => {
   const form = useRef();
+
+  const navbarRef = useRef(null);
+  const [showScrollNav, setShowScrollNav] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (navbarRef.current) {
+        const navbarTop = navbarRef.current.getBoundingClientRect().top;
+        setShowScrollNav(navbarTop < 0);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -28,13 +44,18 @@ const Contact = () => {
       );
   };
 
-
-
   // Title
   document.title = "GifTap || Contact";
 
   return (
     <div className="max-w-7xl mx-auto p-8 flex flex-wrap justify-between">
+      {/* ScrollNav implementation */}
+      <div ref={navbarRef}></div>
+      {showScrollNav && (
+        <div className="fixed top-0 left-0 w-full z-50">
+          <ScrollNav />
+        </div>
+      )}
       {/* Form Section */}
       <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
         <h1 className="text-4xl font-semibold text-center mb-4">

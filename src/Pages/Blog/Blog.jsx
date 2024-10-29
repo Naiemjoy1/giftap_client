@@ -1,22 +1,34 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import useBlogs from '../../Components/Hooks/useBlogs';
-import { FaArrowRight, FaCommentDots } from 'react-icons/fa';
-import { useForm } from 'react-hook-form';
-import { IoSearch } from 'react-icons/io5';
-import { GrNext, GrPrevious } from 'react-icons/gr';
+import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import useBlogs from "../../Components/Hooks/useBlogs";
+import { FaArrowRight, FaCommentDots } from "react-icons/fa";
+import { useForm } from "react-hook-form";
+import { IoSearch } from "react-icons/io5";
+import { GrNext, GrPrevious } from "react-icons/gr";
 import { CgCalendarDates } from "react-icons/cg";
+import ScrollNav from "../../Shared/Navbar/ScrollNav/ScrollNav";
 
 const Blog = () => {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [blogs, refetch] = useBlogs(search);
   const [currentPage, setCurrentPage] = useState(1);
 
-  // console.log(blogs)
+  const navbarRef = useRef(null);
+  const [showScrollNav, setShowScrollNav] = useState(false);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (navbarRef.current) {
+        const navbarTop = navbarRef.current.getBoundingClientRect().top;
+        setShowScrollNav(navbarTop < 0);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const itemsPerPage = 6;
-
   const totalPages = Math.ceil(blogs.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentProducts = blogs.slice(startIndex, startIndex + itemsPerPage);
@@ -25,20 +37,18 @@ const Blog = () => {
     setCurrentPage(pageNumber);
   };
 
-  // Previous page
   const handlePreviousPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
   };
-  // Next page
+
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
     }
   };
 
-  // Pagination Calculation
   const getPageNumbers = () => {
     const pageNumbers = [];
     const maxVisiblePages = 3;
@@ -56,8 +66,11 @@ const Blog = () => {
     return pageNumbers;
   };
 
-  // Search Bar Handle
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const onSubmit = (data) => {
     setSearch(data.search);
@@ -68,6 +81,13 @@ const Blog = () => {
 
   return (
     <div className="container mx-auto my-5 flex flex-col md:flex-row">
+      {/* ScrollNav implementation */}
+      <div ref={navbarRef}></div>
+      {showScrollNav && (
+        <div className="fixed top-0 left-0 w-full z-50">
+          <ScrollNav />
+        </div>
+      )}
       <div className="">
         {/*----------- Search Bar Start ------------*/}
         <div className="flex justify-center w-full px-4">
@@ -77,9 +97,11 @@ const Blog = () => {
                 type="text"
                 placeholder="Search Blog Title ..."
                 className="w-full p-3 rounded-md border border-blue-300 input-bordered focus:outline-none focus:ring-2 focus:ring-blue-500"
-                {...register('search')}
+                {...register("search")}
               />
-              {errors.search && <span className="text-red-500">{errors.search.message}</span>}
+              {errors.search && (
+                <span className="text-red-500">{errors.search.message}</span>
+              )}
               <button
                 type="submit"
                 className="inline-flex items-center bg-primary hover:bg-primary-dark text-white text-lg font-semibold px-3 rounded-r-md"
@@ -93,7 +115,6 @@ const Blog = () => {
           </form>
         </div>
         {/*------------ Search Bar End ------------*/}
-
 
         {/*------------ Blogs Start ------------*/}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-4">
@@ -116,29 +137,32 @@ const Blog = () => {
                 </Link>
               </div>
               <Link to={`/BlogDetails/${blog._id}`}>
-
-                <h2 className="font-poppins text-lg font-semibold mt-3 hover:text-primary">{blog.blogTitle}</h2>
+                <h2 className="font-poppins text-lg font-semibold mt-3 hover:text-primary">
+                  {blog.blogTitle}
+                </h2>
               </Link>
 
               <div className="flex justify-between text-sm mb-2">
                 <span className="mt-2 flex text-xl font-semibold text-gray-500">
                   <CgCalendarDates className="text-[17px] mt-2 mr-1" />
-                  <p className="  text-[17px] font-semibold"> {blog.blogPublishDate} </p>
-
+                  <p className="text-[17px] font-semibold">
+                    {blog.blogPublishDate}
+                  </p>
                 </span>
                 <span className="flex items-center text-gray-500">
                   <FaCommentDots className="text-[17px] mt-2 mr-2" />
-                  <p className="mt-2 text-[17px] font-semibold">{blog.blogComments.length} Comments</p>
+                  <p className="mt-2 text-[17px] font-semibold">
+                    {blog.blogComments.length} Comments
+                  </p>
                 </span>
               </div>
-              
+
               <p className="text-gray-700 dark:text-gray-700 font-opensans">
                 {blog.blogDescription.slice(0, 110)}...
                 <Link to={`/BlogDetails/${blog._id}`} className="text-primary">
                   Read More
                 </Link>
               </p>
-
             </div>
           ))}
         </div>
@@ -147,7 +171,9 @@ const Blog = () => {
         <div className="flex justify-center mt-8 gap-2">
           <button
             onClick={handlePreviousPage}
-            className={`px-4 py-2 text-white bg-primary rounded ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`px-4 py-2 text-white bg-primary rounded ${
+              currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
+            }`}
             disabled={currentPage === 1}
           >
             <GrPrevious />
@@ -156,21 +182,27 @@ const Blog = () => {
             <button
               key={number}
               onClick={() => handlePageClick(number)}
-              className={`px-4 py-2 rounded-full ${number === currentPage ? 'bg-primary text-white' : 'bg-gray-200 text-black'}`}
+              className={`px-4 py-2 rounded-full ${
+                number === currentPage
+                  ? "bg-primary text-white"
+                  : "bg-gray-200 text-black"
+              }`}
             >
               {number}
             </button>
           ))}
           <button
             onClick={handleNextPage}
-            className={`px-4 py-2 text-white bg-primary rounded ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`px-4 py-2 text-white bg-primary rounded ${
+              currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
+            }`}
             disabled={currentPage === totalPages}
           >
             <GrNext />
           </button>
         </div>
+        {/* ------------ Pagination End ------------*/}
       </div>
-      {/* ------------ Pagination StarEnd------------*/}
     </div>
   );
 };

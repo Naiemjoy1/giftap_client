@@ -13,7 +13,7 @@ const ProductTabs = () => {
   const [activeTab, setActiveTab] = useState("newProduct");
 
   return (
-    <div className="container 2xl:w-[70%] mx-auto">
+    <div className="container 2xl:w-[70%] mx-auto mt-4 lg:mt-10">
       <div>
         <Tabs
           value={activeTab}
