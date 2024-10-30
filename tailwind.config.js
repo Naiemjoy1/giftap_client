@@ -5,12 +5,19 @@ export default {
     extend: {
       fontFamily: {
         poppins: "'Poppins', sans-serif ",
-        reenie: "'Reenie Beanie', cursive",
-        roboto: "'Roboto', sans-serif",
-        robotoslab: "'Roboto Slab', serif",
-        belle: "'La Belle Aurore', cursive",
-        marcellus: "'Marcellus', serif",
-        jost: "'Jost', sans-serif",
+        opensans: "'Open Sans',sans-serif",
+        gabarito: "'Gabarito','sans-serif'",
+      },
+      animation: {
+        poke: "poke 0.8s ease-in-out forwards",
+      },
+      keyframes: {
+        poke: {
+          "0%": { transform: "translateX(0)" },
+          "30%": { transform: "translateX(10px)" },
+          "60%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(0)" },
+        },
       },
     },
   },
@@ -19,11 +26,10 @@ export default {
     themes: [
       {
         mytheme: {
-          primary: "#47ccc8",
-          secondary: "#2d3663",
-          accent: "#dc4545",
-          neutral: "#343434",
-          "base-100": "#ffffff",
+          primary: "#ed246a",
+          secondary: "#fe93bd",
+          accent: "#eceef2",
+          neutral: "#f7f8fd",
         },
       },
       "light",
