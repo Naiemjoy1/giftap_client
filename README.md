@@ -41,12 +41,11 @@ Giftap is an e-commerce platform designed to streamline the purchase and deliver
 ### Installation
 
 1. **Clone the repositories:**
+
    ```bash
    git clone https://github.com/Naiemjoy1/giftap_client.git
    git clone https://github.com/Naiemjoy1/giftap_server.git
    ```
-
-````
 
 2. **Set up the Backend:**
 
@@ -60,11 +59,13 @@ Giftap is an e-commerce platform designed to streamline the purchase and deliver
      ```
    - Create a `.env` file and set your environment variables (refer to `.env.example`).
    - Start the server:
+
      ```bash
      npm start
      ```
 
-3. **Set up the Frontend:**
+     3. **Set up the Frontend:**
+
    - Navigate to the frontend directory:
      ```bash
      cd giftap_client
@@ -76,6 +77,7 @@ Giftap is an e-commerce platform designed to streamline the purchase and deliver
    - Start the React app:
      ```bash
      npm start
+     ``
      ```
 
 ## Deployment
@@ -93,6 +95,7 @@ Deploy the backend using platforms like Heroku, DigitalOcean, or AWS EC2.
 Contributions are welcome! Please follow these steps:
 
 1. Fork the repository.
+
 2. Create a new branch:
    ```bash
    git checkout -b feature/new-feature
@@ -106,5 +109,3 @@ Contributions are welcome! Please follow these steps:
    git push origin feature/new-feature
    ```
 5. Open a Pull Request.
-
-````
