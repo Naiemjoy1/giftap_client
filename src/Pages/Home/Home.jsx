@@ -10,6 +10,10 @@ import RecentBlog from "./RecentBlog/RecentBlog";
 import TrustedShop from "./TrustedShop/TrustedShop";
 import Subscription from "./Subscription/Subscription";
 import ScrollNav from "../../Shared/Navbar/ScrollNav/ScrollNav";
+import NewBanner from "./Banner/NewBanner/NewBanner";
+import Slide1 from "./Banner/NewBanner/Slide1/Slide1";
+import Slide2 from "./Banner/NewBanner/Slide2/Slide2";
+import Slide3 from "./Banner/NewBanner/Slide3/Slide3";
 
 const Home = () => {
   document.title = `GifTap || Home`;
@@ -38,10 +42,14 @@ const Home = () => {
         </div>
       )}
 
-      <Banner />
+      {/* <Banner />
       <div className="hidden md:block">
         <BannerFeature />
-      </div>
+      </div> */}
+      <NewBanner></NewBanner>
+      {/* <Slide1></Slide1> */}
+      {/* <Slide2></Slide2> */}
+      {/* <Slide3></Slide3> */}
       <Category />
       <ProductTabs />
       <Subscription />
