@@ -35,7 +35,7 @@ const AdminChat = () => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io("http://localhost:3000", {
+    const newSocket = io("https://giftap-server.vercel.app", {
       transports: ["websocket", "polling"],
       reconnection: true,
     });
