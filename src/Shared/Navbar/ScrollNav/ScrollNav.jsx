@@ -6,7 +6,6 @@ import AdminChat from "../../../Pages/Support/AdminChat/AdminChat";
 import { FaBars } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import useCart from "../../../Components/Hooks/useCart";
-import useWishs from "../../../Components/Hooks/useWishs";
 import { Drawer } from "@material-tailwind/react";
 import NavDrawer from "../Drawer/NavDrawer";
 
@@ -22,7 +21,7 @@ const ScrollNav = () => {
       .catch((error) => console.log(error));
   };
 
-  const [userType] = user ? useType() : [""]; // Ensure a default value if `useType` returns undefined
+  const [userType, isLoading] = useType();
 
   const location = useLocation();
 
@@ -113,9 +112,18 @@ const ScrollNav = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  const [carts = []] = useCart(); // Set a default value if useCart returns undefined
+  const [carts = []] = useCart();
 
   const userCarts = carts?.filter((cart) => cart?.email === user?.email) || [];
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <span className="loading loading-spinner loading-lg text-primary"></span>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-white shadow-xl py-2">
       <div className="flex justify-between items-center px-4 lg:hidden">
@@ -138,14 +146,14 @@ const ScrollNav = () => {
             </section>
 
             <section className="flex justify-between items-baseline gap-4">
-              {/* <Link to="/cart" className="relative">
+              <Link to="/cart" className="relative">
                 <p className="text-2xl">
                   <HiOutlineShoppingBag />
                 </p>
                 <div className="bg-primary absolute top-0 -right-1 transform translate-x-1 -translate-y-1 rounded-full w-4 h-4 flex items-center justify-center text-white text-xs">
                   {userCarts.length || 0}
                 </div>
-              </Link> */}
+              </Link>
               {user && <AdminChat />}
             </section>
           </section>
