@@ -22,6 +22,7 @@ const ScrollNav = () => {
   };
 
   const [userType, isLoading] = useType();
+  // console.log("userType", userType);
 
   const location = useLocation();
 
@@ -75,33 +76,37 @@ const ScrollNav = () => {
           Contact
         </a>
       </li>
-      {userType === "admin" && (
-        <li>
-          <a
-            href="/dashboard"
-            className={`px-4 py-2 rounded-md text-sm ${
-              location.pathname === "/dashboard"
-                ? "bg-primary text-white"
-                : "hover:bg-primary hover:text-white"
-            }`}
-          >
-            Dashboard
-          </a>
-        </li>
-      )}
-      {userType === "seller" && (
-        <li>
-          <a
-            href="/sellerdashboard"
-            className={`px-4 py-2 rounded-md text-sm ${
-              location.pathname === "/sellerdashboard"
-                ? "bg-primary text-white"
-                : "hover:bg-primary hover:text-white"
-            }`}
-          >
-            Dashboard
-          </a>
-        </li>
+      {user && (
+        <>
+          {userType === "admin" && (
+            <li>
+              <a
+                href="/dashboard"
+                className={`px-4 py-2 rounded-md text-sm ${
+                  location.pathname === "/dashboard"
+                    ? "bg-primary text-white"
+                    : "hover:bg-primary hover:text-white"
+                }`}
+              >
+                Dashboard
+              </a>
+            </li>
+          )}
+          {userType === "seller" && (
+            <li>
+              <a
+                href="/sellerdashboard"
+                className={`px-4 py-2 rounded-md text-sm ${
+                  location.pathname === "/sellerdashboard"
+                    ? "bg-primary text-white"
+                    : "hover:bg-primary hover:text-white"
+                }`}
+              >
+                Dashboard
+              </a>
+            </li>
+          )}
+        </>
       )}
     </>
   );
@@ -115,14 +120,6 @@ const ScrollNav = () => {
   const [carts = []] = useCart();
 
   const userCarts = carts?.filter((cart) => cart?.email === user?.email) || [];
-
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <span className="loading loading-spinner loading-lg text-primary"></span>
-      </div>
-    );
-  }
 
   return (
     <div className="bg-white shadow-xl py-2">

@@ -13,7 +13,6 @@ const ConfirmPay = ({ setIsModalVisible, payment }) => {
   const usersDetails = users?.find((u) => u?.email === user?.email);
   const billingInfo = usersDetails?.address?.billing?.[0];
   const shippingInfo = usersDetails?.address?.shipping?.[0];
-  console.log("shippingInfo", shippingInfo);
 
   const handleConfirm = () => {
     if (!shippingInfo?.email) {

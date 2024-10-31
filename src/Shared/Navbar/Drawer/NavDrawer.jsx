@@ -60,33 +60,37 @@ const NavDrawer = ({ toggleDrawer, handleLogOut }) => {
           Contact
         </a>
       </li>
-      {userType === "admin" && (
-        <li>
-          <a
-            href="/dashboard"
-            className={`px-2 py-2 rounded-md text-sm ${
-              location.pathname === "/dashboard"
-                ? "bg-primary text-white"
-                : "hover:bg-primary hover:text-white"
-            }`}
-          >
-            Dashboard
-          </a>
-        </li>
-      )}
-      {userType === "seller" && (
-        <li>
-          <a
-            href="/sellerdashboard"
-            className={`px-2 py-2 rounded-md text-sm ${
-              location.pathname === "/sellerdashboard"
-                ? "bg-primary text-white"
-                : "hover:bg-primary hover:text-white"
-            }`}
-          >
-            Dashboard
-          </a>
-        </li>
+      {user && (
+        <>
+          {userType === "admin" && (
+            <li>
+              <a
+                href="/dashboard"
+                className={`px-2 py-2 rounded-md text-sm ${
+                  location.pathname === "/dashboard"
+                    ? "bg-primary text-white"
+                    : "hover:bg-primary hover:text-white"
+                }`}
+              >
+                Dashboard
+              </a>
+            </li>
+          )}
+          {userType === "seller" && (
+            <li>
+              <a
+                href="/sellerdashboard"
+                className={`px-2 py-2 rounded-md text-sm ${
+                  location.pathname === "/sellerdashboard"
+                    ? "bg-primary text-white"
+                    : "hover:bg-primary hover:text-white"
+                }`}
+              >
+                Dashboard
+              </a>
+            </li>
+          )}
+        </>
       )}
     </>
   );

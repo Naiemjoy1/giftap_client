@@ -297,6 +297,7 @@ const ProductEdit = ({ handleBackClick, productId }) => {
                     <div className="form-control">
                       <input
                         type="number"
+                        step="0.01"
                         placeholder="Price"
                         className="input input-bordered"
                         {...register(`priceGroup.${index}.price.amount`, {
