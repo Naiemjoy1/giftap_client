@@ -22,7 +22,6 @@ const ScrollNav = () => {
   };
 
   const [userType, isLoading] = useType();
-  console.log("userType", userType);
 
   const location = useLocation();
 
