@@ -2,6 +2,8 @@ import { useEffect, useState, useRef } from "react";
 import { PieChart } from "@mui/x-charts/PieChart";
 
 const ShowPie = ({ currentSellerStat }) => {
+  console.log("currentSellerStat", currentSellerStat);
+
   const [chartWidth, setChartWidth] = useState(400);
   const chartRef = useRef(null);
 

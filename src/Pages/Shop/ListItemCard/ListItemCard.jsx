@@ -24,6 +24,7 @@ const ListItemCard = ({ item }) => {
     priceGroup,
     discount,
     store_name,
+    quantity,
   } = item;
 
   const usersDetails = users.find((u) => u?.email === user?.email);
@@ -227,13 +228,25 @@ const ListItemCard = ({ item }) => {
               )}
 
               {user ? (
-                <button
-                  type="button"
-                  onClick={handleAddToCart}
-                  className="flex-grow block rounded bg-primary px-4 py-3 text-sm font-medium text-white transition hover:scale-105 font-opensans"
-                >
-                  Add to Cart
-                </button>
+                <>
+                  {quantity > 0 ? (
+                    <button
+                      type="button"
+                      onClick={handleAddToCart}
+                      className="flex-grow block rounded bg-primary px-4 py-3 text-sm font-medium text-white transition hover:scale-105 font-opensans"
+                    >
+                      Add to Cart
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      disabled
+                      className="flex-grow block rounded bg-gray-400 px-4 py-3 text-sm font-medium text-white transition hover:scale-105 font-opensans"
+                    >
+                      Stock Out
+                    </button>
+                  )}
+                </>
               ) : (
                 <button
                   type="button"

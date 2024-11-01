@@ -221,9 +221,12 @@ const TrackOrders = () => {
                                   </p>
                                 </td>
                                 <td>
-                                  {isNaN(
-                                    Date.parse(paymentData.delivery[index])
-                                  ) ? (
+                                  {paymentData.delivery[index].toLowerCase() ===
+                                  "home" ? (
+                                    "Pending"
+                                  ) : isNaN(
+                                      Date.parse(paymentData.delivery[index])
+                                    ) ? (
                                     paymentData.delivery[index]
                                       .toLowerCase()
                                       .split(" ")
@@ -242,6 +245,7 @@ const TrackOrders = () => {
                                     </span>
                                   )}
                                 </td>
+
                                 <th>
                                   {paymentData?.delivery[
                                     index

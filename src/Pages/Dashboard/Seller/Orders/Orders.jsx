@@ -5,9 +5,14 @@ import useSellers from "../../../../Components/Hooks/useSellers";
 
 const Orders = () => {
   const [sellers] = useSellers();
+
   const { user } = useAuth();
+
   const storeDetails = sellers.find((store) => store.email === user.email);
-  const [sellerStat] = useSellerOrder();
+
+  const [sellerStat, isLoading] = useSellerOrder();
+  console.log("sellerStat", sellerStat);
+
   const [products] = useProducts();
 
   const filteredOrders = Array.isArray(sellerStat)
@@ -22,6 +27,14 @@ const Orders = () => {
         );
       })
     : [];
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <span className="loading loading-spinner loading-lg text-primary"></span>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -46,7 +59,12 @@ const Orders = () => {
                   return (
                     <tr key={index}>
                       <td>{new Date(order.date).toLocaleDateString()}</td>
-                      <td>{userTotals.totalPrice.toFixed(2)}</td>
+                      <td>
+                        {userTotals?.totalPrice
+                          ? userTotals.totalPrice.toFixed(2)
+                          : "N/A"}
+                      </td>
+
                       <td>
                         <table className="table-auto">
                           <thead>
