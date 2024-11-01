@@ -43,12 +43,12 @@ const useSellerTabs = () => {
       tab: 3,
       page: <RequestBanner />,
     },
-    {
-      name: "orders",
-      icon: <BsCashStack />,
-      tab: 4,
-      page: <Orders></Orders>,
-    },
+    // {
+    //   name: "orders",
+    //   icon: <BsCashStack />,
+    //   tab: 4,
+    //   page: <Orders></Orders>,
+    // },
   ];
   return [tabsData];
 };
